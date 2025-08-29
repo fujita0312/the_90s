@@ -639,7 +639,7 @@
           🔌 Connect
         </button>
       </div>
-      <div id="loading-progress" style="display: none;">
+      <div id="loading-progress" style="display: none">
         <div class="loading-text">Connecting to the 90s...</div>
         <div class="progress-bar">
           <div class="progress-fill"></div>
@@ -1140,9 +1140,9 @@
       Your browser does not support the audio element.
     </audio>
 
-    <audio id="budweiser_wassup">
-        <source src="budweiser_wassup.mp3" type="audio/mpeg" />
-        Your browser does not support the audio element.
+    <audio id="budweiser_wassup" loop>
+      <source src="budweiser_wassup.mp3" type="audio/mpeg" />
+      Your browser does not support the audio element.
     </audio>
     <script>
       const dialup = document.getElementById("dialup");
@@ -1237,33 +1237,28 @@
       };
 
       function loadingStart() {
-        document.getElementById("connectWrapper").style.display="none";
-        document.getElementById("loading-progress").style.display="flex";
+        document.getElementById("connectWrapper").style.display = "none";
+        document.getElementById("loading-progress").style.display = "flex";
 
-        dialup.play().then(()=>{
-   
-        }).catch(err=>{
-
-        })
+        dialup
+          .play()
+          .then(() => {})
+          .catch((err) => {});
 
         dialup.addEventListener("ended", () => {
-            // Hide loading screen only after dial-up sound is complete
-            document.getElementById("loadingScreen").style.display = "none";
-            createMatrixRain();
-            updateLastUpdated();
-    
-            // Show a connection success message
-            setTimeout(() => {
-              alert(
-                "📞 CONNECTION ESTABLISHED! 📞\n\nWelcome to the World Wide Web!\nBaud Rate: 56k\nStatus: ONLINE\n\nWASSSSUPPP! 🕺"
-              );
-              setTimeout(()=>{
-                budweiser_wassup.play().catch(err=>{
+          // Hide loading screen only after dial-up sound is complete
+          document.getElementById("loadingScreen").style.display = "none";
+          createMatrixRain();
+          updateLastUpdated();
 
-                })
-              },1000)
-            }, 500);
-        })
+          // Show a connection success message
+          setTimeout(() => {
+            alert(
+              "📞 CONNECTION ESTABLISHED! 📞\n\nWelcome to the World Wide Web!\nBaud Rate: 56k\nStatus: ONLINE\n\nWASSSSUPPP! 🕺"
+            );
+            budweiser_wassup.play().catch((err) => {});
+          }, 500);
+        });
       }
 
       // Update last updated time
