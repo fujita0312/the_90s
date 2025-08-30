@@ -16,6 +16,7 @@ const RightSidebar: React.FC = () => {
   const { showToast } = useToast();
   const [guestbookEntries, setGuestbookEntries] = useState<GuestbookEntry[]>([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [lastBulletinRefresh, setLastBulletinRefresh] = useState<Date>(new Date());
 
   // Load guestbook entries on component mount
   useEffect(() => {
@@ -94,6 +95,23 @@ const RightSidebar: React.FC = () => {
     }, 100);
   };
 
+  const handleBulletinBoardClick = (post: { title: string; replies: number; emoji: string; category: string }) => {
+    // Show a fun toast message when clicking on bulletin board posts
+    const messages = [
+      `📌 Opening "${post.title}"...\n\nLoading ${post.replies} replies...\nCategory: ${post.category}`,
+      `🚀 Launching thread: ${post.title}\n\n${post.emoji} This thread is LIT!`,
+      `💫 Accessing: ${post.title}\n\nConnecting to the 90s forum...\nBaud rate: 56k`
+    ];
+    
+    const randomMessage = messages[Math.floor(Math.random() * messages.length)];
+    showToast(randomMessage, 'info');
+  };
+
+  const handleRefreshBulletinBoard = () => {
+    setLastBulletinRefresh(new Date());
+    showToast("🔄 Refreshing bulletin board...\n\nNew posts loaded!\nStay tuned for updates! 📌", 'success');
+  };
+
   return (
     <div className="bg-gradient-to-br from-black/90 via-blue-900/80 to-black/90 md:border-4 border-2 border-yellow-400 border-ridge md:p-3 p-2 shadow-[0_0_25px_rgba(255,255,0,0.3),inset_0_0_25px_rgba(255,255,255,0.1)] relative gradient-border">
       <h3 className="animate-blink text-center text-pink-500 text-xl mb-8">
@@ -148,14 +166,36 @@ const RightSidebar: React.FC = () => {
         <h4 className="text-center text-purple-300 mb-4 text-xl">
           📌 BULLETIN BOARD 📌
         </h4>
-        <div className="md:text-lg text-base leading-relaxed">
-          → "Moon mission planning thread" (42 replies) 🔥<br />
-          → "Share our 90s memories!" (138 replies) 💭<br />
-          → "Diamond hands support group" (69 replies) 💎<br />
-          → "Pump.fun tips & tricks" (420 replies) 📈<br />
-          → "Time traveler AMA" (1337 replies) 🕰️<br />
-          → "Best dial-up sounds compilation" (666 replies) 📞<br />
-          → "Y2K bug survivors unite!" (2000 replies) 🐛
+        <div className="md:text-lg text-base leading-relaxed space-y-2">
+          {[
+            { title: "Moon mission planning thread", replies: 42, emoji: "🔥", category: "space" },
+            { title: "Share our 90s memories!", replies: 138, emoji: "💭", category: "nostalgia" },
+            { title: "Diamond hands support group", replies: 69, emoji: "💎", category: "crypto" },
+            { title: "Pump.fun tips & tricks", replies: 420, emoji: "📈", category: "trading" },
+            { title: "Time traveler AMA", replies: 1337, emoji: "🕰️", category: "meta" },
+            { title: "Best dial-up sounds compilation", replies: 666, emoji: "📞", category: "audio" },
+            { title: "Y2K bug survivors unite!", replies: 2000, emoji: "🐛", category: "history" }
+          ].map((post, index) => (
+            <div 
+              key={index}
+              onClick={() => handleBulletinBoardClick(post)}
+              className="cursor-pointer hover:bg-purple-700/50 p-2 rounded transition-all duration-200 hover:scale-105 transform border-l-2 border-purple-300 hover:border-purple-100"
+              title={`Click to view ${post.title}`}
+            >
+              → "{post.title}" ({post.replies} replies) {post.emoji}
+            </div>
+          ))}
+        </div>
+        <div className="text-center mt-4">
+          <button 
+            onClick={handleRefreshBulletinBoard}
+            className="bg-purple-600 hover:bg-purple-500 text-white px-4 py-2 rounded border border-purple-400 transition-colors"
+          >
+            🔄 Refresh Board
+          </button>
+          <div className="text-xs text-purple-200 mt-2">
+            Last updated: {lastBulletinRefresh.toLocaleTimeString()}
+          </div>
         </div>
       </div>
 
