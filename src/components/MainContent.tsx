@@ -22,7 +22,7 @@ const MainContent: React.FC = () => {
       </div>
 
       {/* Main Message */}
-      <div className="md:p-8 md:p-4 p-2 md:border-4 border-2 border-cyan-400 border-ridge mb-8 text-white shadow-[0_0_30px_rgba(0,255,255,0.3)]" style={{ background: "linear-gradient(135deg,rgba(0, 0, 139, 0.9),rgba(25, 25, 112, 0.8))" }}>
+      <div className="md:p-4 p-2 md:border-4 border-2 border-cyan-400 border-ridge mb-8 text-white shadow-[0_0_30px_rgba(0,255,255,0.3)]" style={{ background: "linear-gradient(135deg,rgba(0, 0, 139, 0.9),rgba(25, 25, 112, 0.8))" }}>
         <h3 className="text-cyan-400 text-center mb-5 md:text-2xl text-xl font-bold">
           🛸 INCOMING GLITCHED TRANSMISSION... SOURCE: UNKNOWN (2025?) 🛸
         </h3>
