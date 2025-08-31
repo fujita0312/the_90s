@@ -401,7 +401,7 @@ const Clippy: React.FC = () => {
             {/* Close button */}
             <button
               onClick={closeDialogue}
-              className="absolute top-2 right-2 text-cyan-400 hover:text-white text-2xl font-bold"
+              className="absolute top-1 right-2 text-cyan-400 hover:text-white text-4xl font-bold"
             >
               ×
             </button>
