@@ -30,7 +30,7 @@ const LeftSidebar: React.FC = () => {
           <img
             src="/emoji_dancing_baby.png"
             alt="Dancing Baby"
-            className="w-[60%] rounded"
+            className="animate-bounce w-[60%] rounded"
           />
         </div>
         <div className="text-lg text-[#00ff00] mt-2.5">

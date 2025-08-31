@@ -13,7 +13,7 @@ const MainContent: React.FC = () => {
           <img 
             src="/emoji_y2k.png" 
             alt="Y2K Coin" 
-            className="animate-spin w-20 h-20 md:w-32 md:h-32"
+            className="animate-pulse w-20 h-20 md:w-32 md:h-32"
           />
         {/* </div> */}
         <div className="md:text-xl text-lg text-yellow-400 mt-2.5">
@@ -36,7 +36,7 @@ const MainContent: React.FC = () => {
           about internet money from your IRC chats? <span className="animate-blink text-yellow-400">THEY CAME TRUE!</span>
         </p>
 
-        <div className="flame text-center my-8 md:text-3xl text-base bg-black/50 p-4 md:border-3 border-2 border-orange-500">
+        <div className="flame text-center my-8 md:text-2xl text-base bg-black/50 p-4 md:border-3 border-2 border-orange-500">
           🔥 YOUR DECADE CONQUERED EVERYTHING! 🔥
         </div>
 

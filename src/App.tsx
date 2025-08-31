@@ -48,7 +48,7 @@ function AppContent({ showMatrixRain, onComplete }: { showMatrixRain: boolean; o
       
       <DancingBaby />
       <Clippy />
-      <PopupHint />
+      {/* <PopupHint /> */}
       
       <Header />
       <Marquee />
