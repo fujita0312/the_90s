@@ -15,13 +15,17 @@ const DancingBaby: React.FC = () => {
 
   return (
     <>
-      <div
-        className="fixed bottom-5 right-5 text-6xl animate-dance z-50 cursor-pointer filter drop-shadow-[0_0_10px_#ffd700]"
-        onClick={handleClick}
-        title="Click me for dial-up sounds!"
-      >
-        👶
-      </div>
+              <div
+          className="fixed bottom-5 right-5 z-50 cursor-pointer filter drop-shadow-[0_0_10px_#ffd700]"
+          onClick={handleClick}
+          title="Click me for dial-up sounds!"
+        >
+          <img 
+            src="/emoji_dancing_baby.png" 
+            alt="Dancing Baby" 
+            className="w-16 h-16 md:w-20 md:h-20 animate-dance"
+          />
+        </div>
       <audio ref={audioRef} src="/dialup-sound.mp3" />
     </>
   );

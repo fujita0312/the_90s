@@ -169,7 +169,7 @@ const RightSidebar: React.FC = () => {
         <div className="md:text-lg text-base leading-relaxed space-y-2">
           {[
             { title: "Moon mission planning thread", replies: 42, emoji: "🔥", category: "space" },
-            { title: "Share our 90s memories!", replies: 138, emoji: "💭", category: "nostalgia" },
+            { title: "Share your 90s memories!", replies: 138, emoji: "💭", category: "nostalgia" },
             { title: "Diamond hands support group", replies: 69, emoji: "💎", category: "crypto" },
             { title: "Pump.fun tips & tricks", replies: 420, emoji: "📈", category: "trading" },
             { title: "Time traveler AMA", replies: 1337, emoji: "🕰️", category: "meta" },
@@ -217,7 +217,8 @@ const RightSidebar: React.FC = () => {
       {/* Now Playing */}
       <div className="bg-[#00ff00]/10 border-2 border-dashed border-[#00ff00] p-4 my-5 text-center">
         <div className="text-[#00ff00] font-bold">🎵 NOW PLAYING 🎵</div>
-        <div className="text-lg my-2.5">
+        <div className="text-lg my-2.5 flex items-center justify-center gap-2">
+          <img src="/emoji_dialup.png" alt="Dial-up" className="w-6 h-6" />
           Dial-Up Connection Sounds
         </div>
         <div className="text-sm text-yellow-400">Volume: ████████░░</div>

@@ -8,10 +8,14 @@ const MainContent: React.FC = () => {
       </h2>
 
       {/* Coin Icon */}
-      <div className="text-center mb-8">
-        <div className="animate-spin md:text-8xl text-6xl filter drop-shadow-[0_0_20px_#ffd700] mb-2.5">
-          🪙
-        </div>
+      <div className="text-center mb-8 flex justify-center items-center flex-col">
+        {/* <div className=" md:text-8xl text-6xl filter drop-shadow-[0_0_20px_#ffd700] mb-2.5"> */}
+          <img 
+            src="/emoji_y2k.png" 
+            alt="Y2K Coin" 
+            className="animate-spin w-20 h-20 md:w-32 md:h-32"
+          />
+        {/* </div> */}
         <div className="md:text-xl text-lg text-yellow-400 mt-2.5">
           The Ultimate Meme Coin
         </div>
@@ -20,7 +24,7 @@ const MainContent: React.FC = () => {
       {/* Main Message */}
       <div className="md:p-8 md:p-4 p-2 md:border-4 border-2 border-cyan-400 border-ridge mb-8 text-white shadow-[0_0_30px_rgba(0,255,255,0.3)]" style={{ background: "linear-gradient(135deg,rgba(0, 0, 139, 0.9),rgba(25, 25, 112, 0.8))" }}>
         <h3 className="text-cyan-400 text-center mb-5 md:text-2xl text-xl font-bold">
-          🛸 GREETINGS FROM 2025! 🛸
+          🛸 INCOMING GLITCHED TRANSMISSION... SOURCE: UNKNOWN (2025?) 🛸
         </h3>
 
         <p className="md:text-2xl text-xl mb-4">
@@ -29,32 +33,27 @@ const MainContent: React.FC = () => {
 
         <p className="mb-5 leading-relaxed">
           We've discovered something MIND-BLOWING in the future - those dreams
-          about internet money from our IRC chats?
-          <span className="animate-blink text-yellow-400">THEY CAME TRUE!</span>
+          about internet money from your IRC chats? <span className="animate-blink text-yellow-400">THEY CAME TRUE!</span>
         </p>
 
         <div className="flame text-center my-8 md:text-3xl text-base bg-black/50 p-4 md:border-3 border-2 border-orange-500">
-          🔥 OUR DECADE CONQUERED EVERYTHING! 🔥
+          🔥 YOUR DECADE CONQUERED EVERYTHING! 🔥
         </div>
 
         <p className="mb-6 leading-relaxed">
           In 2025, something called "MEME CULTURE" rules the internet, and
-          guess what?
-          <strong className="text-yellow-400">IT'S ALL OUR STUFF!</strong>
+          guess what? <strong className="text-yellow-400">IT'S ALL YOUR STUFF!</strong>
         </p>
 
         <div className="bg-black/60 md:p-5 p-2 md:border-2 border border-[#00ff00] md:my-6 my-4">
-          <div className="text-[#00ff00] text-center mb-4 font-bold md:text-lg text-base">
-            Our Music, Movies and Fashion rule pop Culture. AND YES BLEACHED TIPS STILL LOOKS GAY BUT STILL PULLS CHICKS. WILD RIGHT.
-          </div>
           <ul className="text-[#00ff00] leading-loose">
-            <li>🎵 Our dial-up sounds = Now considered music</li>
-            <li>💬 Our AOL chat slang = Universal language</li>
-            <li>🎨 Our GeoCities pages = Worth millions</li>
-            <li>🎮 Our Tamagotchis = Came back bigger than ever</li>
-            <li>✨ Our Y2K vibes = The ultimate aesthetic</li>
-            <li>📺 Our CRT monitors = Premium gaming displays</li>
-            <li>💿 Our CD collections = Vintage gold</li>
+            <li>🎵 Your dial-up sounds = Now considered music</li>
+            <li>💬 Your AOL chat slang = Universal language</li>
+            <li>🎨 Your GeoCities pages = Worth millions</li>
+            <li>🎮 Your Tamagotchis = Came back bigger than ever</li>
+            <li>✨ Your Y2K vibes = The ultimate aesthetic</li>
+            <li>📺 Your CRT monitors = Premium gaming displays</li>
+            <li>💿 Your CD collections = Vintage gold</li>
           </ul>
         </div>
 
@@ -66,13 +65,8 @@ const MainContent: React.FC = () => {
         </div>
 
         <p className="mb-6 leading-relaxed">
-          This coin contains the pure essence of our cultural DNA. Every time
-          someone buys it, they're not just getting internet money...
-          <span className="rainbow">
-            <strong>
-              they're joining the FOUNDING FATHERS OF DIGITAL COOL!
-            </strong>
-          </span>
+          This coin contains the pure essence of your cultural DNA. Every time
+          someone buys it, they're not just getting internet money... <span className="rainbow"><strong>they're joining the FOUNDING FATHERS OF DIGITAL COOL!</strong></span>
         </p>
 
         <div className="text-center my-6">

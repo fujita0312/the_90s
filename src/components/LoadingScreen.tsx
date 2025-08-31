@@ -61,8 +61,10 @@ const LoadingScreen: React.FC<LoadingScreenProps> = ({ onComplete }) => {
 
     return (
         <div className="fixed inset-0 bg-black text-[#00ff00] flex flex-col justify-center items-center z-50 font-courier">
-            <div className="md:text-6xl text-3xl text-[#00ff00] mb-8">
-                📞 DIALING UP 📞
+                        <div className="md:text-6xl text-3xl text-[#00ff00] mb-8 flex items-center gap-4">
+              <img src="/emoji_dialup.png" alt="Dial-up" className="w-12 h-12 md:w-16 md:h-16" />
+              DIALING UP
+              <img src="/emoji_dialup.png" alt="Dial-up" className="w-12 h-12 md:w-16 md:h-16" />
             </div>
 
             {!showProgress && (
@@ -94,7 +96,8 @@ const LoadingScreen: React.FC<LoadingScreenProps> = ({ onComplete }) => {
                         <div>🕰️ Preparing time machine... ██████████</div>
                     </div>
                     <div className="md:text-sm text-xs mt-8 text-yellow-400 max-w-sm text-center">
-                        WERE DIALING UP SO PLEASE GET OURSELF DIALED IN AND PREPARE OURSELF FOR THIS STORY ALL ABOUT HOW OUR LIFE GOT FLIPPED TURNED UPSIDE DOWN.
+                        🎵 *Authentic 90s dial-up sounds playing* 🎵<br />
+                        Please wait for connection to complete...
                     </div>
                 </div>
             )}

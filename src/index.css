@@ -390,3 +390,126 @@ animation: gradientShift 2s ease infinite;
 .animate-slide-in {
   animation: slideIn 0.3s ease-out;
 }
+
+/* Enhanced Clippy Animations */
+@keyframes clippy-thinking {
+  0%, 100% { transform: rotate(0deg) scale(1); }
+  25% { transform: rotate(5deg) scale(1.1); }
+  50% { transform: rotate(-5deg) scale(1.05); }
+  75% { transform: rotate(3deg) scale(1.15); }
+}
+
+@keyframes clippy-smug {
+  0% { transform: scale(1) rotate(0deg); }
+  50% { transform: scale(1.2) rotate(10deg); }
+  100% { transform: scale(1) rotate(0deg); }
+}
+
+@keyframes clippy-eyeroll {
+  0% { transform: rotate(0deg); }
+  25% { transform: rotate(15deg); }
+  50% { transform: rotate(0deg); }
+  75% { transform: rotate(-15deg); }
+  100% { transform: rotate(0deg); }
+}
+
+@keyframes clippy-impatient {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+@keyframes clippy-talk {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+}
+
+@keyframes clippy-explaining {
+  0% { transform: rotate(0deg) scale(1); }
+  25% { transform: rotate(2deg) scale(1.05); }
+  50% { transform: rotate(-2deg) scale(1.1); }
+  75% { transform: rotate(1deg) scale(1.05); }
+  100% { transform: rotate(0deg) scale(1); }
+}
+
+@keyframes clippy-annoyed {
+  0%, 100% { transform: scale(1) rotate(0deg); }
+  25% { transform: scale(1.1) rotate(5deg); }
+  50% { transform: scale(1.2) rotate(-5deg); }
+  75% { transform: scale(1.1) rotate(3deg); }
+}
+
+@keyframes clippy-excited {
+  0%, 100% { transform: scale(1) rotate(0deg); }
+  50% { transform: scale(1.3) rotate(15deg); }
+}
+
+@keyframes clippy-success {
+  0% { transform: scale(1) rotate(0deg); }
+  50% { transform: scale(1.4) rotate(360deg); }
+  100% { transform: scale(1) rotate(0deg); }
+}
+
+@keyframes clippy-celebrate {
+  0% { transform: scale(1) rotate(0deg); }
+  25% { transform: scale(1.2) rotate(90deg); }
+  50% { transform: scale(1.4) rotate(180deg); }
+  75% { transform: scale(1.2) rotate(270deg); }
+  100% { transform: scale(1) rotate(360deg); }
+}
+
+@keyframes clippy-idle {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  25% { transform: translateY(-5px) rotate(2deg); }
+  50% { transform: translateY(-2px) rotate(-1deg); }
+  75% { transform: translateY(-8px) rotate(1deg); }
+}
+
+@keyframes clippy-disappear {
+  0% { opacity: 1; transform: scale(1); }
+  100% { opacity: 0; transform: scale(0.5); }
+}
+
+@keyframes clippy-waiting {
+  0%, 100% { transform: scale(1) rotate(0deg); }
+  50% { transform: scale(0.9) rotate(180deg); }
+}
+
+@keyframes clippy-wave {
+  0% { transform: rotate(0deg) scale(1); }
+  25% { transform: rotate(15deg) scale(1.1); }
+  50% { transform: rotate(30deg) scale(1.2); }
+  75% { transform: rotate(15deg) scale(1.1); }
+  100% { transform: rotate(0deg) scale(1); }
+}
+
+/* Clippy Animation Classes */
+.clippy-anim-thinking { animation: clippy-thinking 2s infinite; }
+.clippy-anim-smug { animation: clippy-smug 1s forwards; }
+.clippy-anim-eyeroll { animation: clippy-eyeroll 1s forwards; }
+.clippy-anim-impatient { animation: clippy-impatient 0.5s infinite alternate; }
+.clippy-anim-talk { animation: clippy-talk 0.3s infinite alternate; }
+.clippy-anim-explaining { animation: clippy-explaining 1.5s infinite; }
+.clippy-anim-annoyed { animation: clippy-annoyed 0.6s infinite; }
+.clippy-anim-excited { animation: clippy-excited 0.4s infinite alternate; }
+.clippy-anim-success { animation: clippy-success 1s forwards; }
+.clippy-anim-celebrate { animation: clippy-celebrate 1.5s infinite; }
+.clippy-anim-idle { animation: clippy-idle 5s infinite; }
+.clippy-anim-disappear { animation: clippy-disappear 0.5s forwards; }
+.clippy-anim-waiting { animation: clippy-waiting 3s infinite; }
+.clippy-anim-wave { animation: clippy-wave 1s forwards; }
+
+/* Clippy Dialogue Box Enhancements */
+.clippy-dialogue-glow {
+  box-shadow: 
+    0 0 25px rgba(0, 255, 255, 0.7),
+    inset 0 0 25px rgba(0, 255, 255, 0.1);
+}
+
+.clippy-button-hover {
+  transition: all 0.2s ease;
+}
+
+.clippy-button-hover:hover {
+  transform: translateY(-2px) scale(1.05);
+  box-shadow: 0 8px 25px rgba(255, 0, 255, 0.8);
+}

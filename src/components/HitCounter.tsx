@@ -44,7 +44,10 @@ const HitCounter: React.FC = () => {
         You are visitor #<span>{counter.toLocaleString()}</span> since 1995!
       </div>
       
-      <div className="mt-2.5 md:text-3xl text-xl">📎 WASSSSUPPPP 🕺</div>
+      <div className="mt-2.5 md:text-3xl text-xl flex items-center justify-center gap-2">
+        <img src="/emoji_floppy_disk.png" alt="Floppy Disk" className="w-6 h-6 md:w-8 md:h-8" />
+        WASSSSUPPPP 🕺
+      </div>
       
       <div className="mt-1.5 md:text-sm text-xs">
         Last updated: <span>{lastUpdated}</span>

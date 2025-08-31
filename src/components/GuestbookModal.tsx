@@ -70,7 +70,7 @@ const GuestbookModal: React.FC<GuestbookModalProps> = ({ isOpen, onClose, onSubm
               ×
             </button>
           </div>
-          <p className="text-sm mt-2 opacity-80">Leave our mark in the 90s time capsule!</p>
+          <p className="text-sm mt-2 opacity-80">Leave your mark in the 90s time capsule!</p>
         </div>
 
         {/* Form */}
@@ -78,7 +78,7 @@ const GuestbookModal: React.FC<GuestbookModalProps> = ({ isOpen, onClose, onSubm
           {/* Username Field */}
           <div className="mb-4">
             <label htmlFor="username" className="block text-cyan-400 font-bold mb-2">
-              🎭 Our 90s Username:
+              🎭 Your 90s Username:
             </label>
             <input
               type="text"
@@ -102,7 +102,7 @@ const GuestbookModal: React.FC<GuestbookModalProps> = ({ isOpen, onClose, onSubm
           {/* Message Field */}
           <div className="mb-6">
             <label htmlFor="message" className="block text-cyan-400 font-bold mb-2">
-              💭 Our Message:
+              💭 Your Message:
             </label>
             <textarea
               id="message"
@@ -112,7 +112,7 @@ const GuestbookModal: React.FC<GuestbookModalProps> = ({ isOpen, onClose, onSubm
               className={`w-full md:p-3 p-2 bg-slate-800 border-2 border-cyan-400 rounded-none text-white placeholder-gray-400 focus:outline-none focus:border-pink-500 transition-colors resize-none ${
                 errors.message ? 'border-red-500' : ''
               }`}
-                              placeholder="Share our thoughts, memories, or just say WASSSUPPP! 🚀"
+                              placeholder="Share your thoughts, memories, or just say WASSSUPPP! 🚀"
               maxLength={500}
             />
             {errors.message && (
@@ -144,7 +144,7 @@ const GuestbookModal: React.FC<GuestbookModalProps> = ({ isOpen, onClose, onSubm
         {/* Footer */}
         <div className="bg-gradient-to-r from-slate-800 to-slate-700 p-4 border-t-2 border-cyan-400 rounded-b-none">
           <div className="text-center text-sm text-gray-400">
-            <p>🌟 Our message will be preserved in the 90s time capsule! 🌟</p>
+            <p>🌟 Your message will be preserved in the 90s time capsule! 🌟</p>
             <p className="mt-1">🕰️ Future generations will thank you! 🕰️</p>
           </div>
         </div>

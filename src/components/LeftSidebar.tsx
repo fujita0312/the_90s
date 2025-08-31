@@ -26,11 +26,11 @@ const LeftSidebar: React.FC = () => {
 
       {/* Dancing Baby Section */}
       <div className="text-center mb-8">
-        <div className="md:text-6xl text-3xl md:mb-2.5 mb-1.5">
+        <div className="flex justify-center items-center md:mb-2.5 mb-1.5">
           <img
-            src="https://cdn.mos.cms.futurecdn.net/ZsQmSHKYueHSDgJ4r3KHhk.gif"
-            alt="baby dancing"
-            className="w-full rounded"
+            src="/emoji_dancing_baby.png"
+            alt="Dancing Baby"
+            className="w-[60%] rounded"
           />
         </div>
         <div className="text-lg text-[#00ff00] mt-2.5">
@@ -53,7 +53,8 @@ const LeftSidebar: React.FC = () => {
           🔥 HOTTER THAN A PENTIUM! 🔥
         </div>
         <div className="mt-4 text-center bg-black/50 p-2.5 border border-[#00ff00]">
-          📎 <span className="text-xl">👀</span> Clippy Says: "BUY!"
+          <img src="/emoji_floppy_disk.png" alt="Clippy" className="inline-block w-5 h-5 mr-1" />
+          <span className="text-xl">👀</span> Clippy Says: "BUY!"
           <div className="text-sm mt-1.5">
             "It looks like you're trying to get rich!"
           </div>

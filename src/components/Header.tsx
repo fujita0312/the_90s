@@ -14,17 +14,21 @@ const Header: React.FC = () => {
       </div>
 
       <h1 className="rainbow bounce animate-pulse text-xl md:text-4xl">
-        ☆ 90's FRESH TIL INFINITY ☆
+        ☆ 90's FRESH ☆
       </h1>
 
       <div className="animate-blink text-base md:text-3xl md:mt-4 mt-2 md:mb-4 mb-2">
-        🚀 TRANSMISSION FROM 2025! THE 90s CONQUERED THE FUTURE! 🚀
+        WARNING: TEMPORAL GLITCH DETECTED! 90s DATASTREAM CORRUPTING 2025!
       </div>
 
-      <div className="md:mt-4 mt-2 md:text-xl text-lg">
-        <span className="animate-spin">💿</span> Best viewed in Netscape Navigator 4.0!
-        <span className="animate-spin">💿</span>
-      </div>
+              <div className="md:mt-4 mt-2 md:text-xl text-lg">
+          <span className="animate-spin">
+            <img src="/emoji_floppy_disk.png" alt="Floppy Disk" className="inline-block w-6 h-6 md:w-8 md:h-8" />
+          </span> Best viewed in Netscape Navigator 4.0!
+          <span className="animate-spin">
+            <img src="/emoji_floppy_disk.png" alt="Floppy Disk" className="inline-block w-6 h-6 md:w-8 md:h-8" />
+          </span>
+        </div>
 
       <div className="md:mt-2.5 mt-1.5 text-lg">
         <span className="animate-blink">🌐 Now with 256 colors! 🌐</span>
