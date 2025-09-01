@@ -548,7 +548,7 @@ Help me complete 5 simple X (Twitter) missions and I'll finally be FREE!`,
         setIsBlinking(true);
         setTimeout(() => setIsBlinking(false), 210);
       }, 3000);
-      
+
       return () => clearInterval(blinkInterval);
     }
   }, [isVisible]);
@@ -706,13 +706,20 @@ Help me complete 5 simple X (Twitter) missions and I'll finally be FREE!`,
         onClick={handleClippyClick}
         title="Hi! I'm Clippy! Click me!"
       >
-        <img 
-          src={isBlinking ? "/emo_clippy_2.png" : "/emo_clippy_1.png"}
-          alt="Clippy" 
+        {isBlinking ? <img
+          src={"/emo_clippy_2.png"}
+          alt="Clippy"
           className="w-16 h-16 transition-all duration-150"
           onMouseEnter={() => setClippyAnimation('excited')}
           onMouseLeave={() => setClippyAnimation('idle')}
-        />
+        /> : <img
+          src={"/emo_clippy_1.png"}
+          alt="Clippy"
+          className="w-16 h-16 transition-all duration-150"
+          onMouseEnter={() => setClippyAnimation('excited')}
+          onMouseLeave={() => setClippyAnimation('idle')}
+        />}
+
       </div>
 
       {/* Dialogue Box */}
