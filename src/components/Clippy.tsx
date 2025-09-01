@@ -546,7 +546,7 @@ Help me complete 5 simple X (Twitter) missions and I'll finally be FREE!`,
     if (isVisible) {
       const blinkInterval = setInterval(() => {
         setIsBlinking(true);
-        setTimeout(() => setIsBlinking(false), 150);
+        setTimeout(() => setIsBlinking(false), 210);
       }, 3000);
       
       return () => clearInterval(blinkInterval);
