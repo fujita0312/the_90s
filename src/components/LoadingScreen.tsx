@@ -11,7 +11,6 @@ const LoadingScreen: React.FC<LoadingScreenProps> = ({ onComplete }) => {
     const [showProgress, setShowProgress] = useState(false);
     const [progress, setProgress] = useState(0);
     const dialupAudioRef = useRef<HTMLAudioElement>(null);
-    const budweiserAudioRef = useRef<HTMLAudioElement>(null);
     use90sFeatures();
     const handleConnect = async () => {
         setShowProgress(true);
@@ -27,12 +26,12 @@ const LoadingScreen: React.FC<LoadingScreenProps> = ({ onComplete }) => {
         // Simulate loading progress
         const interval = setInterval(() => {
             setProgress(prev => {
-                let pr=prev + Math.random() * 15;
+                let pr = prev + Math.random() * 15;
                 if (pr >= 100) {
                     clearInterval(interval);
-                    setTimeout(() => {
-                        onComplete();
-                    }, 1500);
+                    // setTimeout(() => {
+
+                    // }, 1500);
                     return 100;
                 }
                 return pr;
@@ -43,20 +42,13 @@ const LoadingScreen: React.FC<LoadingScreenProps> = ({ onComplete }) => {
         if (dialupAudioRef.current) {
             dialupAudioRef.current.addEventListener('ended', () => {
                 setTimeout(() => {
-                    try {
-                        if (budweiserAudioRef.current) {
-                            budweiserAudioRef.current.play();
-                        }
-                    } catch (err) {
-                        console.log('Budweiser audio play failed:', err);
-                    }
-
                     showToast(
                         "📞 CONNECTION ESTABLISHED! 📞\n\nWelcome to the World Wide Web!\nBaud Rate: 56k\nStatus: ONLINE\n\nWASSSSUPPP! 🕺",
                         'success',
                         6000
                     );
                 }, 500);
+                onComplete();
             });
         }
     };
@@ -103,7 +95,6 @@ const LoadingScreen: React.FC<LoadingScreenProps> = ({ onComplete }) => {
             )}
 
             <audio ref={dialupAudioRef} src="/dialup-sound.mp3" />
-            <audio ref={budweiserAudioRef} src="/budweiser_wassup.mp3" />
         </div>
     );
 };

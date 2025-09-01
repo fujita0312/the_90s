@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import LoadingScreen from './components/LoadingScreen';
 import Header from './components/Header';
 import Marquee from './components/Marquee';
@@ -17,10 +17,19 @@ import { ToastProvider } from './contexts/ToastContext';
 function App() {
   const [isLoading, setIsLoading] = useState(true);
   const [showMatrixRain, setShowMatrixRain] = useState(false);
+  const budweiserAudioRef = useRef<HTMLAudioElement>(null);
 
   const handleLoadingComplete = () => {
     setIsLoading(false);
     setShowMatrixRain(true);
+    try {
+      if (budweiserAudioRef.current) {
+        budweiserAudioRef.current.play();
+      }
+    } catch (err) {
+      console.log('Budweiser audio play failed:', err);
+    }
+
   };
 
   return (
@@ -28,21 +37,22 @@ function App() {
       {isLoading ? (
         <LoadingScreen onComplete={handleLoadingComplete} />
       ) : (
-        <AppContent 
+        <AppContent
           showMatrixRain={showMatrixRain}
           onComplete={handleLoadingComplete}
         />
       )}
+      <audio ref={budweiserAudioRef} src="/budweiser_wassup.mp3" />
     </ToastProvider>
   );
 }
 
 // Separate component to use the toast context
-function AppContent({ 
-  showMatrixRain, 
+function AppContent({
+  showMatrixRain,
   onComplete
-}: { 
-  showMatrixRain: boolean; 
+}: {
+  showMatrixRain: boolean;
   onComplete: () => void;
 }) {
   // Initialize 90s features - now inside ToastProvider
@@ -52,21 +62,21 @@ function AppContent({
   return (
     <div className="min-h-screen">
       {showMatrixRain && <MatrixRain />}
-      
+
       <DancingBaby />
       <Clippy />
       {/* <PopupHint /> */}
-      
+
       <Header onGamesClick={() => setShowGames(true)} />
       <Marquee />
       <HitCounter />
-      
-              <div className="grid grid-cols-1 md:grid-cols-[330px_1fr_330px] gap-[20px] md:p-5 p-1.5 max-w-[1500px] mx-auto">
-          <LeftSidebar />
-          <MainContent showGames={showGames} setShowGames={setShowGames} />
-          <RightSidebar />
-        </div>
-      
+
+      <div className="grid grid-cols-1 md:grid-cols-[330px_1fr_330px] gap-[20px] md:p-5 p-1.5 max-w-[1500px] mx-auto">
+        <LeftSidebar />
+        <MainContent showGames={showGames} setShowGames={setShowGames} />
+        <RightSidebar />
+      </div>
+
       <Footer />
     </div>
   );
