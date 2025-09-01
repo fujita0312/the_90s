@@ -1,4 +1,5 @@
 import React, { createContext, useContext, useState, ReactNode } from 'react';
+import { use90sFeatures } from '../hooks/use90sFeatures';
 
 export interface ToastMessage {
   id: string;
@@ -29,7 +30,6 @@ interface ToastProviderProps {
 
 export const ToastProvider: React.FC<ToastProviderProps> = ({ children }) => {
   const [toasts, setToasts] = useState<ToastMessage[]>([]);
-
   const showToast = (message: string, type: 'success' | 'error' | 'info', duration: number = 4000) => {
     const id = Date.now().toString();
     const newToast: ToastMessage = {

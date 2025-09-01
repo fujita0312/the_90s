@@ -119,7 +119,7 @@ const RightSidebar: React.FC = () => {
       </h3>
 
       {/* Guestbook */}
-      <div className="bg-gradient-to-br from-slate-900 to-slate-800 md:border-3 border-2 border-gray-300 border-ridge md:p-2 p-1 mb-5 max-h-96 overflow-y-auto shadow-[inset_0_0_20px_rgba(0,0,0,0.5)]">
+      <div className="bg-gradient-to-br from-slate-900 to-slate-800 md:border-4 border-2 border-gray-300 border-ridge md:p-2 p-1 mb-5 max-h-96 overflow-y-auto shadow-[inset_0_0_20px_rgba(0,0,0,0.5)]">
         {isLoading ? (
           <div className="text-center p-8 text-cyan-400">
             <div className="animate-spin text-2xl mb-2">🔄</div>
@@ -156,13 +156,13 @@ const RightSidebar: React.FC = () => {
       {/* Sign Guestbook Button */}
       <button
         onClick={handleSignGuestbook}
-        className="w-full bg-gradient-to-r from-cyan-500 to-teal-500 text-black md:border-3 border-2 border-pink-500 border-ridge p-4 font-bold cursor-pointer text-xl shadow-[0_0_10px_#00ced1]"
+        className="w-full bg-gradient-to-r from-cyan-500 to-teal-500 text-black md:border-4 border-2 border-pink-500 border-ridge p-4 font-bold cursor-pointer text-xl shadow-[0_0_10px_#00ced1]"
       >
         🖊️ SIGN GUESTBOOK 🖊️
       </button>
 
       {/* Bulletin Board */}
-      <div className="bg-gradient-to-br from-purple-900 to-purple-800 text-white md:p-5 p-2 md:my-6 my-4 md:border-3 border-2 border-purple-400 border-ridge shadow-[0_0_15px_rgba(218,112,214,0.5)]">
+      <div className="bg-gradient-to-br from-purple-900 to-purple-800 text-white md:p-5 p-2 md:my-6 my-4 md:border-4 border-2 border-purple-400 border-ridge shadow-[0_0_15px_rgba(218,112,214,0.5)]">
         <h4 className="text-center text-purple-300 mb-4 text-xl">
           📌 BULLETIN BOARD 📌
         </h4>
@@ -200,7 +200,7 @@ const RightSidebar: React.FC = () => {
       </div>
 
       {/* Web Ring */}
-      <div className="bg-pink-500/20 p-5 border-3 border-pink-500 border-ridge my-6 text-center shadow-[0_0_15px_rgba(255,0,255,0.3)]">
+      <div className="bg-pink-500/20 p-5 md:border-4 border-2 border-pink-500 border-ridge my-6 text-center shadow-[0_0_15px_rgba(255,0,255,0.3)]">
         <h4 className="animate-blink text-pink-500 mb-4 text-xl">🌐 WEB RING 🌐</h4>
         <div className="mb-4">
           <button className="text-cyan-400 no-underline mx-1.5 bg-transparent border-none cursor-pointer">← Previous</button>
@@ -215,7 +215,7 @@ const RightSidebar: React.FC = () => {
       </div>
 
       {/* Now Playing */}
-      <div className="bg-[#00ff00]/10 border-2 border-dashed border-[#00ff00] p-4 my-5 text-center">
+      <div className="bg-[#00ff00]/10 md:border-4 border-2 border-dashed border-[#00ff00] p-4 my-5 text-center">
         <div className="text-[#00ff00] font-bold">🎵 NOW PLAYING 🎵</div>
         <div className="text-lg my-2.5">
           Dial-Up Connection Sounds

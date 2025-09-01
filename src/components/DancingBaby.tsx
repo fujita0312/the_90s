@@ -16,7 +16,7 @@ const DancingBaby: React.FC = () => {
   return (
     <>
       <div
-        className="fixed bottom-5 right-5 text-6xl animate-dance z-50 cursor-pointer filter drop-shadow-[0_0_10px_#ffd700]"
+        className="fixed bottom-5 md:right-5 right-1 text-6xl animate-dance z-50 cursor-pointer filter drop-shadow-[0_0_10px_#ffd700]"
         onClick={handleClick}
         title="Click me for dial-up sounds!"
       >

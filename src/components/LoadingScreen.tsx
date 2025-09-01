@@ -1,5 +1,6 @@
 import React, { useState, useRef } from 'react';
 import { useToast } from '../contexts/ToastContext';
+import { use90sFeatures } from '../hooks/use90sFeatures';
 
 interface LoadingScreenProps {
     onComplete: () => void;
@@ -11,7 +12,7 @@ const LoadingScreen: React.FC<LoadingScreenProps> = ({ onComplete }) => {
     const [progress, setProgress] = useState(0);
     const dialupAudioRef = useRef<HTMLAudioElement>(null);
     const budweiserAudioRef = useRef<HTMLAudioElement>(null);
-
+    use90sFeatures();
     const handleConnect = async () => {
         setShowProgress(true);
 
