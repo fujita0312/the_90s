@@ -241,7 +241,7 @@ const Clippy: React.FC = () => {
     if (!node) return;
 
     setCurrentNode(nodeKey);
-    
+
     let content: React.ReactNode = (
       <div className="text-sm leading-relaxed mb-4">
         {node.text}
@@ -262,12 +262,12 @@ const Clippy: React.FC = () => {
             <p className="text-gray-300 mb-3 text-sm">
               {node.mission.instruction}
             </p>
-            <textarea 
+            <textarea
               className="w-full h-24 bg-black text-green-400 border border-green-400 p-2 rounded font-mono text-sm resize-none mb-3"
               value={node.mission.payload}
               readOnly
             />
-            <button 
+            <button
               onClick={() => copyMissionText(node.mission!.payload)}
               className="w-full bg-gradient-to-r from-pink-500 to-purple-500 text-white border-2 border-yellow-400 py-2 px-4 rounded font-bold text-sm mb-3 clippy-button-hover"
             >
@@ -277,13 +277,13 @@ const Clippy: React.FC = () => {
             <label className="block text-cyan-400 font-bold mb-2 text-sm">
               {node.mission.proofLabel}
             </label>
-            <input 
-              type="text" 
+            <input
+              type="text"
               id="proof-input"
               placeholder="https://x.com/your_post_link"
               className="w-full bg-black text-green-400 border border-green-400 p-2 rounded font-mono text-sm mb-3"
             />
-            <button 
+            <button
               onClick={() => submitProof(node.mission!.nextNode)}
               className="w-full bg-gradient-to-r from-pink-500 to-purple-500 text-white border-2 border-yellow-400 py-2 px-4 rounded font-bold text-sm clippy-button-hover"
             >
@@ -322,7 +322,7 @@ const Clippy: React.FC = () => {
     }
 
     setDialogueContent(content);
-    
+
     // Set Clippy animation based on the node
     if (node.animation) {
       setClippyAnimation(node.animation);
@@ -377,24 +377,18 @@ const Clippy: React.FC = () => {
     <>
       {/* Clippy Character */}
       <div
-        className="fixed md:bottom-24 bottom-20 md:left-12 left-8 z-50 cursor-pointer transition-transform duration-300 hover:scale-105"
+        className="fixed top-1/2 left-5 text-4xl animate-clippy-bounce z-50 cursor-pointer filter drop-shadow-[0_0_10px_#00ff00] transform -translate-y-1/2"
         onClick={handleClippyClick}
         title="Hi! I'm Clippy! Click me!"
       >
-        <div className={`filter drop-shadow-[0_0_15px_rgba(0,255,0,0.7)] clippy-anim-${clippyAnimation}`}>
-          <img 
-            src="/emoji_clippy.png" 
-            alt="Clippy" 
-            className="w-16 h-16 md:w-20 md:h-20"
-          />
-        </div>
+        📎
       </div>
 
       {/* Dialogue Box */}
       {showDialogue && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
           <div className="bg-black/80 backdrop-blur-sm absolute inset-0" onClick={closeDialogue} />
-          <div 
+          <div
             ref={dialogueRef}
             className="relative bg-gradient-to-br from-blue-900 to-purple-900 border-4 border-cyan-400 rounded-lg p-6 max-w-md w-full max-h-[80vh] overflow-y-auto clippy-dialogue-glow"
           >
@@ -405,7 +399,7 @@ const Clippy: React.FC = () => {
             >
               ×
             </button>
-            
+
             {/* Dialogue content */}
             {dialogueContent}
           </div>

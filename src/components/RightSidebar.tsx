@@ -27,7 +27,7 @@ const RightSidebar: React.FC = () => {
     try {
       setIsLoading(true);
       const response = await guestbookApi.getAllEntries();
-      
+
       if (response.success && response.data) {
         setGuestbookEntries(response.data);
       } else {
@@ -48,7 +48,7 @@ const RightSidebar: React.FC = () => {
   const handleGuestbookSubmit = async (name: string, message: string) => {
     try {
       const response = await guestbookApi.addEntry({ name, message });
-      
+
       if (response.success && response.data) {
         setGuestbookEntries(prev => [response.data!, ...prev]);
         showToast("📝 Thanks for signing the guestbook! Our message has been added to the time capsule! 🕰️", 'success');
@@ -64,7 +64,7 @@ const RightSidebar: React.FC = () => {
   const handlePlayDialUp = () => {
     // Create a more realistic dial-up sound simulation
     const audioContext = new (window.AudioContext || window.webkitAudioContext)();
-    
+
     // Create the classic dial-up sequence
     const frequencies = [2100, 1800, 1200, 2400, 1200, 2400];
     let time = 0;
@@ -102,7 +102,7 @@ const RightSidebar: React.FC = () => {
       `🚀 Launching thread: ${post.title}\n\n${post.emoji} This thread is LIT!`,
       `💫 Accessing: ${post.title}\n\nConnecting to the 90s forum...\nBaud rate: 56k`
     ];
-    
+
     const randomMessage = messages[Math.floor(Math.random() * messages.length)];
     showToast(randomMessage, 'info');
   };
@@ -117,7 +117,7 @@ const RightSidebar: React.FC = () => {
       <h3 className="animate-blink text-center text-pink-500 text-xl mb-8">
         📝 GUESTBOOK 📝
       </h3>
-      
+
       {/* Guestbook */}
       <div className="bg-gradient-to-br from-slate-900 to-slate-800 md:border-3 border-2 border-gray-300 border-ridge md:p-2 p-1 mb-5 max-h-96 overflow-y-auto shadow-[inset_0_0_20px_rgba(0,0,0,0.5)]">
         {isLoading ? (
@@ -169,14 +169,14 @@ const RightSidebar: React.FC = () => {
         <div className="md:text-lg text-base leading-relaxed space-y-2">
           {[
             { title: "Moon mission planning thread", replies: 42, emoji: "🔥", category: "space" },
-            { title: "Share your 90s memories!", replies: 138, emoji: "💭", category: "nostalgia" },
+            { title: "Share our 90s memories!", replies: 138, emoji: "💭", category: "nostalgia" },
             { title: "Diamond hands support group", replies: 69, emoji: "💎", category: "crypto" },
             { title: "Pump.fun tips & tricks", replies: 420, emoji: "📈", category: "trading" },
             { title: "Time traveler AMA", replies: 1337, emoji: "🕰️", category: "meta" },
             { title: "Best dial-up sounds compilation", replies: 666, emoji: "📞", category: "audio" },
             { title: "Y2K bug survivors unite!", replies: 2000, emoji: "🐛", category: "history" }
           ].map((post, index) => (
-            <div 
+            <div
               key={index}
               onClick={() => handleBulletinBoardClick(post)}
               className="cursor-pointer hover:bg-purple-700/50 p-2 rounded transition-all duration-200 hover:scale-105 transform border-l-2 border-purple-300 hover:border-purple-100"
@@ -187,7 +187,7 @@ const RightSidebar: React.FC = () => {
           ))}
         </div>
         <div className="text-center mt-4">
-          <button 
+          <button
             onClick={handleRefreshBulletinBoard}
             className="bg-purple-600 hover:bg-purple-500 text-white px-4 py-2 rounded border border-purple-400 transition-colors"
           >
@@ -217,8 +217,7 @@ const RightSidebar: React.FC = () => {
       {/* Now Playing */}
       <div className="bg-[#00ff00]/10 border-2 border-dashed border-[#00ff00] p-4 my-5 text-center">
         <div className="text-[#00ff00] font-bold">🎵 NOW PLAYING 🎵</div>
-        <div className="text-lg my-2.5 flex items-center justify-center gap-2">
-          <img src="/emoji_dialup.png" alt="Dial-up" className="w-6 h-6" />
+        <div className="text-lg my-2.5">
           Dial-Up Connection Sounds
         </div>
         <div className="text-sm text-yellow-400">Volume: ████████░░</div>

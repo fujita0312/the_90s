@@ -35,7 +35,7 @@ const HitCounter: React.FC = () => {
   }, []);
 
   return (
-    <div className="bg-gradient-to-br from-black via-gray-800 to-black text-pink-500 md:p-5 p-1.5 border-3 border-cyan-400 border-ridge text-center mx-auto my-5 md:max-w-[400px] max-w-[300px] text-[22px] shadow-[0_0_20px_#00ffff] relative">
+    <div className="bg-gradient-to-br from-black via-gray-800 to-black text-pink-500 md:p-5 p-1.5 md:border-4 border-2 border-cyan-400 border-ridge text-center mx-auto my-5 md:max-w-[400px] max-w-[300px] text-[22px] shadow-[0_0_20px_#00ffff] relative">
       <div className="absolute -top-4 left-1/2 transform -translate-x-1/2 bg-black px-2.5 py-1.5 border-2 border-cyan-400 md:text-[25px] text-[15px]">
         📊
       </div>
@@ -44,10 +44,7 @@ const HitCounter: React.FC = () => {
         You are visitor #<span>{counter.toLocaleString()}</span> since 1995!
       </div>
       
-      <div className="mt-2.5 md:text-3xl text-xl flex items-center justify-center gap-2">
-        <img src="/emoji_floppy_disk.png" alt="Floppy Disk" className="w-6 h-6 md:w-8 md:h-8" />
-        WASSSSUPPPP 🕺
-      </div>
+      <div className="mt-2.5 md:text-3xl text-xl">📎 WASSSSUPPPP 🕺</div>
       
       <div className="mt-1.5 md:text-sm text-xs">
         Last updated: <span>{lastUpdated}</span>

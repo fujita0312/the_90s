@@ -36,8 +36,7 @@ const Footer: React.FC = () => {
         📧 Email the Webmaster: hello@90sfresh.meme<br />
         Made with ❤️ and HTML 1.0 | Best viewed at 800x600 resolution<br />
         © 1995-2025 | <span className="animate-blink">This site is Y2K compliant!</span><br />
-        <span className="text-sm flex items-center justify-center gap-2">
-          <img src="/emoji_floppy_disk.png" alt="Floppy Disk" className="w-4 h-4" />
+        <span className="text-sm">
           Optimized for 56k modems | No Flash required
         </span>
       </div>
