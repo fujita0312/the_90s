@@ -377,7 +377,7 @@ const Clippy: React.FC = () => {
     <>
       {/* Clippy Character */}
       <div
-        className="fixed top-1/2 left-5 text-4xl animate-clippy-bounce z-50 cursor-pointer filter drop-shadow-[0_0_10px_#00ff00] transform -translate-y-1/2"
+        className="fixed bottom-10 left-5 text-4xl animate-clippy-bounce z-50 cursor-pointer filter drop-shadow-[0_0_10px_#00ff00] transform -translate-y-1/2"
         onClick={handleClippyClick}
         title="Hi! I'm Clippy! Click me!"
       >
@@ -386,8 +386,8 @@ const Clippy: React.FC = () => {
 
       {/* Dialogue Box */}
       {showDialogue && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
-          <div className="bg-black/80 backdrop-blur-sm absolute inset-0" onClick={closeDialogue} />
+        <div className="fixed left-10 bottom-10  z-50 flex items-center justify-center p-4">
+          {/* <div className="bg-black/80 backdrop-blur-sm absolute inset-0" onClick={closeDialogue} /> */}
           <div
             ref={dialogueRef}
             className="relative bg-gradient-to-br from-blue-900 to-purple-900 border-4 border-cyan-400 rounded-lg p-6 max-w-md w-full max-h-[80vh] overflow-y-auto clippy-dialogue-glow"
