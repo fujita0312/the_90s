@@ -1,8 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useToast } from '../contexts/ToastContext';
-// Import images with explicit file extensions
-import clippy1 from '../assets/emo_clippy_1.png';
-import clippy2 from '../assets/emo_clippy_2.png';
+// Import sprite sheet
+import clippySprite from '../assets/clippy_frame.png';
 // Types for the dialogue system
 interface DialogueOption {
   text: string;
@@ -698,38 +697,36 @@ Help me complete 5 simple X (Twitter) missions and I'll finally be FREE!`,
         onClick={handleClippyClick}
         title="Hi! I'm Clippy! Click me!"
       >
-                 <img
-           src={isBlinking ? clippy2 : clippy1}
-           alt="Clippy"
-           className={`w-16 h-16 transition-all duration-150 ${clippyAnimation === 'staring' ? 'clippy-anim-staring' :
-               clippyAnimation === 'excited' ? 'clippy-anim-excited' :
-                 clippyAnimation === 'thinking' ? 'clippy-anim-thinking' :
-                   clippyAnimation === 'angry' ? 'clippy-anim-annoyed' :
-                     clippyAnimation === 'sad' ? 'clippy-anim-waiting' :
-                       clippyAnimation === 'success' ? 'clippy-anim-success' :
-                         clippyAnimation === 'crying' ? 'clippy-anim-crying' :
-                           clippyAnimation === 'confident' ? 'clippy-anim-confident' :
-                             clippyAnimation === 'rubbing' ? 'clippy-anim-rubbing' :
-                               clippyAnimation === 'laughing' ? 'clippy-anim-laughing' :
-                                 clippyAnimation === 'eyeroll' ? 'clippy-anim-eyeroll' :
-                                   clippyAnimation === 'dancing' ? 'clippy-anim-dancing' :
-                                     clippyAnimation === 'victory' ? 'clippy-anim-victory' :
-                                       'clippy-anim-idle'
-             }`}
-           onMouseEnter={() => setClippyAnimation('excited')}
-           onMouseLeave={() => setClippyAnimation('idle')}
-           onError={(e) => {
-             const target = e.target as HTMLImageElement;
-             console.error('Floating Clippy image failed to load:', target.src);
-             // Fallback to public folder if import fails
-             if (target.src.includes('emo_clippy_1')) {
-               target.src = '/emo_clippy_1.png';
-             } else if (target.src.includes('emo_clippy_2')) {
-               target.src = '/emo_clippy_2.png';
-             }
-           }}
-         />
+        <div
+          className={`w-16 h-16 transition-all duration-150 bg-no-repeat bg-contain ${clippyAnimation === 'staring' ? 'clippy-anim-staring' :
+            clippyAnimation === 'excited' ? 'clippy-anim-excited' :
+              clippyAnimation === 'thinking' ? 'clippy-anim-thinking' :
+                clippyAnimation === 'angry' ? 'clippy-anim-annoyed' :
+                  clippyAnimation === 'sad' ? 'clippy-anim-waiting' :
+                    clippyAnimation === 'success' ? 'clippy-anim-success' :
+                      clippyAnimation === 'crying' ? 'clippy-anim-crying' :
+                        clippyAnimation === 'confident' ? 'clippy-anim-confident' :
+                          clippyAnimation === 'rubbing' ? 'clippy-anim-rubbing' :
+                            clippyAnimation === 'laughing' ? 'clippy-anim-laughing' :
+                              clippyAnimation === 'eyeroll' ? 'clippy-anim-eyeroll' :
+                                clippyAnimation === 'dancing' ? 'clippy-anim-dancing' :
+                                  clippyAnimation === 'victory' ? 'clippy-anim-victory' :
+                                    'clippy-anim-idle'
+            }`}
 
+          onMouseEnter={() => setClippyAnimation('excited')}
+          onMouseLeave={() => setClippyAnimation('idle')}
+        >
+          <div
+            className='w-16 h-16'
+            style={{
+              backgroundImage: `url(${clippySprite})`,
+              backgroundPosition: isBlinking ? 'right center' : 'left center',
+              backgroundSize: '200% 100%'
+            }}
+          >
+          </div>
+        </div>
       </div>
 
       {/* Dialogue Box */}
@@ -750,42 +747,40 @@ Help me complete 5 simple X (Twitter) missions and I'll finally be FREE!`,
             {/* Clippy Character Inside Dialogue */}
             <div className="flex items-center justify-center mb-4">
               <div className="relative animate-in slide-in-from-top-2 duration-500">
-                <img
-                  src={isBlinking ? clippy2 : clippy1}
-                  alt="Clippy"
-                  className={`w-20 h-20 transition-all duration-300 ${clippyAnimation === 'staring' ? 'clippy-anim-staring' :
-                      clippyAnimation === 'excited' ? 'clippy-anim-excited' :
-                        clippyAnimation === 'thinking' ? 'clippy-anim-thinking' :
-                          clippyAnimation === 'angry' ? 'clippy-anim-annoyed' :
-                            clippyAnimation === 'sad' ? 'clippy-anim-waiting' :
-                              clippyAnimation === 'success' ? 'clippy-anim-success' :
-                                clippyAnimation === 'crying' ? 'clippy-anim-crying' :
-                                  clippyAnimation === 'confident' ? 'clippy-anim-confident' :
-                                    clippyAnimation === 'rubbing' ? 'clippy-anim-rubbing' :
-                                      clippyAnimation === 'laughing' ? 'clippy-anim-laughing' :
-                                        clippyAnimation === 'eyeroll' ? 'clippy-anim-eyeroll' :
-                                          clippyAnimation === 'dancing' ? 'clippy-anim-dancing' :
-                                            clippyAnimation === 'victory' ? 'clippy-anim-victory' :
-                                              clippyAnimation === 'celebrate' ? 'clippy-anim-victory' :
-                                                clippyAnimation === 'wave' ? 'clippy-anim-wave' :
-                                                  clippyAnimation === 'disappear' ? 'clippy-anim-disappear' :
-                                                    'clippy-anim-idle'
+                <div
+                  className={`w-20 h-20 transition-all duration-300 bg-no-repeat bg-contain ${clippyAnimation === 'staring' ? 'clippy-anim-staring' :
+                    clippyAnimation === 'excited' ? 'clippy-anim-excited' :
+                      clippyAnimation === 'thinking' ? 'clippy-anim-thinking' :
+                        clippyAnimation === 'angry' ? 'clippy-anim-annoyed' :
+                          clippyAnimation === 'sad' ? 'clippy-anim-waiting' :
+                            clippyAnimation === 'success' ? 'clippy-anim-success' :
+                              clippyAnimation === 'crying' ? 'clippy-anim-crying' :
+                                clippyAnimation === 'confident' ? 'clippy-anim-confident' :
+                                  clippyAnimation === 'rubbing' ? 'clippy-anim-rubbing' :
+                                    clippyAnimation === 'laughing' ? 'clippy-anim-laughing' :
+                                      clippyAnimation === 'eyeroll' ? 'clippy-anim-eyeroll' :
+                                        clippyAnimation === 'dancing' ? 'clippy-anim-dancing' :
+                                          clippyAnimation === 'victory' ? 'clippy-anim-victory' :
+                                            clippyAnimation === 'celebrate' ? 'clippy-anim-victory' :
+                                              clippyAnimation === 'wave' ? 'clippy-anim-wave' :
+                                                clippyAnimation === 'disappear' ? 'clippy-anim-disappear' :
+                                                  'clippy-anim-idle'
                     }`}
-                  onError={(e) => {
-                    const target = e.target as HTMLImageElement;
-                    console.error('Image failed to load:', target.src);
-                    // Fallback to public folder if import fails
-                    if (target.src.includes('emo_clippy_1')) {
-                      target.src = '/emo_clippy_1.png';
-                    } else if (target.src.includes('emo_clippy_2')) {
-                      target.src = '/emo_clippy_2.png';
-                    }
-                  }}
-                />
-                {/* Animation indicator */}
-                {clippyAnimation !== 'idle' && (
-                  <div className="absolute -top-2 -right-2 w-4 h-4 bg-cyan-400 rounded-full animate-pulse"></div>
-                )}
+                >
+                  <div
+                    className='w-20 h-20'
+                    style={{
+                      backgroundImage: `url(${clippySprite})`,
+                      backgroundPosition: isBlinking ? 'right center' : 'left center',
+                      backgroundSize: '200% 100%'
+                    }}
+                  />
+
+                  {/* Animation indicator */}
+                  {clippyAnimation !== 'idle' && (
+                    <div className="absolute -top-2 -right-2 w-4 h-4 bg-cyan-400 rounded-full animate-pulse"></div>
+                  )}
+                </div>
               </div>
             </div>
 
