@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useToast } from '../contexts/ToastContext';
-
+import clippy1 from '../assets/emo_clippy_1.png';
+import clippy2 from '../assets/emo_clippy_2.png';
 // Types for the dialogue system
 interface DialogueOption {
   text: string;
@@ -739,7 +740,7 @@ Help me complete 5 simple X (Twitter) missions and I'll finally be FREE!`,
             <div className="flex items-center justify-center mb-4">
               <div className="relative animate-in slide-in-from-top-2 duration-500">
                 <img
-                  src={isBlinking ? "/emo_clippy_2.png" : "/emo_clippy_1.png"}
+                  src={isBlinking ? clippy2 : clippy1}
                   alt="Clippy"
                   className={`w-20 h-20 transition-all duration-300 ${clippyAnimation === 'staring' ? 'clippy-anim-staring' :
                       clippyAnimation === 'excited' ? 'clippy-anim-excited' :
