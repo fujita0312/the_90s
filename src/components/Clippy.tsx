@@ -559,7 +559,7 @@ Help me complete 5 simple X (Twitter) missions and I'll finally be FREE!`,
     setCurrentNode(nodeKey);
 
     let content: React.ReactNode = (
-      <div className="text-sm leading-relaxed mb-4 text-navy-800">
+      <div className="text-sm leading-relaxed mb-4 text-blue-800">
         {node.text}
       </div>
     );
@@ -568,18 +568,18 @@ Help me complete 5 simple X (Twitter) missions and I'll finally be FREE!`,
     if (node.mission) {
       content = (
         <>
-          <div className="text-sm leading-relaxed mb-4 text-navy-800">
+          <div className="text-sm leading-relaxed mb-4 text-blue-800">
             {node.text}
           </div>
           <div className="bg-black/50 border-2 border-dashed border-green-400 p-4 mb-4">
-            <h4 className="text-navy-800 text-center mb-3 font-bold text-lg">
+            <h4 className="text-blue-800 text-center mb-3 font-bold text-lg">
               {node.mission.title}
             </h4>
-            <p className="text-navy-800 mb-3 text-sm">
+            <p className="text-blue-800 mb-3 text-sm">
               {node.mission.instruction}
             </p>
             <textarea
-              className="w-full h-24 bg-black text-navy-800 border border-green-400 p-2 font-mono text-sm resize-none mb-3"
+              className="w-full h-24 bg-black text-blue-800 border border-green-400 p-2 font-mono text-sm resize-none mb-3"
               value={node.mission.payload}
               readOnly
             />
@@ -590,14 +590,14 @@ Help me complete 5 simple X (Twitter) missions and I'll finally be FREE!`,
               Copy Text
             </button>
             <hr className="border-dashed border-green-400 my-3" />
-            <label className="block text-navy-800 font-bold mb-2 text-sm">
+            <label className="block text-blue-800 font-bold mb-2 text-sm">
               {node.mission.proofLabel}
             </label>
             <input
               type="text"
               id="proof-input"
               placeholder="https://x.com/your_post_link"
-              className="w-full bg-black text-navy-800 border border-green-400 p-2 font-mono text-sm mb-3"
+              className="w-full bg-black text-blue-800 border border-green-400 p-2 font-mono text-sm mb-3"
             />
             <button
               onClick={() => submitProof(node.mission!.nextNode)}
@@ -612,7 +612,7 @@ Help me complete 5 simple X (Twitter) missions and I'll finally be FREE!`,
       // Handle Options
       content = (
         <>
-          <div className="text-sm leading-relaxed mb-4 text-navy-800">
+          <div className="text-sm leading-relaxed mb-4 text-blue-800">
             {node.text}
           </div>
           <div className="space-y-2">
@@ -631,7 +631,7 @@ Help me complete 5 simple X (Twitter) missions and I'll finally be FREE!`,
     } else {
       // End nodes
       content = (
-        <div className="text-sm leading-relaxed mb-4 text-navy-800">
+        <div className="text-sm leading-relaxed mb-4 text-blue-800">
           {node.text}
         </div>
       );
@@ -731,7 +731,7 @@ Help me complete 5 simple X (Twitter) missions and I'll finally be FREE!`,
             {/* Close button */}
             <button
               onClick={closeDialogue}
-              className="absolute top-1 right-2 text-navy-800 hover:text-navy-600 text-4xl font-bold"
+              className="absolute top-1 right-2 text-blue-800 hover:text-blue-600 text-4xl font-bold"
             >
               ×
             </button>
