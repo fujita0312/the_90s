@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useToast } from '../contexts/ToastContext';
+// Import images with explicit file extensions
 import clippy1 from '../assets/emo_clippy_1.png';
 import clippy2 from '../assets/emo_clippy_2.png';
 // Types for the dialogue system
@@ -537,7 +538,7 @@ Help me complete 5 simple X (Twitter) missions and I'll finally be FREE!`,
     if (isVisible) {
       const blinkInterval = setInterval(() => {
         setIsBlinking(true);
-        setTimeout(() => setIsBlinking(false), 510);
+        setTimeout(() => setIsBlinking(false), 800);
       }, 3000);
 
       return () => clearInterval(blinkInterval);
@@ -697,27 +698,37 @@ Help me complete 5 simple X (Twitter) missions and I'll finally be FREE!`,
         onClick={handleClippyClick}
         title="Hi! I'm Clippy! Click me!"
       >
-        <img
-          src={isBlinking ? "/emo_clippy_2.png" : "/emo_clippy_1.png"}
-          alt="Clippy"
-          className={`w-16 h-16 transition-all duration-150 ${clippyAnimation === 'staring' ? 'clippy-anim-staring' :
-              clippyAnimation === 'excited' ? 'clippy-anim-excited' :
-                clippyAnimation === 'thinking' ? 'clippy-anim-thinking' :
-                  clippyAnimation === 'angry' ? 'clippy-anim-annoyed' :
-                    clippyAnimation === 'sad' ? 'clippy-anim-waiting' :
-                      clippyAnimation === 'success' ? 'clippy-anim-success' :
-                        clippyAnimation === 'crying' ? 'clippy-anim-crying' :
-                          clippyAnimation === 'confident' ? 'clippy-anim-confident' :
-                            clippyAnimation === 'rubbing' ? 'clippy-anim-rubbing' :
-                              clippyAnimation === 'laughing' ? 'clippy-anim-laughing' :
-                                clippyAnimation === 'eyeroll' ? 'clippy-anim-eyeroll' :
-                                  clippyAnimation === 'dancing' ? 'clippy-anim-dancing' :
-                                    clippyAnimation === 'victory' ? 'clippy-anim-victory' :
-                                      'clippy-anim-idle'
-            }`}
-          onMouseEnter={() => setClippyAnimation('excited')}
-          onMouseLeave={() => setClippyAnimation('idle')}
-        />
+                 <img
+           src={isBlinking ? clippy2 : clippy1}
+           alt="Clippy"
+           className={`w-16 h-16 transition-all duration-150 ${clippyAnimation === 'staring' ? 'clippy-anim-staring' :
+               clippyAnimation === 'excited' ? 'clippy-anim-excited' :
+                 clippyAnimation === 'thinking' ? 'clippy-anim-thinking' :
+                   clippyAnimation === 'angry' ? 'clippy-anim-annoyed' :
+                     clippyAnimation === 'sad' ? 'clippy-anim-waiting' :
+                       clippyAnimation === 'success' ? 'clippy-anim-success' :
+                         clippyAnimation === 'crying' ? 'clippy-anim-crying' :
+                           clippyAnimation === 'confident' ? 'clippy-anim-confident' :
+                             clippyAnimation === 'rubbing' ? 'clippy-anim-rubbing' :
+                               clippyAnimation === 'laughing' ? 'clippy-anim-laughing' :
+                                 clippyAnimation === 'eyeroll' ? 'clippy-anim-eyeroll' :
+                                   clippyAnimation === 'dancing' ? 'clippy-anim-dancing' :
+                                     clippyAnimation === 'victory' ? 'clippy-anim-victory' :
+                                       'clippy-anim-idle'
+             }`}
+           onMouseEnter={() => setClippyAnimation('excited')}
+           onMouseLeave={() => setClippyAnimation('idle')}
+           onError={(e) => {
+             const target = e.target as HTMLImageElement;
+             console.error('Floating Clippy image failed to load:', target.src);
+             // Fallback to public folder if import fails
+             if (target.src.includes('emo_clippy_1')) {
+               target.src = '/emo_clippy_1.png';
+             } else if (target.src.includes('emo_clippy_2')) {
+               target.src = '/emo_clippy_2.png';
+             }
+           }}
+         />
 
       </div>
 
@@ -760,6 +771,16 @@ Help me complete 5 simple X (Twitter) missions and I'll finally be FREE!`,
                                                   clippyAnimation === 'disappear' ? 'clippy-anim-disappear' :
                                                     'clippy-anim-idle'
                     }`}
+                  onError={(e) => {
+                    const target = e.target as HTMLImageElement;
+                    console.error('Image failed to load:', target.src);
+                    // Fallback to public folder if import fails
+                    if (target.src.includes('emo_clippy_1')) {
+                      target.src = '/emo_clippy_1.png';
+                    } else if (target.src.includes('emo_clippy_2')) {
+                      target.src = '/emo_clippy_2.png';
+                    }
+                  }}
                 />
                 {/* Animation indicator */}
                 {clippyAnimation !== 'idle' && (
