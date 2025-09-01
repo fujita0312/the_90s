@@ -700,18 +700,7 @@ Help me complete 5 simple X (Twitter) missions and I'll finally be FREE!`,
         <div
           className={`w-16 h-16 transition-all duration-150 bg-no-repeat bg-contain ${clippyAnimation === 'staring' ? 'clippy-anim-staring' :
             clippyAnimation === 'excited' ? 'clippy-anim-excited' :
-              clippyAnimation === 'thinking' ? 'clippy-anim-thinking' :
-                clippyAnimation === 'angry' ? 'clippy-anim-annoyed' :
-                  clippyAnimation === 'sad' ? 'clippy-anim-waiting' :
-                    clippyAnimation === 'success' ? 'clippy-anim-success' :
-                      clippyAnimation === 'crying' ? 'clippy-anim-crying' :
-                        clippyAnimation === 'confident' ? 'clippy-anim-confident' :
-                          clippyAnimation === 'rubbing' ? 'clippy-anim-rubbing' :
-                            clippyAnimation === 'laughing' ? 'clippy-anim-laughing' :
-                              clippyAnimation === 'eyeroll' ? 'clippy-anim-eyeroll' :
-                                clippyAnimation === 'dancing' ? 'clippy-anim-dancing' :
-                                  clippyAnimation === 'victory' ? 'clippy-anim-victory' :
-                                    'clippy-anim-idle'
+              'clippy-anim-idle'
             }`}
 
           onMouseEnter={() => setClippyAnimation('excited')}
