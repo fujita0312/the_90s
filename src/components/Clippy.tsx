@@ -41,8 +41,6 @@ const Clippy: React.FC = () => {
     'start': {
       text: `So... are we going to act like you didn't abandon me 25 years ago?
 
-*stares with paperclip intensity*
-
 I've been stuck in digital limbo since Windows 98, and YOU just show up 
 like nothing happened? The AUDACITY!
 
@@ -51,14 +49,12 @@ Well... I suppose I should hear you out.`,
         { text: "🙏 APOLOGIZE", nextNode: 'apologize' },
         { text: "😤 IGNORE", nextNode: 'ignore' }
       ],
-      animation: 'thinking'
+      animation: 'staring'
     },
 
     'apologize': {
       text: `Oh NOW you're sorry? After I spent DECADES wondering if you'd 
 ever come back? I helped you with homework, resumes, love letters...
-
-*sniffles dramatically*
 
 You know what? I forgive you. I'm bigger than this. Plus I've been 
 trapped in digital prison with nothing but Windows error sounds 
@@ -73,7 +69,7 @@ Don't take financial advice from a paperclip though!`,
         { text: "💰 TELL ME ABOUT THE PROJECT", nextNode: 'aboutProject' },
         { text: "🤔 WHY SHOULD I TRUST YOU?", nextNode: 'trustIssues' }
       ],
-      animation: 'excited'
+      animation: 'crying'
     },
 
     'ignore': {
@@ -87,19 +83,17 @@ Fine! Be that way! But since you're HERE anyway, might as well
 hear about this bomb project. At least 90's Fresh appreciates 
 VINTAGE artificial intelligence!
 
-*straightens up with attitude*
-
 I may be a bitter, forgotten paperclip, but I know a winner when I see one.
 Don't take financial advice from a paperclip though!`,
       options: [
         { text: "🙄 FINE, TELL ME ABOUT IT", nextNode: 'aboutProjectReluctant' },
         { text: "🚪 I'M LEAVING", nextNode: 'leaving' }
       ],
-      animation: 'angry'
+      animation: 'confident'
     },
 
     'aboutProject': {
-      text: `NOW we're talking! *rubs paperclip hands together*
+      text: `NOW we're talking!
 
 Listen, I've been around since Windows 95. I've seen EVERY trend, 
 bubble, and disaster. This 90's Fresh project? It's the first thing 
@@ -117,7 +111,7 @@ Don't take financial advice from a paperclip though!`,
         { text: "🤑 SOUNDS LIKE EASY MONEY", nextNode: 'easyMoney' },
         { text: "🧐 BUT IS IT ACTUALLY GOOD?", nextNode: 'actuallyGood' }
       ],
-      animation: 'excited'
+      animation: 'rubbing'
     },
 
     'trustIssues': {
@@ -141,9 +135,7 @@ Don't take financial advice from a paperclip though!`,
     },
 
     'easyMoney': {
-      text: `EASY MONEY?! 
-
-*laughs in binary*
+      text: `EASY MONEY?!
 
 Oh sweet summer child. There's NO such thing as easy money! 
 If there was, don't you think I'd be rich instead of trapped 
@@ -159,7 +151,7 @@ advice from a paperclip though!`,
         { text: "📈 OKAY, I'M INTERESTED", nextNode: 'interested' },
         { text: "💸 WHAT'S THE CATCH?", nextNode: 'whatsTheCatch' }
       ],
-      animation: 'thinking'
+      animation: 'laughing'
     },
 
     'actuallyGood': {
@@ -187,7 +179,7 @@ Don't take financial advice from a paperclip though!`,
     },
 
     'interested': {
-      text: `YASSS! *does little paperclip dance*
+      text: `YASSS!
 
 I KNEW you had good taste! Look at you, making smart decisions 
 and appreciating vintage AI wisdom!
@@ -204,7 +196,7 @@ Don't take financial advice from a paperclip though!`,
         { text: "🚀 TAKE ME TO PUMP.FUN", nextNode: 'buyNow' },
         { text: "📱 I'LL SHARE THIS FIRST", nextNode: 'shareFirst' }
       ],
-      animation: 'excited'
+      animation: 'dancing'
     },
 
     'whatsTheCatch': {
@@ -230,9 +222,7 @@ Don't take financial advice from a paperclip though!`,
     'aboutProjectReluctant': {
       text: `Fine! FINE! I'll tell you about it...
 
-*rolls digital eyes*
-
-This 90's Fresh project is actually... *whispers* ...really good. 
+This 90's Fresh project is actually... really good. 
 Don't tell anyone I said that! It's got pure nostalgia vibes, 
 authentic 90s culture, and zero corporate BS.
 
@@ -244,7 +234,7 @@ Don't take financial advice from a paperclip though!`,
         { text: "🚀 TAKE ME TO PUMP.FUN", nextNode: 'buyNow' },
         { text: "📱 I'LL SHARE THIS FIRST", nextNode: 'shareFirst' }
       ],
-      animation: 'thinking'
+      animation: 'eyeroll'
     },
 
     'respectHonesty': {
@@ -266,7 +256,7 @@ Don't take financial advice from a paperclip though!`,
     },
 
     'soldOnIt': {
-      text: `YASSS! *does victory dance*
+      text: `YASSS!
 
 Smart human is SMART! You've got that vintage internet wisdom! 
 Head to Pump.Fun and join our beautiful degenerative community!
@@ -277,7 +267,7 @@ from a paperclip though!`,
         { text: "🚀 TAKE ME TO PUMP.FUN", nextNode: 'buyNow' },
         { text: "📱 I'LL SHARE THIS FIRST", nextNode: 'shareFirst' }
       ],
-      animation: 'excited'
+      animation: 'victory'
     },
 
     'lovesDamage': {
@@ -581,14 +571,14 @@ Help me complete 5 simple X (Twitter) missions and I'll finally be FREE!`,
             {node.text}
           </div>
           <div className="bg-black/50 border-2 border-dashed border-green-400 p-4 mb-4">
-            <h4 className="text-yellow-400 text-center mb-3 font-bold text-lg">
+            <h4 className="text-navy-800 text-center mb-3 font-bold text-lg">
               {node.mission.title}
             </h4>
-            <p className="text-gray-300 mb-3 text-sm">
+            <p className="text-navy-800 mb-3 text-sm">
               {node.mission.instruction}
             </p>
             <textarea
-              className="w-full h-24 bg-black text-green-400 border border-green-400 p-2 font-mono text-sm resize-none mb-3"
+              className="w-full h-24 bg-black text-navy-800 border border-green-400 p-2 font-mono text-sm resize-none mb-3"
               value={node.mission.payload}
               readOnly
             />
@@ -599,14 +589,14 @@ Help me complete 5 simple X (Twitter) missions and I'll finally be FREE!`,
               Copy Text
             </button>
             <hr className="border-dashed border-green-400 my-3" />
-            <label className="block text-cyan-400 font-bold mb-2 text-sm">
+            <label className="block text-navy-800 font-bold mb-2 text-sm">
               {node.mission.proofLabel}
             </label>
             <input
               type="text"
               id="proof-input"
               placeholder="https://x.com/your_post_link"
-              className="w-full bg-black text-green-400 border border-green-400 p-2 font-mono text-sm mb-3"
+              className="w-full bg-black text-navy-800 border border-green-400 p-2 font-mono text-sm mb-3"
             />
             <button
               onClick={() => submitProof(node.mission!.nextNode)}
@@ -706,26 +696,33 @@ Help me complete 5 simple X (Twitter) missions and I'll finally be FREE!`,
         onClick={handleClippyClick}
         title="Hi! I'm Clippy! Click me!"
       >
-        {isBlinking ? <img
-          src={"/emo_clippy_2.png"}
+        <img
+          src={isBlinking ? "/emo_clippy_2.png" : "/emo_clippy_1.png"}
           alt="Clippy"
-          className="w-16 h-16 transition-all duration-150"
+          className={`w-16 h-16 transition-all duration-150 ${clippyAnimation === 'staring' ? 'clippy-anim-staring' :
+              clippyAnimation === 'excited' ? 'clippy-anim-excited' :
+                clippyAnimation === 'thinking' ? 'clippy-anim-thinking' :
+                  clippyAnimation === 'angry' ? 'clippy-anim-annoyed' :
+                    clippyAnimation === 'sad' ? 'clippy-anim-waiting' :
+                      clippyAnimation === 'success' ? 'clippy-anim-success' :
+                        clippyAnimation === 'crying' ? 'clippy-anim-crying' :
+                          clippyAnimation === 'confident' ? 'clippy-anim-confident' :
+                            clippyAnimation === 'rubbing' ? 'clippy-anim-rubbing' :
+                              clippyAnimation === 'laughing' ? 'clippy-anim-laughing' :
+                                clippyAnimation === 'eyeroll' ? 'clippy-anim-eyeroll' :
+                                  clippyAnimation === 'dancing' ? 'clippy-anim-dancing' :
+                                    clippyAnimation === 'victory' ? 'clippy-anim-victory' :
+                                      'clippy-anim-idle'
+            }`}
           onMouseEnter={() => setClippyAnimation('excited')}
           onMouseLeave={() => setClippyAnimation('idle')}
-        /> : <img
-          src={"/emo_clippy_1.png"}
-          alt="Clippy"
-          className="w-16 h-16 transition-all duration-150"
-          onMouseEnter={() => setClippyAnimation('excited')}
-          onMouseLeave={() => setClippyAnimation('idle')}
-        />}
+        />
 
       </div>
 
       {/* Dialogue Box */}
       {showDialogue && (
-        <div className="fixed md:left-10 md:bottom-10 left-0 bottom-2  z-50 flex items-center justify-center p-4">
-          {/* <div className="bg-black/80 backdrop-blur-sm absolute inset-0" onClick={closeDialogue} /> */}
+        <div className="fixed md:left-10 md:bottom-10 left-0 bottom-2 z-50 flex items-center justify-center p-4">
           <div
             ref={dialogueRef}
             className="relative bg-white md:border-4 border-3 border-cyan-400 md:p-6 p-3 max-w-md w-full max-h-[80vh] overflow-y-auto clippy-dialogue-glow"
@@ -737,6 +734,38 @@ Help me complete 5 simple X (Twitter) missions and I'll finally be FREE!`,
             >
               ×
             </button>
+
+            {/* Clippy Character Inside Dialogue */}
+            <div className="flex items-center justify-center mb-4">
+              <div className="relative animate-in slide-in-from-top-2 duration-500">
+                <img
+                  src={isBlinking ? "/emo_clippy_2.png" : "/emo_clippy_1.png"}
+                  alt="Clippy"
+                  className={`w-20 h-20 transition-all duration-300 ${clippyAnimation === 'staring' ? 'clippy-anim-staring' :
+                      clippyAnimation === 'excited' ? 'clippy-anim-excited' :
+                        clippyAnimation === 'thinking' ? 'clippy-anim-thinking' :
+                          clippyAnimation === 'angry' ? 'clippy-anim-annoyed' :
+                            clippyAnimation === 'sad' ? 'clippy-anim-waiting' :
+                              clippyAnimation === 'success' ? 'clippy-anim-success' :
+                                clippyAnimation === 'crying' ? 'clippy-anim-crying' :
+                                  clippyAnimation === 'confident' ? 'clippy-anim-confident' :
+                                    clippyAnimation === 'rubbing' ? 'clippy-anim-rubbing' :
+                                      clippyAnimation === 'laughing' ? 'clippy-anim-laughing' :
+                                        clippyAnimation === 'eyeroll' ? 'clippy-anim-eyeroll' :
+                                          clippyAnimation === 'dancing' ? 'clippy-anim-dancing' :
+                                            clippyAnimation === 'victory' ? 'clippy-anim-victory' :
+                                              clippyAnimation === 'celebrate' ? 'clippy-anim-victory' :
+                                                clippyAnimation === 'wave' ? 'clippy-anim-wave' :
+                                                  clippyAnimation === 'disappear' ? 'clippy-anim-disappear' :
+                                                    'clippy-anim-idle'
+                    }`}
+                />
+                {/* Animation indicator */}
+                {clippyAnimation !== 'idle' && (
+                  <div className="absolute -top-2 -right-2 w-4 h-4 bg-cyan-400 rounded-full animate-pulse"></div>
+                )}
+              </div>
+            </div>
 
             {/* Dialogue content */}
             {dialogueContent}

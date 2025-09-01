@@ -613,6 +613,51 @@ animation: gradientShift 2s ease infinite;
   100% { transform: rotate(0deg) scale(1); }
 }
 
+@keyframes clippy-staring {
+  0%, 100% { transform: scale(1.1) rotate(0deg); }
+  50% { transform: scale(1.2) rotate(2deg); }
+}
+
+@keyframes clippy-crying {
+  0%, 100% { transform: scale(1) rotate(0deg); }
+  25% { transform: scale(0.9) rotate(-2deg); }
+  50% { transform: scale(0.95) rotate(1deg); }
+  75% { transform: scale(0.9) rotate(-1deg); }
+}
+
+@keyframes clippy-confident {
+  0%, 100% { transform: scale(1) rotate(0deg); }
+  50% { transform: scale(1.15) rotate(5deg); }
+}
+
+@keyframes clippy-rubbing {
+  0%, 100% { transform: scale(1) rotate(0deg); }
+  25% { transform: scale(1.1) rotate(-3deg); }
+  50% { transform: scale(1.05) rotate(2deg); }
+  75% { transform: scale(1.1) rotate(-2deg); }
+}
+
+@keyframes clippy-laughing {
+  0%, 100% { transform: scale(1) rotate(0deg); }
+  25% { transform: scale(1.2) rotate(-5deg); }
+  50% { transform: scale(1.1) rotate(3deg); }
+  75% { transform: scale(1.15) rotate(-2deg); }
+}
+
+@keyframes clippy-dancing {
+  0%, 100% { transform: scale(1) rotate(0deg); }
+  25% { transform: scale(1.1) rotate(15deg); }
+  50% { transform: scale(1.2) rotate(-10deg); }
+  75% { transform: scale(1.1) rotate(8deg); }
+}
+
+@keyframes clippy-victory {
+  0%, 100% { transform: scale(1) rotate(0deg); }
+  25% { transform: scale(1.3) rotate(90deg); }
+  50% { transform: scale(1.4) rotate(180deg); }
+  75% { transform: scale(1.3) rotate(270deg); }
+}
+
 /* Clippy Animation Classes */
 .clippy-anim-thinking { animation: clippy-thinking 2s infinite; }
 .clippy-anim-smug { animation: clippy-smug 1s forwards; }
@@ -628,6 +673,13 @@ animation: gradientShift 2s ease infinite;
 .clippy-anim-disappear { animation: clippy-disappear 0.5s forwards; }
 .clippy-anim-waiting { animation: clippy-waiting 3s infinite; }
 .clippy-anim-wave { animation: clippy-wave 1s forwards; }
+.clippy-anim-staring { animation: clippy-staring 2s infinite; }
+.clippy-anim-crying { animation: clippy-crying 1.5s infinite; }
+.clippy-anim-confident { animation: clippy-confident 2s infinite; }
+.clippy-anim-rubbing { animation: clippy-rubbing 1.5s infinite; }
+.clippy-anim-laughing { animation: clippy-laughing 1s infinite; }
+.clippy-anim-dancing { animation: clippy-dancing 1.5s infinite; }
+.clippy-anim-victory { animation: clippy-victory 2s infinite; }
 
 /* Clippy Dialogue Box Enhancements */
 .clippy-dialogue-glow {
@@ -643,4 +695,24 @@ animation: gradientShift 2s ease infinite;
 .clippy-button-hover:hover {
   transform: translateY(-2px) scale(1.05);
   box-shadow: 0 8px 25px rgba(255, 0, 255, 0.8);
+}
+
+/* Clippy Dialogue Entrance Animations */
+@keyframes slide-in-from-top-2 {
+  from {
+    opacity: 0;
+    transform: translateY(-0.5rem);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-in {
+  animation-fill-mode: both;
+}
+
+.slide-in-from-top-2 {
+  animation-name: slide-in-from-top-2;
 }
