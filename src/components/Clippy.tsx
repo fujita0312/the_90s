@@ -33,6 +33,7 @@ const Clippy: React.FC = () => {
   const [dialogueContent, setDialogueContent] = useState<React.ReactNode>(null);
   const [isVisible, setIsVisible] = useState<boolean>(false);
   const [clippyAnimation, setClippyAnimation] = useState<string>('idle');
+  const [isBlinking, setIsBlinking] = useState<boolean>(false);
   const dialogueRef = useRef<HTMLDivElement>(null);
 
   // Clippy's dialogue tree - the brain of the operation
@@ -540,6 +541,18 @@ Help me complete 5 simple X (Twitter) missions and I'll finally be FREE!`,
     }
   }, [isVisible]);
 
+  // Blinking effect
+  useEffect(() => {
+    if (isVisible) {
+      const blinkInterval = setInterval(() => {
+        setIsBlinking(true);
+        setTimeout(() => setIsBlinking(false), 150);
+      }, 3000);
+      
+      return () => clearInterval(blinkInterval);
+    }
+  }, [isVisible]);
+
   const handleClippyClick = () => {
     if (!showDialogue) {
       setCurrentNode('start');
@@ -689,11 +702,17 @@ Help me complete 5 simple X (Twitter) missions and I'll finally be FREE!`,
     <>
       {/* Clippy Character */}
       <div
-        className="fixed md:bottom-10 md:left-5 bottom-5 left-3 text-4xl animate-clippy-bounce z-50 cursor-pointer filter drop-shadow-[0_0_10px_#00ff00] transform -translate-y-1/2"
+        className="fixed md:bottom-10 md:left-5 bottom-5 left-3 z-50 cursor-pointer filter drop-shadow-[0_0_10px_#00ff00] transform -translate-y-1/2 animate-clippy-bounce"
         onClick={handleClippyClick}
         title="Hi! I'm Clippy! Click me!"
       >
-        📎
+        <img 
+          src={isBlinking ? "/emo_clippy_2.png" : "/emo_clippy_1.png"}
+          alt="Clippy" 
+          className="w-16 h-16 transition-all duration-150"
+          onMouseEnter={() => setClippyAnimation('excited')}
+          onMouseLeave={() => setClippyAnimation('idle')}
+        />
       </div>
 
       {/* Dialogue Box */}

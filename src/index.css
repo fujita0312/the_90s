@@ -311,6 +311,8 @@ animation: gradientShift 2s ease infinite;
   }
 }
 
+
+
 @keyframes loading {
   0% {
     width: 0%;
