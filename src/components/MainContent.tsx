@@ -1,6 +1,16 @@
 import React from 'react';
+import Games from './Games';
 
-const MainContent: React.FC = () => {
+interface MainContentProps {
+  showGames: boolean;
+  setShowGames: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+const MainContent: React.FC<MainContentProps> = ({ showGames, setShowGames }) => {
+  if (showGames) {
+    return <Games onBack={() => setShowGames(false)} />;
+  }
+
   return (
     <div className="bg-gradient-to-br from-black/90 via-blue-900/80 to-black/90 md:border-4 border-2 border-yellow-400 border-ridge md:p-4 p-1 shadow-[0_0_25px_rgba(255,255,0,0.3),inset_0_0_25px_rgba(255,255,255,0.1)] relative gradient-border">
       <h2 className="rainbow text-center mb-8 md:text-3xl text-xl">
@@ -79,6 +89,37 @@ const MainContent: React.FC = () => {
           <div className="animate-blink md:text-2xl text-xl text-yellow-400">
             ⚡ YOU ARE THE CHOSEN ONES ⚡
           </div>
+        </div>
+      </div>
+
+      {/* Games Section */}
+      <div className="bg-gradient-to-r from-black via-gray-800 to-black md:border-4 border-2 border-pink-500 border-ridge md:p-6 p-2 shadow-[0_0_20px_rgba(255,0,255,0.3)] mb-6">
+        <h4 className="text-pink-500 text-center mb-5 text-xl font-bold">
+          🎮 90s GAMES ARCADE 🎮
+        </h4>
+        <div className="text-center">
+          <p className="text-white mb-4">
+            Take a break from the future and enjoy some classic 90s games!
+          </p>
+          <button
+            onClick={() => {
+              // Then show games after scroll completes
+              setShowGames(true);
+              setTimeout(() => {
+                const gamesSection = document.getElementById('games-section');
+                if (gamesSection) {
+                  gamesSection.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'center',
+                    inline: 'nearest'
+                  });
+                }
+              }, 800);
+            }}
+            className="bg-gradient-to-r from-pink-500 to-purple-500 text-white px-8 py-3 rounded border-2 border-pink-400 hover:scale-105 transition-all duration-300 text-lg font-bold shadow-[0_0_20px_rgba(255,0,255,0.3)] hover:shadow-[0_0_30px_rgba(255,0,255,0.5)] hover:border-pink-300 group"
+          >
+            <span className="group-hover:animate-pulse">🎮 Play Games Now! 🎮</span>
+          </button>
         </div>
       </div>
 

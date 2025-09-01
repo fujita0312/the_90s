@@ -38,9 +38,16 @@ function App() {
 }
 
 // Separate component to use the toast context
-function AppContent({ showMatrixRain, onComplete }: { showMatrixRain: boolean; onComplete: () => void }) {
+function AppContent({ 
+  showMatrixRain, 
+  onComplete
+}: { 
+  showMatrixRain: boolean; 
+  onComplete: () => void;
+}) {
   // Initialize 90s features - now inside ToastProvider
   use90sFeatures();
+  const [showGames, setShowGames] = useState(false);
 
   return (
     <div className="min-h-screen">
@@ -50,15 +57,15 @@ function AppContent({ showMatrixRain, onComplete }: { showMatrixRain: boolean; o
       <Clippy />
       {/* <PopupHint /> */}
       
-      <Header />
+      <Header onGamesClick={() => setShowGames(true)} />
       <Marquee />
       <HitCounter />
       
-      <div className="grid grid-cols-1 md:grid-cols-[330px_1fr_330px] gap-[20px] md:p-5 p-1.5 max-w-[1500px] mx-auto">
-        <LeftSidebar />
-        <MainContent />
-        <RightSidebar />
-      </div>
+              <div className="grid grid-cols-1 md:grid-cols-[330px_1fr_330px] gap-[20px] md:p-5 p-1.5 max-w-[1500px] mx-auto">
+          <LeftSidebar />
+          <MainContent showGames={showGames} setShowGames={setShowGames} />
+          <RightSidebar />
+        </div>
       
       <Footer />
     </div>

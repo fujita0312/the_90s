@@ -10,6 +10,22 @@
     box-sizing: border-box;
   }
 
+  /* Fade in animation for games */
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .animate-fade-in {
+    animation: fadeIn 0.6s ease-out;
+  }
+
   body {
     font-family: "Comic Neue", "Comic Sans MS", cursive;
     background: linear-gradient(45deg, #000080, #800080, #008080, #000080);
