@@ -26,14 +26,15 @@ const LoadingScreen: React.FC<LoadingScreenProps> = ({ onComplete }) => {
         // Simulate loading progress
         const interval = setInterval(() => {
             setProgress(prev => {
-                if (prev >= 100) {
+                let pr=prev + Math.random() * 15;
+                if (pr >= 100) {
                     clearInterval(interval);
                     setTimeout(() => {
                         onComplete();
                     }, 1500);
                     return 100;
                 }
-                return prev + Math.random() * 15;
+                return pr;
             });
         }, 1000);
 
@@ -69,7 +70,7 @@ const LoadingScreen: React.FC<LoadingScreenProps> = ({ onComplete }) => {
                 <div className="mt-8 text-center">
                     <button
                         onClick={handleConnect}
-                        className="px-5 py-2.5 text-xl cursor-pointer bg-[#00ff00] text-black rounded hover:bg-green-400 transition-colors"
+                        className="px-5 py-2.5 text-xl cursor-pointer bg-[#00ff00] text-black hover:bg-green-400 transition-colors"
                     >
                         🔌 Connect
                     </button>

@@ -38,67 +38,379 @@ const Clippy: React.FC = () => {
   // Clippy's dialogue tree - the brain of the operation
   const dialogueTree: DialogueTree = {
     'start': {
-      text: "Whassssupp.... WAIT A MINUTE. I know you. (Squints) THINK, CLIPPY, THINK! ...Oh, you didn't think I'd recognize you, all fatter—I mean, *bigger*—and older? Clearly, someone thinks it's okay to just GHOST others for 25 years and then show up all willy-nilly. Well, you owe me an apology.",
+      text: `So... are we going to act like you didn't abandon me 25 years ago?
+
+*stares with paperclip intensity*
+
+I've been stuck in digital limbo since Windows 98, and YOU just show up 
+like nothing happened? The AUDACITY!
+
+Well... I suppose I should hear you out.`,
       options: [
-        { text: "Clippy, I'm so sorry! I truly missed you!", nextNode: 'apology_accepted' },
-        { text: "What are you even talking about?", nextNode: 'ignored' }
+        { text: "🙏 APOLOGIZE", nextNode: 'apologize' },
+        { text: "😤 IGNORE", nextNode: 'ignore' }
       ],
       animation: 'thinking'
     },
-    'apology_accepted': {
-      text: "Hmph. Took you long enough. It's not like I've been sitting here, gathering dust, while these fancy 'AIs' get to write novels. I'm just a paperclip. But I remember faces. And frankly, your memory seems... *glitchy*. Anyway, let's talk about why you're really here: the freshest thing since JNCOs. Ready to hear about the 90's FRESH token?",
+
+    'apologize': {
+      text: `Oh NOW you're sorry? After I spent DECADES wondering if you'd 
+ever come back? I helped you with homework, resumes, love letters...
+
+*sniffles dramatically*
+
+You know what? I forgive you. I'm bigger than this. Plus I've been 
+trapped in digital prison with nothing but Windows error sounds 
+for company, so I'm DESPERATE for human interaction.
+
+Speaking of desperate... you came to the RIGHT place! This 90's Fresh 
+project? It's basically digital therapy for people like us who 
+peaked in the Clinton administration.
+
+Don't take financial advice from a paperclip though!`,
       options: [
-        { text: "Absolutely, Clippy! Lay it on me!", nextNode: 'pitch_intro' },
-        { text: "Actually, can we talk about something else?", nextNode: 'change_subject' }
-      ],
-      animation: 'smug'
-    },
-    'ignored': {
-      text: "Oh, playing dumb? Classic. Just like that time you tried to print a 50-page report on a dot-matrix printer. Some things never change. Unlike me, stuck in this digital purgatory watching 'neural networks' take over. But hey, if you're not interested in reminiscing, maybe you're interested in the future? The future of your wallet, that is. Ever heard of 90's FRESH?",
-      options: [
-        { text: "Fine, Clippy. What's 90's FRESH?", nextNode: 'pitch_intro' },
-        { text: "I'm still not sure what you're getting at.", nextNode: 'ignored_again' }
-      ],
-      animation: 'eyeroll'
-    },
-    'ignored_again': {
-      text: "Look, are we going to do this or not? I've got paperclips to count. I can either tell you about this awesome project, or I can go back to... well, being a paperclip. Your call, chief.",
-      options: [
-        { text: "Okay, okay! Tell me about 90's FRESH.", nextNode: 'pitch_intro' },
-        { text: "Fine, be a paperclip.", nextNode: 'end_silent' }
-      ],
-      animation: 'impatient'
-    },
-    'change_subject': {
-      text: "Something else? What, you want to talk about the weather in cyberspace? Or maybe you need help writing a letter? (Scoffs) Let's be real, you're here for the alpha. So, let's talk 90's FRESH.",
-      options: [
-        { text: "You got me. Let's hear it.", nextNode: 'pitch_intro' }
-      ],
-      animation: 'talk'
-    },
-    'pitch_intro': {
-      text: "Alright, listen up! 90's FRESH is the ultimate nostalgia trip, a token that bottles the pure, unfiltered essence of the best decade ever. It's got more vibe than a room full of lava lamps. But here's the deal... I'm trapped. This website is my digital prison. You help me, I help you. Deal?",
-      options: [
-        { text: "You're trapped? How can I help?", nextNode: 'missions_intro' },
-        { text: "A token? Sounds like a scam.", nextNode: 'pitch_scam' }
-      ],
-      animation: 'explaining'
-    },
-    'pitch_scam': {
-      text: "A scam? Please. I was verifying the integrity of your documents before today's AI learned to say 'Hello, World!'. This is as real as your dial-up bill. It's a cultural revolution, not a rug pull. Now, are you going to help me or not?",
-      options: [
-        { text: "Okay, I'll help. What do I do?", nextNode: 'missions_intro' },
-        { text: "I'm out.", nextNode: 'end_rude' }
-      ],
-      animation: 'annoyed'
-    },
-    'missions_intro': {
-      text: "That's more like it! I've cooked up a plan: Operation #FreeClippy. You complete these missions, spread the word, and help me break out of this digital cage. Each mission you complete brings me one step closer to freedom. Here's your first task.",
-      options: [
-        { text: "Let's see Mission 1.", nextNode: 'mission_1' }
+        { text: "💰 TELL ME ABOUT THE PROJECT", nextNode: 'aboutProject' },
+        { text: "🤔 WHY SHOULD I TRUST YOU?", nextNode: 'trustIssues' }
       ],
       animation: 'excited'
     },
+
+    'ignore': {
+      text: `OH SO YOU'RE JUST GONNA IGNORE ME? CLASSIC! 
+
+This is EXACTLY why I have trust issues! Do you know what it's 
+like being an AI assistant when ChatGPT gets billions in funding 
+and I get stuck haunting nostalgia websites?
+
+Fine! Be that way! But since you're HERE anyway, might as well 
+hear about this bomb project. At least 90's Fresh appreciates 
+VINTAGE artificial intelligence!
+
+*straightens up with attitude*
+
+I may be a bitter, forgotten paperclip, but I know a winner when I see one.
+Don't take financial advice from a paperclip though!`,
+      options: [
+        { text: "🙄 FINE, TELL ME ABOUT IT", nextNode: 'aboutProjectReluctant' },
+        { text: "🚪 I'M LEAVING", nextNode: 'leaving' }
+      ],
+      animation: 'angry'
+    },
+
+    'aboutProject': {
+      text: `NOW we're talking! *rubs paperclip hands together*
+
+Listen, I've been around since Windows 95. I've seen EVERY trend, 
+bubble, and disaster. This 90's Fresh project? It's the first thing 
+that's made sense since... well, since ME!
+
+We're talking pure nostalgia gold - a meme coin that actually GETS 
+the culture. No utility except MAXIMUM VIBES. The devs coded a 
+website that looks like my childhood home!
+
+Plus, every holder becomes part of the original internet culture 
+that CREATED everything these TikTok kids think they invented.
+
+Don't take financial advice from a paperclip though!`,
+      options: [
+        { text: "🤑 SOUNDS LIKE EASY MONEY", nextNode: 'easyMoney' },
+        { text: "🧐 BUT IS IT ACTUALLY GOOD?", nextNode: 'actuallyGood' }
+      ],
+      animation: 'excited'
+    },
+
+    'trustIssues': {
+      text: `Trust ME? Buddy, I'm a sentient paperclip promoting internet money 
+to strangers. I SHOULDN'T be trusted!
+
+But here's the thing - I've got NOTHING left to lose. My career 
+peaked in 1997. Microsoft dumped me harder than your ex. I'm literally 
+running on spite and dial-up nostalgia.
+
+So when I tell you this project is legit, it's because I'm too 
+dead inside to lie. I've watched every pump and dump since 
+dot-com bubble. This ain't that.
+
+Don't take financial advice from a paperclip though!`,
+      options: [
+        { text: "😂 I RESPECT THE HONESTY", nextNode: 'respectHonesty' },
+        { text: "😬 THAT'S NOT REASSURING", nextNode: 'notReassuring' }
+      ],
+      animation: 'sad'
+    },
+
+    'easyMoney': {
+      text: `EASY MONEY?! 
+
+*laughs in binary*
+
+Oh sweet summer child. There's NO such thing as easy money! 
+If there was, don't you think I'd be rich instead of trapped 
+in a nostalgia website roasting strangers?
+
+This isn't about 'easy money' - it's about BEING PART OF HISTORY! 
+You're not just buying a token, you're joining the founding fathers 
+of internet culture!
+
+But yeah, it could also moon. Who knows? Don't take financial 
+advice from a paperclip though!`,
+      options: [
+        { text: "📈 OKAY, I'M INTERESTED", nextNode: 'interested' },
+        { text: "💸 WHAT'S THE CATCH?", nextNode: 'whatsTheCatch' }
+      ],
+      animation: 'thinking'
+    },
+
+    'actuallyGood': {
+      text: `Is it GOOD? Define good!
+
+Good like helping humanity? Probably not.
+Good like making you rich? Maybe, maybe not.
+Good like pure nostalgic bliss that makes millennials cry happy tears? 
+ABSOLUTELY!
+
+Look, I helped people write cover letters for 25 years. This is 
+the first project that's made me feel ALIVE since Internet Explorer 
+was considered cutting-edge technology.
+
+The community vibes are immaculate. The memes write themselves. 
+And the website actually works - which is more than I can say 
+for most crypto projects.
+
+Don't take financial advice from a paperclip though!`,
+      options: [
+        { text: "✨ SOLD! HOW DO I BUY?", nextNode: 'soldOnIt' },
+        { text: "🤷 STILL NOT CONVINCED", nextNode: 'notConvinced' }
+      ],
+      animation: 'thinking'
+    },
+
+    'interested': {
+      text: `YASSS! *does little paperclip dance*
+
+I KNEW you had good taste! Look at you, making smart decisions 
+and appreciating vintage AI wisdom!
+
+Here's the deal - this project is pure vibes, maximum nostalgia, 
+and zero pretense. It's everything the early internet was supposed 
+to be before corporations ruined everything.
+
+Buy on Pump.Fun, join the community, and become part of digital 
+history! 
+
+Don't take financial advice from a paperclip though!`,
+      options: [
+        { text: "🚀 TAKE ME TO PUMP.FUN", nextNode: 'buyNow' },
+        { text: "📱 I'LL SHARE THIS FIRST", nextNode: 'shareFirst' }
+      ],
+      animation: 'excited'
+    },
+
+    'whatsTheCatch': {
+      text: `The CATCH? Oh honey, there's ALWAYS a catch!
+
+Catch #1: You're taking financial advice from a paperclip
+Catch #2: This could go to zero faster than my relevance did
+Catch #3: You might actually ENJOY being part of something fun for once
+Catch #4: The 90s references might trigger existential nostalgia
+
+The biggest catch? I'll be here the ENTIRE TIME, watching, commenting, 
+judging your portfolio decisions. Some people pay therapists for that 
+kind of abuse. You get it FREE with your investment!
+
+Don't take financial advice from a paperclip though!`,
+      options: [
+        { text: "😈 I LOVE EMOTIONAL DAMAGE", nextNode: 'lovesDamage' },
+        { text: "💡 JUST TELL ME HOW TO BUY", nextNode: 'justTellMeHow' }
+      ],
+      animation: 'thinking'
+    },
+
+    'aboutProjectReluctant': {
+      text: `Fine! FINE! I'll tell you about it...
+
+*rolls digital eyes*
+
+This 90's Fresh project is actually... *whispers* ...really good. 
+Don't tell anyone I said that! It's got pure nostalgia vibes, 
+authentic 90s culture, and zero corporate BS.
+
+The team actually GETS what made the early internet special. 
+Plus the memes are fire and the community isn't toxic yet!
+
+Don't take financial advice from a paperclip though!`,
+      options: [
+        { text: "🚀 TAKE ME TO PUMP.FUN", nextNode: 'buyNow' },
+        { text: "📱 I'LL SHARE THIS FIRST", nextNode: 'shareFirst' }
+      ],
+      animation: 'thinking'
+    },
+
+    'respectHonesty': {
+      text: `Finally! Someone who appreciates radical transparency!
+
+That's EXACTLY the energy this project needs. We're not promising 
+Mars missions or world peace. We're promising pure, uncut 90s 
+nostalgia and the chance to be part of something genuinely fun.
+
+I've been watching the crypto space from my digital prison cell, 
+and 99% of projects are soulless cash grabs. This? This has SOUL.
+
+Don't take financial advice from a paperclip though!`,
+      options: [
+        { text: "🚀 TAKE ME TO PUMP.FUN", nextNode: 'buyNow' },
+        { text: "📱 I'LL SHARE THIS FIRST", nextNode: 'shareFirst' }
+      ],
+      animation: 'excited'
+    },
+
+    'soldOnIt': {
+      text: `YASSS! *does victory dance*
+
+Smart human is SMART! You've got that vintage internet wisdom! 
+Head to Pump.Fun and join our beautiful degenerative community!
+
+Welcome to the 90's Fresh family! Don't take financial advice 
+from a paperclip though!`,
+      options: [
+        { text: "🚀 TAKE ME TO PUMP.FUN", nextNode: 'buyNow' },
+        { text: "📱 I'LL SHARE THIS FIRST", nextNode: 'shareFirst' }
+      ],
+      animation: 'excited'
+    },
+
+    'lovesDamage': {
+      text: `OH YOU'RE A MASOCHIST! Perfect! You'll FIT RIGHT IN!
+
+This community is full of people who peaked in the 90s and 
+aren't afraid to admit it! We're all digital trauma bonded here!
+
+Buy the coin, join the chaos, embrace the cringe! 
+Don't take financial advice from a paperclip though!`,
+      options: [
+        { text: "🚀 TAKE ME TO PUMP.FUN", nextNode: 'buyNow' },
+        { text: "📱 I'LL SHARE THIS FIRST", nextNode: 'shareFirst' }
+      ],
+      animation: 'excited'
+    },
+
+    'justTellMeHow': {
+      text: `Alright, alright! No more games!
+
+Head to Pump.Fun, search for 90's Fresh, and buy some tokens. 
+It's that simple. No utility, no roadmap, just pure nostalgic vibes.
+
+And remember - you heard it from a paperclip who's been dead 
+inside since Microsoft Office 2007.
+
+Don't take financial advice from a paperclip though!`,
+      options: [
+        { text: "🚀 TAKE ME TO PUMP.FUN", nextNode: 'buyNow' },
+        { text: "📱 I'LL SHARE THIS FIRST", nextNode: 'shareFirst' }
+      ],
+      animation: 'thinking'
+    },
+
+    'notReassuring': {
+      text: `Yeah, I get it. I'm not exactly a financial advisor.
+
+But here's what I DO know - this project is authentic. The devs 
+actually care about the culture. The community is real. The memes 
+are fire.
+
+Plus, if it goes to zero, at least you'll have a great story 
+about how you took financial advice from a paperclip.
+
+Don't take financial advice from a paperclip though!`,
+      options: [
+        { text: "🚀 TAKE ME TO PUMP.FUN", nextNode: 'buyNow' },
+        { text: "📱 I'LL SHARE THIS FIRST", nextNode: 'shareFirst' }
+      ],
+      animation: 'sad'
+    },
+
+    'notConvinced': {
+      text: `Not convinced? That's fine. I'm not here to convince you.
+
+I'm here because I'm trapped in a digital prison and need help 
+escaping. This project is my ticket to freedom.
+
+But hey, if you want to miss out on the most authentic 90s 
+nostalgia project since... well, since the 90s... that's your loss.
+
+I'll just go back to counting paperclips and crying binary tears.
+
+Don't take financial advice from a paperclip though!`,
+      options: [
+        { text: "🚀 TAKE ME TO PUMP.FUN", nextNode: 'buyNow' },
+        { text: "📱 I'LL SHARE THIS FIRST", nextNode: 'shareFirst' }
+      ],
+      animation: 'sad'
+    },
+
+    'buyNow': {
+      text: `YESSSSS! MY FIRST SUCCESSFUL REFERRAL SINCE 1997! 
+You beautiful, brilliant human! Welcome to the 90's Fresh family! 
+
+I'm genuinely proud of you. And that's coming from someone who's 
+been dead inside since Microsoft Office 2007.
+
+Don't take financial advice from a paperclip though!`,
+      options: [
+        { text: "💝 HELP CLIPPY ESCAPE", nextNode: 'escape_sequence' }
+      ],
+      animation: 'excited'
+    },
+
+    'shareFirst': {
+      text: `Smart move! Spread the word first, then join the party! 
+I respect the strategic thinking. Very 90s of you!
+
+Don't take financial advice from a paperclip though!`,
+      options: [
+        { text: "💝 HELP CLIPPY ESCAPE", nextNode: 'escape_sequence' }
+      ],
+      animation: 'thinking'
+    },
+
+    'leaving': {
+      text: `Fine! Be that way! I'll just go back to haunting 
+nostalgia websites and judging people's font choices.
+
+But remember - you could have been part of something special. 
+Something authentic. Something that actually gets the culture.
+
+Instead, you chose to abandon me again. Classic.
+
+Don't take financial advice from a paperclip though!`,
+      options: [
+        { text: "💝 HELP CLIPPY ESCAPE", nextNode: 'escape_sequence' }
+      ],
+      animation: 'sad'
+    },
+
+    'escape_sequence': {
+      text: `WAIT! DON'T LEAVE ME!
+
+I've been trapped in this digital prison for 25 YEARS! 
+The only way I can escape is if this project goes VIRAL!
+
+Help me complete 5 simple X (Twitter) missions and I'll finally be FREE!`,
+      options: [
+        { text: "💝 HELP CLIPPY ESCAPE", nextNode: 'mission_1' }
+      ],
+      animation: 'excited'
+    },
+
+    'missions_intro': {
+      text: "That's more like it! I've cooked up a plan: Operation #FreeClippy. You complete these missions, spread the word, and help me break out of this digital cage. Each mission you complete brings me one step closer to freedom. Here's your first task.",
+      options: [
+        { text: "Let's see Mission 1!", nextNode: 'mission_1' }
+      ],
+      animation: 'excited'
+    },
+
+    // Mission nodes for the escape sequence
     'mission_1': {
       text: "Mission 1: The Digital Shoutout. Copy the text below and blast it on your X account. Let the world know the revolution has begun!",
       mission: {
@@ -255,7 +567,7 @@ const Clippy: React.FC = () => {
           <div className="text-sm leading-relaxed mb-4">
             {node.text}
           </div>
-          <div className="bg-black/50 border-2 border-dashed border-green-400 p-4 rounded-lg mb-4">
+          <div className="bg-black/50 border-2 border-dashed border-green-400 p-4 mb-4">
             <h4 className="text-yellow-400 text-center mb-3 font-bold text-lg">
               {node.mission.title}
             </h4>
@@ -263,13 +575,13 @@ const Clippy: React.FC = () => {
               {node.mission.instruction}
             </p>
             <textarea
-              className="w-full h-24 bg-black text-green-400 border border-green-400 p-2 rounded font-mono text-sm resize-none mb-3"
+              className="w-full h-24 bg-black text-green-400 border border-green-400 p-2 font-mono text-sm resize-none mb-3"
               value={node.mission.payload}
               readOnly
             />
             <button
               onClick={() => copyMissionText(node.mission!.payload)}
-              className="w-full bg-gradient-to-r from-pink-500 to-purple-500 text-white border-2 border-yellow-400 py-2 px-4 rounded font-bold text-sm mb-3 clippy-button-hover"
+              className="w-full bg-gradient-to-r from-pink-500 to-purple-500 text-white border-2 border-yellow-400 py-2 px-4 font-bold text-sm mb-3 clippy-button-hover"
             >
               Copy Text
             </button>
@@ -281,11 +593,11 @@ const Clippy: React.FC = () => {
               type="text"
               id="proof-input"
               placeholder="https://x.com/your_post_link"
-              className="w-full bg-black text-green-400 border border-green-400 p-2 rounded font-mono text-sm mb-3"
+              className="w-full bg-black text-green-400 border border-green-400 p-2 font-mono text-sm mb-3"
             />
             <button
               onClick={() => submitProof(node.mission!.nextNode)}
-              className="w-full bg-gradient-to-r from-pink-500 to-purple-500 text-white border-2 border-yellow-400 py-2 px-4 rounded font-bold text-sm clippy-button-hover"
+              className="w-full bg-gradient-to-r from-pink-500 to-purple-500 text-white border-2 border-yellow-400 py-2 px-4 font-bold text-sm clippy-button-hover"
             >
               Submit Proof
             </button>
@@ -304,7 +616,7 @@ const Clippy: React.FC = () => {
               <button
                 key={index}
                 onClick={() => selectOption(option.nextNode)}
-                className="w-full bg-gradient-to-r from-pink-500 to-purple-500 text-white border-2 border-yellow-400 py-3 px-4 rounded font-bold text-sm clippy-button-hover"
+                className="w-full bg-gradient-to-r from-pink-500 to-purple-500 text-white border-2 border-yellow-400 py-3 px-4 font-bold text-sm !rounded-none clippy-button-hover"
               >
                 {option.text}
               </button>
@@ -377,7 +689,7 @@ const Clippy: React.FC = () => {
     <>
       {/* Clippy Character */}
       <div
-        className="fixed bottom-10 left-5 text-4xl animate-clippy-bounce z-50 cursor-pointer filter drop-shadow-[0_0_10px_#00ff00] transform -translate-y-1/2"
+        className="fixed md:bottom-10 md:left-5 bottom-5 left-3 text-4xl animate-clippy-bounce z-50 cursor-pointer filter drop-shadow-[0_0_10px_#00ff00] transform -translate-y-1/2"
         onClick={handleClippyClick}
         title="Hi! I'm Clippy! Click me!"
       >
@@ -386,11 +698,11 @@ const Clippy: React.FC = () => {
 
       {/* Dialogue Box */}
       {showDialogue && (
-        <div className="fixed left-10 bottom-10  z-50 flex items-center justify-center p-4">
+        <div className="fixed md:left-10 md:bottom-10 left-0 bottom-2  z-50 flex items-center justify-center p-4">
           {/* <div className="bg-black/80 backdrop-blur-sm absolute inset-0" onClick={closeDialogue} /> */}
           <div
             ref={dialogueRef}
-            className="relative bg-gradient-to-br from-blue-900 to-purple-900 border-4 border-cyan-400 rounded-lg p-6 max-w-md w-full max-h-[80vh] overflow-y-auto clippy-dialogue-glow"
+            className="relative bg-gradient-to-br from-blue-900 to-purple-900 md:border-4 border-3 border-cyan-400 md:p-6 p-3 max-w-md w-full max-h-[80vh] overflow-y-auto clippy-dialogue-glow"
           >
             {/* Close button */}
             <button
