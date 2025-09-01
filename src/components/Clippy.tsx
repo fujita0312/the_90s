@@ -546,7 +546,7 @@ Help me complete 5 simple X (Twitter) missions and I'll finally be FREE!`,
     if (isVisible) {
       const blinkInterval = setInterval(() => {
         setIsBlinking(true);
-        setTimeout(() => setIsBlinking(false), 210);
+        setTimeout(() => setIsBlinking(false), 510);
       }, 3000);
 
       return () => clearInterval(blinkInterval);
@@ -568,7 +568,7 @@ Help me complete 5 simple X (Twitter) missions and I'll finally be FREE!`,
     setCurrentNode(nodeKey);
 
     let content: React.ReactNode = (
-      <div className="text-sm leading-relaxed mb-4">
+      <div className="text-sm leading-relaxed mb-4 text-navy-800">
         {node.text}
       </div>
     );
@@ -577,7 +577,7 @@ Help me complete 5 simple X (Twitter) missions and I'll finally be FREE!`,
     if (node.mission) {
       content = (
         <>
-          <div className="text-sm leading-relaxed mb-4">
+          <div className="text-sm leading-relaxed mb-4 text-navy-800">
             {node.text}
           </div>
           <div className="bg-black/50 border-2 border-dashed border-green-400 p-4 mb-4">
@@ -621,7 +621,7 @@ Help me complete 5 simple X (Twitter) missions and I'll finally be FREE!`,
       // Handle Options
       content = (
         <>
-          <div className="text-sm leading-relaxed mb-4">
+          <div className="text-sm leading-relaxed mb-4 text-navy-800">
             {node.text}
           </div>
           <div className="space-y-2">
@@ -640,7 +640,7 @@ Help me complete 5 simple X (Twitter) missions and I'll finally be FREE!`,
     } else {
       // End nodes
       content = (
-        <div className="text-sm leading-relaxed mb-4">
+        <div className="text-sm leading-relaxed mb-4 text-navy-800">
           {node.text}
         </div>
       );
@@ -728,12 +728,12 @@ Help me complete 5 simple X (Twitter) missions and I'll finally be FREE!`,
           {/* <div className="bg-black/80 backdrop-blur-sm absolute inset-0" onClick={closeDialogue} /> */}
           <div
             ref={dialogueRef}
-            className="relative bg-gradient-to-br from-blue-900 to-purple-900 md:border-4 border-3 border-cyan-400 md:p-6 p-3 max-w-md w-full max-h-[80vh] overflow-y-auto clippy-dialogue-glow"
+            className="relative bg-white md:border-4 border-3 border-cyan-400 md:p-6 p-3 max-w-md w-full max-h-[80vh] overflow-y-auto clippy-dialogue-glow"
           >
             {/* Close button */}
             <button
               onClick={closeDialogue}
-              className="absolute top-1 right-2 text-cyan-400 hover:text-white text-4xl font-bold"
+              className="absolute top-1 right-2 text-navy-800 hover:text-navy-600 text-4xl font-bold"
             >
               ×
             </button>
