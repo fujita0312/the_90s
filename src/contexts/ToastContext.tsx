@@ -67,7 +67,7 @@ export const ToastProvider: React.FC<ToastProviderProps> = ({ children }) => {
             key={toast.id}
             className="animate-slide-in"
           >
-            <div className={`max-w-sm shadow-lg border-2 border-ridge rounded-lg p-4 ${
+            <div className={`max-w-sm shadow-lg border-2 border-ridge rounded-none p-4 ${
               toast.type === 'success' 
                 ? 'bg-gradient-to-r from-green-500 to-emerald-500 text-white border-green-400 shadow-[0_0_20px_rgba(34,197,94,0.5)]'
                 : toast.type === 'error'
