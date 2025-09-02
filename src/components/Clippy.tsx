@@ -29,10 +29,10 @@ interface DialogueTree {
 
 const Clippy: React.FC = () => {
   const { showToast } = useToast();
-  const [currentNode, setCurrentNode] = useState<string>('start');
   const [showDialogue, setShowDialogue] = useState<boolean>(false);
   const [dialogueContent, setDialogueContent] = useState<React.ReactNode>(null);
-  const [isVisible, setIsVisible] = useState<boolean>(false);
+  const [isVisible] = useState<boolean>(true);
+  const [shouldAutoOpen, setShouldAutoOpen] = useState<boolean>(false);
   const [clippyAnimation, setClippyAnimation] = useState<string>('idle');
   const [isBlinking, setIsBlinking] = useState<boolean>(false);
   const dialogueRef = useRef<HTMLDivElement>(null);
@@ -514,23 +514,54 @@ Help me complete 5 simple X (Twitter) missions and I'll finally be FREE!`,
     }
   };
 
-  // Show Clippy after a delay
+  // Set auto-open flag after scrolling 1/3 down the page or 15 seconds, whichever comes first
   useEffect(() => {
-    const timer = setTimeout(() => {
-      setIsVisible(true);
-    }, 2000);
-    return () => clearTimeout(timer);
+    let timer: NodeJS.Timeout;
+    let scrollHandler: () => void;
+    
+    const checkScrollPosition = () => {
+      const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+      const documentHeight = document.documentElement.scrollHeight;
+      const scrollThreshold = documentHeight / 3; // 1/3 of the page
+      
+      if (scrollTop >= scrollThreshold) {
+        setShouldAutoOpen(true);
+        // Clean up event listeners
+        if (timer) clearTimeout(timer);
+        if (scrollHandler) window.removeEventListener('scroll', scrollHandler);
+      }
+    };
+    
+    // Set 15 second timer
+    timer = setTimeout(() => {
+      setShouldAutoOpen(true);
+      // Clean up scroll listener
+      if (scrollHandler) window.removeEventListener('scroll', scrollHandler);
+    }, 15000);
+    
+    // Add scroll listener
+    scrollHandler = checkScrollPosition;
+    window.addEventListener('scroll', scrollHandler);
+    
+    // Check initial scroll position
+    checkScrollPosition();
+    
+    return () => {
+      if (timer) clearTimeout(timer);
+      if (scrollHandler) window.removeEventListener('scroll', scrollHandler);
+    };
   }, []);
 
-  // Auto-start dialogue after Clippy appears
+  // Auto-start dialogue after trigger condition
   useEffect(() => {
-    if (isVisible) {
+    if (shouldAutoOpen) {
       const timer = setTimeout(() => {
         handleClippyClick();
-      }, 1000);
+      }, 300);
       return () => clearTimeout(timer);
     }
-  }, [isVisible]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [shouldAutoOpen]);
 
   // Blinking effect
   useEffect(() => {
@@ -546,7 +577,6 @@ Help me complete 5 simple X (Twitter) missions and I'll finally be FREE!`,
 
   const handleClippyClick = () => {
     if (!showDialogue) {
-      setCurrentNode('start');
       setShowDialogue(true);
       renderDialogue('start');
     }
@@ -556,7 +586,7 @@ Help me complete 5 simple X (Twitter) missions and I'll finally be FREE!`,
     const node = dialogueTree[nodeKey];
     if (!node) return;
 
-    setCurrentNode(nodeKey);
+    // track current node locally only within function scope; no external state needed
 
     let content: React.ReactNode = (
       <div className="text-sm leading-relaxed mb-4 text-blue-800">
@@ -647,7 +677,6 @@ Help me complete 5 simple X (Twitter) missions and I'll finally be FREE!`,
 
   const selectOption = (nextNode: string) => {
     if (nextNode.startsWith('end')) {
-      const node = dialogueTree[nextNode];
       renderDialogue(nextNode);
       // Auto-hide dialogue after a delay for end nodes
       setTimeout(() => {

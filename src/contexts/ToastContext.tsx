@@ -76,10 +76,10 @@ export const ToastProvider: React.FC<ToastProviderProps> = ({ children }) => {
             }`}>
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-3">
-                  <span className="text-2xl">
+                  <span className="text-xl">
                     {toast.type === 'success' ? '✅' : toast.type === 'error' ? '❌' : 'ℹ️'}
                   </span>
-                  <p className="font-medium whitespace-pre-line">{toast.message}</p>
+                  <p className="font-medium whitespace-pre-line text-sm">{toast.message}</p>
                 </div>
                 <button
                   onClick={() => removeToast(toast.id)}
