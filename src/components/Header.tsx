@@ -1,10 +1,9 @@
 import React from 'react';
 
 interface HeaderProps {
-  onGamesClick?: () => void;
 }
 
-const Header: React.FC<HeaderProps> = ({ onGamesClick }) => {
+const Header: React.FC<HeaderProps> = () => {
   return (
     <div className="text-center md:p-4 p-2 py-7 bg-gradient-to-r from-[#ff1493] via-[#00ced1] via-[#ffd700] to-[#ff1493] bg-[length:400%_400%] animate-gradient-shift-header md:border-4 border-2 border-yellow-400 border-ridge md:m-2.5 m-1 shadow-[0_0_20px_#ff00ff,inset_0_0_20px_rgba(255,255,255,0.2)] relative">
       {/* Left star */}

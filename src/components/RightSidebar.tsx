@@ -162,7 +162,7 @@ const RightSidebar: React.FC = () => {
       </button>
 
       {/* Bulletin Board */}
-      <div className="bg-gradient-to-br from-purple-900 to-purple-800 text-white md:p-5 p-2 md:my-6 my-4 md:border-4 border-2 border-purple-400 border-ridge shadow-[0_0_15px_rgba(218,112,214,0.5)]">
+      <div className="bg-gradient-to-br from-purple-900 to-purple-800 text-white md:p-2 p-1 md:my-6 my-4 md:border-4 border-2 border-purple-400 border-ridge shadow-[0_0_15px_rgba(218,112,214,0.5)]">
         <h4 className="text-center text-purple-300 mb-4 text-xl">
           📌 BULLETIN BOARD 📌
         </h4>
@@ -179,7 +179,7 @@ const RightSidebar: React.FC = () => {
             <div
               key={index}
               onClick={() => handleBulletinBoardClick(post)}
-              className="cursor-pointer hover:bg-purple-700/50 p-2 rounded transition-all duration-200 hover:scale-105 transform border-l-2 border-purple-300 hover:border-purple-100"
+              className="cursor-pointer hover:bg-purple-700/50 p-2 transition-all duration-200 hover:scale-105 transform border-l-2 border-purple-300 hover:border-purple-100"
               title={`Click to view ${post.title}`}
             >
               → "{post.title}" ({post.replies} replies) {post.emoji}
@@ -189,7 +189,7 @@ const RightSidebar: React.FC = () => {
         <div className="text-center mt-4">
           <button
             onClick={handleRefreshBulletinBoard}
-            className="bg-purple-600 hover:bg-purple-500 text-white px-4 py-2 rounded border border-purple-400 transition-colors"
+            className="bg-purple-600 hover:bg-purple-500 text-white px-4 py-2 border border-purple-400 transition-colors"
           >
             🔄 Refresh Board
           </button>

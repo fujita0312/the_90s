@@ -752,7 +752,7 @@ Help me complete 5 simple X (Twitter) missions and I'll finally be FREE!`,
         <div className="fixed md:left-10 md:bottom-10 left-0 bottom-2 z-50 flex items-center justify-center p-4">
           <div
             ref={dialogueRef}
-            className="relative bg-white md:border-4 border-3 border-cyan-400 md:p-6 p-3 max-w-md w-full max-h-[80vh] overflow-y-auto clippy-dialogue-glow"
+            className="relative bg-white md:border-4 border-3 border-ridge border-cyan-400 md:p-6 p-3 max-w-md w-full max-h-[80vh] overflow-y-auto clippy-dialogue-glow"
           >
             {/* Close button */}
             <button

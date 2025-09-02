@@ -1,16 +1,14 @@
-import React, { useState, useRef } from 'react';
+import { useState, useRef } from 'react';
 import { useToast } from '../contexts/ToastContext';
 import { use90sFeatures } from '../hooks/use90sFeatures';
+import { useNavigate } from 'react-router-dom';
 
-interface LoadingScreenProps {
-    onComplete: () => void;
-}
-
-const LoadingScreen: React.FC<LoadingScreenProps> = ({ onComplete }) => {
+const LoadingScreen = () => {
     const { showToast } = useToast();
     const [showProgress, setShowProgress] = useState(false);
     const [progress, setProgress] = useState(0);
     const dialupAudioRef = useRef<HTMLAudioElement>(null);
+    const navigate = useNavigate();
     use90sFeatures();
     const handleConnect = async () => {
         setShowProgress(true);
@@ -48,7 +46,7 @@ const LoadingScreen: React.FC<LoadingScreenProps> = ({ onComplete }) => {
                         6000
                     );
                 }, 500);
-                onComplete();
+                navigate('/main');
             });
         }
     };

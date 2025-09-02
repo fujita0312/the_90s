@@ -1,9 +1,18 @@
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 import { useToast } from '../contexts/ToastContext';
 
 export const use90sFeatures = () => {
   const { showToast } = useToast();
-  
+
+  const containerRef = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    if (!containerRef.current) {
+      containerRef.current = document.createElement('div');
+      containerRef.current.className = 'w-full h-screen absolute top-0 left-0 overflow-hidden';
+      document.body.insertBefore(containerRef.current, document.body.firstChild);
+    }
+  }, []);
+
   useEffect(() => {
     // Konami code
     let konamiCode: string[] = [];
@@ -38,12 +47,12 @@ export const use90sFeatures = () => {
     let cursorGlow: HTMLElement | null = null;
     let lastMouseX = 0;
     let lastMouseY = 0;
-    
+
     // Create cursor glow effect
     const createCursorGlow = () => {
       cursorGlow = document.createElement('div');
       cursorGlow.className = 'cursor-glow';
-      document.body.appendChild(cursorGlow);
+      containerRef.current?.appendChild(cursorGlow);
     };
 
     // Trail types for variety
@@ -61,7 +70,7 @@ export const use90sFeatures = () => {
       const random = Math.random();
       let selectedType = trailTypes[0];
       let cumulativeChance = 0;
-      
+
       for (const type of trailTypes) {
         cumulativeChance += type.chance;
         if (random <= cumulativeChance) {
@@ -75,18 +84,18 @@ export const use90sFeatures = () => {
       if (selectedType.animation) {
         trail.classList.add(selectedType.animation);
       }
-      
+
       trail.setAttribute('data-time', Date.now().toString());
       trail.style.left = `${x}px`;
       trail.style.top = `${y}px`;
-      
+
       // Add some randomness to position
       const offsetX = (Math.random() - 0.5) * 10;
       const offsetY = (Math.random() - 0.5) * 10;
       trail.style.transform = `translate(${offsetX}px, ${offsetY}px)`;
-      
-      document.body.appendChild(trail);
-      
+
+      containerRef.current?.appendChild(trail);
+
       // Remove after animation
       setTimeout(() => {
         if (trail.parentNode) {
@@ -98,21 +107,21 @@ export const use90sFeatures = () => {
     // Create line trail between mouse positions
     const createLineTrail = (x1: number, y1: number, x2: number, y2: number) => {
       if (Math.abs(x2 - x1) < 5 && Math.abs(y2 - y1) < 5) return; // Skip if too close
-      
+
       const line = document.createElement('div');
       line.className = 'cursor-trail-line';
-      
+
       const length = Math.sqrt(Math.pow(x2 - x1, 2) + Math.pow(y2 - y1, 2));
       const angle = Math.atan2(y2 - y1, x2 - x1) * 180 / Math.PI;
-      
+
       line.style.width = `${length}px`;
       line.style.left = `${x1}px`;
       line.style.top = `${y1}px`;
       line.style.transform = `rotate(${angle}deg)`;
       line.style.transformOrigin = '0 0';
-      
-      document.body.appendChild(line);
-      
+
+      containerRef.current?.appendChild(line);
+
       setTimeout(() => {
         if (line.parentNode) {
           line.remove();
@@ -122,7 +131,7 @@ export const use90sFeatures = () => {
 
     const handleMousemove = (e: MouseEvent) => {
       const currentTime = Date.now();
-      
+
       // Update cursor glow position
       if (cursorGlow) {
         cursorGlow.style.left = `${e.clientX - 10}px`;
@@ -130,9 +139,9 @@ export const use90sFeatures = () => {
       }
 
       // Add to trail history
-      mouseTrail.push({ 
-        x: e.clientX, 
-        y: e.clientY, 
+      mouseTrail.push({
+        x: e.clientX,
+        y: e.clientY,
         time: currentTime,
         type: 'move'
       });
@@ -154,10 +163,10 @@ export const use90sFeatures = () => {
       const mouseSpeed = Math.sqrt(
         Math.pow(e.clientX - lastMouseX, 2) + Math.pow(e.clientY - lastMouseY, 2)
       );
-      
+
       // Higher speed = more trails
       const trailChance = Math.min(mouseSpeed / 50, 0.8);
-      
+
       if (Math.random() < trailChance) {
         createTrailElement(e.clientX, e.clientY);
       }
@@ -194,15 +203,15 @@ export const use90sFeatures = () => {
           const distance = 30;
           const x = e.clientX + Math.cos(angle) * distance;
           const y = e.clientY + Math.sin(angle) * distance;
-          
+
           const clickTrail = document.createElement('div');
           clickTrail.className = 'mouse-trail mouse-trail-star';
           clickTrail.style.left = `${x}px`;
           clickTrail.style.top = `${y}px`;
           clickTrail.style.animation = 'trailBounce 1s ease-out forwards';
-          
-          document.body.appendChild(clickTrail);
-          
+
+          containerRef.current?.appendChild(clickTrail);
+
           setTimeout(() => {
             if (clickTrail.parentNode) {
               clickTrail.remove();
@@ -243,10 +252,10 @@ export const use90sFeatures = () => {
     document.addEventListener('keydown', handleKeydown);
     document.addEventListener('mousemove', handleMousemove);
     document.addEventListener('mousedown', handleMouseClick);
-    
+
     // Initialize cursor glow
     createCursorGlow();
-    
+
     // Show random popup every 30 seconds
     const popupInterval = setInterval(showRandomPopup, 30000);
 

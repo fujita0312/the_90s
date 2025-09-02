@@ -42,7 +42,7 @@ const LeftSidebar: React.FC = () => {
       </div>
 
       {/* Holders Stats */}
-      <div className="md:border-4 border-2 border-[#00ff00] md:p-5 p-2 mb-5 text-[#00ff00] shadow-[0_0_15px_#00ff00] relative" style={{ background: "linear-gradient(45deg,rgba(0, 100, 0, 0.9),rgba(0, 150, 0, 0.7))" }}>
+      <div className="md:border-4 border-2 border-ridge border-[#00ff00] md:p-5 p-2 mb-5 text-[#00ff00] shadow-[0_0_15px_#00ff00] relative" style={{ background: "linear-gradient(45deg,rgba(0, 100, 0, 0.9),rgba(0, 150, 0, 0.7))" }}>
         <div className="absolute -top-2.5 -right-2.5 bg-black p-1.5 border-2 border-[#00ff00] rounded-full">
           📈
         </div>
@@ -61,7 +61,7 @@ const LeftSidebar: React.FC = () => {
       </div>
 
       {/* Vibe Meter */}
-      <div className="border-2 md:border-4 border-[#00ff00] md:p-5 p-2 mb-5 text-[#00ff00] shadow-[0_0_15px_#00ff00] relative" style={{ background: "linear-gradient(45deg,rgba(0, 100, 0, 0.9),rgba(0, 150, 0, 0.7))" }}>
+      <div className="border-2 md:border-4 border-ridge border-[#00ff00] md:p-5 p-2 mb-5 text-[#00ff00] shadow-[0_0_15px_#00ff00] relative" style={{ background: "linear-gradient(45deg,rgba(0, 100, 0, 0.9),rgba(0, 150, 0, 0.7))" }}>
         <div className="absolute -top-2.5 -right-2.5 bg-black p-1.5 border-2 border-[#00ff00] rounded-full">
           📈
         </div>

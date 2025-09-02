@@ -151,25 +151,24 @@ const TicTacToe: React.FC<TicTacToeProps> = ({ onBack }) => {
         setTies(0);
     };
 
-      const renderCell = (index: number) => {
-    const value = board[index];
-    return (
-      <button
-        key={index}
-        onClick={() => handleCellClick(index)}
-        disabled={gameOver || !isPlayerTurn || value !== null}
-        className={`w-16 h-16 md:w-20 md:h-20 border-2 border-cyan-400 text-2xl md:text-3xl font-bold transition-all duration-300 bg-black/40 hover:bg-cyan-900/30 ${
-          value === 'X' 
-            ? 'text-red-400 bg-red-900/30 shadow-[0_0_15px_rgba(239,68,68,0.5)]' 
-            : value === 'O' 
-            ? 'text-blue-400 bg-blue-900/30 shadow-[0_0_15px_rgba(59,130,246,0.5)]' 
-            : 'text-white hover:scale-105 hover:shadow-[0_0_20px_rgba(34,211,238,0.5)]'
-        } ${gameOver || !isPlayerTurn || value !== null ? 'cursor-not-allowed' : 'cursor-pointer'}`}
-      >
-        {value}
-      </button>
-    );
-  };
+    const renderCell = (index: number) => {
+        const value = board[index];
+        return (
+            <button
+                key={index}
+                onClick={() => handleCellClick(index)}
+                disabled={gameOver || !isPlayerTurn || value !== null}
+                className={`w-20 h-20 md:w-[100px] md:h-[100px] border-2 border-cyan-400 text-2xl md:text-3xl font-bold transition-all duration-300 bg-black/40 hover:bg-cyan-900/30 ${value === 'X'
+                    ? 'text-red-400 bg-red-900/30 shadow-[0_0_15px_rgba(239,68,68,0.5)]'
+                    : value === 'O'
+                        ? 'text-blue-400 bg-blue-900/30 shadow-[0_0_15px_rgba(59,130,246,0.5)]'
+                        : 'text-white hover:scale-105 hover:shadow-[0_0_20px_rgba(34,211,238,0.5)]'
+                    } ${gameOver || !isPlayerTurn || value !== null ? 'cursor-not-allowed' : 'cursor-pointer'}`}
+            >
+                {value}
+            </button>
+        );
+    };
 
     return (
         <div className="text-center">
@@ -184,65 +183,43 @@ const TicTacToe: React.FC<TicTacToeProps> = ({ onBack }) => {
                 {/* <div></div> */}
             </div>
 
-                  <div className="bg-black/60 md:p-5 p-2 md:border-2 border border-[#00ff00] md:my-6 my-4">
-        <div className="text-[#00ff00] text-center mb-4 font-bold md:text-lg text-base">
-          GAME STATISTICS
-        </div>
-        <div className="grid grid-cols-3 gap-2 md:gap-4">
-          <div className="text-center">
-            <div className="text-red-400 font-bold text-sm md:text-base">Player (X)</div>
-            <div className="text-white text-lg md:text-xl">{playerScore}</div>
-          </div>
-          <div className="text-center">
-            <div className="text-[#00ff00] font-bold text-sm md:text-base">Ties</div>
-            <div className="text-white text-lg md:text-xl">{ties}</div>
-          </div>
-          <div className="text-center">
-            <div className="text-blue-400 font-bold text-sm md:text-base">Computer (O)</div>
-            <div className="text-white text-lg md:text-xl">{computerScore}</div>
-          </div>
-        </div>
-      </div>
-
-                  <div className="bg-black/60 md:p-5 p-2 md:border-2 border border-cyan-400 md:my-6 my-4">
-        <div className="text-cyan-400 text-center mb-4 font-bold md:text-lg text-base">
-          GAME DIFFICULTY
-        </div>
-        <div className="text-center">
-          <label className="text-cyan-400 font-bold text-sm md:text-base mr-2 md:mr-3">Select Level:</label>
-          <select
-            value={difficulty}
-            onChange={(e) => setDifficulty(e.target.value)}
-            className="bg-black border-2 border-cyan-400 text-white px-2 md:px-3 py-1 rounded ml-1 md:ml-2 text-sm md:text-base"
-          >
-            <option value="easy">Easy</option>
-            <option value="medium">Medium</option>
-            <option value="hard">Hard</option>
-          </select>
-        </div>
-      </div>
-
-            {gameOver && (
-                <div className="animate-bounce text-center bg-gradient-to-r from-yellow-400 to-orange-500 text-black md:p-5 p-2 md:my-8 my-4 border-4 border-red-600 border-ridge font-bold shadow-[0_0_20px_rgba(255,215,0,0.5)] md:text-xl text-lg">
-                    <div className="mb-3">
-                        {winner === 'Tie' ? "It's a Tie! 🤝" : `${winner} Wins! 🎉`}
+            <div className="bg-black/60 md:p-5 p-2 md:border-2 border border-[#00ff00] md:my-6 my-4">
+                <div className="text-[#00ff00] text-center mb-4 font-bold md:text-lg text-base">
+                    GAME STATISTICS
+                </div>
+                <div className="grid grid-cols-3 gap-2 md:gap-4">
+                    <div className="text-center">
+                        <div className="text-red-400 font-bold text-sm md:text-base">Player (X)</div>
+                        <div className="text-white text-lg md:text-xl">{playerScore}</div>
                     </div>
-                    <div className="space-x-3">
-                        <button
-                            onClick={resetGame}
-                            className="bg-gradient-to-r from-green-500 to-blue-500 text-white px-6 py-2 rounded border-2 border-green-400 hover:scale-105 transition-all duration-300 shadow-[0_0_15px_rgba(34,197,94,0.5)]"
-                        >
-                            Play Again
-                        </button>
-                        <button
-                            onClick={resetScores}
-                            className="bg-gradient-to-r from-orange-500 to-red-500 text-white px-6 py-2 rounded border-2 border-orange-400 hover:scale-105 transition-all duration-300 shadow-[0_0_15px_rgba(249,115,22,0.5)]"
-                        >
-                            Reset Scores
-                        </button>
+                    <div className="text-center">
+                        <div className="text-[#00ff00] font-bold text-sm md:text-base">Ties</div>
+                        <div className="text-white text-lg md:text-xl">{ties}</div>
+                    </div>
+                    <div className="text-center">
+                        <div className="text-blue-400 font-bold text-sm md:text-base">Computer (O)</div>
+                        <div className="text-white text-lg md:text-xl">{computerScore}</div>
                     </div>
                 </div>
-            )}
+            </div>
+
+            <div className="bg-black/60 md:p-5 p-2 md:border-2 border border-cyan-400 md:my-6 my-4">
+                <div className="text-cyan-400 text-center mb-4 font-bold md:text-lg text-base">
+                    GAME DIFFICULTY
+                </div>
+                <div className="text-center">
+                    <label className="text-cyan-400 font-bold text-sm md:text-base mr-2 md:mr-3">Select Level:</label>
+                    <select
+                        value={difficulty}
+                        onChange={(e) => setDifficulty(e.target.value)}
+                        className="bg-black border-2 border-cyan-400 text-white px-2 md:px-3 py-1 rounded ml-1 md:ml-2 text-sm md:text-base"
+                    >
+                        <option value="easy">Easy</option>
+                        <option value="medium">Medium</option>
+                        <option value="hard">Hard</option>
+                    </select>
+                </div>
+            </div>
 
             {!gameOver && (
                 <div className="text-center my-4 md:my-6">
@@ -252,11 +229,36 @@ const TicTacToe: React.FC<TicTacToeProps> = ({ onBack }) => {
                 </div>
             )}
 
-                  <div className="flex justify-center mb-6">
-        <div className="grid grid-cols-3 gap-2 md:gap-3 bg-black/20 p-3 md:p-4 rounded-lg border-2 border-cyan-400 shadow-[0_0_20px_rgba(0,255,255,0.3)]">
-          {board.map((_, index) => renderCell(index))}
-        </div>
-      </div>
+            <div className="flex justify-center mb-6">
+                <div className="relative bg-black/20 p-3 md:p-4 rounded-lg border-2 border-cyan-400 shadow-[0_0_20px_rgba(0,255,255,0.3)]">
+                    <div className="grid grid-cols-3 gap-2 md:gap-3">
+                        {board.map((_, index) => renderCell(index))}
+                    </div>
+                    {gameOver && (
+                        <div className="absolute inset-0 flex items-center justify-center bg-black/70">
+                            <div className="text-center space-y-3">
+                                <div className="text-2xl font-bold text-yellow-300">
+                                    {winner === 'Tie' ? "It's a Tie! 🤝" : `${winner} Wins! 🎉`}
+                                </div>
+                                <div className="space-x-3">
+                                    <button
+                                        onClick={resetGame}
+                                        className="bg-gradient-to-r from-green-500 to-blue-500 text-white md:px-6 px-3 md:py-2 py-1 rounded border-2 border-green-400 hover:scale-105 transition-all duration-300 shadow-[0_0_15px_rgba(34,197,94,0.5)]"
+                                    >
+                                        Play Again
+                                    </button>
+                                    <button
+                                        onClick={resetScores}
+                                        className="bg-gradient-to-r from-orange-500 to-red-500 text-white md:px-6 px-3 md:py-2 py-1 rounded border-2 border-orange-400 hover:scale-105 transition-all duration-300 shadow-[0_0_15px_rgba(249,115,22,0.5)]"
+                                    >
+                                        Reset Scores
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    )}
+                </div>
+            </div>
 
             {!gameOver && (
                 <div className="text-xs md:text-sm text-gray-400 text-center px-2">

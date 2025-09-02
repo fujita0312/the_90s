@@ -1,9 +1,10 @@
-import React, { useState } from 'react';
+import React, { Suspense, lazy, useMemo, useState } from 'react';
 
-// Game components will be imported here
-import TicTacToe from './games/TicTacToe';
-import Snake from './games/Snake';
-import FamilyFeud from './games/FamilyFeud';
+// Lazy-load game components for performance
+const TicTacToe = lazy(() => import('./games/TicTacToe'));
+const Snake = lazy(() => import('./games/Snake'));
+const FamilyFeud = lazy(() => import('./games/FamilyFeud'));
+const Tetris90s = lazy(() => import('./games/Tetris90s'));
 
 interface GamesProps {
     onBack: () => void;
@@ -13,84 +14,130 @@ const Games: React.FC<GamesProps> = ({ onBack }) => {
     const [activeGame, setActiveGame] = useState<string>('menu');
     const [isLoading, setIsLoading] = useState(false);
 
-    const games = [
-        { id: 'tictactoe', name: 'Tic Tac Toe', icon: '⭕', description: 'Classic X vs O game with AI opponent' },
-        { id: 'snake', name: 'Snake', icon: '🐍', description: 'Grow your snake by eating food' },
-        { id: 'familyfeud', name: 'Family Feud', icon: '👨‍👩‍👧‍👦', description: 'Guess the most popular answers' }
-    ];
+    const games = useMemo(() => ([
+        { id: 'tictactoe', name: 'Tic Tac Toe', icon: '⭕', description: 'Classic X vs O with AI' },
+        { id: 'snake', name: 'Snake', icon: '🐍', description: 'Grow by eating food, avoid walls' },
+        { id: 'familyfeud', name: 'Family Feud', icon: '👨‍👩‍👧‍👦', description: 'Guess the most popular answers' },
+        { id: 'tetris90s', name: 'Tetris (90s)', icon: '🧩', description: 'Stack blocks, clear lines, level up' }
+    ]), []);
 
     const handleGameSelect = (gameId: string) => {
         setIsLoading(true);
+        // Small delay for a pleasant transition between menu and game load
         setTimeout(() => {
             setActiveGame(gameId);
             setIsLoading(false);
-        }, 300);
+        }, 250);
     };
 
     const renderGame = () => {
         if (isLoading) {
             return (
-                <div className="text-center py-20">
-                    <div className="animate-spin text-6xl mb-4">🎮</div>
-                    <div className="text-cyan-400 text-xl">Loading Game...</div>
+                <div className="text-center py-16" role="status" aria-live="polite">
+                    <div className="mx-auto mb-4 h-16 w-16 rounded-full border-4 border-cyan-400 border-t-transparent animate-spin" aria-hidden="true"></div>
+                    <div className="text-cyan-400 md:text-xl text-lg font-semibold">Loading game…</div>
                 </div>
             );
         }
 
         switch (activeGame) {
             case 'tictactoe':
-                return <TicTacToe onBack={() => setActiveGame('menu')} />;
+                return (
+                    <Suspense fallback={
+                        <div className="text-center py-16" role="status" aria-live="polite">
+                            <div className="mx-auto mb-4 h-16 w-16 rounded-full border-4 border-cyan-400 border-t-transparent animate-spin"></div>
+                            <div className="text-cyan-400 md:text-xl text-lg font-semibold">Loading Tic Tac Toe…</div>
+                        </div>
+                    }>
+                        <TicTacToe onBack={() => setActiveGame('menu')} />
+                    </Suspense>
+                );
             case 'snake':
-                return <Snake onBack={() => setActiveGame('menu')} />;
+                return (
+                    <Suspense fallback={
+                        <div className="text-center py-16" role="status" aria-live="polite">
+                            <div className="mx-auto mb-4 h-16 w-16 rounded-full border-4 border-cyan-400 border-t-transparent animate-spin"></div>
+                            <div className="text-cyan-400 md:text-xl text-lg font-semibold">Loading Snake…</div>
+                        </div>
+                    }>
+                        <Snake onBack={() => setActiveGame('menu')} />
+                    </Suspense>
+                );
             case 'familyfeud':
-                return <FamilyFeud onBack={() => setActiveGame('menu')} />;
+                return (
+                    <Suspense fallback={
+                        <div className="text-center py-16" role="status" aria-live="polite">
+                            <div className="mx-auto mb-4 h-16 w-16 rounded-full border-4 border-cyan-400 border-t-transparent animate-spin"></div>
+                            <div className="text-cyan-400 md:text-xl text-lg font-semibold">Loading Family Feud…</div>
+                        </div>
+                    }>
+                        <FamilyFeud onBack={() => setActiveGame('menu')} />
+                    </Suspense>
+                );
+            case 'tetris90s':
+                return (
+                    <Suspense fallback={
+                        <div className="text-center py-16" role="status" aria-live="polite">
+                            <div className="mx-auto mb-4 h-16 w-16 rounded-full border-4 border-cyan-400 border-t-transparent animate-spin"></div>
+                            <div className="text-cyan-400 md:text-xl text-lg font-semibold">Loading Tetris…</div>
+                        </div>
+                    }>
+                        <Tetris90s onBack={() => setActiveGame('menu')} />
+                    </Suspense>
+                );
             default:
                 return (
-                    <div className="text-center">
-                        <h3 className="rainbow text-center mb-8 md:text-3xl text-xl animate-pulse">
-                            🎮 90s GAMES ARCADE 🎮
-                        </h3>
-                        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+                    <div className="mx-auto max-w-6xl text-center">
+                        <h1 className="rainbow mb-3 md:text-4xl text-2xl font-extrabold tracking-wide">
+                            🎮 90s Games Arcade
+                        </h1>
+                        <p className="text-gray-300 md:text-base text-sm mb-6">Pick a classic and start playing!</p>
+                        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 mb-8">
                             {games.map((game) => (
-                                <div
+                                <button
                                     key={game.id}
                                     onClick={() => handleGameSelect(game.id)}
-                                    className="bg-gradient-to-r from-black via-gray-800 to-black md:border-4 border-2 border-cyan-400 border-ridge md:p-6 p-2 cursor-pointer hover:scale-105 transition-all duration-300 shadow-[0_0_20px_rgba(0,255,255,0.3)] hover:shadow-[0_0_30px_rgba(0,255,255,0.5)] group"
+                                    className="text-left bg-gradient-to-br from-black via-gray-900 to-black md:border-4 border-2 border-cyan-400 border-ridge md:p-6 p-4 rounded-md hover:scale-[1.02] focus:scale-[1.02] transition-transform duration-300 shadow-[0_0_20px_rgba(0,255,255,0.25)] hover:shadow-[0_0_28px_rgba(0,255,255,0.45)] focus:outline-none focus:ring-2 focus:ring-cyan-300 group"
+                                    aria-label={`Play ${game.name}`}
                                 >
-                                    <div className="text-6xl mb-3 group-hover:scale-110 transition-transform duration-300">{game.icon}</div>
-                                    <h4 className="text-cyan-400 text-lg font-bold mb-2 group-hover:text-cyan-300 transition-colors duration-300">{game.name}</h4>
-                                    <p className="text-white text-sm group-hover:text-gray-200 transition-colors duration-300">{game.description}</p>
-                                    <div className="mt-3 text-cyan-300 text-xs opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                                        Click to play →
+                                    <div className="flex items-center gap-3 md:gap-4">
+                                        <div className="text-5xl md:text-6xl mb-1 group-hover:scale-110 transition-transform duration-300" aria-hidden="true">{game.icon}</div>
+                                        <div>
+                                            <h2 className="text-cyan-300 md:text-xl text-lg font-bold group-hover:text-cyan-200 transition-colors duration-300">{game.name}</h2>
+                                            <p className="text-white/90 md:text-sm text-xs group-hover:text-white transition-colors duration-300">{game.description}</p>
+                                        </div>
                                     </div>
-                                </div>
+                                    <div className="mt-4 text-cyan-300 text-xs md:text-sm opacity-80">
+                                        Tap or click to play →
+                                    </div>
+                                </button>
                             ))}
                         </div>
-                        <div className="text-yellow-400 text-sm mb-4">
-                            Click on any game to start playing!
-                        </div>
-                        <div className="text-gray-400 text-xs">
-                            🕹️ Relive the golden age of gaming! 🕹️
-                        </div>
+                        <div className="text-yellow-400 text-sm mb-2">Optimized for mobile and desktop</div>
+                        <div className="text-gray-400 text-xs">🕹️ Relive the golden age of gaming! 🕹️</div>
                     </div>
                 );
         }
     };
 
     return (
-        <div id="games-section" className="bg-gradient-to-br from-black/90 via-blue-900/80 to-black/90 md:border-4 border-2 border-yellow-400 border-ridge md:p-4 p-1 shadow-[0_0_25px_rgba(255,255,0,0.3),inset_0_0_25px_rgba(255,255,255,0.1)] relative gradient-border animate-fade-in">
-            {/* Back Button */}
-            <div className="mb-6">
-                <button
-                    onClick={() => activeGame === 'menu' ? onBack() : setActiveGame('menu')}
-                    className="bg-gradient-to-r from-yellow-500 to-orange-500 text-black md:px-4 px-2 md:py-2 py-1 rounded border-2 border-yellow-400 hover:scale-105 transition-all duration-300 font-bold shadow-[0_0_15px_rgba(255,215,0,0.5)]"
-                >
-                    ← Back
-                </button>
-            </div>
+        <section id="games-section" className="md:p-6 p-3 relative animate-fade-in" aria-labelledby="games-heading">
+            <div className="mx-auto max-w-6xl">
+                <div className="mb-4 flex items-center justify-between gap-2">
+                    <button
+                        onClick={() => activeGame === 'menu' ? onBack() : setActiveGame('menu')}
+                        className="bg-gradient-to-r from-yellow-500 to-orange-500 text-black md:px-4 px-3 md:py-2 py-1 rounded border-2 border-yellow-400 hover:scale-105 transition-all duration-300 font-bold shadow-[0_0_15px_rgba(255,215,0,0.5)] focus:outline-none focus:ring-2 focus:ring-yellow-300"
+                        aria-label={activeGame === 'menu' ? 'Go back' : 'Back to games menu'}
+                    >
+                        ← Back
+                    </button>
+                </div>
 
-            {renderGame()}
-        </div>
+                <div aria-live="polite">
+                    {renderGame()}
+                </div>
+            </div>
+        </section>
     );
 };
 
