@@ -127,7 +127,7 @@ const MemeSlider: React.FC = () => {
 
   if (isLoading) {
     return (
-      <div className="bg-gradient-to-r from-black via-gray-800 to-black md:border-4 border-2 border-pink-500 border-ridge md:p-6 p-3 shadow-[0_0_20px_rgba(255,0,255,0.3)] mb-6 max-w-4xl mx-auto">
+      <div className="bg-gradient-to-r from-black via-gray-800 to-black md:border-4 border-2 border-pink-500 border-ridge md:p-4 p-2 shadow-[0_0_20px_rgba(255,0,255,0.3)] mb-6 max-w-4xl mx-auto">
         <h4 className="text-pink-500 text-center mb-5 text-xl font-bold">
           😂 90s MEME GALLERY 😂
         </h4>
@@ -141,7 +141,7 @@ const MemeSlider: React.FC = () => {
 
   if (memes.length === 0) {
     return (
-      <div className="bg-gradient-to-r from-black via-gray-800 to-black md:border-4 border-2 border-pink-500 border-ridge md:p-6 p-3 shadow-[0_0_20px_rgba(255,0,255,0.3)] mb-6 max-w-4xl mx-auto">
+      <div className="bg-gradient-to-r from-black via-gray-800 to-black md:border-4 border-2 border-pink-500 border-ridge md:p-4 p-2 shadow-[0_0_20px_rgba(255,0,255,0.3)] mb-6 max-w-4xl mx-auto">
         <h4 className="text-pink-500 text-center mb-5 text-xl font-bold">
           😂 90s MEME GALLERY 😂
         </h4>
@@ -157,7 +157,7 @@ const MemeSlider: React.FC = () => {
   // Safety check to ensure we have a valid meme at the current index
   if (!memes || memes.length === 0 || !memes[currentIndex]) {
     return (
-      <div className="bg-gradient-to-r from-black via-gray-800 to-black md:border-4 border-2 border-pink-500 border-ridge md:p-6 p-2 shadow-[0_0_20px_rgba(255,0,255,0.3)] mb-6">
+      <div className="bg-gradient-to-r from-black via-gray-800 to-black md:border-4 border-2 border-pink-500 border-ridge md:p-4 p-2 shadow-[0_0_20px_rgba(255,0,255,0.3)] mb-6">
         <h4 className="text-pink-500 text-center mb-5 text-xl font-bold">
           😂 90s MEME GALLERY 😂
         </h4>
@@ -175,7 +175,7 @@ const MemeSlider: React.FC = () => {
   return (
     <div
       ref={containerRef}
-      className="bg-gradient-to-r from-black via-gray-800 to-black md:border-4 border-2 border-pink-500 border-ridge md:p-6 p-3 shadow-[0_0_20px_rgba(255,0,255,0.3)] mb-6 max-w-4xl mx-auto select-none"
+      className="bg-gradient-to-r from-black via-gray-800 to-black md:border-4 border-2 border-pink-500 border-ridge md:p-4 p-2 shadow-[0_0_20px_rgba(255,0,255,0.3)] mb-6 max-w-4xl mx-auto select-none"
       onMouseEnter={() => setIsHovering(true)}
       onMouseLeave={() => setIsHovering(false)}
       onTouchStart={onTouchStart}

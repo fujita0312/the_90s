@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useToast } from '../contexts/ToastContext';
-const ContractAddress = '0x90sFreshToken2025';
-const PumpFunUrl = 'https://pump.fun';
+const ContractAddress = process.env.REACT_APP_CONTRACT_ADDRESS || '0x90sFreshToken2025';
+const PumpFunUrl = 'https://pump.fun/' + ContractAddress;
 const LeftSidebar: React.FC = () => {
   const [holders, setHolders] = useState(1337);
   const { showToast } = useToast();
@@ -95,7 +95,7 @@ const LeftSidebar: React.FC = () => {
 
 
       {/* Contract Address Section */}
-      <div className="bg-gradient-to-r from-black via-gray-800 to-black md:border-4 border-2 border-cyan-500 border-ridge md:p-6 p-2 shadow-[0_0_20px_rgba(0,255,255,0.3)] mb-6">
+      <div className="bg-gradient-to-r from-black via-gray-800 to-black md:border-4 border-2 border-cyan-500 border-ridge md:p-4 p-2 shadow-[0_0_20px_rgba(0,255,255,0.3)] mb-6">
         <h4 className="text-cyan-400 text-center mb-5 text-xl font-bold animate-blink">
           📋 CONTRACT ADDRESS 📋
         </h4>
