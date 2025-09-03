@@ -39,16 +39,16 @@ const MemesPage: React.FC = () => {
   const handleMemeSubmit = async (imageUrl: string | undefined, file?: File) => {
     try {
       let response;
-      
+
       console.log('handleMemeSubmit called with:', { imageUrl, file: file?.name });
-      
+
       if (file && file.size > 0) {
         // Handle file upload
         console.log('Using file upload method for file:', file.name);
         const formData = new FormData();
         formData.append('image', file);
         formData.append('author', 'Anonymous');
-        
+
         response = await memeApi.uploadMeme(formData);
       } else if (imageUrl && imageUrl.trim()) {
         // Handle URL submission
@@ -58,7 +58,7 @@ const MemesPage: React.FC = () => {
         console.error('No valid file or URL provided:', { file: file?.name, imageUrl });
         throw new Error('Either a file or image URL must be provided');
       }
-      
+
       if (response.success) {
         showToast('Meme added successfully! 🎉', 'success');
         setIsMemeModalOpen(false);
@@ -152,17 +152,14 @@ const MemesPage: React.FC = () => {
             {memes.map((meme) => (
               <div
                 key={meme.id}
-                className="bg-gradient-to-br from-gray-800 to-gray-900 p-3 sm:p-4 lg:p-6 border-2 border-pink-500 shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2"
+                className="bg-gradient-to-br from-gray-800 to-gray-900 p-2 md:p-4 border-2 border-pink-500 shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2"
               >
                 <div className="mb-3 sm:mb-4">
                   <img
                     src={meme.imageUrl}
                     alt="90s Meme"
                     className="w-full h-40 sm:h-44 lg:h-48 xl:h-52 object-cover border-2 border-yellow-400"
-                    // onError={(e) => {
-                    //   const target = e.target as HTMLImageElement;
-                    //   target.src = 'https://via.placeholder.com/300x200/ff69b4/ffffff?text=90s+Meme';
-                    // }}
+                    onLoad={() => console.log('✅ Image loaded successfully:', meme.imageUrl)}
                   />
                 </div>
                 <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2 sm:gap-0">
