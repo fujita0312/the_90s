@@ -7,9 +7,24 @@ const Footer: React.FC = () => {
   const [isMemeModalOpen, setIsMemeModalOpen] = useState(false);
   const { showToast } = useToast();
 
-  const handleMemeSubmit = async (imageUrl: string) => {
+  const handleMemeSubmit = async (imageUrl: string | undefined, file?: File) => {
     try {
-      const response = await memeApi.addMeme({ imageUrl });
+      let response;
+      
+      if (file && file.size > 0) {
+        // Handle file upload
+        const formData = new FormData();
+        formData.append('image', file);
+        formData.append('author', 'Anonymous');
+        
+        response = await memeApi.uploadMeme(formData);
+      } else if (imageUrl && imageUrl.trim()) {
+        // Handle URL submission
+        response = await memeApi.addMeme({ imageUrl });
+      } else {
+        throw new Error('Either a file or image URL must be provided');
+      }
+      
       if (response.success) {
         showToast('Meme added successfully! 🎉', 'success');
         setIsMemeModalOpen(false);

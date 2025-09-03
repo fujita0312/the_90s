@@ -90,6 +90,21 @@ export class ApiService {
     }
   }
 
+  // Generic POST request for FormData (file uploads)
+  protected postForm = async <T>(endpoint: string, formData: FormData): Promise<ApiResponse<T>> => {
+    try {
+      console.log('postForm called with endpoint:', endpoint);
+      const response = await this.client.post<ApiResponse<T>>(endpoint, formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      });
+      return response.data;
+    } catch (error) {
+      return this.handleError(error);
+    }
+  }
+
   // Generic PUT request
   protected put = async <T>(endpoint: string, data?: any): Promise<ApiResponse<T>> => {
     try {

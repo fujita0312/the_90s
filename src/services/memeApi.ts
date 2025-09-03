@@ -17,6 +17,15 @@ class MemeApiService extends ApiService {
   }
 
   /**
+   * Upload a meme file to the server
+   */
+  async uploadMeme(formData: FormData): Promise<ApiResponse<Meme>> {
+    console.log('uploadMeme called with FormData:', formData);
+    console.log('Making request to: /memes/upload');
+    return this.postForm<Meme>('/memes/upload', formData);
+  }
+
+  /**
    * Delete a meme by ID
    */
   async deleteMeme(id: string): Promise<ApiResponse<void>> {

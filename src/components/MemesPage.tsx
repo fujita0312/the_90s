@@ -36,9 +36,29 @@ const MemesPage: React.FC = () => {
     loadMemes();
   }, []);
 
-  const handleMemeSubmit = async (imageUrl: string) => {
+  const handleMemeSubmit = async (imageUrl: string | undefined, file?: File) => {
     try {
-      const response = await memeApi.addMeme({ imageUrl });
+      let response;
+      
+      console.log('handleMemeSubmit called with:', { imageUrl, file: file?.name });
+      
+      if (file && file.size > 0) {
+        // Handle file upload
+        console.log('Using file upload method for file:', file.name);
+        const formData = new FormData();
+        formData.append('image', file);
+        formData.append('author', 'Anonymous');
+        
+        response = await memeApi.uploadMeme(formData);
+      } else if (imageUrl && imageUrl.trim()) {
+        // Handle URL submission
+        console.log('Using URL submission method for URL:', imageUrl);
+        response = await memeApi.addMeme({ imageUrl });
+      } else {
+        console.error('No valid file or URL provided:', { file: file?.name, imageUrl });
+        throw new Error('Either a file or image URL must be provided');
+      }
+      
       if (response.success) {
         showToast('Meme added successfully! 🎉', 'success');
         setIsMemeModalOpen(false);
@@ -139,10 +159,10 @@ const MemesPage: React.FC = () => {
                     src={meme.imageUrl}
                     alt="90s Meme"
                     className="w-full h-40 sm:h-44 lg:h-48 xl:h-52 object-cover border-2 border-yellow-400"
-                    onError={(e) => {
-                      const target = e.target as HTMLImageElement;
-                      target.src = 'https://via.placeholder.com/300x200/ff69b4/ffffff?text=90s+Meme';
-                    }}
+                    // onError={(e) => {
+                    //   const target = e.target as HTMLImageElement;
+                    //   target.src = 'https://via.placeholder.com/300x200/ff69b4/ffffff?text=90s+Meme';
+                    // }}
                   />
                 </div>
                 <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2 sm:gap-0">
@@ -151,7 +171,7 @@ const MemesPage: React.FC = () => {
                   </span>
                   <button
                     onClick={() => handleDeleteMeme(meme.id)}
-                    disabled={true}
+                    // disabled={true}
                     className="bg-red-600 hover:bg-red-700 text-white px-2 py-1 sm:px-3 sm:py-1 text-xs sm:text-sm font-bold transition-colors duration-200 w-full sm:w-auto"
                   >
                     🗑️ Delete
