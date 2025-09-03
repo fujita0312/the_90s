@@ -53,16 +53,25 @@ const LoadingScreen = () => {
 
     return (
         <div className="fixed inset-0 bg-black text-[#00ff00] flex flex-col justify-center items-center z-50 font-courier">
-            <div className="mb-8">
-                <video 
-                    className="w-full max-w-md h-auto"
-                    autoPlay 
-                    loop 
+            <div
+                className="mb-8 relative max-w-md h-auto flex justify-center items-center overflow-hidden"
+                style={{
+                    aspectRatio: '5/3.7'
+                }}>
+                <video
+                    className=""
+                    autoPlay
+                    loop
                     muted
                 >
                     <source src="/video_2025-09-03_20-14-01.mp4" type="video/mp4" />
                     Your browser does not support the video tag.
                 </video>
+                <div className="absolute inset-0 pointer-events-none"
+                    style={{
+                        background: 'radial-gradient(circle, #00000000 30%, rgb(0 0 0) 80%, rgb(0 0 0) 100%)'
+                    }}>
+                </div>
             </div>
 
             {!showProgress && (
