@@ -69,7 +69,7 @@ const LoadingScreen = () => {
                 </video>
                 <div className="absolute inset-0 pointer-events-none"
                     style={{
-                        background: 'radial-gradient(circle, #00000000 30%, rgb(0 0 0) 80%, rgb(0 0 0) 100%)'
+                        background: 'radial-gradient(circle, #00000000 30%, rgb(0 0 0) 90%, rgb(0 0 0) 100%)'
                     }}>
                 </div>
             </div>
