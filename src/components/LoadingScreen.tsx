@@ -53,12 +53,20 @@ const LoadingScreen = () => {
 
     return (
         <div className="fixed inset-0 bg-black text-[#00ff00] flex flex-col justify-center items-center z-50 font-courier">
-            <div className="md:text-6xl text-3xl text-[#00ff00] mb-8">
-                📞 DIALING UP 📞
+            <div className="mb-8">
+                <video 
+                    className="w-full max-w-md h-auto"
+                    autoPlay 
+                    loop 
+                    muted
+                >
+                    <source src="/video_2025-09-03_20-14-01.mp4" type="video/mp4" />
+                    Your browser does not support the video tag.
+                </video>
             </div>
 
             {!showProgress && (
-                <div className="mt-8 text-center">
+                <div className="text-center">
                     <button
                         onClick={handleConnect}
                         className="px-5 py-2.5 text-xl cursor-pointer bg-[#00ff00] text-black hover:bg-green-400 transition-colors"
