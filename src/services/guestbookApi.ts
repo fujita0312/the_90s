@@ -1,58 +1,51 @@
 import { GuestbookEntry, CreateGuestbookEntry, ApiResponse } from '../types/guestbook';
+import { ApiService } from './api';
 
-const API_BASE_URL = process.env.REACT_APP_API_URL || 'http://localhost:3001/api';
-
-class GuestbookApiService {
-  private async makeRequest<T>(
-    endpoint: string,
-    options: RequestInit = {}
-  ): Promise<ApiResponse<T>> {
-    try {
-      const response = await fetch(`${API_BASE_URL}${endpoint}`, {
-        headers: {
-          'Content-Type': 'application/json',
-          ...options.headers,
-        },
-        ...options,
-      });
-
-      const data = await response.json();
-
-      if (!response.ok) {
-        throw new Error(data.error || `HTTP error! status: ${response.status}`);
-      }
-
-      return data;
-    } catch (error) {
-      console.error('API request failed:', error);
-      return {
-        success: false,
-        error: error instanceof Error ? error.message : 'Unknown error occurred'
-      };
-    }
-  }
-
+class GuestbookApiService extends ApiService {
+  /**
+   * Get all guestbook entries from the server
+   */
   async getAllEntries(): Promise<ApiResponse<GuestbookEntry[]>> {
-    return this.makeRequest<GuestbookEntry[]>('/guestbook');
+    return this.get<GuestbookEntry[]>('/guestbook');
   }
 
+  /**
+   * Add a new guestbook entry
+   */
   async addEntry(entry: CreateGuestbookEntry): Promise<ApiResponse<GuestbookEntry>> {
-    return this.makeRequest<GuestbookEntry>('/guestbook', {
-      method: 'POST',
-      body: JSON.stringify(entry),
-    });
+    return this.post<GuestbookEntry>('/guestbook', entry);
   }
 
+  /**
+   * Delete a guestbook entry by ID
+   */
   async deleteEntry(id: number): Promise<ApiResponse<void>> {
-    return this.makeRequest<void>(`/guestbook/${id}`, {
-      method: 'DELETE',
-    });
+    return this.delete<void>(`/guestbook/${id}`);
   }
 
+  /**
+   * Get a specific guestbook entry by ID
+   */
   async getEntryById(id: number): Promise<ApiResponse<GuestbookEntry>> {
-    return this.makeRequest<GuestbookEntry>(`/guestbook/${id}`);
+    return this.get<GuestbookEntry>(`/guestbook/${id}`);
+  }
+
+  /**
+   * Update an existing guestbook entry
+   */
+  async updateEntry(id: number, entry: Partial<CreateGuestbookEntry>): Promise<ApiResponse<GuestbookEntry>> {
+    return this.put<GuestbookEntry>(`/guestbook/${id}`, entry);
+  }
+
+  /**
+   * Get guestbook entries with pagination
+   */
+  async getEntriesPaginated(page: number = 1, limit: number = 10): Promise<ApiResponse<GuestbookEntry[]>> {
+    return this.get<GuestbookEntry[]>(`/guestbook?page=${page}&limit=${limit}`);
   }
 }
 
-export const guestbookApi = new GuestbookApiService();
+// Create and export a singleton instance
+const guestbookApi = new GuestbookApiService();
+export { guestbookApi };
 export default guestbookApi;

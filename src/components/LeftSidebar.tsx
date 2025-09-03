@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useToast } from '../contexts/ToastContext';
-
+const ContractAddress = '0x90sFreshToken2025';
+const PumpFunUrl = 'https://pump.fun';
 const LeftSidebar: React.FC = () => {
   const [holders, setHolders] = useState(1337);
   const { showToast } = useToast();
@@ -89,6 +90,43 @@ const LeftSidebar: React.FC = () => {
             Y2K Compliance:
           </span>
           <span className="text-cyan-400 md:text-xl text-base">██████████ (100%)</span>
+        </div>
+      </div>
+
+
+      {/* Contract Address Section */}
+      <div className="bg-gradient-to-r from-black via-gray-800 to-black md:border-4 border-2 border-cyan-500 border-ridge md:p-6 p-2 shadow-[0_0_20px_rgba(0,255,255,0.3)] mb-6">
+        <h4 className="text-cyan-400 text-center mb-5 text-xl font-bold animate-blink">
+          📋 CONTRACT ADDRESS 📋
+        </h4>
+        <div className="text-center">
+          <div className="bg-black/60 md:p-4 p-2 md:border-2 border border-cyan-400 mb-4 hover:bg-black/80 transition-all duration-300 hover:shadow-[0_0_15px_rgba(0,255,255,0.5)]">
+            <div className="text-cyan-400 text-sm mb-2">Click to copy & buy:</div>
+            <a
+              href={PumpFunUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-yellow-400 hover:text-yellow-300 transition-all duration-300 font-mono text-sm md:text-base break-all hover:underline cursor-pointer hover:scale-105 transform block"
+              onClick={(e) => {
+                e.preventDefault();
+                navigator.clipboard.writeText(ContractAddress);
+                showToast("📋 Contract address copied to clipboard!\n\n🚀 Opening pump.fun to buy...\n\nTO THE MOON! 🌙", 'success');
+                // Open pump.fun in new tab
+                window.open(PumpFunUrl, '_blank');
+              }}
+            >
+              {ContractAddress}
+            </a>
+          </div>
+          <div className="text-white text-sm mb-2">
+            🚀 <strong>Ready to join the time travel revolution?</strong> 🚀
+          </div>
+          <div className="text-cyan-400 text-xs">
+            Click address above to copy & visit pump.fun!
+          </div>
+          <div className="text-yellow-400 text-xs mt-1 animate-pulse">
+            ⚡ Instant copy + buy link! ⚡
+          </div>
         </div>
       </div>
 

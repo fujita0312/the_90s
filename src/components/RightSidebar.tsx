@@ -3,6 +3,7 @@ import GuestbookModal from './GuestbookModal';
 import { useToast } from '../contexts/ToastContext';
 import { GuestbookEntry } from '../types/guestbook';
 import guestbookApi from '../services/guestbookApi';
+import { useNavigate } from 'react-router-dom';
 
 // Extend Window interface for webkitAudioContext
 declare global {
@@ -17,7 +18,7 @@ const RightSidebar: React.FC = () => {
   const [guestbookEntries, setGuestbookEntries] = useState<GuestbookEntry[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [lastBulletinRefresh, setLastBulletinRefresh] = useState<Date>(new Date());
-
+  const navigate = useNavigate();
   // Load guestbook entries on component mount
   useEffect(() => {
     loadGuestbookEntries();
@@ -227,6 +228,24 @@ const RightSidebar: React.FC = () => {
         >
           ▶️ PLAY
         </button>
+      </div>
+
+      {/* Games Section */}
+      <div className="bg-gradient-to-r from-black via-gray-800 to-black md:border-4 border-2 border-pink-500 border-ridge md:p-6 p-2 shadow-[0_0_20px_rgba(255,0,255,0.3)] mb-6">
+        <h4 className="text-pink-500 text-center mb-5 text-xl font-bold">
+          🎮 90s GAMES ARCADE 🎮
+        </h4>
+        <div className="text-center">
+          <p className="text-white mb-4">
+            Take a break from the future and enjoy some classic 90s games!
+          </p>
+          <button
+            onClick={() => navigate('/games')}
+            className="bg-gradient-to-r from-pink-500 to-purple-500 text-white px-8 py-3 border-2 border-pink-400 hover:scale-105 transition-all duration-300 text-lg font-bold shadow-[0_0_20px_rgba(255,0,255,0.3)] hover:shadow-[0_0_30px_rgba(255,0,255,0.5)] hover:border-pink-300 group"
+          >
+            <span className="group-hover:animate-pulse">🎮 Play Games Now! 🎮</span>
+          </button>
+        </div>
       </div>
 
       {/* Guestbook Modal */}

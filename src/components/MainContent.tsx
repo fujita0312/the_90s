@@ -1,13 +1,11 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
-import { useToast } from '../contexts/ToastContext';
+ 
+import MemeSlider from './MemeSlider';
 
 
-const ContractAddress = '0x90sFreshToken2025';
-const PumpFunUrl = 'https://pump.fun';
+
 const MainContent: React.FC = () => {
-  const navigate = useNavigate();
-  const { showToast } = useToast();
+
 
   return (
     <div className="bg-gradient-to-br from-black/90 via-blue-900/80 to-black/90 md:border-4 border-2 border-yellow-400 border-ridge md:p-4 p-1 shadow-[0_0_25px_rgba(255,255,0,0.3),inset_0_0_25px_rgba(255,255,255,0.1)] relative gradient-border">
@@ -90,59 +88,12 @@ const MainContent: React.FC = () => {
         </div>
       </div>
 
-      {/* Games Section */}
-      <div className="bg-gradient-to-r from-black via-gray-800 to-black md:border-4 border-2 border-pink-500 border-ridge md:p-6 p-2 shadow-[0_0_20px_rgba(255,0,255,0.3)] mb-6">
-        <h4 className="text-pink-500 text-center mb-5 text-xl font-bold">
-          🎮 90s GAMES ARCADE 🎮
-        </h4>
-        <div className="text-center">
-          <p className="text-white mb-4">
-            Take a break from the future and enjoy some classic 90s games!
-          </p>
-          <button
-            onClick={() => navigate('/games')}
-            className="bg-gradient-to-r from-pink-500 to-purple-500 text-white px-8 py-3 border-2 border-pink-400 hover:scale-105 transition-all duration-300 text-lg font-bold shadow-[0_0_20px_rgba(255,0,255,0.3)] hover:shadow-[0_0_30px_rgba(255,0,255,0.5)] hover:border-pink-300 group"
-          >
-            <span className="group-hover:animate-pulse">🎮 Play Games Now! 🎮</span>
-          </button>
-        </div>
-      </div>
+      {/* Meme Slider Section */}
+      <MemeSlider />
 
-      {/* Contract Address Section */}
-      <div className="bg-gradient-to-r from-black via-gray-800 to-black md:border-4 border-2 border-cyan-500 border-ridge md:p-6 p-2 shadow-[0_0_20px_rgba(0,255,255,0.3)] mb-6">
-        <h4 className="text-cyan-400 text-center mb-5 text-xl font-bold animate-blink">
-          📋 CONTRACT ADDRESS 📋
-        </h4>
-        <div className="text-center">
-          <div className="bg-black/60 md:p-4 p-2 md:border-2 border border-cyan-400 mb-4 hover:bg-black/80 transition-all duration-300 hover:shadow-[0_0_15px_rgba(0,255,255,0.5)]">
-            <div className="text-cyan-400 text-sm mb-2">Click to copy & buy:</div>
-            <a 
-              href={PumpFunUrl} 
-              target="_blank" 
-              rel="noopener noreferrer"
-              className="text-yellow-400 hover:text-yellow-300 transition-all duration-300 font-mono text-sm md:text-base break-all hover:underline cursor-pointer hover:scale-105 transform block"
-              onClick={(e) => {
-                e.preventDefault();
-                navigator.clipboard.writeText(ContractAddress);
-                showToast("📋 Contract address copied to clipboard!\n\n🚀 Opening pump.fun to buy...\n\nTO THE MOON! 🌙", 'success');
-                // Open pump.fun in new tab
-                window.open(PumpFunUrl, '_blank');
-              }}
-            >
-              {ContractAddress}
-            </a>
-          </div>
-          <div className="text-white text-sm mb-2">
-            🚀 <strong>Ready to join the time travel revolution?</strong> 🚀
-          </div>
-          <div className="text-cyan-400 text-xs">
-            Click address above to copy & visit pump.fun!
-          </div>
-          <div className="text-yellow-400 text-xs mt-1 animate-pulse">
-            ⚡ Instant copy + buy link! ⚡
-          </div>
-        </div>
-      </div>
+   
+
+ 
 
       {/* Why This Will Go Viral */}
       <div className="bg-gradient-to-r from-black via-gray-800 to-black md:border-4 border-2 border-pink-500 border-ridge md:p-6 p-2 shadow-[0_0_20px_rgba(255,0,255,0.3)]">

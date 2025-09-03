@@ -14,6 +14,7 @@ import MatrixRain from './components/MatrixRain';
 import { use90sFeatures } from './hooks/use90sFeatures';
 import { ToastProvider } from './contexts/ToastContext';
 import Games from './components/Games';
+import MemesPage from './components/MemesPage';
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
         <Routes>
           <Route path="/" element={<LoadingScreen />} />
           <Route path="/games" element={<GamesPage />} />
+          <Route path="/memes" element={<MemesPage />} />
           <Route path="/main" element={<AppContent />} />
         </Routes>
       </BrowserRouter>

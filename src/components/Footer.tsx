@@ -1,6 +1,27 @@
-import React from 'react';
+import React, { useState } from 'react';
+import MemeModal from './MemeModal';
+import memeApi from '../services/memeApi';
+import { useToast } from '../contexts/ToastContext';
 
 const Footer: React.FC = () => {
+  const [isMemeModalOpen, setIsMemeModalOpen] = useState(false);
+  const { showToast } = useToast();
+
+  const handleMemeSubmit = async (title: string, description: string, imageUrl: string) => {
+    try {
+      const response = await memeApi.addMeme({ title, description, imageUrl });
+      if (response.success) {
+        showToast('Meme added successfully! 🎉', 'success');
+        setIsMemeModalOpen(false);
+      } else {
+        showToast(response.error || 'Failed to add meme', 'error');
+      }
+    } catch (error) {
+      showToast('Failed to add meme. Please try again.', 'error');
+      console.error('Error adding meme:', error);
+    }
+  };
+
   return (
     <div className="bg-gradient-to-r from-black via-gray-800 to-black text-[#00ff00] text-center md:p-4 p-3 border-t-5 border-pink-500 border-ridge mt-10 shadow-[0_-10px_20px_rgba(255,0,255,0.3)]">
       {/* Web Ring Links */}
@@ -26,8 +47,11 @@ const Footer: React.FC = () => {
         <button className="bg-gradient-to-r from-blue-600 to-blue-500 text-white md:px-5 px-2 md:py-2.5 py-1 no-underline md:border-3 border-2 border-white border-ridge font-bold transition-all duration-300 shadow-[0_0_10px_#4169e1] hover:-translate-y-1 hover:shadow-[0_5px_15px_#4169e1] bg-transparent border-none cursor-pointer">
           📊 STATS
         </button>
-        <button className="bg-gradient-to-r from-blue-600 to-blue-500 text-white md:px-5 px-2 md:py-2.5 py-1 no-underline md:border-3 border-2 border-white border-ridge font-bold transition-all duration-300 shadow-[0_0_10px_#4169e1] hover:-translate-y-1 hover:shadow-[0_5px_15px_#4169e1] bg-transparent border-none cursor-pointer">
-          💿 DOWNLOADS
+        <button 
+          onClick={() => setIsMemeModalOpen(true)}
+          className="bg-gradient-to-r from-blue-600 to-blue-500 text-white md:px-5 px-2 md:py-2.5 py-1 no-underline md:border-3 border-2 border-white border-ridge font-bold transition-all duration-300 shadow-[0_0_10px_#4169e1] hover:-translate-y-1 hover:shadow-[0_5px_15px_#4169e1] bg-transparent border-none cursor-pointer"
+        >
+          😂 MEMES
         </button>
       </div>
 
@@ -59,6 +83,13 @@ const Footer: React.FC = () => {
       <div className="mt-5 text-sm text-gray-400">
         <div className="animate-blink">🌟 Powered by Nostalgia Engine v1.0 🌟</div>
       </div>
+
+      {/* Meme Modal */}
+      <MemeModal
+        isOpen={isMemeModalOpen}
+        onClose={() => setIsMemeModalOpen(false)}
+        onSubmit={handleMemeSubmit}
+      />
     </div>
   );
 };
