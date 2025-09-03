@@ -241,7 +241,7 @@ const RightSidebar: React.FC = () => {
           </p>
           <button
             onClick={() => navigate('/games')}
-            className="bg-gradient-to-r from-pink-500 to-purple-500 text-white px-8 py-3 border-2 border-pink-400 hover:scale-105 transition-all duration-300 text-lg font-bold shadow-[0_0_20px_rgba(255,0,255,0.3)] hover:shadow-[0_0_30px_rgba(255,0,255,0.5)] hover:border-pink-300 group"
+            className="bg-gradient-to-r from-pink-500 to-purple-500 text-white md:px-4 px-3 py-3 border-2 border-pink-400 hover:scale-105 transition-all duration-300 text-lg font-bold shadow-[0_0_20px_rgba(255,0,255,0.3)] hover:shadow-[0_0_30px_rgba(255,0,255,0.5)] hover:border-pink-300 group"
           >
             <span className="group-hover:animate-pulse">🎮 Play Games Now! 🎮</span>
           </button>
