@@ -127,13 +127,13 @@ const MemeSlider: React.FC = () => {
 
   if (isLoading) {
     return (
-      <div className="bg-gradient-to-r from-black via-gray-800 to-black md:border-4 border-2 border-pink-500 border-ridge md:p-4 p-2 shadow-[0_0_20px_rgba(255,0,255,0.3)] mb-6 max-w-4xl mx-auto">
-        <h4 className="text-pink-500 text-center mb-5 text-xl font-bold">
+      <div className="bg-gradient-to-r from-black via-gray-800 to-black border-2 sm:border-3 lg:border-4 border-pink-500 border-ridge p-3 sm:p-4 lg:p-6 shadow-[0_0_20px_rgba(255,0,255,0.3)] mb-4 sm:mb-6 max-w-5xl mx-auto">
+        <h4 className="text-pink-500 text-center mb-3 sm:mb-4 lg:mb-5 text-lg sm:text-xl lg:text-2xl font-bold">
           😂 90s MEME GALLERY 😂
         </h4>
         <div className="text-center text-white">
-          <div className="animate-spin text-4xl mb-4">🔄</div>
-          <p>Loading the raddest memes...</p>
+          <div className="animate-spin text-3xl sm:text-4xl lg:text-5xl mb-3 sm:mb-4">🔄</div>
+          <p className="text-sm sm:text-base lg:text-lg">Loading the raddest memes...</p>
         </div>
       </div>
     );
@@ -141,14 +141,14 @@ const MemeSlider: React.FC = () => {
 
   if (memes.length === 0) {
     return (
-      <div className="bg-gradient-to-r from-black via-gray-800 to-black md:border-4 border-2 border-pink-500 border-ridge md:p-4 p-2 shadow-[0_0_20px_rgba(255,0,255,0.3)] mb-6 max-w-4xl mx-auto">
-        <h4 className="text-pink-500 text-center mb-5 text-xl font-bold">
+      <div className="bg-gradient-to-r from-black via-gray-800 to-black border-2 sm:border-3 lg:border-4 border-pink-500 border-ridge p-3 sm:p-4 lg:p-6 shadow-[0_0_20px_rgba(255,0,255,0.3)] mb-4 sm:mb-6 max-w-5xl mx-auto">
+        <h4 className="text-pink-500 text-center mb-3 sm:mb-4 lg:mb-5 text-lg sm:text-xl lg:text-2xl font-bold">
           😂 90s MEME GALLERY 😂
         </h4>
         <div className="text-center text-white">
-          <div className="text-4xl mb-4">📭</div>
-          <p className="mb-4">No memes yet! Be the first to submit one!</p>
-          <p className="text-sm text-gray-400">Click the MEMES button in the footer to submit your first meme!</p>
+          <div className="text-3xl sm:text-4xl lg:text-5xl mb-3 sm:mb-4">📭</div>
+          <p className="mb-3 sm:mb-4 text-sm sm:text-base lg:text-lg">No memes yet! Be the first to submit one!</p>
+          <p className="text-xs sm:text-sm text-gray-400">Click the MEMES button in the footer to submit your first meme!</p>
         </div>
       </div>
     );
@@ -157,14 +157,14 @@ const MemeSlider: React.FC = () => {
   // Safety check to ensure we have a valid meme at the current index
   if (!memes || memes.length === 0 || !memes[currentIndex]) {
     return (
-      <div className="bg-gradient-to-r from-black via-gray-800 to-black md:border-4 border-2 border-pink-500 border-ridge md:p-4 p-2 shadow-[0_0_20px_rgba(255,0,255,0.3)] mb-6">
-        <h4 className="text-pink-500 text-center mb-5 text-xl font-bold">
+      <div className="bg-gradient-to-r from-black via-gray-800 to-black border-2 sm:border-3 lg:border-4 border-pink-500 border-ridge p-3 sm:p-4 lg:p-6 shadow-[0_0_20px_rgba(255,0,255,0.3)] mb-4 sm:mb-6 max-w-5xl mx-auto">
+        <h4 className="text-pink-500 text-center mb-3 sm:mb-4 lg:mb-5 text-lg sm:text-xl lg:text-2xl font-bold">
           😂 90s MEME GALLERY 😂
         </h4>
         <div className="text-center text-white">
-          <div className="text-4xl mb-4">📭</div>
-          <p className="mb-4">No memes available right now!</p>
-          <p className="text-sm text-gray-400">Try refreshing the page or check back later.</p>
+          <div className="text-3xl sm:text-4xl lg:text-5xl mb-3 sm:mb-4">📭</div>
+          <p className="mb-3 sm:mb-4 text-sm sm:text-base lg:text-lg">No memes available right now!</p>
+          <p className="text-xs sm:text-sm text-gray-400">Try refreshing the page or check back later.</p>
         </div>
       </div>
     );
@@ -175,7 +175,7 @@ const MemeSlider: React.FC = () => {
   return (
     <div
       ref={containerRef}
-      className="bg-gradient-to-r from-black via-gray-800 to-black md:border-4 border-2 border-pink-500 border-ridge md:p-4 p-2 shadow-[0_0_20px_rgba(255,0,255,0.3)] mb-6 max-w-4xl mx-auto select-none"
+      className="bg-gradient-to-r from-black via-gray-800 to-black border-2 sm:border-3 lg:border-4 border-pink-500 border-ridge p-3 sm:p-4 lg:p-6 shadow-[0_0_20px_rgba(255,0,255,0.3)] mb-4 sm:mb-6 max-w-5xl mx-auto select-none"
       onMouseEnter={() => setIsHovering(true)}
       onMouseLeave={() => setIsHovering(false)}
       onTouchStart={onTouchStart}
@@ -185,37 +185,24 @@ const MemeSlider: React.FC = () => {
       aria-roledescription="carousel"
       aria-label="90s Meme Gallery"
     >
-      <h4 className="text-pink-500 text-center mb-5 text-xl font-bold">
+      <h4 className="text-pink-500 text-center mb-3 sm:mb-4 lg:mb-5 text-lg sm:text-xl lg:text-2xl font-bold">
         😂 90s MEME GALLERY 😂
       </h4>
       
       {/* Meme Display */}
-      <div className="relative mb-6">
-        <div className="bg-black/60 md:p-4 p-2 md:border-2 border border-pink-400 rounded-none">
+      <div className="relative mb-4 sm:mb-5 lg:mb-6">
+        <div className="bg-black/60 p-2 sm:p-3 lg:p-4 border border-pink-400 rounded-none">
           {/* Meme Image */}
-          <div className="text-center mb-4">
+          <div className="text-center mb-3 sm:mb-4">
             <img
               src={currentMeme.imageUrl}
-              alt={currentMeme.title}
-              className="w-full h-[38vh] md:h-[420px] object-contain mx-auto  shadow-[0_0_15px_rgba(255,0,255,0.3)] bg-black"
+              alt="90s Meme"
+              className="w-full h-[35vh] sm:h-[40vh] md:h-[45vh] lg:h-[50vh] xl:h-[55vh] max-h-[600px] object-contain mx-auto shadow-[0_0_15px_rgba(255,0,255,0.3)] bg-black"
               onError={(e) => {
                 const target = e.target as HTMLImageElement;
                 target.src = 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjMzMzIi8+PHRleHQgeD0iNTAlIiB5PSI1MCUiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIxNCIgZmlsbD0iI2ZmZiIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZHk9Ii4zZW0iPkltYWdlIE5vdCBGb3VuZDwvdGV4dD48L3N2Zz4=';
               }}
             />
-          </div>
-          
-          {/* Meme Info */}
-          <div className="text-center px-2">
-            <h5 className="text-pink-400 font-bold text-lg mb-2 truncate">
-              {currentMeme.title}
-            </h5>
-            <p className="text-white text-sm mb-2 leading-relaxed">
-              {currentMeme.description}
-            </p>
-            <div className="text-gray-400 text-xs">
-              By: {currentMeme.author} | {new Date(currentMeme.createdAt).toLocaleDateString()}
-            </div>
           </div>
         </div>
 
@@ -225,14 +212,14 @@ const MemeSlider: React.FC = () => {
             <button
               onClick={prevMeme}
               aria-label="Previous meme"
-              className="absolute left-2 top-1/2 -translate-y-1/2 bg-pink-500/90 hover:bg-pink-600 text-black w-10 h-10 md:w-12 md:h-12 rounded-full grid place-items-center border-2 border-pink-300 transition-all duration-200 shadow-[0_0_10px_rgba(255,0,255,0.3)]"
+              className="absolute left-1 sm:left-2 lg:left-3 top-1/2 -translate-y-1/2 bg-pink-500/90 hover:bg-pink-600 text-black w-8 h-8 sm:w-10 sm:h-10 lg:w-12 lg:h-12 rounded-full grid place-items-center border-2 border-pink-300 transition-all duration-200 shadow-[0_0_10px_rgba(255,0,255,0.3)] text-sm sm:text-base lg:text-lg"
             >
               ←
             </button>
             <button
               onClick={nextMeme}
               aria-label="Next meme"
-              className="absolute right-2 top-1/2 -translate-y-1/2 bg-pink-500/90 hover:bg-pink-600 text-black w-10 h-10 md:w-12 md:h-12 rounded-full grid place-items-center border-2 border-pink-300 transition-all duration-200 shadow-[0_0_10px_rgba(255,0,255,0.3)]"
+              className="absolute right-1 sm:right-2 lg:right-3 top-1/2 -translate-y-1/2 bg-pink-500/90 hover:bg-pink-600 text-black w-8 h-8 sm:w-10 sm:h-10 lg:w-12 lg:h-12 rounded-full grid place-items-center border-2 border-pink-300 transition-all duration-200 shadow-[0_0_10px_rgba(255,0,255,0.3)] text-sm sm:text-base lg:text-lg"
             >
               →
             </button>
@@ -242,13 +229,13 @@ const MemeSlider: React.FC = () => {
 
       {/* Dots Indicator */}
       {memes.length > 1 && (
-        <div className="flex justify-center mb-4 gap-2">
+        <div className="flex justify-center mb-3 sm:mb-4 gap-1.5 sm:gap-2">
           {memes.map((_, index) => (
             <button
               key={index}
               onClick={() => goToIndex(index)}
               aria-label={`Go to meme ${index + 1}`}
-              className={`w-2.5 h-2.5 md:w-3 md:h-3 rounded-full border-2 border-pink-400 transition-all duration-200 ${
+              className={`w-2 h-2 sm:w-2.5 sm:h-2.5 lg:w-3 lg:h-3 rounded-full border-2 border-pink-400 transition-all duration-200 ${
                 index === currentIndex 
                   ? 'bg-pink-500 shadow-[0_0_10px_rgba(255,0,255,0.5)]' 
                   : 'bg-transparent hover:bg-pink-500/50'
@@ -262,11 +249,11 @@ const MemeSlider: React.FC = () => {
       <div className="text-center">
         <button
           onClick={handleViewAll}
-          className="bg-gradient-to-r from-pink-500 to-purple-500 text-black px-6 py-2 border-2 border-pink-400 hover:scale-105 transition-all duration-300 text-sm font-bold shadow-[0_0_15px_rgba(255,0,255,0.3)] hover:shadow-[0_0_25px_rgba(255,0,255,0.5)] hover:border-pink-300"
+          className="bg-gradient-to-r from-pink-500 to-purple-500 text-black px-4 py-2 sm:px-6 sm:py-2.5 lg:px-8 lg:py-3 border-2 border-pink-400 hover:scale-105 transition-all duration-300 text-xs sm:text-sm lg:text-base font-bold shadow-[0_0_15px_rgba(255,0,255,0.3)] hover:shadow-[0_0_25px_rgba(255,0,255,0.5)] hover:border-pink-300"
         >
           <span className="animate-pulse">🎭 View All Memes 🎭</span>
         </button>
-        <p className="text-gray-400 text-xs mt-2">
+        <p className="text-gray-400 text-xs sm:text-sm mt-2">
           Showing {currentIndex + 1} of {memes.length} memes
         </p>
       </div>

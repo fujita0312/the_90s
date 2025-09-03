@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useToast } from '../contexts/ToastContext';
-const ContractAddress = process.env.REACT_APP_CONTRACT_ADDRESS || '0x90sFreshToken2025';
+const ContractAddress = process.env.REACT_APP_CONTRACT_ADDRESS || '';
 const PumpFunUrl = 'https://pump.fun/' + ContractAddress;
 const LeftSidebar: React.FC = () => {
   const [holders, setHolders] = useState(1337);

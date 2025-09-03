@@ -7,9 +7,9 @@ const Footer: React.FC = () => {
   const [isMemeModalOpen, setIsMemeModalOpen] = useState(false);
   const { showToast } = useToast();
 
-  const handleMemeSubmit = async (title: string, description: string, imageUrl: string) => {
+  const handleMemeSubmit = async (imageUrl: string) => {
     try {
-      const response = await memeApi.addMeme({ title, description, imageUrl });
+      const response = await memeApi.addMeme({ imageUrl });
       if (response.success) {
         showToast('Meme added successfully! 🎉', 'success');
         setIsMemeModalOpen(false);

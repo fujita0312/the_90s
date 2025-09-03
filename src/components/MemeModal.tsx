@@ -3,14 +3,12 @@ import React, { useState } from 'react';
 interface MemeModalProps {
   isOpen: boolean;
   onClose: () => void;
-  onSubmit: (title: string, description: string, imageUrl: string) => void;
+  onSubmit: (imageUrl: string) => void;
 }
 
 const MemeModal: React.FC<MemeModalProps> = ({ isOpen, onClose, onSubmit }) => {
-  const [title, setTitle] = useState('');
-  const [description, setDescription] = useState('');
   const [imageUrl, setImageUrl] = useState('');
-  const [errors, setErrors] = useState<{ title?: string; description?: string; imageUrl?: string }>({});
+  const [errors, setErrors] = useState<{ imageUrl?: string }>({});
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -19,28 +17,8 @@ const MemeModal: React.FC<MemeModalProps> = ({ isOpen, onClose, onSubmit }) => {
     setErrors({});
     
     // Validate inputs
-    if (!title.trim()) {
-      setErrors(prev => ({ ...prev, title: 'Meme title is required!' }));
-      return;
-    }
-    
-    if (!description.trim()) {
-      setErrors(prev => ({ ...prev, description: 'Meme description is required!' }));
-      return;
-    }
-    
     if (!imageUrl.trim()) {
       setErrors(prev => ({ ...prev, imageUrl: 'Image URL is required!' }));
-      return;
-    }
-    
-    if (title.length > 50) {
-      setErrors(prev => ({ ...prev, title: 'Title must be 50 characters or less!' }));
-      return;
-    }
-    
-    if (description.length > 300) {
-      setErrors(prev => ({ ...prev, description: 'Description must be 300 characters or less!' }));
       return;
     }
     
@@ -53,18 +31,14 @@ const MemeModal: React.FC<MemeModalProps> = ({ isOpen, onClose, onSubmit }) => {
     }
     
     // Submit the form
-    onSubmit(title.trim(), description.trim(), imageUrl.trim());
+    onSubmit(imageUrl.trim());
     
     // Reset form
-    setTitle('');
-    setDescription('');
     setImageUrl('');
     onClose();
   };
 
   const handleClose = () => {
-    setTitle('');
-    setDescription('');
     setImageUrl('');
     setErrors({});
     onClose();
@@ -91,54 +65,6 @@ const MemeModal: React.FC<MemeModalProps> = ({ isOpen, onClose, onSubmit }) => {
 
         {/* Form */}
         <form onSubmit={handleSubmit} className="md:p-6 p-4">
-          {/* Title Field */}
-          <div className="mb-4">
-            <label htmlFor="title" className="block text-pink-400 font-bold mb-2">
-              🎭 Meme Title:
-            </label>
-            <input
-              type="text"
-              id="title"
-              value={title}
-              onChange={(e) => setTitle(e.target.value)}
-              className={`w-full md:p-3 p-2 bg-slate-800 border-2 border-pink-400 rounded-none text-white placeholder-gray-400 focus:outline-none focus:border-cyan-500 transition-colors ${
-                errors.title ? 'border-red-500' : ''
-              }`}
-              placeholder="e.g., 'That 90s Kid', 'Dial-Up Problems'"
-              maxLength={50}
-            />
-            {errors.title && (
-              <p className="text-red-400 text-sm mt-1">⚠️ {errors.title}</p>
-            )}
-            <p className="text-gray-400 text-xs mt-1">
-              {title.length}/50 characters
-            </p>
-          </div>
-
-          {/* Description Field */}
-          <div className="mb-4">
-            <label htmlFor="description" className="block text-pink-400 font-bold mb-2">
-              💭 Meme Description:
-            </label>
-            <textarea
-              id="description"
-              value={description}
-              onChange={(e) => setDescription(e.target.value)}
-              rows={3}
-              className={`w-full md:p-3 p-2 bg-slate-800 border-2 border-pink-400 rounded-none text-white placeholder-gray-400 focus:outline-none focus:border-cyan-500 transition-colors resize-none ${
-                errors.description ? 'border-red-500' : ''
-              }`}
-              placeholder="Describe your meme or add a funny caption! 🚀"
-              maxLength={300}
-            />
-            {errors.description && (
-              <p className="text-red-400 text-sm mt-1">⚠️ {errors.description}</p>
-            )}
-            <p className="text-gray-400 text-xs mt-1">
-              {description.length}/300 characters
-            </p>
-          </div>
-
           {/* Image URL Field */}
           <div className="mb-6">
             <label htmlFor="imageUrl" className="block text-pink-400 font-bold mb-2">
