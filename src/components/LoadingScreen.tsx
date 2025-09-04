@@ -80,31 +80,54 @@ const LoadingScreen = () => {
                         onClick={handleConnect}
                         className="px-5 py-2.5 text-xl cursor-pointer bg-[#00ff00] text-black hover:bg-green-400 transition-colors"
                     >
-                        🔌 Connect
+                        🔌 CONNECT TO THE 90s 🔌
                     </button>
+                    <div className="mt-4 text-90s-neon-cyan text-sm animate-blink">
+                        Click to establish dial-up connection
+                    </div>
                 </div>
             )}
 
             {showProgress && (
-                <div className="flex flex-col justify-center items-center">
-                    <div className="md:text-3xl text-2xl mb-5 animate-blink">
+                <div className="flex flex-col justify-center items-center px-2">
+                    <div className="md:text-2xl text-xl mb-5 animate-blink text-center">
                         Connecting to the 90s...
                     </div>
-                    <div className="w-80 h-5 border-2 border-[#00ff00] bg-black mb-5">
+                    
+                    {/* Enhanced progress bar */}
+                    <div className="w-full max-w-md h-8 border-4 border-90s-neon-green bg-black mb-6 retro-border-glow">
                         <div
-                            className="h-full bg-[#00ff00] transition-all duration-1000"
+                            className="h-full bg-gradient-to-r from-90s-neon-green to-90s-neon-cyan transition-all duration-1000 relative overflow-hidden"
                             style={{ width: `${progress}%` }}
-                        ></div>
+                        >
+                            <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white to-transparent opacity-30 animate-cyber-scan"></div>
+                        </div>
                     </div>
-                    <div className="md:text-lg text-[13px] mt-5">
-                        <div>🔊 Playing dial-up sounds... ████████░░</div>
-                        <div>📞 Establishing connection... ██████████</div>
-                        <div>💻 Loading GeoCities assets... ████████░░</div>
-                        <div>🕰️ Preparing time machine... ██████████</div>
+                    
+                    {/* Enhanced status messages */}
+                    <div className="md:text-lg text-sm mt-6 space-y-2 font-courier">
+                        <div className="flex items-center gap-2 text-90s-neon-green">
+                            <span className="animate-pulse">🔊</span> Playing dial-up sounds... 
+                            <span className="text-90s-neon-cyan">████████░░</span>
+                        </div>
+                        <div className="flex items-center gap-2 text-90s-neon-cyan">
+                            <span className="animate-pulse">📞</span> Establishing connection... 
+                            <span className="text-90s-neon-green">██████████</span>
+                        </div>
+                        <div className="flex items-center gap-2 text-90s-neon-pink">
+                            <span className="animate-pulse">💻</span> Loading GeoCities assets... 
+                            <span className="text-90s-neon-yellow">████████░░</span>
+                        </div>
+                        <div className="flex items-center gap-2 text-90s-neon-yellow">
+                            <span className="animate-pulse">🕰️</span> Preparing time machine... 
+                            <span className="text-90s-neon-pink">██████████</span>
+                        </div>
                     </div>
-                    <div className="md:text-sm text-xs mt-8 text-yellow-400 max-w-sm text-center">
+                    
+                    <div className="md:text-base text-sm mt-8 text-90s-neon-cyan max-w-md text-center retro-text-glow">
                         🎵 *Authentic 90s dial-up sounds playing* 🎵<br />
-                        Please wait for connection to complete...
+                        Please wait for connection to complete...<br />
+                        <span className="text-90s-neon-pink animate-blink">Baud Rate: 56k | Status: CONNECTING</span>
                     </div>
                 </div>
             )}

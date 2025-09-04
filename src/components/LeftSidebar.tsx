@@ -44,8 +44,9 @@ const LeftSidebar: React.FC = () => {
       </div>
 
       {/* Holders Stats */}
-      <div className="md:border-4 border-2 border-ridge border-[#00ff00] md:p-5 p-2 mb-5 text-[#00ff00] shadow-[0_0_15px_#00ff00] relative" style={{ background: "linear-gradient(45deg,rgba(0, 100, 0, 0.9),rgba(0, 150, 0, 0.7))" }}>
-        <div className="absolute -top-2.5 -right-2.5 bg-black p-1.5 border-2 border-[#00ff00] rounded-full">
+      <div className="md:border-4 border-2 border-ridge border-[#00ff00] md:p-5 p-2 mb-5 text-[#00ff00] shadow-[0_0_15px_#00ff00] relative" style={{ 
+      background: "linear-gradient(45deg,rgba(0, 100, 0, 0.9),rgba(0, 150, 0, 0.7))" }}>
+        <div className="absolute -top-3 -right-3 bg-black p-2 border-2 border-90s-neon-green rounded-full retro-border-glow">
           📈
         </div>
         <div className="text-xl">
@@ -56,16 +57,17 @@ const LeftSidebar: React.FC = () => {
         </div>
         <div className="mt-4 text-center bg-black/50 p-2.5 border border-[#00ff00]">
           📎 <span className="text-xl">👀</span> Clippy Says: "BUY!"
-          <div className="text-sm mt-1.5">
+          <div className="text-sm mt-2 font-comic text-90s-neon-cyan">
             "It looks like you're trying to get rich!"
           </div>
         </div>
       </div>
 
       {/* Vibe Meter */}
-      <div className="border-2 md:border-4 border-ridge border-[#00ff00] md:p-5 p-2 mb-5 text-[#00ff00] shadow-[0_0_15px_#00ff00] relative" style={{ background: "linear-gradient(45deg,rgba(0, 100, 0, 0.9),rgba(0, 150, 0, 0.7))" }}>
-        <div className="absolute -top-2.5 -right-2.5 bg-black p-1.5 border-2 border-[#00ff00] rounded-full">
-          📈
+      <div className="border-2 md:border-4 border-ridge border-[#00ff00] md:p-5 p-2 mb-5 text-[#00ff00] shadow-[0_0_15px_#00ff00] relative" style={{ 
+      background: "linear-gradient(45deg,rgba(0, 100, 0, 0.9),rgba(0, 150, 0, 0.7))" }}>
+        <div className="absolute -top-3 -right-3 bg-black p-2 border-2 border-90s-neon-green rounded-full retro-border-glow">
+          🎮
         </div>
         <h4 className="text-yellow-400 md:text-center text-left mb-2.5 md:text-xl text-lg">🎮 VIBE METER 🎮</h4>
         <div className="md:mb-2.5 mb-1.5 flex md:flex-col">
@@ -134,7 +136,7 @@ const LeftSidebar: React.FC = () => {
       {/* Buy Button */}
       <button
         onClick={handleBuyNow}
-        className="w-full bg-gradient-to-r from-orange-500 via-red-500 to-orange-600 bg-[length:200%_200%] text-white border-2 md:border-4 border-yellow-400 border-ridge py-5 md:text-xl text-lg font-bold cursor-pointer animate-bounce animate-gradient-shift my-5 block text-center shadow-[0_0_20px_#ff4500] text-shadow-90s font-orbitron transition-all duration-300 hover:scale-110 hover:rotate-1"
+        className="w-full bg-gradient-to-r from-orange-500 via-red-500 to-orange-600 bg-[length:200%_200%] text-white border-2 md:border-4 border-yellow-400 border-ridge py-5 md:text-xl text-lg font-bold cursor-pointer animate-bounce my-5 block text-center shadow-[0_0_20px_#ff4500] text-shadow-90s font-orbitron transition-all duration-300 hover:scale-110 hover:rotate-1"
       >
         🚀 BUY ON PUMP.FUN 🚀
         <div className="text-lg mt-1.5">TO THE MOON!</div>

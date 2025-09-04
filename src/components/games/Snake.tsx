@@ -213,7 +213,7 @@ const Snake: React.FC<SnakeProps> = ({ onBack }) => {
             )}
 
             <div className="flex justify-center mb-6">
-                <div className="relative border-4 border-green-400 bg-gray-900 p-2 rounded">
+                <div className="relative md:border-3 border-2 border-green-400 bg-gray-900 p-2 rounded-none">
                     {gameStarted && !gameOver && (
                         <div className="absolute top-2 left-2 bg-black/50 text-white text-xs px-2 py-1 rounded border border-green-400/40">
                             <div>Score: <span className="font-bold text-green-300">{score}</span></div>

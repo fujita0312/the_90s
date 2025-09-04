@@ -270,5 +270,5 @@ export const use90sFeatures = () => {
         cursorGlow.remove();
       }
     };
-  }, []);
+  }, [showToast]);
 };

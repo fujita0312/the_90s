@@ -88,8 +88,8 @@ const Games: React.FC<GamesProps> = ({ onBack }) => {
             default:
                 return (
                     <div className="mx-auto max-w-6xl text-center">
-                        <h1 className="rainbow mb-3 md:text-4xl text-2xl font-extrabold tracking-wide">
-                            🎮 90s Games Arcade
+                        <h1 className="rainbow mb-6 md:text-5xl text-3xl font-impact retro-text-glow tracking-wide">
+                            🎮 90s GAMES ARCADE 🎮
                         </h1>
                         <p className="text-gray-300 md:text-base text-sm mb-6">Pick a classic and start playing!</p>
                         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 mb-8">
@@ -97,7 +97,7 @@ const Games: React.FC<GamesProps> = ({ onBack }) => {
                                 <button
                                     key={game.id}
                                     onClick={() => handleGameSelect(game.id)}
-                                    className="text-left bg-gradient-to-br from-black via-gray-900 to-black md:border-4 border-2 border-cyan-400 border-ridge md:p-6 p-4 rounded-md hover:scale-[1.02] focus:scale-[1.02] transition-transform duration-300 shadow-[0_0_20px_rgba(0,255,255,0.25)] hover:shadow-[0_0_28px_rgba(0,255,255,0.45)] focus:outline-none focus:ring-2 focus:ring-cyan-300 group"
+                                    className="text-left bg-gradient-to-br from-black via-gray-900 to-black md:border-4 border-2 border-cyan-400 border-ridge md:p-6 p-4 rounded-none hover:scale-[1.02] focus:scale-[1.02] transition-transform duration-300 shadow-[0_0_20px_rgba(0,255,255,0.25)] hover:shadow-[0_0_28px_rgba(0,255,255,0.45)] focus:outline-none focus:ring-2 focus:ring-cyan-300 group"
                                     aria-label={`Play ${game.name}`}
                                 >
                                     <div className="flex items-center gap-3 md:gap-4">
@@ -126,7 +126,7 @@ const Games: React.FC<GamesProps> = ({ onBack }) => {
                 <div className="mb-4 flex items-center justify-between gap-2">
                     <button
                         onClick={() => activeGame === 'menu' ? onBack() : setActiveGame('menu')}
-                        className="bg-gradient-to-r from-yellow-500 to-orange-500 text-black md:px-4 px-3 md:py-2 py-1 rounded border-2 border-yellow-400 hover:scale-105 transition-all duration-300 font-bold shadow-[0_0_15px_rgba(255,215,0,0.5)] focus:outline-none focus:ring-2 focus:ring-yellow-300"
+                        className="bg-gradient-to-r from-yellow-500 to-orange-500 text-black md:px-4 px-3 md:py-2 py-1 rounded-none border-2 border-yellow-400 hover:scale-105 transition-all duration-300 font-bold shadow-[0_0_15px_rgba(255,215,0,0.5)] focus:outline-none focus:ring-2 focus:ring-yellow-300"
                         aria-label={activeGame === 'menu' ? 'Go back' : 'Back to games menu'}
                     >
                         ← Back

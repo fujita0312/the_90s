@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { Autoplay, FreeMode, Navigation, Pagination } from 'swiper/modules';
+import { Autoplay, FreeMode } from 'swiper/modules';
 import { Meme } from '../types/meme';
 import memeApi from '../services/memeApi';
 

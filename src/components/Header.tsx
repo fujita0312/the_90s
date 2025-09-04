@@ -5,32 +5,51 @@ interface HeaderProps {
 
 const Header: React.FC<HeaderProps> = () => {
   return (
-    <div className="text-center md:p-4 p-2 py-7 bg-gradient-to-r from-[#ff1493] via-[#00ced1] via-[#ffd700] to-[#ff1493] bg-[length:400%_400%] animate-gradient-shift-header md:border-4 border-2 border-yellow-400 border-ridge md:m-2.5 m-1 shadow-[0_0_20px_#ff00ff,inset_0_0_20px_rgba(255,255,255,0.2)] relative">
-      {/* Left star */}
-      <div className="absolute md:top-2.5 top-1.5 md:left-2.5 left-1.5 text-base md:text-3xl animate-spin">
-        🌟
+    <div className="bg-gradient-to-r from-[#ff1493] via-[#00ced1]  to-[#ff1493] bg-[length:400%_400%] text-center md:p-6 p-4 py-8 md:m-3 m-1.5 relative cyber-scan-line animate-gradient-shift-header md:border-4 border-2 border-yellow-400 border-ridge">
+      {/* Enhanced star decorations */}
+      <div className="absolute md:top-3 top-2 md:left-3 left-2 text-lg md:text-4xl animate-spin ">
+        ⭐
+      </div>
+      <div className="absolute md:top-3 top-2 md:right-3 right-2 text-lg md:text-4xl animate-spin " style={{ animationDirection: 'reverse' }}>
+        ⭐
+      </div>
+      
+      {/* Additional corner decorations */}
+      <div className="absolute md:bottom-3 bottom-2 md:left-3 left-2 text-sm md:text-xl animate-pulse text-90s-neon-cyan">
+        🔥
+      </div>
+      <div className="absolute md:bottom-3 bottom-2 md:right-3 right-2 text-sm md:text-xl animate-pulse text-90s-neon-pink">
+        💫
       </div>
 
-      {/* Right star */}
-      <div className="absolute md:top-2.5 top-1.5 md:right-2.5 right-1.5 text-base md:text-3xl animate-spin" style={{ animationDirection: 'reverse' }}>
-        🌟
-      </div>
-
-      <h1 className="rainbow bounce animate-pulse text-2xl md:text-4xl">
+      <h1 className="rainbow bounce animate-pulse text-3xl md:text-5xl font-impact retro-text-glow mb-2">
         ☆ 90's FRESH TIL INFINITY ☆
       </h1>
 
-      <div className="animate-blink text-base md:text-3xl md:mt-4 mt-2 md:mb-4 mb-2">
+      <div className="animate-blink text-lg md:text-4xl md:mt-6 mt-3 md:mb-6 mb-3 font-bold text-90s-neon-yellow retro-text-glow">
         🚀 TRANSMISSION FROM 2025! THE 90s CONQUERED THE FUTURE! 🚀
       </div>
 
-      <div className="md:mt-4 mt-2 md:text-xl text-lg">
-        <span className="animate-spin">💿</span> Best viewed in Netscape Navigator 4.0!
-        <span className="animate-spin">💿</span>
+      <div className="md:mt-6 mt-3 md:text-2xl text-lg font-comic text-90s-neon-cyan">
+        <span className="animate-spin inline-block">💿</span> Best viewed in Netscape Navigator 4.0!
+        <span className="animate-spin inline-block">💿</span>
       </div>
 
-      <div className="md:mt-2.5 mt-1.5 text-lg">
+      <div className="md:mt-4 mt-2 text-lg md:text-xl font-comic text-90s-neon-green">
         <span className="animate-blink">🌐 Now with 256 colors! 🌐</span>
+      </div>
+
+      {/* Enhanced status indicators */}
+      <div className="md:mt-6 mt-4 flex flex-wrap justify-center gap-4 text-sm md:text-base">
+        <div className=" px-3 py-1 text-90s-neon-green">
+          <span className="animate-pulse">●</span> ONLINE
+        </div>
+        <div className=" px-3 py-1 text-90s-neon-cyan">
+          <span className="animate-pulse">●</span> 56K MODEM
+        </div>
+        <div className=" px-3 py-1 text-90s-neon-pink">
+          <span className="animate-pulse">●</span> 1995 MODE
+        </div>
       </div>
 
       {/* Games Button */}

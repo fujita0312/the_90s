@@ -28,13 +28,15 @@
 
   body {
     font-family: "Comic Neue", "Comic Sans MS", cursive;
-    background: linear-gradient(45deg, #000080, #800080, #008080, #000080);
-    background-size: 400% 400%;
-    animation: gradientShift 4s ease infinite;
+    background: linear-gradient(45deg, #000080, #800080, #008080, #000080, #800000, #008000);
+    background-size: 600% 600%;
+    animation: gradientShift 6s ease infinite;
     color: #00ff00;
     overflow-x: hidden;
-    /* cursor: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20"><text y="15" font-size="15">💿</text></svg>'), auto; */
+    cursor: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20"><text y="15" font-size="15">💿</text></svg>'), auto;
     font-size: 1.2em;
+    text-shadow: 0 0 5px #00ff00;
+    animation: screenFlicker 0.1s infinite alternate;
   }
 
   /* Starfield background */
@@ -738,7 +740,6 @@ animation: gradientShift 2s ease infinite;
 .meme-swiper {
   padding: 0 10px;
   height: auto;
-  /* min-height: 200px; */
   width: 100%;
 }
 
@@ -747,7 +748,6 @@ animation: gradientShift 2s ease infinite;
   justify-content: center;
   align-items: center;
   height: auto;
-  /* min-height: 200px; */
   width: auto !important;
   flex-shrink: 0;
 }
@@ -755,4 +755,192 @@ animation: gradientShift 2s ease infinite;
 .meme-swiper .swiper-wrapper {
   align-items: center;
   height: auto;
+}
+
+/* Enhanced 90s UI Components */
+/* .retro-button {
+  background: linear-gradient(45deg, #ff00ff, #00ffff, #ffff00, #ff00ff);
+  background-size: 400% 400%;
+  animation: gradientShift 3s ease infinite;
+  border: 3px ridge #ffff00;
+  color: #000;
+  font-weight: bold;
+  text-shadow: 1px 1px 0px #fff;
+  box-shadow: 
+    inset 0 0 10px rgba(255, 255, 255, 0.3),
+    0 0 20px rgba(255, 0, 255, 0.5);
+  transition: all 0.3s ease;
+} */
+
+/* .retro-button:hover {
+  transform: scale(1.05);
+  box-shadow: 
+    inset 0 0 15px rgba(255, 255, 255, 0.5),
+    0 0 30px rgba(255, 0, 255, 0.8);
+  animation-duration: 1s;
+} */
+
+/* .retro-button:active {
+  transform: scale(0.95);
+  box-shadow: 
+    inset 0 0 20px rgba(0, 0, 0, 0.3),
+    0 0 10px rgba(255, 0, 255, 0.3);
+} */
+
+
+.cyber-scan-line {
+  position: relative;
+  overflow: hidden;
+}
+
+.cyber-scan-line::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(0, 255, 0, 0.5), transparent);
+  animation: cyberScan 3s linear infinite;
+}
+
+.data-stream {
+  position: relative;
+  overflow: hidden;
+}
+
+.data-stream::before {
+  content: '';
+  position: absolute;
+  top: -100%;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(180deg, transparent, rgba(0, 255, 255, 0.3), transparent);
+  animation: dataStream 2s linear infinite;
+}
+
+/* Authentic 90s Scrollbar */
+::-webkit-scrollbar {
+  width: 16px;
+}
+
+::-webkit-scrollbar-track {
+  background: #000;
+  border: 2px ridge #00ff00;
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(45deg, #ff00ff, #00ffff);
+  border: 2px ridge #ffff00;
+  border-radius: 0;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(45deg, #ffff00, #ff00ff);
+  box-shadow: 0 0 10px rgba(255, 255, 0, 0.5);
+}
+
+/* 90s Selection */
+::selection {
+  background: #ff00ff;
+  color: #000;
+  text-shadow: none;
+}
+
+::-moz-selection {
+  background: #ff00ff;
+  color: #000;
+  text-shadow: none;
+}
+
+/* Accessibility Improvements */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  
+  .animate-spin,
+  .animate-bounce,
+  .animate-pulse,
+  .animate-blink {
+    animation: none !important;
+  }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .retro-button {
+    border-width: 4px;
+    border-color: #fff;
+    background: #000;
+    color: #fff;
+  }
+  
+  .retro-card {
+    border-width: 4px;
+    border-color: #fff;
+  }
+  
+  .text-90s-neon-green {
+    color: #00ff00 !important;
+  }
+  
+  .text-90s-neon-pink {
+    color: #ff00ff !important;
+  }
+  
+  .text-90s-neon-cyan {
+    color: #00ffff !important;
+  }
+  
+  .text-90s-neon-yellow {
+    color: #ffff00 !important;
+  }
+}
+
+/* Focus indicators for keyboard navigation */
+.retro-button:focus,
+.retro-input:focus,
+button:focus,
+input:focus,
+a:focus {
+  outline: 3px solid #ffff00;
+  outline-offset: 2px;
+  box-shadow: 0 0 0 3px rgba(255, 255, 0, 0.5);
+}
+
+/* Skip to content link */
+.skip-link {
+  position: absolute;
+  top: -40px;
+  left: 6px;
+  background: #000;
+  color: #00ff00;
+  padding: 8px;
+  text-decoration: none;
+  border: 2px solid #00ff00;
+  z-index: 10000;
+}
+
+.skip-link:focus {
+  top: 6px;
+}
+
+/* Screen reader only content */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
 }

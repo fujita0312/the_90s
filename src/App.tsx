@@ -35,6 +35,7 @@ function App() {
 function AppContent() {
   // Initialize 90s features - now inside ToastProvider
   use90sFeatures();
+  const navigate = useNavigate();
   const budweiserAudioRef = useRef<HTMLAudioElement>(null);
   const [showMatrixRain, setShowMatrixRain] = useState(false);
 
