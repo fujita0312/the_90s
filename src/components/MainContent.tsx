@@ -9,7 +9,7 @@ const MainContent: React.FC = () => {
 
 
   return (
-    <div className="bg-gradient-to-br from-black/90 via-blue-900/80 to-black/90 md:border-4 border-2 border-yellow-400 border-ridge md:p-4 p-1 shadow-[0_0_25px_rgba(255,255,0,0.3),inset_0_0_25px_rgba(255,255,255,0.1)] relative gradient-border">
+    <div className="md:bg-gradient-to-br bg-transparent from-black/90 via-blue-900/80 to-black/90 md:border-4 border-0 border-yellow-400 border-ridge md:p-4 p-1 md:shadow-[0_0_25px_rgba(255,255,0,0.3),inset_0_0_25px_rgba(255,255,255,0.1)] relative md:gradient-border">
       <h2 className="rainbow text-center mb-8 md:text-3xl text-xl">
         📡 MESSAGE FROM THE FUTURE 📡
       </h2>

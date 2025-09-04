@@ -96,7 +96,7 @@ const LoadingScreen = () => {
                             style={{ width: `${progress}%` }}
                         ></div>
                     </div>
-                    <div className="md:text-lg text-sm mt-5">
+                    <div className="md:text-lg text-[13px] mt-5">
                         <div>🔊 Playing dial-up sounds... ████████░░</div>
                         <div>📞 Establishing connection... ██████████</div>
                         <div>💻 Loading GeoCities assets... ████████░░</div>

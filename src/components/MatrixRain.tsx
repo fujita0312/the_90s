@@ -10,11 +10,11 @@ const MatrixRain: React.FC = () => {
     const chars = "01";
 
     // Create matrix columns
-    for (let i = 0; i < 20; i++) {
+    for (let i = 0; i < 10; i++) {
       const column = document.createElement("div");
       column.className = "matrix-column";
       column.style.left = Math.random() * 100 + "%";
-      column.style.animationDuration = Math.random() * 3 + 2 + "s";
+      column.style.animationDuration = Math.random() * 3 + 4 + "s";
       column.style.animationDelay = Math.random() * 2 + "s";
 
       let columnText = "";

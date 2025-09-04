@@ -20,18 +20,19 @@ const LeftSidebar: React.FC = () => {
   };
 
   return (
-    <div className="bg-gradient-to-br from-black/90 via-blue-900/80 to-black/90 md:border-4 border-2 border-yellow-400 border-ridge md:p-3 p-1 shadow-[0_0_25px_rgba(255,255,0,0.3),inset_0_0_25px_rgba(255,255,255,0.1)] relative gradient-border">
+    <div className="md:bg-gradient-to-br bg-transparent from-black/90 via-blue-900/80 to-black/90 md:border-4 border-0 border-yellow-400 md:border-ridge md:p-3 p-1 md:shadow-[0_0_25px_rgba(255,255,0,0.3),inset_0_0_25px_rgba(255,255,255,0.1)] relative md:gradient-border">
       <h3 className="animate-blink text-center text-pink-500 md:text-xl text-lg mb-8">
         🔥 LIVE STATS 🔥
       </h3>
 
       {/* Dancing Baby Section */}
       <div className="text-center mb-8">
-        <div className="md:text-6xl text-3xl md:mb-2.5 mb-1.5">
+        <div className="md:text-6xl text-3xl md:mb-2.5 mb-1.5 relative">
+          <div className='w-[60%] h-[50px] rounded-full mx-auto absolute bottom-0 left-1/2 -translate-x-1/2 bg-[#5c5c5c49] transform rotate-x-12 scale-y-75 shadow-[0_8px_16px_rgba(0,0,0,0.8)]' />
           <img
-            src="https://cdn.mos.cms.futurecdn.net/ZsQmSHKYueHSDgJ4r3KHhk.gif"
+            src="/babydancing.gif"
             alt="baby dancing"
-            className="w-full rounded"
+            className="w-full relative z-10"
           />
         </div>
         <div className="text-lg text-[#00ff00] mt-2.5">

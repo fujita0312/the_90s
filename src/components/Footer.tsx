@@ -38,7 +38,7 @@ const Footer: React.FC = () => {
   };
 
   return (
-    <div className="bg-gradient-to-r from-black via-gray-800 to-black text-[#00ff00] text-center md:p-4 p-3 border-t-5 border-pink-500 border-ridge mt-10 shadow-[0_-10px_20px_rgba(255,0,255,0.3)]">
+    <div className="bg-gradient-to-r from-black via-gray-800 to-black text-[#00ff00] text-center md:p-4 p-3 border-t-2 border-pink-500 border-ridge mt-10 shadow-[0_-10px_20px_rgba(255,0,255,0.3)]">
       {/* Web Ring Links */}
       <div className="flex justify-center gap-5 my-5 flex-wrap">
         <button className="bg-gradient-to-r from-blue-600 to-blue-500 text-white md:px-5 px-2 md:py-2.5 py-1 no-underline md:border-3 border-2 border-white border-ridge font-bold transition-all duration-300 shadow-[0_0_10px_#4169e1] hover:-translate-y-1 hover:shadow-[0_5px_15px_#4169e1] bg-transparent border-none cursor-pointer text-sm md:text-base">
