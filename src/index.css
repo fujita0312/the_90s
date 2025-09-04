@@ -28,15 +28,13 @@
 
   body {
     font-family: "Comic Neue", "Comic Sans MS", cursive;
-    background: linear-gradient(45deg, #000080, #800080, #008080, #000080, #800000, #008000);
-    background-size: 600% 600%;
-    animation: gradientShift 6s ease infinite;
+    background: linear-gradient(45deg, #000080, #800080, #008080, #000080);
+    background-size: 400% 400%;
+    animation: gradientShift 4s ease infinite;
     color: #00ff00;
     overflow-x: hidden;
-    cursor: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20"><text y="15" font-size="15">💿</text></svg>'), auto;
+    /* cursor: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20"><text y="15" font-size="15">💿</text></svg>'), auto; */
     font-size: 1.2em;
-    text-shadow: 0 0 5px #00ff00;
-    animation: screenFlicker 0.1s infinite alternate;
   }
 
   /* Starfield background */
