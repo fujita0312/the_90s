@@ -10,13 +10,13 @@ const Footer: React.FC = () => {
   const handleMemeSubmit = async (imageUrl: string | undefined, file?: File) => {
     try {
       let response;
-      
+
       if (file && file.size > 0) {
         // Handle file upload
         const formData = new FormData();
         formData.append('image', file);
         formData.append('author', 'Anonymous');
-        
+
         response = await memeApi.uploadMeme(formData);
       } else if (imageUrl && imageUrl.trim()) {
         // Handle URL submission
@@ -24,7 +24,7 @@ const Footer: React.FC = () => {
       } else {
         throw new Error('Either a file or image URL must be provided');
       }
-      
+
       if (response.success) {
         showToast('Meme added successfully! 🎉', 'success');
         setIsMemeModalOpen(false);
@@ -44,7 +44,14 @@ const Footer: React.FC = () => {
         <button className="bg-gradient-to-r from-blue-600 to-blue-500 text-white md:px-5 px-2 md:py-2.5 py-1 no-underline md:border-3 border-2 border-white border-ridge font-bold transition-all duration-300 shadow-[0_0_10px_#4169e1] hover:-translate-y-1 hover:shadow-[0_5px_15px_#4169e1] bg-transparent border-none cursor-pointer text-sm md:text-base">
           🏠 HOME
         </button>
-        <button className="bg-gradient-to-r from-blue-600 to-blue-500 text-white md:px-5 px-2 md:py-2.5 py-1 no-underline md:border-3 border-2 border-white border-ridge font-bold transition-all duration-300 shadow-[0_0_10px_#4169e1] hover:-translate-y-1 hover:shadow-[0_5px_15px_#4169e1] bg-transparent border-none cursor-pointer text-sm md:text-base">
+        <button
+          onClick={() => {
+            const guestbookSection = document.querySelector('#guestbook-section');
+            if (guestbookSection) {
+              guestbookSection.scrollIntoView({ behavior: 'smooth' });
+            }
+          }}
+          className="bg-gradient-to-r from-blue-600 to-blue-500 text-white md:px-5 px-2 md:py-2.5 py-1 no-underline md:border-3 border-2 border-white border-ridge font-bold transition-all duration-300 shadow-[0_0_10px_#4169e1] hover:-translate-y-1 hover:shadow-[0_5px_15px_#4169e1] bg-transparent border-none cursor-pointer text-sm md:text-base">
           📝 GUESTBOOK
         </button>
         <button className="bg-gradient-to-r from-blue-600 to-blue-500 text-white md:px-5 px-2 md:py-2.5 py-1 no-underline md:border-3 border-2 border-white border-ridge font-bold transition-all duration-300 shadow-[0_0_10px_#4169e1] hover:-translate-y-1 hover:shadow-[0_5px_15px_#4169e1] bg-transparent border-none cursor-pointer text-sm md:text-base">
@@ -53,7 +60,14 @@ const Footer: React.FC = () => {
         <button className="bg-gradient-to-r from-blue-600 to-blue-500 text-white md:px-5 px-2 md:py-2.5 py-1 no-underline md:border-3 border-2 border-white border-ridge font-bold transition-all duration-300 shadow-[0_0_10px_#4169e1] hover:-translate-y-1 hover:shadow-[0_5px_15px_#4169e1] bg-transparent border-none cursor-pointer text-sm md:text-base">
           🔗 COOL LINKS
         </button>
-        <button className="bg-gradient-to-r from-blue-600 to-blue-500 text-white md:px-5 px-2 md:py-2.5 py-1 no-underline md:border-3 border-2 border-white border-ridge font-bold transition-all duration-300 shadow-[0_0_10px_#4169e1] hover:-translate-y-1 hover:shadow-[0_5px_15px_#4169e1] bg-transparent border-none cursor-pointer text-sm md:text-base">
+        <button
+          onClick={() => {
+            const gamesSection = document.querySelector('#games-section');
+            if (gamesSection) {
+              gamesSection.scrollIntoView({ behavior: 'smooth' });
+            }
+          }}
+          className="bg-gradient-to-r from-blue-600 to-blue-500 text-white md:px-5 px-2 md:py-2.5 py-1 no-underline md:border-3 border-2 border-white border-ridge font-bold transition-all duration-300 shadow-[0_0_10px_#4169e1] hover:-translate-y-1 hover:shadow-[0_5px_15px_#4169e1] bg-transparent border-none cursor-pointer text-sm md:text-base">
           🎮 GAMES
         </button>
         <button className="bg-gradient-to-r from-blue-600 to-blue-500 text-white md:px-5 px-2 md:py-2.5 py-1 no-underline md:border-3 border-2 border-white border-ridge font-bold transition-all duration-300 shadow-[0_0_10px_#4169e1] hover:-translate-y-1 hover:shadow-[0_5px_15px_#4169e1] bg-transparent border-none cursor-pointer">
@@ -62,7 +76,7 @@ const Footer: React.FC = () => {
         <button className="bg-gradient-to-r from-blue-600 to-blue-500 text-white md:px-5 px-2 md:py-2.5 py-1 no-underline md:border-3 border-2 border-white border-ridge font-bold transition-all duration-300 shadow-[0_0_10px_#4169e1] hover:-translate-y-1 hover:shadow-[0_5px_15px_#4169e1] bg-transparent border-none cursor-pointer">
           📊 STATS
         </button>
-        <button 
+        <button
           onClick={() => setIsMemeModalOpen(true)}
           className="bg-gradient-to-r from-blue-600 to-blue-500 text-white md:px-5 px-2 md:py-2.5 py-1 no-underline md:border-3 border-2 border-white border-ridge font-bold transition-all duration-300 shadow-[0_0_10px_#4169e1] hover:-translate-y-1 hover:shadow-[0_5px_15px_#4169e1] bg-transparent border-none cursor-pointer"
         >

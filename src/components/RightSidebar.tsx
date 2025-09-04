@@ -120,7 +120,7 @@ const RightSidebar: React.FC = () => {
       </h3>
 
       {/* Guestbook */}
-      <div className="bg-gradient-to-br from-slate-900 to-slate-800 md:border-4 border-2 border-gray-300 border-ridge md:p-2 p-1 mb-5 max-h-96 overflow-y-auto shadow-[inset_0_0_20px_rgba(0,0,0,0.5)]">
+      <div id="guestbook-section" className="bg-gradient-to-br from-slate-900 to-slate-800 md:border-4 border-2 border-gray-300 border-ridge md:p-2 p-1 mb-5 max-h-96 overflow-y-auto shadow-[inset_0_0_20px_rgba(0,0,0,0.5)]">
         {isLoading ? (
           <div className="text-center p-8 text-cyan-400">
             <div className="animate-spin text-2xl mb-2">🔄</div>
@@ -231,7 +231,7 @@ const RightSidebar: React.FC = () => {
       </div>
 
       {/* Games Section */}
-      <div className="bg-gradient-to-r from-black via-gray-800 to-black md:border-4 border-2 border-pink-500 border-ridge md:p-4 p-2 shadow-[0_0_20px_rgba(255,0,255,0.3)] mb-6">
+      <div id="games-section" className="bg-gradient-to-r from-black via-gray-800 to-black md:border-4 border-2 border-pink-500 border-ridge md:p-4 p-2 shadow-[0_0_20px_rgba(255,0,255,0.3)] mb-6">
         <h4 className="text-pink-500 text-center mb-5 text-xl font-bold">
           🎮 90s GAMES ARCADE 🎮
         </h4>
