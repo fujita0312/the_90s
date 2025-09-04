@@ -1,6 +1,7 @@
 import React from 'react';
  
 import MemeSlider from './MemeSlider';
+import MusicPlayer from './MusicPlayer';
 
 
 
@@ -87,6 +88,9 @@ const MainContent: React.FC = () => {
           </div>
         </div>
       </div>
+
+      {/* Music Player Section */}
+      <MusicPlayer />
 
       {/* Meme Slider Section */}
       <MemeSlider />

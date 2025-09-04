@@ -163,6 +163,24 @@ const LeftSidebar: React.FC = () => {
         </div>
       </div>
 
+      {/* Music Player Quick Access */}
+      <div className="text-center p-4 bg-gradient-to-br from-pink-500/30 to-purple-500/20 border-3 border-pink-400 border-ridge my-5 shadow-[0_0_20px_rgba(255,0,255,0.5)]">
+        <h4 className="text-pink-400 mb-3 text-sm sm:text-base">🎵 MUSIC PLAYER 🎵</h4>
+        <div className="text-xs sm:text-sm text-gray-300 mb-3">
+          Jam to 90s hits while browsing!
+        </div>
+        <button
+          onClick={() => {
+            const musicPlayer = document.querySelector('[data-music-player]');
+            if (musicPlayer) {
+              musicPlayer.scrollIntoView({ behavior: 'smooth' });
+            }
+          }}
+          className="bg-pink-500 hover:bg-pink-600 text-black px-3 py-2 rounded font-bold text-xs sm:text-sm transition-colors"
+        >
+          🎧 Open Player
+        </button>
+      </div>
 
     </div>
   );

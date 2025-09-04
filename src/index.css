@@ -33,7 +33,7 @@
     animation: gradientShift 4s ease infinite;
     color: #00ff00;
     overflow-x: hidden;
-    cursor: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20"><text y="15" font-size="15">💿</text></svg>'), auto;
+    /* cursor: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20"><text y="15" font-size="15">💿</text></svg>'), auto; */
     font-size: 1.2em;
   }
 
@@ -731,4 +731,27 @@ animation: gradientShift 2s ease infinite;
 
 .slide-in-from-top-2 {
   animation-name: slide-in-from-top-2;
+}
+
+/* Custom Swiper Styles for 90s Theme */
+.meme-swiper {
+  padding: 0 10px;
+  height: auto;
+  /* min-height: 200px; */
+  width: 100%;
+}
+
+.meme-swiper .swiper-slide {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: auto;
+  /* min-height: 200px; */
+  width: auto !important;
+  flex-shrink: 0;
+}
+
+.meme-swiper .swiper-wrapper {
+  align-items: center;
+  height: auto;
 }
