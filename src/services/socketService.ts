@@ -7,7 +7,7 @@ class SocketService {
   connect(): Socket {
     if (!this.socket) {
       // Connect to the server - adjust URL based on your setup
-      const serverUrl = process.env.REACT_APP_SERVER_URL || 'http://localhost:5003';
+      const serverUrl = process.env.REACT_APP_SOCKET_URL || 'http://localhost:5003';
       this.socket = io(serverUrl, {
         transports: ['websocket', 'polling'],
         timeout: 20000,
