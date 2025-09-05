@@ -1,22 +1,12 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { useToast } from '../contexts/ToastContext';
 const ContractAddress = process.env.REACT_APP_CONTRACT_ADDRESS || '';
-const PumpFunUrl = 'https://pump.fun/' + ContractAddress;
+const BagsFmUrl = 'https://bags.fm/' + ContractAddress;
 const LeftSidebar: React.FC = () => {
-  const [holders, setHolders] = useState(1337);
   const { showToast } = useToast();
 
-  useEffect(() => {
-    // Update holders count every 7 seconds
-    const interval = setInterval(() => {
-      setHolders(prev => prev + Math.floor(Math.random() * 5));
-    }, 7000);
-
-    return () => clearInterval(interval);
-  }, []);
-
   const handleBuyNow = () => {
-    showToast("🚀 LAUNCHING TO PUMP.FUN! 🚀\n\nRemember: This is not financial advice!\nJust pure 90s nostalgia vibes!\n\nWASSSUPPP! 🕺", 'info');
+    showToast("🚀 LAUNCHING TO BAGS.FM! 🚀\n\nRemember: This is not financial advice!\nJust pure 90s nostalgia vibes!\n\nWASSSUPPP! 🕺", 'info');
   };
 
   return (
@@ -43,29 +33,65 @@ const LeftSidebar: React.FC = () => {
         </div>
       </div>
 
-      {/* Holders Stats */}
-      <div className="md:border-4 border-2 border-ridge border-[#00ff00] md:p-5 p-2 mb-5 text-[#00ff00] shadow-[0_0_15px_#00ff00] relative" style={{ 
-      background: "linear-gradient(45deg,rgba(0, 100, 0, 0.9),rgba(0, 150, 0, 0.7))" }}>
+
+
+
+      {/* Contract Address Section */}
+      <div className="bg-gradient-to-r from-black via-gray-800 to-black md:border-4 border-2 border-cyan-500 border-ridge md:p-4 p-2 shadow-[0_0_20px_rgba(0,255,255,0.3)] mb-6">
+        <h4 className="text-cyan-400 text-center mb-5 text-xl font-bold animate-blink">
+          📋 CONTRACT ADDRESS 📋
+        </h4>
+        <div className="text-center">
+          <div className="bg-black/60 md:p-4 p-2 md:border-2 border border-cyan-400 mb-4 hover:bg-black/80 transition-all duration-300 hover:shadow-[0_0_15px_rgba(0,255,255,0.5)]">
+            <div className="text-cyan-400 text-sm mb-2">Click to copy & buy:</div>
+            <a
+              href={BagsFmUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-yellow-400 hover:text-yellow-300 transition-all duration-300 font-mono text-sm md:text-base break-all hover:underline cursor-pointer hover:scale-105 transform block"
+              onClick={(e) => {
+                e.preventDefault();
+                navigator.clipboard.writeText(ContractAddress);
+                showToast("📋 Contract address copied to clipboard!\n\n🚀 Opening bags.fm to buy...\n\nTO THE MOON! 🌙", 'success');
+                // Open bags.fm in new tab
+                window.open(BagsFmUrl, '_blank');
+              }}
+            >
+              {ContractAddress}
+            </a>
+          </div>
+          <div className="text-white text-sm mb-2">
+            🚀 <strong>Ready to join the time travel revolution?</strong> 🚀
+          </div>
+          <div className="text-cyan-400 text-xs">
+            Click address above to copy & visit bags.fm!
+          </div>
+          <div className="text-yellow-400 text-xs mt-1 animate-pulse">
+            ⚡ Instant copy + buy link! ⚡
+          </div>
+        </div>
+      </div>
+
+      {/* Clippy Section */}
+      <div className="md:border-4 border-2 border-ridge border-[#00ff00] md:p-5 p-2 mb-5 text-[#00ff00] shadow-[0_0_15px_#00ff00] relative" style={{
+        background: "linear-gradient(45deg,rgba(0, 100, 0, 0.9),rgba(0, 150, 0, 0.7))"
+      }}>
         <div className="absolute -top-3 -right-3 bg-black p-2 border-2 border-90s-neon-green rounded-full retro-border-glow">
-          📈
-        </div>
-        <div className="text-xl">
-          Holders: <span className="flame">{holders.toLocaleString()}</span>
-        </div>
-        <div className="flame text-center my-4">
-          🔥 HOTTER THAN A PENTIUM! 🔥
+          📎
         </div>
         <div className="mt-4 text-center bg-black/50 p-2.5 border border-[#00ff00]">
-          📎 <span className="text-xl">👀</span> Clippy Says: "BUY!"
+          📎 <span className="text-xl">👀</span> Clippy Says: "Hi my name is... my name is... my name is Clip Clipuh Clip Shady!"
           <div className="text-sm mt-2 font-comic text-90s-neon-cyan">
             "It looks like you're trying to get rich!"
           </div>
         </div>
       </div>
 
+
       {/* Vibe Meter */}
-      <div className="border-2 md:border-4 border-ridge border-[#00ff00] md:p-5 p-2 mb-5 text-[#00ff00] shadow-[0_0_15px_#00ff00] relative" style={{ 
-      background: "linear-gradient(45deg,rgba(0, 100, 0, 0.9),rgba(0, 150, 0, 0.7))" }}>
+      <div className="border-2 md:border-4 border-ridge border-[#00ff00] md:p-5 p-2 mb-5 text-[#00ff00] shadow-[0_0_15px_#00ff00] relative" style={{
+        background: "linear-gradient(45deg,rgba(0, 100, 0, 0.9),rgba(0, 150, 0, 0.7))"
+      }}>
         <div className="absolute -top-3 -right-3 bg-black p-2 border-2 border-90s-neon-green rounded-full retro-border-glow">
           🎮
         </div>
@@ -97,48 +123,14 @@ const LeftSidebar: React.FC = () => {
       </div>
 
 
-      {/* Contract Address Section */}
-      <div className="bg-gradient-to-r from-black via-gray-800 to-black md:border-4 border-2 border-cyan-500 border-ridge md:p-4 p-2 shadow-[0_0_20px_rgba(0,255,255,0.3)] mb-6">
-        <h4 className="text-cyan-400 text-center mb-5 text-xl font-bold animate-blink">
-          📋 CONTRACT ADDRESS 📋
-        </h4>
-        <div className="text-center">
-          <div className="bg-black/60 md:p-4 p-2 md:border-2 border border-cyan-400 mb-4 hover:bg-black/80 transition-all duration-300 hover:shadow-[0_0_15px_rgba(0,255,255,0.5)]">
-            <div className="text-cyan-400 text-sm mb-2">Click to copy & buy:</div>
-            <a
-              href={PumpFunUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-yellow-400 hover:text-yellow-300 transition-all duration-300 font-mono text-sm md:text-base break-all hover:underline cursor-pointer hover:scale-105 transform block"
-              onClick={(e) => {
-                e.preventDefault();
-                navigator.clipboard.writeText(ContractAddress);
-                showToast("📋 Contract address copied to clipboard!\n\n🚀 Opening pump.fun to buy...\n\nTO THE MOON! 🌙", 'success');
-                // Open pump.fun in new tab
-                window.open(PumpFunUrl, '_blank');
-              }}
-            >
-              {ContractAddress}
-            </a>
-          </div>
-          <div className="text-white text-sm mb-2">
-            🚀 <strong>Ready to join the time travel revolution?</strong> 🚀
-          </div>
-          <div className="text-cyan-400 text-xs">
-            Click address above to copy & visit pump.fun!
-          </div>
-          <div className="text-yellow-400 text-xs mt-1 animate-pulse">
-            ⚡ Instant copy + buy link! ⚡
-          </div>
-        </div>
-      </div>
+
 
       {/* Buy Button */}
       <button
         onClick={handleBuyNow}
         className="w-full bg-gradient-to-r from-orange-500 via-red-500 to-orange-600 bg-[length:200%_200%] text-white border-2 md:border-4 border-yellow-400 border-ridge py-5 md:text-xl text-lg font-bold cursor-pointer animate-bounce my-5 block text-center shadow-[0_0_20px_#ff4500] text-shadow-90s font-orbitron transition-all duration-300 hover:scale-110 hover:rotate-1"
       >
-        🚀 BUY ON PUMP.FUN 🚀
+        🚀 BUY ON BAGS.FM 🚀
         <div className="text-lg mt-1.5">TO THE MOON!</div>
       </button>
 
