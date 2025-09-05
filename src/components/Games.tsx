@@ -123,7 +123,7 @@ const Games: React.FC<GamesProps> = ({ onBack }) => {
     return (
         <section id="games-section" className="md:p-6 p-3 relative animate-fade-in" aria-labelledby="games-heading">
             <div className="mx-auto max-w-6xl">
-                <div className="mb-4 flex items-center justify-between gap-2">
+                {/* <div className="mb-4 flex items-center justify-between gap-2">
                     <button
                         onClick={() => activeGame === 'menu' ? onBack() : setActiveGame('menu')}
                         className="bg-gradient-to-r from-yellow-500 to-orange-500 text-black md:px-4 px-3 md:py-2 py-1 rounded-none border-2 border-yellow-400 hover:scale-105 transition-all duration-300 font-bold shadow-[0_0_15px_rgba(255,215,0,0.5)] focus:outline-none focus:ring-2 focus:ring-yellow-300"
@@ -131,7 +131,7 @@ const Games: React.FC<GamesProps> = ({ onBack }) => {
                     >
                         ← Back
                     </button>
-                </div>
+                </div> */}
 
                 <div aria-live="polite">
                     {renderGame()}

@@ -162,76 +162,8 @@ const RightSidebar: React.FC = () => {
         🖊️ SIGN GUESTBOOK 🖊️
       </button>
 
-      {/* Bulletin Board */}
-      <div className="bg-gradient-to-br from-purple-900 to-purple-800 text-white md:p-2 p-1 md:my-6 my-4 md:border-4 border-2 border-purple-400 border-ridge shadow-[0_0_15px_rgba(218,112,214,0.5)]">
-        <h4 className="text-center text-purple-300 mb-4 text-xl">
-          📌 BULLETIN BOARD 📌
-        </h4>
-        <div className="md:text-lg text-base leading-relaxed space-y-2">
-          {[
-            { title: "Moon mission planning thread", replies: 42, emoji: "🔥", category: "space" },
-            { title: "Share our 90s memories!", replies: 138, emoji: "💭", category: "nostalgia" },
-            { title: "Diamond hands support group", replies: 69, emoji: "💎", category: "crypto" },
-            { title: "Pump.fun tips & tricks", replies: 420, emoji: "📈", category: "trading" },
-            { title: "Time traveler AMA", replies: 1337, emoji: "🕰️", category: "meta" },
-            { title: "Best dial-up sounds compilation", replies: 666, emoji: "📞", category: "audio" },
-            { title: "Y2K bug survivors unite!", replies: 2000, emoji: "🐛", category: "history" }
-          ].map((post, index) => (
-            <div
-              key={index}
-              onClick={() => handleBulletinBoardClick(post)}
-              className="cursor-pointer hover:bg-purple-700/50 p-2 transition-all duration-200 hover:scale-105 transform border-l-2 border-purple-300 hover:border-purple-100"
-              title={`Click to view ${post.title}`}
-            >
-              → "{post.title}" ({post.replies} replies) {post.emoji}
-            </div>
-          ))}
-        </div>
-        <div className="text-center mt-4">
-          <button
-            onClick={handleRefreshBulletinBoard}
-            className="bg-purple-600 hover:bg-purple-500 text-white px-4 py-2 border border-purple-400 transition-colors"
-          >
-            🔄 Refresh Board
-          </button>
-          <div className="text-xs text-purple-200 mt-2">
-            Last updated: {lastBulletinRefresh.toLocaleTimeString()}
-          </div>
-        </div>
-      </div>
-
-      {/* Web Ring */}
-      <div className="bg-pink-500/20 p-5 md:border-4 border-2 border-pink-500 border-ridge my-6 text-center shadow-[0_0_15px_rgba(255,0,255,0.3)]">
-        <h4 className="animate-blink text-pink-500 mb-4 text-xl">🌐 WEB RING 🌐</h4>
-        <div className="mb-4">
-          <button className="text-cyan-400 no-underline mx-1.5 bg-transparent border-none cursor-pointer">← Previous</button>
-          |
-          <button className="text-cyan-400 no-underline mx-1.5 bg-transparent border-none cursor-pointer">Random</button>
-          |
-          <button className="text-cyan-400 no-underline mx-1.5 bg-transparent border-none cursor-pointer">Next →</button>
-        </div>
-        <div className="text-sm text-yellow-400 mt-2.5">
-          Member of the Crypto90s Ring
-        </div>
-      </div>
-
-      {/* Now Playing */}
-      <div className="bg-[#00ff00]/10 md:border-4 border-2 border-dashed border-[#00ff00] p-4 my-5 text-center">
-        <div className="text-[#00ff00] font-bold">🎵 NOW PLAYING 🎵</div>
-        <div className="text-lg my-2.5">
-          Dial-Up Connection Sounds
-        </div>
-        <div className="text-sm text-yellow-400">Volume: ████████░░</div>
-        <button
-          onClick={handlePlayDialUp}
-          className="bg-black text-[#00ff00] border-2 border-[#00ff00] px-4 py-2 mt-2.5 cursor-pointer hover:bg-[#00ff00] hover:text-black transition-colors"
-        >
-          ▶️ PLAY
-        </button>
-      </div>
-
       {/* Games Section */}
-      <div id="games-section" className="bg-gradient-to-r from-black via-gray-800 to-black md:border-4 border-2 border-pink-500 border-ridge md:p-4 p-2 shadow-[0_0_20px_rgba(255,0,255,0.3)] mb-6">
+      <div id="games-section" className="mt-5 bg-gradient-to-r from-black via-gray-800 to-black md:border-4 border-2 border-pink-500 border-ridge md:p-4 p-2 shadow-[0_0_20px_rgba(255,0,255,0.3)] mb-6">
         <h4 className="text-pink-500 text-center mb-5 text-xl font-bold">
           🎮 90s GAMES ARCADE 🎮
         </h4>
@@ -248,14 +180,42 @@ const RightSidebar: React.FC = () => {
         </div>
       </div>
 
+      {/* Why This Will Go Viral */}
+      <div className="bg-gradient-to-r from-black via-gray-800 to-black md:border-4 border-2 border-pink-500 border-ridge md:p-6 p-2 shadow-[0_0_20px_rgba(255,0,255,0.3)]">
+        <h4 className="text-pink-500 text-center mb-5 text-xl font-bold">
+          🎯 WHY THIS WILL GO VIRAL:
+        </h4>
+        <div className="text-white leading-loose md:text-lg text-base ">
+          • Perfect nostalgia timing for millennial money<br />
+          • Zero utility = Maximum meme potential<br />
+          • 90s aesthetic is trending everywhere<br />
+          • Built-in community of culture creators<br />
+          • Time travel narrative = infinite content<br />
+          • Fair launch = No VC dumping<br />
+          • Endorsed by dancing baby and Clippy<br />
+          • Y2K compliant smart contracts
+        </div>
+      </div>
+
+      {/* Awards */}
+      <div className="text-center p-6 bg-gradient-to-br from-yellow-400/30 to-orange-500/20 border-3 border-yellow-400 border-ridge my-5 shadow-[0_0_20px_rgba(255,215,0,0.5)]">
+        <h4 className="text-yellow-400 mb-4">🏆 AWARDS WON 🏆</h4>
+        <div className="leading-relaxed">
+          ⭐ Best Time Travel Coin 2025<br />
+          🔥 Sickest Nostalgia Vibes<br />
+          💎 Diamond Hands Approved<br />
+          🎯 Most Viral Potential<br />
+          🌟 GeoCities Hall of Fame<br />
+          📺 Featured on TechTV
+        </div>
+      </div>
+
       {/* Guestbook Modal */}
       <GuestbookModal
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
         onSubmit={handleGuestbookSubmit}
       />
-
-
     </div>
   );
 };

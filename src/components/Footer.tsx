@@ -68,7 +68,7 @@ const Footer: React.FC = () => {
             }
           }}
           className="bg-gradient-to-r from-blue-600 to-blue-500 text-white md:px-5 px-2 md:py-2.5 py-1 no-underline md:border-3 border-2 border-white border-ridge font-bold transition-all duration-300 shadow-[0_0_10px_#4169e1] hover:-translate-y-1 hover:shadow-[0_5px_15px_#4169e1] bg-transparent border-none cursor-pointer text-sm md:text-base">
-          🎮 GAMES
+          ARCADE
         </button>
         <button className="bg-gradient-to-r from-blue-600 to-blue-500 text-white md:px-5 px-2 md:py-2.5 py-1 no-underline md:border-3 border-2 border-white border-ridge font-bold transition-all duration-300 shadow-[0_0_10px_#4169e1] hover:-translate-y-1 hover:shadow-[0_5px_15px_#4169e1] bg-transparent border-none cursor-pointer">
           👨‍💻 WEBMASTER

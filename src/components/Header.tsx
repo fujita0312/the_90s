@@ -1,4 +1,5 @@
 import React from 'react';
+import Navigation from './Navigation';
 
 interface HeaderProps {
 }
@@ -37,6 +38,11 @@ const Header: React.FC<HeaderProps> = () => {
 
       <div className="md:mt-4 mt-2 text-lg md:text-xl font-comic text-90s-neon-green">
         <span className="animate-blink">🌐 Now with 256 colors! 🌐</span>
+      </div>
+
+      {/* Navigation Menu */}
+      <div className="md:mt-6 mt-4">
+        <Navigation />
       </div>
 
       {/* Enhanced status indicators */}

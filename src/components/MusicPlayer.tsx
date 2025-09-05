@@ -671,7 +671,7 @@ const MusicPlayer: React.FC = () => {
           </div>
 
           {/* YouTube Search */}
-          <div className="mb-4 p-3 sm:p-4 bg-black/60 border border-cyan-400 border-ridge shadow-[0_0_15px_rgba(0,255,255,0.2)]">
+          {/* <div className="mb-4 p-3 sm:p-4 bg-black/60 border border-cyan-400 border-ridge shadow-[0_0_15px_rgba(0,255,255,0.2)]">
             <h4 className="text-cyan-400 font-bold mb-2 text-sm sm:text-base text-shadow-cyan">🔍 ADD YOUTUBE TRACKS</h4>
             <div className="mb-2">
               <textarea
@@ -713,7 +713,7 @@ const MusicPlayer: React.FC = () => {
                 </span>
               )}
             </div>
-          </div>
+          </div> */}
 
           {/* Playlist */}
           <div className="p-3 sm:p-4 bg-black/60 border border-cyan-400 border-ridge shadow-[0_0_15px_rgba(0,255,255,0.2)]">

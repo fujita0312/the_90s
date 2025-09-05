@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
 import { Meme } from '../types/meme';
 import memeApi from '../services/memeApi';
 import MemeModal from './MemeModal';
@@ -9,7 +8,6 @@ const MemesPage: React.FC = () => {
   const [isMemeModalOpen, setIsMemeModalOpen] = useState(false);
   const [memes, setMemes] = useState<Meme[]>([]);
   const [isLoading, setIsLoading] = useState(true);
-  const navigate = useNavigate();
   const { showToast } = useToast();
 
   // Load memes on component mount
@@ -101,21 +99,18 @@ const MemesPage: React.FC = () => {
 
   if (isLoading) {
     return (
-      <div className="min-h-screen">
-        <div className="container mx-auto px-3 sm:px-4 lg:px-6 py-6 sm:py-8">
-          <div className="text-center">
-            <div className="animate-spin text-4xl sm:text-5xl lg:text-6xl mb-3 sm:mb-4">🔄</div>
-            <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-pink-500 mb-3 sm:mb-4">Loading Memes...</h1>
-            <p className="text-white text-sm sm:text-base lg:text-lg">Fetching the raddest 90s memes...</p>
-          </div>
+      <div className="container mx-auto px-3 sm:px-4 lg:px-6 py-6 sm:py-8">
+        <div className="text-center">
+          <div className="animate-spin text-4xl sm:text-5xl lg:text-6xl mb-3 sm:mb-4">🔄</div>
+          <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-pink-500 mb-3 sm:mb-4">Loading Memes...</h1>
+          <p className="text-white text-sm sm:text-base lg:text-lg">Fetching the raddest 90s memes...</p>
         </div>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen">
-      <div className="container mx-auto px-3 sm:px-4 lg:px-6 py-6 sm:py-8">
+    <div className="container mx-auto px-3 sm:px-4 lg:px-6 py-6 sm:py-8">
         {/* Header */}
         <div className="text-center mb-6 sm:mb-8">
           <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-pink-500 mb-3 sm:mb-4 animate-pulse">
@@ -179,23 +174,12 @@ const MemesPage: React.FC = () => {
           </div>
         )}
 
-        {/* Back Button */}
-        <div className="text-center mt-6 sm:mt-8">
-          <button
-            onClick={() => navigate('/main')}
-            className="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-4 py-2 sm:px-6 sm:py-3 lg:px-8 lg:py-4 font-bold text-sm sm:text-base lg:text-lg hover:from-blue-700 hover:to-purple-700 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1"
-          >
-            ← Back to Home
-          </button>
-        </div>
-
         {/* Meme Modal */}
         <MemeModal
           isOpen={isMemeModalOpen}
           onClose={() => setIsMemeModalOpen(false)}
           onSubmit={handleMemeSubmit}
         />
-      </div>
     </div>
   );
 };

@@ -143,38 +143,6 @@ const LeftSidebar: React.FC = () => {
         </div>
       </div>
 
-      {/* Awards */}
-      <div className="text-center p-6 bg-gradient-to-br from-yellow-400/30 to-orange-500/20 border-3 border-yellow-400 border-ridge my-5 shadow-[0_0_20px_rgba(255,215,0,0.5)]">
-        <h4 className="text-yellow-400 mb-4">🏆 AWARDS WON 🏆</h4>
-        <div className="leading-relaxed">
-          ⭐ Best Time Travel Coin 2025<br />
-          🔥 Sickest Nostalgia Vibes<br />
-          💎 Diamond Hands Approved<br />
-          🎯 Most Viral Potential<br />
-          🌟 GeoCities Hall of Fame<br />
-          📺 Featured on TechTV
-        </div>
-      </div>
-
-      {/* Music Player Quick Access */}
-      <div className="text-center p-4 bg-gradient-to-br from-pink-500/30 to-purple-500/20 border-3 border-pink-400 border-ridge my-5 shadow-[0_0_20px_rgba(255,0,255,0.5)]">
-        <h4 className="text-pink-400 mb-3 text-sm sm:text-base">🎵 MUSIC PLAYER 🎵</h4>
-        <div className="text-xs sm:text-sm text-gray-300 mb-3">
-          Jam to 90s hits while browsing!
-        </div>
-        <button
-          onClick={() => {
-            const musicPlayer = document.querySelector('[data-music-player]');
-            if (musicPlayer) {
-              musicPlayer.scrollIntoView({ behavior: 'smooth' });
-            }
-          }}
-          className="bg-pink-500 hover:bg-pink-600 text-black px-3 py-2 rounded font-bold text-xs sm:text-sm transition-colors"
-        >
-          🎧 Open Player
-        </button>
-      </div>
-
     </div>
   );
 };

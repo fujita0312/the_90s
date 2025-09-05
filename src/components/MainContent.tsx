@@ -95,22 +95,6 @@ const MainContent: React.FC = () => {
       {/* Meme Slider Section */}
       <MemeSlider />
 
-      {/* Why This Will Go Viral */}
-      <div className="bg-gradient-to-r from-black via-gray-800 to-black md:border-4 border-2 border-pink-500 border-ridge md:p-6 p-2 shadow-[0_0_20px_rgba(255,0,255,0.3)]">
-        <h4 className="text-pink-500 text-center mb-5 text-xl font-bold">
-          🎯 WHY THIS WILL GO VIRAL:
-        </h4>
-        <div className="text-white leading-loose md:text-lg text-base ">
-          • Perfect nostalgia timing for millennial money<br />
-          • Zero utility = Maximum meme potential<br />
-          • 90s aesthetic is trending everywhere<br />
-          • Built-in community of culture creators<br />
-          • Time travel narrative = infinite content<br />
-          • Fair launch = No VC dumping<br />
-          • Endorsed by dancing baby and Clippy<br />
-          • Y2K compliant smart contracts
-        </div>
-      </div>
     </div>
   );
 };
