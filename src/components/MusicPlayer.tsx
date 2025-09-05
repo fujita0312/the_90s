@@ -646,7 +646,7 @@ const MusicPlayer: React.FC = () => {
               max="100"
               value={volume}
               onChange={(e) => setVolume(Number(e.target.value))}
-              className="w-24 sm:w-32 accent-cyan-400"
+              className="w-24 sm:w-32 accent-cyan-400 focus:outline-none"
             />
             <span className="text-cyan-400 font-mono text-sm text-shadow-cyan">{volume}</span>
           </div>
