@@ -79,11 +79,9 @@ const LeftSidebar: React.FC = () => {
         <div className="absolute -top-3 -right-3 bg-black p-2 border-2 border-90s-neon-green rounded-full retro-border-glow">
           📎
         </div>
-        <div className="mt-4 text-center bg-black/50 p-2.5 border border-[#00ff00]">
-          📎 <span className="text-xl">👀</span> Clippy Says: "Hi my name is... my name is... my name is Clip Clipuh Clip Shady!"
-          <div className="text-sm mt-2 font-comic text-90s-neon-cyan">
-            "It looks like you're trying to get rich!"
-          </div>
+        📎 <span className="text-xl">👀</span> Clippy Says: "Hi my name is... my name is... my name is Clip Clipuh Clip Shady!"
+        <div className="text-sm mt-2 font-comic text-90s-neon-cyan">
+          "It looks like you're trying to get rich!"
         </div>
       </div>
 
