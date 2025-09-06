@@ -1,4 +1,4 @@
-import { MusicTrack, CreateMusicTrack, MusicUploadResponse } from '../types/music';
+import { MusicTrack, CreateMusicTrack } from '../types/music';
 import { ApiService, ApiResponse } from './api';
 
 class MusicApiService extends ApiService {
@@ -12,8 +12,8 @@ class MusicApiService extends ApiService {
   /**
    * Upload an audio file
    */
-  async uploadAudioFile(formData: FormData): Promise<ApiResponse<MusicUploadResponse>> {
-    return this.postForm<MusicUploadResponse>('/music/upload', formData);
+  async uploadAudioFile(formData: FormData): Promise<ApiResponse<MusicTrack>> {
+    return this.postForm<MusicTrack>('/music/upload', formData);
   }
 }
 

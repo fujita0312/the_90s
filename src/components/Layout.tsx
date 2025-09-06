@@ -23,10 +23,7 @@ const Layout: React.FC<LayoutProps> = ({
   const budweiserAudioRef = useRef<HTMLAudioElement>(null);
   const [matrixRainVisible, setMatrixRainVisible] = useState(false);
 
-  // Initialize 90s features
-  // use90sFeatures();
-
-  const handleLoadingComplete = () => {
+  useEffect(() => {
     setMatrixRainVisible(true);
     if (showAudio) {
       try {
@@ -39,11 +36,7 @@ const Layout: React.FC<LayoutProps> = ({
         console.log('Budweiser audio play failed:', err);
       }
     }
-  };
-
-  useEffect(() => {
-    handleLoadingComplete();
-  }, [handleLoadingComplete]);
+  }, []);
 
   return (
     <div className="min-h-screen">
@@ -71,6 +64,7 @@ const Layout: React.FC<LayoutProps> = ({
       {showAudio && (
         <audio ref={budweiserAudioRef} src="/budweiser_wassup.mp3" />
       )}
+
     </div>
   );
 };

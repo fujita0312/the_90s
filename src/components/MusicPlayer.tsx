@@ -39,7 +39,7 @@ const MusicPlayer: React.FC = () => {
   const [isExpanded, setIsExpanded] = useState(false);
   const [isLoadingTracks, setIsLoadingTracks] = useState(false);
   const [selectedFiles, setSelectedFiles] = useState<File[]>([]);
-  
+
   const audioRef = useRef<HTMLAudioElement>(null);
 
   // Load tracks from backend on component mount
@@ -89,15 +89,16 @@ const MusicPlayer: React.FC = () => {
   const checkUniqueFileName = (fileName: string, existingTracks: MusicTrack[]): string => {
     const baseName = fileName.replace(/\.[^/.]+$/, "");
     const extension = fileName.match(/\.[^/.]+$/)?.[0] || "";
-    
+    const existingTitles = new Set(existingTracks.map(track => track.title));
+
     let uniqueName = baseName;
     let counter = 1;
-    
-    while (existingTracks.some(track => track.title === uniqueName)) {
+
+    while (existingTitles.has(uniqueName)) {
       uniqueName = `${baseName} (${counter})`;
       counter++;
     }
-    
+
     return uniqueName + extension;
   };
 
@@ -123,7 +124,14 @@ const MusicPlayer: React.FC = () => {
         formData.append('title', uniqueName.replace(/\.[^/.]+$/, ""));
 
         const response = await musicApi.uploadAudioFile(formData);
-        return response.data?.track;
+        
+        // The response structure is: { success: boolean, data: MusicTrack }
+        if (response.success && response.data) {
+          return response.data as MusicTrack;
+        }
+        
+        console.error('Upload failed:', response.error || 'Unknown error');
+        return null;
       });
 
       const uploadedTracks = (await Promise.all(uploadPromises)).filter(Boolean) as MusicTrack[];
@@ -146,7 +154,7 @@ const MusicPlayer: React.FC = () => {
       console.error('Error uploading audio files:', error);
       // Fallback to local handling
       const newTracks = selectedFiles.map(file => ({
-        id: URL.createObjectURL(file),
+        _id: URL.createObjectURL(file),
         title: file.name.replace(/\.[^/.]+$/, ""),
         type: 'audio' as const,
         url: URL.createObjectURL(file),
@@ -222,7 +230,7 @@ const MusicPlayer: React.FC = () => {
   }, [volume]);
 
   return (
-    <div 
+    <div
       data-music-player
       className="bg-gradient-to-br from-black/90 via-blue-900/80 to-black/90 border-2 sm:border-3 lg:border-4 border-cyan-400 border-ridge p-3 sm:p-4 lg:p-6 shadow-[0_0_30px_rgba(0,255,255,0.3),inset_0_0_25px_rgba(255,255,255,0.1)] mb-4 sm:mb-6 max-w-5xl mx-auto"
     >
@@ -338,7 +346,7 @@ const MusicPlayer: React.FC = () => {
                 className="w-full p-2 bg-black text-green-400 border border-cyan-400 text-xs sm:text-sm text-shadow-green file:bg-cyan-400 file:text-black file:border-0 file:px-2 file:py-1 file:rounded file:text-xs disabled:opacity-50"
               />
             </div>
-            
+
             {/* Selected Files Display */}
             {selectedFiles.length > 0 && (
               <div className="mb-3 p-2 bg-gray-800 border border-cyan-400/50 rounded">
@@ -433,9 +441,9 @@ const MusicPlayer: React.FC = () => {
                   key={index}
                   onClick={() => selectTrack(index)}
                   className={`p-2 cursor-pointer mb-1 text-xs sm:text-sm transition-colors ${index === currentIndex
-                      ? 'bg-cyan-400 text-black shadow-glow-cyan'
-                      : 'bg-gray-800 text-cyan-300 hover:bg-gray-700 text-shadow-cyan'
-                  }`}
+                    ? 'bg-cyan-400 text-black shadow-glow-cyan'
+                    : 'bg-gray-800 text-cyan-300 hover:bg-gray-700 text-shadow-cyan'
+                    }`}
                 >
                   <div className="truncate font-bold">{track.title}</div>
                 </div>
@@ -450,19 +458,19 @@ const MusicPlayer: React.FC = () => {
         <div className="hidden">
           <audio
             ref={audioRef}
-            src={currentVideo.url || currentVideo.id}
+            src={currentVideo.url}
             onPlay={() => setIsPlaying(true)}
             onPause={() => setIsPlaying(false)}
             onEnded={() => nextTrack()}
             onError={(e) => {
               console.error('Audio playback error:', e);
-              console.error('Audio source:', currentVideo.url || currentVideo.id);
+              console.error('Audio source:', currentVideo.url);
             }}
             onLoadStart={() => {
-              console.log('Audio loading started:', currentVideo.url || currentVideo.id);
+              console.log('Audio loading started:', currentVideo.url);
             }}
             onCanPlay={() => {
-              console.log('Audio can play:', currentVideo.url || currentVideo.id);
+              console.log('Audio can play:', currentVideo.url);
             }}
           />
         </div>

@@ -1,7 +1,7 @@
 export interface MusicTrack {
-  id: string;
+  _id: string;
   title: string;
-  type: 'audio';
+  type?: 'audio';
   url: string; // URL to the audio file
   filePath?: string; // Local file path
   duration?: number; // Duration in seconds
@@ -33,8 +33,8 @@ export interface CreateMusicPlaylist {
 }
 
 export interface MusicUploadResponse {
-  track: MusicTrack;
-  fileUrl: string;
+  data: MusicTrack;
+  success: boolean;
 }
 
 export interface MusicSearchParams {
