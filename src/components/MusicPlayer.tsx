@@ -39,6 +39,7 @@ const MusicPlayer: React.FC = () => {
   const [isExpanded, setIsExpanded] = useState(false);
   const [isLoadingTracks, setIsLoadingTracks] = useState(false);
   const [selectedFiles, setSelectedFiles] = useState<File[]>([]);
+  const [uploadProgress, setUploadProgress] = useState<number>(0);
 
   const audioRef = useRef<HTMLAudioElement>(null);
 
@@ -106,6 +107,7 @@ const MusicPlayer: React.FC = () => {
     if (selectedFiles.length === 0) return;
 
     setIsLoadingTracks(true);
+    setUploadProgress(0);
 
     try {
       // Check for duplicate file names and make them unique
@@ -117,16 +119,22 @@ const MusicPlayer: React.FC = () => {
         };
       });
 
-      // Upload files to backend
-      const uploadPromises = uniqueFiles.map(async ({ file, uniqueName }) => {
+      // Upload files to backend with progress tracking
+      const uploadPromises = uniqueFiles.map(async ({ file, uniqueName }, index) => {
         const formData = new FormData();
         formData.append('audioFile', file);
         formData.append('title', uniqueName.replace(/\.[^/.]+$/, ""));
 
+        console.log(`Starting upload ${index + 1}/${uniqueFiles.length}: ${file.name} (${(file.size / 1024 / 1024).toFixed(2)}MB)`);
+        
         const response = await musicApi.uploadAudioFile(formData);
+        
+        // Update progress
+        setUploadProgress((prev) => prev + (100 / uniqueFiles.length));
         
         // The response structure is: { success: boolean, data: MusicTrack }
         if (response.success && response.data) {
+          console.log(`✅ Upload successful: ${file.name}`);
           return response.data as MusicTrack;
         }
         
@@ -134,18 +142,18 @@ const MusicPlayer: React.FC = () => {
         if (response.error) {
           if (response.error.includes('too large') || response.error.includes('413')) {
             console.error('File too large:', response.error);
-            throw new Error(`File too large. Please choose a smaller file.`);
+            throw new Error(`File "${file.name}" is too large. Maximum size is 50MB.`);
           } else if (response.error.includes('timeout') || response.error.includes('504')) {
             console.error('Upload timeout:', response.error);
-            throw new Error(`Upload timeout. Please try again with a smaller file.`);
+            throw new Error(`Upload timeout for "${file.name}". Please try again.`);
           } else {
             console.error('Upload failed:', response.error);
-            throw new Error(`Upload failed: ${response.error}`);
+            throw new Error(`Upload failed for "${file.name}": ${response.error}`);
           }
         }
         
         console.error('Upload failed: Unknown error');
-        throw new Error('Upload failed: Unknown error');
+        throw new Error(`Upload failed for "${file.name}": Unknown error`);
       });
 
       const uploadedTracks = (await Promise.all(uploadPromises)).filter(Boolean) as MusicTrack[];
@@ -157,10 +165,13 @@ const MusicPlayer: React.FC = () => {
         // Load first uploaded track
         loadAudioFile(uploadedTracks[0]);
         setCurrentIndex(playlist.length);
+        
+        console.log(`🎵 Successfully uploaded ${uploadedTracks.length} file(s)`);
       }
 
       // Clear selected files after successful upload
       setSelectedFiles([]);
+      setUploadProgress(0);
       // Reset file input
       const fileInput = document.getElementById('audio-file-input') as HTMLInputElement;
       if (fileInput) fileInput.value = '';
@@ -174,6 +185,7 @@ const MusicPlayer: React.FC = () => {
       // Don't fallback to local handling for server errors
       // Just clear the selected files
       setSelectedFiles([]);
+      setUploadProgress(0);
       const fileInput = document.getElementById('audio-file-input') as HTMLInputElement;
       if (fileInput) fileInput.value = '';
     } finally {
@@ -382,6 +394,22 @@ const MusicPlayer: React.FC = () => {
                 >
                   {isLoadingTracks ? '⏳ Uploading...' : '🚀 Upload Files'}
                 </button>
+              </div>
+            )}
+
+            {/* Upload Progress */}
+            {isLoadingTracks && uploadProgress > 0 && (
+              <div className="mb-3">
+                <div className="flex justify-between text-xs text-cyan-400 mb-1">
+                  <span>Upload Progress</span>
+                  <span>{Math.round(uploadProgress)}%</span>
+                </div>
+                <div className="w-full bg-gray-700 rounded-full h-2">
+                  <div 
+                    className="bg-cyan-400 h-2 rounded-full transition-all duration-300"
+                    style={{ width: `${uploadProgress}%` }}
+                  ></div>
+                </div>
               </div>
             )}
 
