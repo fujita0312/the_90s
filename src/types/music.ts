@@ -1,24 +1,20 @@
 export interface MusicTrack {
   id: string;
   title: string;
-  artist: string;
-  type: 'youtube' | 'audio';
-  url?: string; // For YouTube videos
-  filePath?: string; // For uploaded audio files
+  type: 'audio';
+  url: string; // URL to the audio file
+  filePath?: string; // Local file path
   duration?: number; // Duration in seconds
-  thumbnail?: string; // YouTube thumbnail or custom thumbnail
   createdAt: string;
   updatedAt: string;
 }
 
 export interface CreateMusicTrack {
   title: string;
-  artist: string;
-  type: 'youtube' | 'audio';
-  url?: string;
+  type: 'audio';
+  url: string;
   filePath?: string;
   duration?: number;
-  thumbnail?: string;
 }
 
 export interface MusicPlaylist {

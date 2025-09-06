@@ -47,7 +47,7 @@ const UsernameModal: React.FC<UsernameModalProps> = ({ isOpen, onClose, onUserna
       <div className="relative z-10 w-full max-w-md bg-gradient-to-br from-gray-900/95 via-purple-900/95 to-gray-900/95 backdrop-blur-sm border-2 border-cyan-400 rounded-2xl shadow-[0_0_40px_rgba(0,255,255,0.3)] p-8">
         {/* Header */}
         <div className="text-center mb-8">
-          <div className="w-16 h-16 bg-gradient-to-r from-cyan-400 to-purple-400 rounded-full flex items-center justify-center mx-auto mb-4 animate-pulse">
+          <div className="w-16 h-16 bg-gradient-to-r from-cyan-400 to-purple-400 flex items-center justify-center mx-auto mb-4 animate-pulse">
             <span className="text-2xl">💬</span>
           </div>
           <h2 className="text-2xl font-bold text-yellow-400 mb-2">
@@ -72,7 +72,7 @@ const UsernameModal: React.FC<UsernameModalProps> = ({ isOpen, onClose, onUserna
                 setError('');
               }}
               placeholder="Enter your username..."
-              className="w-full px-4 py-3 bg-black/60 border-2 border-cyan-400/50 rounded-xl text-white placeholder-gray-400 focus:border-yellow-400 focus:outline-none focus:shadow-[0_0_15px_rgba(255,255,0,0.3)] transition-all duration-300"
+              className="w-full px-4 py-3 bg-black/60 border-2 border-cyan-400/50 text-white placeholder-gray-400 focus:border-yellow-400 focus:outline-none focus:shadow-[0_0_15px_rgba(255,255,0,0.3)] transition-all duration-300"
               maxLength={20}
               autoFocus
             />
@@ -88,13 +88,13 @@ const UsernameModal: React.FC<UsernameModalProps> = ({ isOpen, onClose, onUserna
             <button
               type="button"
               onClick={onClose}
-              className="flex-1 bg-gradient-to-r from-red-500 to-red-600 text-white px-6 py-3 rounded-xl font-bold hover:from-red-600 hover:to-red-700 transition-all duration-300 transform hover:scale-105"
+              className="flex-1 bg-gradient-to-r from-red-500 to-red-600 text-white px-6 py-3  font-bold hover:from-red-600 hover:to-red-700 transition-all duration-300 transform hover:scale-105"
             >
               Cancel
             </button>
             <button
               type="submit"
-              className="flex-1 bg-gradient-to-r from-green-500 to-green-600 text-white px-6 py-3 rounded-xl font-bold hover:from-green-600 hover:to-green-700 transition-all duration-300 transform hover:scale-105 shadow-[0_0_15px_rgba(0,255,0,0.3)]"
+              className="flex-1 bg-gradient-to-r from-green-500 to-green-600 text-white px-6 py-3  font-bold hover:from-green-600 hover:to-green-700 transition-all duration-300 transform hover:scale-105 shadow-[0_0_15px_rgba(0,255,0,0.3)]"
             >
               Join Chat! 🚀
             </button>
