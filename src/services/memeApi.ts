@@ -1,4 +1,4 @@
-import { Meme, MemeSubmission } from '../types/meme';
+import { Meme, MemeSubmission, PaginatedResponse, MemeQueryParams } from '../types/meme';
 import { ApiService, ApiResponse } from './api';
 
 class MemeApiService extends ApiService {
@@ -7,6 +7,23 @@ class MemeApiService extends ApiService {
    */
   async getAllMemes(): Promise<ApiResponse<Meme[]>> {
     return this.get<Meme[]>('/memes');
+  }
+
+  /**
+   * Get paginated memes with search and sort options
+   */
+  async getMemesPaginated(queryParams: MemeQueryParams): Promise<PaginatedResponse<Meme>> {
+    const searchParams = new URLSearchParams();
+    
+    if (queryParams.page) searchParams.append('page', queryParams.page.toString());
+    if (queryParams.limit) searchParams.append('limit', queryParams.limit.toString());
+    if (queryParams.search) searchParams.append('search', queryParams.search);
+    if (queryParams.sortBy) searchParams.append('sortBy', queryParams.sortBy);
+    
+    const queryString = searchParams.toString();
+    const url = `/memes/paginated${queryString ? `?${queryString}` : ''}`;
+    
+    return this.get<Meme[]>(url) as Promise<PaginatedResponse<Meme>>;
   }
 
   /**
@@ -44,6 +61,13 @@ class MemeApiService extends ApiService {
    */
   async updateMeme(id: string, meme: Partial<MemeSubmission>): Promise<ApiResponse<Meme>> {
     return this.put<Meme>(`/memes/${id}`, meme);
+  }
+
+  /**
+   * Vote on a meme (up or down)
+   */
+  async voteMeme(id: string, voteType: 'up' | 'down'): Promise<ApiResponse<Meme>> {
+    return this.post<Meme>(`/memes/${id}/vote`, { voteType });
   }
 }
 

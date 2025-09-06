@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import UsernameModal from './UsernameModal';
 import socketService from '../services/socketService';
+import { generateRoomId } from '../utils/roomUtils';
 
 interface Message {
     id: string;
@@ -8,31 +9,35 @@ interface Message {
     text: string;
     timestamp: Date;
     isOwn: boolean;
-    recipient?: string; // For private messages
+    roomId?: string; // Room identifier
+    sender?: string; // Sender's user ID
+    readCount?: number; // Count of users who have read this message
 }
 
 interface User {
+    id: string;
     username: string;
     joinedAt: Date;
+    unreadCount?: number;
+    isOnline?: boolean;
 }
 
 
 const Chatroom: React.FC = () => {
-    const [isUsernameModalOpen, setIsUsernameModalOpen] = useState(true);
-    const [username, setUsername] = useState('');
+    const [isUsernameModalOpen, setIsUsernameModalOpen] = useState(false);
     const [messages, setMessages] = useState<Message[]>([]);
     const [newMessage, setNewMessage] = useState('');
     const [isConnected, setIsConnected] = useState(false);
     const [users, setUsers] = useState<User[]>([]);
-    const [selectedUser, setSelectedUser] = useState<string | null>(null);
+    const [selectedUserId, setSelectedUserId] = useState<string | null>(null);
     const [showUserList, setShowUserList] = useState(false);
-    const [privateChats, setPrivateChats] = useState<Map<string, Message[]>>(new Map());
-    const [currentChat, setCurrentChat] = useState<string | null>(null); // null = general chat
+    const [currentRoomId, setCurrentRoomId] = useState<string>('general'); // Track current room ID
     const messagesEndRef = useRef<HTMLDivElement>(null);
     const messagesContainerRef = useRef<HTMLDivElement>(null);
     const inputRef = useRef<HTMLInputElement>(null);
-    const usernameRef = useRef<string>('');
+    const currentUser = useRef<{ id: string, username: string }>({ id: '', username: '' });
 
+    const currentRoomIdRef = useRef<string>(currentRoomId);
     // Show user list by default on desktop, hide on mobile
     useEffect(() => {
         const handleResize = () => {
@@ -51,6 +56,9 @@ const Chatroom: React.FC = () => {
         return () => window.removeEventListener('resize', handleResize);
     }, []);
 
+    useEffect(() => {
+        currentRoomIdRef.current = currentRoomId;
+    }, [currentRoomId])
     // Auto-hide user list on mobile when screen size changes
     useEffect(() => {
         const handleResize = () => {
@@ -75,7 +83,7 @@ const Chatroom: React.FC = () => {
 
     useEffect(() => {
         scrollToBottom();
-    }, [messages, privateChats, currentChat]);
+    }, [messages]);
 
     // Focus input when component mounts
     useEffect(() => {
@@ -100,97 +108,187 @@ const Chatroom: React.FC = () => {
         };
 
         // Message handling
-        const handleMessageReceived = (data: any) => {
-            console.log('Message received:', data); // Debug log
-            const message: Message = {
-                id: data.id || Date.now().toString(),
-                username: data.username,
-                text: data.message,
-                timestamp: new Date(data.timestamp || Date.now()),
-                isOwn: data.username === usernameRef.current,
-                recipient: data.recipient
-            };
-
-            if (data.recipient) {
-                // Private message
-                console.log('Adding private message to chat:', data.recipient);
-                setPrivateChats(prev => {
-                    const newMap = new Map(prev);
-                    const chatKey = data.recipient === usernameRef.current ? data.username : data.recipient;
-                    const existingMessages = newMap.get(chatKey) || [];
-                    newMap.set(chatKey, [...existingMessages, message]);
-                    return newMap;
-                });
-            } else {
-                // General message
-                console.log('Adding general message');
+        const handleMessageReceived = (data: {
+            id: string,
+            message: string,
+            timestamp: string,
+            type: string,
+            roomId: string,
+            sender: string,
+            readCount: number
+        }) => {
+            const user = users.find(user => user.id === data.sender);
+            if (data.roomId === currentRoomIdRef.current) {
+                const message: Message = {
+                    id: data.id || Date.now().toString(),
+                    username: user?.username || '',
+                    text: data.message,
+                    timestamp: new Date(data.timestamp || Date.now()),
+                    isOwn: data.sender === currentUser.current.id,
+                    roomId: data.roomId,
+                    sender: data.sender,
+                    readCount: data.readCount || 0
+                };
+                // Add message to current messages
                 setMessages(prev => [...prev, message]);
+            } else {
+                setUsers(prev => {
+                    return [...prev.map((p) => {
+                        return p.id === data.sender ? { ...p, unreadCount: (p.unreadCount || 0) + 1 } : p
+                    })]
+                });
             }
         };
 
         // Message history
-        const handleMessageHistory = (historyMessages: any[]) => {
-            setMessages(prev => {
-                const formattedMessages = historyMessages.map(msg => ({
+        const handleMessageHistory = (data: {
+            roomId: string,
+            selectedUser: string | null,
+            recentMessages: {
+                id: string,
+                message: string,
+                timestamp: string,
+                type: string,
+                roomId: string,
+                sender: string,
+                readCount: number
+            }[]
+        }) => {
+            setSelectedUserId(data.selectedUser || null);
+            setCurrentRoomId(data.roomId);
+
+            if (inputRef.current) {
+                inputRef.current.focus();
+            }
+
+            const formattedMessages = data.recentMessages.map(msg => {
+                const user = users.find(user => user.id === msg.sender);
+                return ({
                     id: msg.id,
-                    username: msg.username,
+                    username: user?.username || '',
                     text: msg.message,
                     timestamp: new Date(msg.timestamp),
-                    isOwn: msg.username === usernameRef.current
-                }));
-                return formattedMessages;
+                    isOwn: msg.sender === currentUser.current.id,
+                    roomId: data.roomId,
+                    sender: msg.sender,
+                    readCount: msg.readCount || 0
+                })
+            });
+            setMessages(formattedMessages);
+
+            setUsers(prev => {
+                return [...prev.map((p) => {
+                    return p.id === data.selectedUser ? { ...p, unreadCount: 0 } : p
+                })]
             });
         };
 
         // User management
-        const handleUserJoined = (data: any) => {
-            const systemMessage: Message = {
-                id: `system-${Date.now()}`,
-                username: 'System',
-                text: `${data.username} joined the chat! 🎉`,
-                timestamp: new Date(),
-                isOwn: false
-            };
-            setMessages(prev => [...prev, systemMessage]);
-        };
+        const handleUserJoined = (data: {
+            id: string,
+            username: string,
+            unreadCount: number,
+            isOnline: true,
+            message: string
+        }) => {
+            const roomId = generateRoomId(currentUser.current.id, data.id);
 
-        const handleUserLeft = (data: any) => {
-            const systemMessage: Message = {
-                id: `system-${Date.now()}`,
-                username: 'System',
-                text: `${data.username} left the chat 👋`,
-                timestamp: new Date(),
-                isOwn: false
-            };
-            setMessages(prev => [...prev, systemMessage]);
-        };
-
-        const handleUserListUpdate = (userList: string[]) => {
-            console.log('User list updated:', userList); // Debug log
-            const userObjects = userList
-                .filter(name => name !== usernameRef.current) // Remove self from user list
-                .map(name => ({
-                    username: name,
-                    joinedAt: new Date()
-                }));
-            setUsers(userObjects);
-        };
-
-        const handlePrivateChatHistory = (data: { otherUser: string; messages: any[] }) => {
-            const formattedMessages = data.messages.map(msg => ({
-                id: msg.id,
-                username: msg.username,
-                text: msg.message,
-                timestamp: new Date(msg.timestamp),
-                isOwn: msg.username === usernameRef.current,
-                recipient: msg.recipient
-            }));
-            
-            setPrivateChats(prev => {
-                const newMap = new Map(prev);
-                newMap.set(data.otherUser, formattedMessages);
-                return newMap;
+            let updated = false;
+            setUsers(prev => {
+                return [...prev.map((p) => {
+                    if (p.id === data.id) {
+                        updated = true;
+                        return {
+                            ...p,
+                            joinedAt: new Date(),
+                            unreadCount: data.unreadCount || 0,
+                            isOnline: true
+                        }
+                    }
+                    return p;
+                })]
             });
+            if (!updated) {
+                setUsers((prev) => [...prev, {
+                    id: data.id,
+                    username: data.username,
+                    roomId: roomId,
+                    joinedAt: new Date(),
+                    unreadCount: data.unreadCount || 0,
+                    isOnline: true
+                }]);
+            }
+        };
+
+        const handleUserLeft = (data: {
+            id: string,
+            message: string
+        }) => {
+            setUsers((prev) =>
+                [...prev.map((user) => user.id !== data.id ? user : { ...user, isOnline: false })]
+            );
+        };
+
+        const handleUserListUpdate = (userList: {
+            id: string;
+            roomId: string;
+            username: string;
+            unreadCount: number;
+            isOnline: boolean
+        }[]) => {
+            const currentUserId = currentUser.current.id;
+            const userObjects = userList
+                .filter((user) => {
+                    return user.id !== currentUserId;
+                })
+                .map((user) => {
+                    return {
+                        id: user.id,
+                        username: user.username,
+                        roomId: user.roomId,
+                        joinedAt: new Date(),
+                        unreadCount: user.unreadCount || 0,
+                        isOnline: user.isOnline || false
+                    };
+                });
+            setUsers([...userObjects]);
+        };
+
+        const handleJoinedChatroom = (data: {
+            id: string;
+            username: string;
+            selectedUser: string | null;
+            message: string;
+            roomId: string;
+            users: {
+                id: string;
+                roomId: string;
+                username: string;
+                unreadCount: number;
+                isOnline: boolean
+            }[],
+            recentMessages: {
+                id: string,
+                message: string,
+                timestamp: string,
+                type: string,
+                roomId: string,
+                sender: string,
+                readCount: number
+            }[]
+        }) => {
+            currentUser.current = { id: data.id, username: data.username };
+            localStorage.setItem('userInfo', JSON.stringify({ id: data.id, username: data.username }));
+            if (data.users) {
+                handleUserListUpdate(data.users);
+            }
+            if (data.recentMessages) {
+                handleMessageHistory({
+                    roomId: data.roomId,
+                    selectedUser: data.selectedUser,
+                    recentMessages: data.recentMessages
+                });
+            }
         };
 
         // Set up event listeners
@@ -198,10 +296,18 @@ const Chatroom: React.FC = () => {
         socket.on('disconnect', handleDisconnect);
         socket.on('message_received', handleMessageReceived);
         socket.on('message_history', handleMessageHistory);
-        socket.on('private_chat_history', handlePrivateChatHistory);
+        socket.on('joined_chatroom', handleJoinedChatroom);
         socket.on('user_joined', handleUserJoined);
         socket.on('user_left', handleUserLeft);
-        socket.on('user_list_update', handleUserListUpdate);
+
+        const userInfo = localStorage.getItem('userInfo');
+        if (userInfo) {
+            const userInfoObj = JSON.parse(userInfo);
+            currentUser.current = { id: userInfoObj.id, username: userInfoObj.username };
+            socketService.joinChatroom(userInfoObj.id, userInfoObj.username);
+        } else {
+            setIsUsernameModalOpen(true);
+        }
 
         // Cleanup on unmount
         return () => {
@@ -209,101 +315,45 @@ const Chatroom: React.FC = () => {
             socket.off('disconnect', handleDisconnect);
             socket.off('message_received', handleMessageReceived);
             socket.off('message_history', handleMessageHistory);
-            socket.off('private_chat_history', handlePrivateChatHistory);
+            socket.off('joined_chatroom', handleJoinedChatroom);
             socket.off('user_joined', handleUserJoined);
             socket.off('user_left', handleUserLeft);
-            socket.off('user_list_update', handleUserListUpdate);
             socketService.disconnect();
         };
-    }, []); // Remove username dependency
-
-    // Handle username-dependent logic
-    useEffect(() => {
-        if (username) {
-            usernameRef.current = username;
-            // Join the chatroom when username is set
-            socketService.joinChatroom(username);
-        }
-    }, [username]);
+    }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     const handleUsernameSubmit = (enteredUsername: string) => {
-        setUsername(enteredUsername);
         setIsUsernameModalOpen(false);
-
-        // Add welcome message
-        const welcomeMessage: Message = {
-            id: Date.now().toString(),
-            username: 'System',
-            text: `Welcome to the chatroom, ${enteredUsername}! 🎉`,
-            timestamp: new Date(),
-            isOwn: false
-        };
-        setMessages([welcomeMessage]);
+        socketService.joinChatroom('', enteredUsername);
     };
 
     const handleSendMessage = (e: React.FormEvent) => {
         e.preventDefault();
 
         if (!newMessage.trim() || !isConnected) {
-            console.log('Cannot send message:', { newMessage: newMessage.trim(), isConnected });
             return;
         }
 
         const messageToSend = newMessage.trim();
-        console.log('Sending message:', { messageToSend, currentChat, username });
-
-        // Send message via Socket.IO
-        if (currentChat) {
-            // Private message
-            console.log('Sending private message to:', currentChat);
-            socketService.sendPrivateMessage(messageToSend, username, currentChat);
-        } else {
-            // General message
-            console.log('Sending general message');
-            socketService.sendMessage(messageToSend, username);
-        }
-        
+        // Send message via Socket.IO using current room ID
+        socketService.sendMessage(messageToSend, currentRoomId);
         setNewMessage('');
-        setSelectedUser(null);
     };
 
     const handleUserClick = (user: User) => {
-        if (user.username !== username) {
-            setSelectedUser(user.username);
-            setCurrentChat(user.username);
-            
-            // Load private chat history
-            socketService.loadPrivateChat(user.username);
-            
-            if (inputRef.current) {
-                inputRef.current.focus();
-            }
+        if (user.id !== currentUser.current.id) {
+            socketService.selectUser(user.id);
         }
     };
 
     const handleGeneralChat = () => {
-        setCurrentChat(null);
-        setSelectedUser(null);
-    };
-
-    const handleMentionUser = (user: User) => {
-        if (user.username !== username) {
-            const mention = `@${user.username} `;
-            setNewMessage(prev => prev + mention);
-            if (inputRef.current) {
-                inputRef.current.focus();
-            }
-        }
+        socketService.selectUser(null);
     };
 
     const formatTime = (date: Date) => {
         return date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
     };
 
-    const getRandom90sEmoji = () => {
-        const emojis = ['😎', '🤘', '🔥', '💯', '🎮', '📞', '💿', '🌟', '⚡', '🎵'];
-        return emojis[Math.floor(Math.random() * emojis.length)];
-    };
 
     return (
         <div className="min-h-screen">
@@ -320,7 +370,7 @@ const Chatroom: React.FC = () => {
                                     {isConnected ? '🟢 ONLINE' : '🔴 OFFLINE'}
                                 </div>
                                 <div className="text-cyan-400">
-                                    👤 {username || 'Anonymous'}
+                                    👤 {currentUser.current.username || 'Anonymous'}
                                 </div>
                                 <div className="text-pink-400">
                                     👥 {users.length} online
@@ -328,7 +378,7 @@ const Chatroom: React.FC = () => {
                             </div>
                         </div>
 
-                        <div className="flex items-center space-x-1 sm:space-x-2">
+                        <div className="flex items-center space-x-1 sm:space-x-2 md:hidden">
                             <button
                                 onClick={() => setShowUserList(!showUserList)}
                                 className="bg-gradient-to-r from-cyan-500 to-purple-500 text-white px-2 sm:px-4 py-1 sm:py-2 font-bold hover:from-cyan-600 hover:to-purple-600 transition-all duration-300 transform hover:scale-105 shadow-[0_0_15px_rgba(0,255,255,0.3)] text-xs sm:text-sm"
@@ -343,7 +393,7 @@ const Chatroom: React.FC = () => {
                         <div className={`px-1 sm:px-2 py-1 ${isConnected ? 'bg-green-500' : 'bg-red-500'} text-white`}>
                             {isConnected ? '🟢' : '🔴'}
                         </div>
-                        <div className="text-cyan-400">👤 {username}</div>
+                        <div className="text-cyan-400">👤 {currentUser.current.username}</div>
                         <div className="text-pink-400">👥 {users.length}</div>
                     </div>
                 </div>
@@ -358,12 +408,6 @@ const Chatroom: React.FC = () => {
                                 <h3 className="text-lg font-bold text-yellow-400">
                                     👥 Online Users ({users.length})
                                 </h3>
-                                <button
-                                    onClick={() => setShowUserList(false)}
-                                    className="text-gray-400 hover:text-white transition-colors p-1"
-                                >
-                                    ✕
-                                </button>
                             </div>
                         </div>
 
@@ -371,40 +415,56 @@ const Chatroom: React.FC = () => {
                             {users.map((user, index) => (
                                 <div
                                     key={index}
-                                    className={`group p-3 border-2 cursor-pointer transition-all duration-300 hover:scale-[1.02] ${user.username === username
+                                    className={`group p-3 border-2 cursor-pointer transition-all duration-300 hover:scale-[1.02] ${user.id === currentUser.current.id
                                         ? 'bg-gradient-to-r from-green-500/20 to-blue-500/20 border-green-400 text-green-400 shadow-[0_0_15px_rgba(0,255,0,0.2)]'
-                                        : selectedUser === user.username
+                                        : selectedUserId === user.id
                                             ? 'bg-gradient-to-r from-yellow-500/20 to-orange-500/20 border-yellow-400 text-yellow-400 shadow-[0_0_15px_rgba(255,255,0,0.2)]'
-                                            : 'bg-gradient-to-r from-purple-500/10 to-pink-500/10 border-purple-400/50 text-purple-300 hover:border-cyan-400 hover:text-cyan-300 hover:shadow-[0_0_15px_rgba(0,255,255,0.1)]'
+                                            : user.isOnline
+                                                ? 'bg-gradient-to-r from-purple-500/10 to-pink-500/10 border-purple-400/50 text-purple-300 hover:border-cyan-400 hover:text-cyan-300 hover:shadow-[0_0_15px_rgba(0,255,255,0.1)]'
+                                                : 'bg-gradient-to-r from-gray-500/5 to-gray-600/5 border-gray-500/30 text-gray-400 opacity-60'
                                         }`}
                                     onClick={() => handleUserClick(user)}
                                 >
                                     <div className="flex items-center justify-between">
                                         <div className="flex items-center space-x-3">
-                                            <div className="w-10 h-10  bg-gradient-to-r from-cyan-400 to-purple-400 flex items-center justify-center text-lg">
-                                                {getRandom90sEmoji()}
+                                            <div className="w-10 h-10  bg-gradient-to-r from-cyan-400 to-purple-400 flex items-center justify-center text-lg font-bold text-white">
+                                                {user.username.charAt(0).toUpperCase()}
                                             </div>
                                             <div>
                                                 <div className="flex items-center space-x-2">
                                                     <span className="font-bold text-sm">{user.username}</span>
-                                                    {user.username === username && (
+                                                    <div className="flex items-center space-x-1">
+                                                        <div className={`w-2 h-2 rounded-full ${user.isOnline ? 'bg-green-400' : 'bg-gray-400'}`}></div>
+                                                        <span className="text-xs opacity-70">
+                                                            {user.isOnline ? 'Online' : 'Offline'}
+                                                        </span>
+                                                    </div>
+                                                    {user.id === currentUser.current.id && (
                                                         <span className="text-xs bg-green-500 text-black px-2 py-0.5  font-bold">
                                                             YOU
                                                         </span>
                                                     )}
                                                 </div>
-                                                <div className="text-xs opacity-70">
-                                                    {formatTime(user.joinedAt)}
+                                                <div className="flex items-center justify-between">
+                                                    <div className="text-xs opacity-70">
+                                                        {formatTime(user.joinedAt)}
+                                                    </div>
+                                                    <div className="flex items-center space-x-1">
+                                                        {(user.unreadCount || 0) > 0 && (
+                                                            <span className="bg-red-500 text-white text-xs px-2 py-0.5 font-bold">
+                                                                {user.unreadCount}
+                                                            </span>
+                                                        )}
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
                                         <button
                                             onClick={(e) => {
                                                 e.stopPropagation();
-                                                handleMentionUser(user);
                                             }}
                                             className="opacity-0 group-hover:opacity-100 bg-cyan-500 hover:bg-cyan-600 text-black px-2 py-1  text-xs font-bold transition-all duration-300"
-                                            disabled={user.username === username}
+                                            disabled={user.id === currentUser.current.id}
                                         >
                                             @
                                         </button>
@@ -416,6 +476,7 @@ const Chatroom: React.FC = () => {
                                 <div className="text-center text-gray-400 py-8">
                                     <div className="text-4xl mb-2">👻</div>
                                     <p className="text-sm">No other users online</p>
+                                    <p className="text-xs mt-1">You're the only one here!</p>
                                 </div>
                             )}
                         </div>
@@ -430,11 +491,11 @@ const Chatroom: React.FC = () => {
                                 <div className="flex items-center space-x-2 sm:space-x-3">
                                     <div className="w-2 h-2 sm:w-3 sm:h-3 bg-green-500  animate-pulse"></div>
                                     <h2 className="text-sm sm:text-lg font-bold text-white truncate">
-                                        {currentChat ? `🔒 Private Chat with ${currentChat}` : '💬 General Chat - 90s Style'}
+                                        {selectedUserId ? `🔒 Private Chat with ${users.find(user => user.id === selectedUserId)?.username}` : '💬 General Chat - 90s Style'}
                                     </h2>
                                 </div>
                                 <div className="flex items-center space-x-1 sm:space-x-2">
-                                    {currentChat && (
+                                    {selectedUserId && (
                                         <button
                                             onClick={handleGeneralChat}
                                             className="px-2 sm:px-3 py-1 bg-yellow-500 hover:bg-yellow-600 text-black text-xs font-bold  transition-colors"
@@ -452,24 +513,24 @@ const Chatroom: React.FC = () => {
                         {/* Messages Area */}
                         <div ref={messagesContainerRef} className="flex-1 overflow-y-auto p-2 sm:p-4 space-y-2 sm:space-y-4 bg-black/10 custom-scrollbar relative">
                             {(() => {
-                                const currentMessages = currentChat ? (privateChats.get(currentChat) || []) : messages;
-                                
+                                const currentMessages = messages;
+
                                 if (currentMessages.length === 0) {
                                     return (
                                         <div className="flex items-center justify-center h-full">
                                             <div className="text-center text-gray-400">
                                                 <div className="text-4xl sm:text-6xl mb-2 sm:mb-4 animate-bounce">💭</div>
                                                 <p className="text-sm sm:text-lg font-bold mb-1 sm:mb-2">
-                                                    {currentChat ? `Private chat with ${currentChat}` : 'Welcome to the 90s Chatroom!'}
+                                                    {selectedUserId ? `Private chat with ${selectedUserId}` : 'Welcome to the 90s Chatroom!'}
                                                 </p>
                                                 <p className="text-xs sm:text-sm">
-                                                    {currentChat ? 'Start a private conversation! 🔒' : 'Start the conversation and let the nostalgia flow! 🚀'}
+                                                    {selectedUserId ? 'Start a private conversation! 🔒' : 'Start the conversation and let the nostalgia flow! 🚀'}
                                                 </p>
                                             </div>
                                         </div>
                                     );
                                 }
-                                
+
                                 return (
                                     <>
                                         {currentMessages.map((message) => (
@@ -536,11 +597,13 @@ const Chatroom: React.FC = () => {
                                 {users.map((user, index) => (
                                     <div
                                         key={index}
-                                        className={`group p-3  border-2 cursor-pointer transition-all duration-300 hover:scale-[1.02] ${user.username === username
+                                        className={`group p-3  border-2 cursor-pointer transition-all duration-300 hover:scale-[1.02] ${user.id === currentUser.current.id
                                             ? 'bg-gradient-to-r from-green-500/20 to-blue-500/20 border-green-400 text-green-400 shadow-[0_0_15px_rgba(0,255,0,0.2)]'
-                                            : selectedUser === user.username
+                                            : selectedUserId === user.id
                                                 ? 'bg-gradient-to-r from-yellow-500/20 to-orange-500/20 border-yellow-400 text-yellow-400 shadow-[0_0_15px_rgba(255,255,0,0.2)]'
-                                                : 'bg-gradient-to-r from-purple-500/10 to-pink-500/10 border-purple-400/50 text-purple-300 hover:border-cyan-400 hover:text-cyan-300 hover:shadow-[0_0_15px_rgba(0,255,255,0.1)]'
+                                                : user.isOnline
+                                                    ? 'bg-gradient-to-r from-purple-500/10 to-pink-500/10 border-purple-400/50 text-purple-300 hover:border-cyan-400 hover:text-cyan-300 hover:shadow-[0_0_15px_rgba(0,255,255,0.1)]'
+                                                    : 'bg-gradient-to-r from-gray-500/5 to-gray-600/5 border-gray-500/30 text-gray-400 opacity-60'
                                             }`}
                                         onClick={() => {
                                             handleUserClick(user);
@@ -549,31 +612,45 @@ const Chatroom: React.FC = () => {
                                     >
                                         <div className="flex items-center justify-between">
                                             <div className="flex items-center space-x-3">
-                                                <div className="w-10 h-10  bg-gradient-to-r from-cyan-400 to-purple-400 flex items-center justify-center text-lg">
-                                                    {getRandom90sEmoji()}
+                                                <div className="w-10 h-10  bg-gradient-to-r from-cyan-400 to-purple-400 flex items-center justify-center text-lg font-bold text-white">
+                                                    {user.username.charAt(0).toUpperCase()}
                                                 </div>
                                                 <div>
                                                     <div className="flex items-center space-x-2">
                                                         <span className="font-bold text-sm">{user.username}</span>
-                                                        {user.username === username && (
+                                                        <div className="flex items-center space-x-1">
+                                                            <div className={`w-2 h-2 rounded-full ${user.isOnline ? 'bg-green-400' : 'bg-gray-400'}`}></div>
+                                                            <span className="text-xs opacity-70">
+                                                                {user.isOnline ? 'Online' : 'Offline'}
+                                                            </span>
+                                                        </div>
+                                                        {user.id === currentUser.current.id && (
                                                             <span className="text-xs bg-green-500 text-black px-2 py-0.5  font-bold">
                                                                 YOU
                                                             </span>
                                                         )}
                                                     </div>
-                                                    <div className="text-xs opacity-70">
-                                                        {formatTime(user.joinedAt)}
+                                                    <div className="flex items-center justify-between">
+                                                        <div className="text-xs opacity-70">
+                                                            {formatTime(user.joinedAt)}
+                                                        </div>
+                                                        <div className="flex items-center space-x-1">
+                                                            {(user.unreadCount || 0) > 0 && (
+                                                                <span className="bg-red-500 text-white text-xs px-2 py-0.5 font-bold">
+                                                                    {user.unreadCount}
+                                                                </span>
+                                                            )}
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
                                             <button
                                                 onClick={(e) => {
                                                     e.stopPropagation();
-                                                    handleMentionUser(user);
                                                     setShowUserList(false); // Close overlay after mention
                                                 }}
                                                 className="opacity-0 group-hover:opacity-100 bg-cyan-500 hover:bg-cyan-600 text-black px-2 py-1  text-xs font-bold transition-all duration-300"
-                                                disabled={user.username === username}
+                                                disabled={user.id === currentUser.current.id}
                                             >
                                                 @
                                             </button>
@@ -592,18 +669,18 @@ const Chatroom: React.FC = () => {
 
                         {/* Message Input */}
                         <div className="p-2 sm:p-4 border-t border-cyan-400/30 bg-gradient-to-r from-gray-800/50 to-purple-800/50">
-                            {selectedUser && (
+                            {selectedUserId && (
                                 <div className="mb-2 sm:mb-3 flex items-center justify-between bg-yellow-400/20 border border-yellow-400/50  p-2 sm:p-3">
                                     <div className="flex items-center space-x-1 sm:space-x-2">
                                         <span className="text-yellow-400 text-xs sm:text-sm font-bold">
                                             Replying to:
                                         </span>
                                         <span className="text-yellow-300 font-bold text-xs sm:text-sm">
-                                            @{selectedUser}
+                                            @{users.find(user => user.id === selectedUserId)?.username}
                                         </span>
                                     </div>
                                     <button
-                                        onClick={() => setSelectedUser(null)}
+                                        onClick={() => setSelectedUserId(null)}
                                         className="text-yellow-400 hover:text-white transition-colors p-1"
                                     >
                                         ✕
@@ -618,7 +695,7 @@ const Chatroom: React.FC = () => {
                                         type="text"
                                         value={newMessage}
                                         onChange={(e) => setNewMessage(e.target.value)}
-                                        placeholder={currentChat ? `Private message to ${currentChat}...` : "Type your message here... (Press Enter to send)"}
+                                        placeholder={selectedUserId ? `Private message to ${users.find(user => user.id === selectedUserId)?.username}...` : "Type your message here... (Press Enter to send)"}
                                         className="w-full px-3 sm:px-4 py-2 sm:py-3 bg-black/60 border-2 border-cyan-400/50  sm: text-white placeholder-gray-400 focus:border-yellow-400 focus:outline-none focus:shadow-[0_0_15px_rgba(255,255,0,0.3)] transition-all duration-300 text-sm sm:text-base"
                                         disabled={!isConnected}
                                     />
@@ -639,7 +716,7 @@ const Chatroom: React.FC = () => {
             {/* Username Modal */}
             <UsernameModal
                 isOpen={isUsernameModalOpen}
-                onClose={() => setIsUsernameModalOpen(false)}
+                onClose={() => { }}
                 onUsernameSubmit={handleUsernameSubmit}
             />
         </div>

@@ -8,7 +8,7 @@ class SocketService {
     if (!this.socket) {
       // Connect to the server - adjust URL based on your setup
       const serverUrl = process.env.REACT_APP_SOCKET_URL || 'http://localhost:5003';
-      this.socket = io(serverUrl, {
+      this.socket = io(serverUrl + '/chat', {
         transports: ['websocket', 'polling'],
         timeout: 20000,
         forceNew: true
@@ -50,39 +50,33 @@ class SocketService {
   }
 
   // Chat specific methods
-  joinChatroom(username: string): void {
+  joinChatroom(userId: string, username: string): void {
     if (this.socket) {
-      this.socket.emit('join_chatroom', { username });
+      this.socket.emit('join_chatroom', { userId, username });
     }
   }
 
-  sendMessage(message: string, username: string): void {
+  sendMessage(message: string, roomId: string): void {
     if (this.socket) {
-      console.log('Emitting send_message:', { message, username });
-      this.socket.emit('send_message', { 
-        message, 
-        username,
-        timestamp: new Date().toISOString()
+      console.log('Emitting send_message:', { message, roomId });
+      this.socket.emit('send_message', {
+        message,
+        roomId,
       });
     } else {
       console.error('Socket not connected');
     }
   }
 
-  sendPrivateMessage(message: string, username: string, recipient: string): void {
+  selectUser(userId: string | null): void {
     if (this.socket) {
-      this.socket.emit('send_private_message', { 
-        message, 
-        username,
-        recipient,
-        timestamp: new Date().toISOString()
-      });
+      this.socket.emit('select_user', { userId });
     }
   }
 
-  loadPrivateChat(otherUser: string): void {
+  markMessagesAsRead(messageIds: string[]): void {
     if (this.socket) {
-      this.socket.emit('load_private_chat', { otherUser });
+      this.socket.emit('mark_messages_read', { messageIds });
     }
   }
 
@@ -101,12 +95,6 @@ class SocketService {
   onUserLeft(callback: (data: any) => void): void {
     if (this.socket) {
       this.socket.on('user_left', callback);
-    }
-  }
-
-  onUserListUpdate(callback: (users: string[]) => void): void {
-    if (this.socket) {
-      this.socket.on('user_list_update', callback);
     }
   }
 

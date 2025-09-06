@@ -7,7 +7,7 @@ import Footer from './Footer';
 import DancingBaby from './DancingBaby';
 import Clippy from './Clippy';
 import MatrixRain from './MatrixRain';
-import { use90sFeatures } from '../hooks/use90sFeatures';
+// import { use90sFeatures } from '../hooks/use90sFeatures';
 
 interface LayoutProps {
   showSidebars?: boolean;
@@ -15,23 +15,23 @@ interface LayoutProps {
   showAudio?: boolean;
 }
 
-const Layout: React.FC<LayoutProps> = ({ 
-  showSidebars = true, 
-  showMatrixRain = true, 
-  showAudio = true 
+const Layout: React.FC<LayoutProps> = ({
+  showSidebars = true,
+  showMatrixRain = true,
+  showAudio = true
 }) => {
   const budweiserAudioRef = useRef<HTMLAudioElement>(null);
   const [matrixRainVisible, setMatrixRainVisible] = useState(false);
 
   // Initialize 90s features
-  use90sFeatures();
+  // use90sFeatures();
 
   const handleLoadingComplete = () => {
     setMatrixRainVisible(true);
     if (showAudio) {
       try {
         if (budweiserAudioRef.current) {
-          budweiserAudioRef.current.play().catch(err => 
+          budweiserAudioRef.current.play().catch(err =>
             console.log('Budweiser audio play failed:', err)
           );
         }
@@ -49,7 +49,7 @@ const Layout: React.FC<LayoutProps> = ({
     <div className="min-h-screen">
       {/* Background Effects */}
       {showMatrixRain && matrixRainVisible && <MatrixRain />}
-      
+
       {/* Interactive Elements */}
       <DancingBaby />
       <Clippy />

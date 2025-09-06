@@ -1,24 +1,73 @@
 import React, { useState, useEffect } from 'react';
-import { Meme } from '../types/meme';
+import { useParams, useNavigate, useSearchParams } from 'react-router-dom';
+import { Meme, MemeQueryParams, PaginatedResponse } from '../types/meme';
 import memeApi from '../services/memeApi';
 import MemeModal from './MemeModal';
+import FullscreenMemeModal from './FullscreenMemeModal';
+import Pagination from './Pagination';
 import { useToast } from '../contexts/ToastContext';
 
 const MemesPage: React.FC = () => {
+  const { memeId } = useParams<{ memeId: string }>();
+  const navigate = useNavigate();
+  const [searchParams, setSearchParams] = useSearchParams();
   const [isMemeModalOpen, setIsMemeModalOpen] = useState(false);
   const [memes, setMemes] = useState<Meme[]>([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [selectedMeme, setSelectedMeme] = useState<Meme | null>(null);
+  const [isFullscreenOpen, setIsFullscreenOpen] = useState(false);
+  const [pagination, setPagination] = useState({
+    page: 1,
+    limit: 24,
+    total: 0,
+    totalPages: 0,
+    hasNext: false,
+    hasPrev: false
+  });
+  const [searchTerm, setSearchTerm] = useState('');
+  const [debouncedSearchTerm, setDebouncedSearchTerm] = useState('');
+  const [sortBy, setSortBy] = useState<'newest' | 'oldest' | 'mostVoted' | 'leastVoted'>('mostVoted');
   const { showToast } = useToast();
 
-  // Load memes on component mount
+  // Debounce search term
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setDebouncedSearchTerm(searchTerm);
+    }, 500);
+
+    return () => clearTimeout(timer);
+  }, [searchTerm]);
+
+  // Initialize URL parameters on component mount
+  useEffect(() => {
+    const page = parseInt(searchParams.get('page') || '1');
+    const limit = parseInt(searchParams.get('limit') || '24');
+    const search = searchParams.get('search') || '';
+    const sort = (searchParams.get('sortBy') as 'newest' | 'oldest' | 'mostVoted' | 'leastVoted') || 'mostVoted';
+    
+    setPagination(prev => ({ ...prev, page, limit }));
+    setSearchTerm(search);
+    setSortBy(sort);
+  }, [searchParams]);
+
+  // Load memes with pagination
   useEffect(() => {
     const loadMemes = async () => {
       try {
         setIsLoading(true);
-        const response = await memeApi.getAllMemes();
-        if (response.success && response.data) {
-          const validMemes = Array.isArray(response.data) ? response.data.filter(meme => meme && meme.id) : [];
-          setMemes(validMemes);
+        
+        const queryParams: MemeQueryParams = {
+          page: pagination.page,
+          limit: pagination.limit,
+          search: debouncedSearchTerm,
+          sortBy: sortBy
+        };
+        
+        const response: PaginatedResponse<Meme> = await memeApi.getMemesPaginated(queryParams);
+        
+        if (response.success && response.data && response.pagination) {
+          setMemes(response.data);
+          setPagination(response.pagination);
         } else {
           console.error('Failed to load memes:', response.error);
           setMemes([]);
@@ -32,7 +81,18 @@ const MemesPage: React.FC = () => {
     };
 
     loadMemes();
-  }, []);
+  }, [pagination.page, pagination.limit, debouncedSearchTerm, sortBy]);
+
+  // Handle URL-based meme opening
+  useEffect(() => {
+    if (memeId && memes.length > 0) {
+      const meme = memes.find(m => m.id === memeId);
+      if (meme) {
+        setSelectedMeme(meme);
+        setIsFullscreenOpen(true);
+      }
+    }
+  }, [memeId, memes]);
 
   const handleMemeSubmit = async (imageUrl: string | undefined, file?: File) => {
     try {
@@ -60,11 +120,17 @@ const MemesPage: React.FC = () => {
       if (response.success) {
         showToast('Meme added successfully! 🎉', 'success');
         setIsMemeModalOpen(false);
-        // Reload memes to show the new one
-        const reloadResponse = await memeApi.getAllMemes();
-        if (reloadResponse.success && reloadResponse.data) {
-          const validMemes = Array.isArray(reloadResponse.data) ? reloadResponse.data.filter(meme => meme && meme.id) : [];
-          setMemes(validMemes);
+        // Reload current page to show the new meme
+        const queryParams: MemeQueryParams = {
+          page: pagination.page,
+          limit: pagination.limit,
+          search: searchTerm,
+          sortBy: sortBy
+        };
+        const reloadResponse: PaginatedResponse<Meme> = await memeApi.getMemesPaginated(queryParams);
+        if (reloadResponse.success && reloadResponse.data && reloadResponse.pagination) {
+          setMemes(reloadResponse.data);
+          setPagination(reloadResponse.pagination);
         }
       } else {
         showToast(response.error || 'Failed to add meme', 'error');
@@ -75,103 +141,233 @@ const MemesPage: React.FC = () => {
     }
   };
 
-  const handleDeleteMeme = async (id: string) => {
-    if (window.confirm('Are you sure you want to delete this meme?')) {
-      try {
-        const response = await memeApi.deleteMeme(id);
-        if (response.success) {
-          showToast('Meme deleted successfully! 🗑️', 'success');
-          // Reload memes
-          const reloadResponse = await memeApi.getAllMemes();
-          if (reloadResponse.success && reloadResponse.data) {
-            const validMemes = Array.isArray(reloadResponse.data) ? reloadResponse.data.filter(meme => meme && meme.id) : [];
-            setMemes(validMemes);
+  const handleVoteMeme = async (id: string, voteType: 'up' | 'down') => {
+    try {
+      const response = await memeApi.voteMeme(id, voteType);
+      if (response.success) {
+        showToast(`Meme ${voteType}voted! 👍`, 'success');
+        // Reload current page to get updated vote counts
+        const queryParams: MemeQueryParams = {
+          page: pagination.page,
+          limit: pagination.limit,
+          search: searchTerm,
+          sortBy: sortBy
+        };
+        const reloadResponse: PaginatedResponse<Meme> = await memeApi.getMemesPaginated(queryParams);
+        if (reloadResponse.success && reloadResponse.data && reloadResponse.pagination) {
+          setMemes(reloadResponse.data);
+          setPagination(reloadResponse.pagination);
+          
+          // Update selected meme if it's currently open
+          if (selectedMeme && selectedMeme.id === id) {
+            const updatedMeme = reloadResponse.data.find(m => m.id === id);
+            if (updatedMeme) {
+              setSelectedMeme(updatedMeme);
+            }
           }
-        } else {
-          showToast(response.error || 'Failed to delete meme', 'error');
         }
-      } catch (error) {
-        showToast('Failed to delete meme. Please try again.', 'error');
-        console.error('Error deleting meme:', error);
+      } else {
+        showToast(response.error || 'Failed to vote meme', 'error');
       }
+    } catch (error) {
+      showToast('Failed to vote meme. Please try again.', 'error');
+      console.error('Error voting meme:', error);
     }
+  };
+
+  const handleMemeClick = (meme: Meme) => {
+    setSelectedMeme(meme);
+    setIsFullscreenOpen(true);
+    navigate(`/memes/${meme.id}`);
+  };
+
+  const handleCloseFullscreen = () => {
+    setIsFullscreenOpen(false);
+    setSelectedMeme(null);
+    navigate('/memes');
+  };
+
+  // Update URL parameters when pagination, search, or sort changes
+  const updateUrlParams = (updates: Partial<{ page: number; limit: number; search: string; sortBy: string }>) => {
+    const newSearchParams = new URLSearchParams(searchParams);
+    
+    Object.entries(updates).forEach(([key, value]) => {
+      if (value !== undefined && value !== null && value !== '') {
+        newSearchParams.set(key, value.toString());
+      } else {
+        newSearchParams.delete(key);
+      }
+    });
+    
+    setSearchParams(newSearchParams);
+  };
+
+  const handlePageChange = (page: number) => {
+    updateUrlParams({ page });
+    // Scroll to top when changing pages
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  const handleSearchChange = (search: string) => {
+    setSearchTerm(search);
+    updateUrlParams({ search, page: 1 });
+  };
+
+  const handleSortChange = (sort: 'newest' | 'oldest' | 'mostVoted' | 'leastVoted') => {
+    setSortBy(sort);
+    updateUrlParams({ sortBy: sort, page: 1 });
+  };
+
+  const handleItemsPerPageChange = (newLimit: number) => {
+    updateUrlParams({ limit: newLimit, page: 1 });
   };
 
   if (isLoading) {
     return (
-      <div className="container mx-auto px-3 sm:px-4 lg:px-6 py-6 sm:py-8">
+      <div className="min-h-screen flex items-center justify-center">
         <div className="text-center">
-          <div className="animate-spin text-4xl sm:text-5xl lg:text-6xl mb-3 sm:mb-4">🔄</div>
-          <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-pink-500 mb-3 sm:mb-4">Loading Memes...</h1>
-          <p className="text-white text-sm sm:text-base lg:text-lg">Fetching the raddest 90s memes...</p>
+          <div className="relative mb-8">
+            <div className="w-20 h-20 border-4 border-purple-500/30 border-t-purple-500 rounded-full animate-spin mx-auto"></div>
+            <div className="absolute inset-0 flex items-center justify-center">
+              <span className="text-2xl">🎭</span>
+            </div>
+          </div>
+          <h1 className="text-3xl font-bold bg-gradient-to-r from-pink-400 to-purple-400 bg-clip-text text-transparent mb-4">
+            Loading Memes...
+          </h1>
+          <p className="text-gray-300 text-sm">Fetching the most radical 90s memes...</p>
         </div>
       </div>
     );
   }
 
   return (
-    <div className="container mx-auto px-3 sm:px-4 lg:px-6 py-6 sm:py-8">
+    <div className="min-h-screen">
+      <div className="container mx-auto px-4 py-6">
         {/* Header */}
-        <div className="text-center mb-6 sm:mb-8">
-          <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-pink-500 mb-3 sm:mb-4 animate-pulse">
-            😂 90s Memes Collection
-          </h1>
-          <p className="text-white text-sm sm:text-base md:text-lg mb-4 sm:mb-6 px-2">
-            The most radical memes from the decade that brought us dial-up and Tamagotchis!
-          </p>
-          <button
-            onClick={() => setIsMemeModalOpen(true)}
-            className="bg-gradient-to-r from-pink-500 to-purple-600 text-white px-4 py-2 sm:px-6 sm:py-3 lg:px-8 lg:py-4 font-bold text-sm sm:text-base lg:text-lg hover:from-pink-600 hover:to-purple-700 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1"
-          >
-            ➕ Add New Meme
-          </button>
+        <div className="text-center mb-8">
+          <h1 className="text-3xl font-bold text-white mb-6">90s Memes Gallery</h1>
+          
+          {/* Search and Filter Controls */}
+          <div className="flex flex-col sm:flex-row gap-4 items-center justify-center mb-6">
+            {/* Search Bar */}
+            <div className="relative">
+                          <input
+              type="text"
+              placeholder="Search memes..."
+              value={searchTerm}
+              onChange={(e) => handleSearchChange(e.target.value)}
+              className="bg-gray-800 border-2 border-cyan-400 text-cyan-400 placeholder-gray-400 px-4 py-2 pr-10 font-bold focus:border-pink-400 focus:outline-none w-64"
+            />
+              <div className="absolute right-3 top-1/2 transform -translate-y-1/2 text-cyan-400">
+                🔍
+              </div>
+            </div>
+
+            {/* Sort Dropdown */}
+            <select
+              value={sortBy}
+              onChange={(e) => handleSortChange(e.target.value as any)}
+              className="bg-gray-800 border-2 border-cyan-400 text-cyan-400 px-4 py-2 font-bold focus:border-pink-400 focus:outline-none"
+            >
+              <option value="mostVoted">🔥 Most Voted</option>
+              <option value="leastVoted">👎 Least Voted</option>
+              <option value="newest">🆕 Newest</option>
+              <option value="oldest">⏰ Oldest</option>
+            </select>
+
+            {/* Add Meme Button */}
+            <button
+              onClick={() => setIsMemeModalOpen(true)}
+              className="bg-gradient-to-r from-green-600 to-blue-600 hover:from-green-700 hover:to-blue-700 text-white px-6 py-2 font-bold transition-all duration-300 border-2 border-green-400 hover:border-blue-400 hover:shadow-[0_0_15px_rgba(0,255,0,0.4)]"
+            >
+              ➕ Add Meme
+            </button>
+          </div>
+
+          {/* Results Info */}
+          {searchTerm && (
+            <div className="text-cyan-400 text-sm mb-4">
+              Showing {memes.length} of {pagination.total} memes
+            </div>
+          )}
         </div>
 
         {/* Memes Grid */}
         {memes.length === 0 ? (
-          <div className="text-center py-8 sm:py-12">
-            <div className="text-6xl sm:text-7xl lg:text-8xl mb-3 sm:mb-4">😢</div>
-            <h2 className="text-2xl sm:text-3xl font-bold text-yellow-400 mb-3 sm:mb-4">No Memes Yet!</h2>
-            <p className="text-white text-base sm:text-lg mb-4 sm:mb-6 px-2">
-              Be the first to add a totally tubular 90s meme!
-            </p>
+          <div className="text-center py-16">
+            <h2 className="text-xl font-bold text-white mb-4">No Memes Yet!</h2>
+            <p className="text-gray-400 mb-6">Be the first to add a meme!</p>
             <button
               onClick={() => setIsMemeModalOpen(true)}
-              className="bg-gradient-to-r from-green-500 to-blue-600 text-white px-4 py-2 sm:px-6 sm:py-3 lg:px-8 lg:py-4 font-bold text-sm sm:text-base lg:text-lg hover:from-green-600 hover:to-blue-700 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1"
+              className="bg-green-600 hover:bg-green-700 text-white px-4 py-2 font-medium transition-colors duration-200"
             >
-              🚀 Add First Meme
+              Add First Meme
             </button>
           </div>
         ) : (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 sm:gap-4 lg:gap-6">
-            {memes.map((meme) => (
-              <div
-                key={meme.id}
-                className="bg-gradient-to-br from-gray-800 to-gray-900 p-2 md:p-4 border-2 border-pink-500 shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2"
-              >
-                <div className="mb-3 sm:mb-4">
-                  <img
-                    src={meme.imageUrl}
-                    alt="90s Meme"
-                    className="w-full h-40 sm:h-44 lg:h-48 xl:h-52 object-cover border-2 border-yellow-400"
-                    onLoad={() => console.log('✅ Image loaded successfully:', meme.imageUrl)}
-                  />
-                </div>
-                <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2 sm:gap-0">
-                  <span className="text-xs sm:text-sm text-gray-400">
-                    Added: {new Date(meme.createdAt).toLocaleDateString()}
-                  </span>
-                  <button
-                    onClick={() => handleDeleteMeme(meme.id)}
-                    // disabled={true}
-                    className="bg-red-600 hover:bg-red-700 text-white px-2 py-1 sm:px-3 sm:py-1 text-xs sm:text-sm font-bold transition-colors duration-200 w-full sm:w-auto"
+          <>
+            {/* Memes Grid */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 mb-6">
+              {memes.map((meme, index) => (
+                <div
+                  key={meme.id}
+                  className="bg-gray-800 border border-gray-700 overflow-hidden hover:border-gray-600 transition-colors duration-200"
+                >
+                  {/* Image */}
+                  <div 
+                    className="relative cursor-pointer"
+                    onClick={() => handleMemeClick(meme)}
                   >
-                    🗑️ Delete
-                  </button>
+                    <img
+                      src={meme.imageUrl}
+                      alt="90s Meme"
+                      className="w-full h-48 object-cover"
+                      onLoad={() => console.log('✅ Image loaded successfully:', meme.imageUrl)}
+                    />
+                  </div>
+
+                  {/* Vote Controls */}
+                  <div className="p-3" onClick={(e) => e.stopPropagation()}>
+                    <div className="flex gap-2 mb-2">
+                      <button
+                        onClick={() => handleVoteMeme(meme.id, 'up')}
+                        className="flex-1 flex items-center justify-center gap-1 bg-green-600 hover:bg-green-700 text-white px-2 py-1 text-sm font-medium transition-colors duration-200"
+                      >
+                        <span className="text-xs">{meme.upVotes || 0}</span>
+                        <span>👍</span>
+                      </button>
+                      <button
+                        onClick={() => handleVoteMeme(meme.id, 'down')}
+                        className="flex-1 flex items-center justify-center gap-1 bg-red-600 hover:bg-red-700 text-white px-2 py-1 text-sm font-medium transition-colors duration-200"
+                      >
+                        <span className="text-xs">{meme.downVotes || 0}</span>
+                        <span>👎</span>
+                      </button>
+                    </div>
+                    
+                    {/* Score and Date */}
+                    <div className="flex justify-between items-center text-xs text-gray-400">
+                      <span>Score: {meme.votes || 0}</span>
+                      <span>{new Date(meme.createdAt).toLocaleDateString()}</span>
+                    </div>
+                  </div>
                 </div>
-              </div>
-            ))}
-          </div>
+              ))}
+            </div>
+
+            {/* Pagination */}
+            {pagination.totalPages > 1 && (
+              <Pagination
+                currentPage={pagination.page}
+                totalPages={pagination.totalPages}
+                onPageChange={handlePageChange}
+                itemsPerPage={pagination.limit}
+                totalItems={pagination.total}
+                onItemsPerPageChange={handleItemsPerPageChange}
+              />
+            )}
+          </>
         )}
 
         {/* Meme Modal */}
@@ -180,6 +376,15 @@ const MemesPage: React.FC = () => {
           onClose={() => setIsMemeModalOpen(false)}
           onSubmit={handleMemeSubmit}
         />
+
+        {/* Fullscreen Meme Modal */}
+        <FullscreenMemeModal
+          isOpen={isFullscreenOpen}
+          meme={selectedMeme}
+          onClose={handleCloseFullscreen}
+          onVote={handleVoteMeme}
+        />
+      </div>
     </div>
   );
 };

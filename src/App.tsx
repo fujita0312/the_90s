@@ -17,6 +17,7 @@ function App() {
             <Route path="main" element={<MainLayout />} />
             <Route path="games" element={<GamesPage />} />
             <Route path="memes" element={<MemesPage />} />
+            <Route path="memes/:memeId" element={<MemesPage />} />
             <Route path="chatroom" element={<ChatroomPage />} />
           </Route>
         </Routes>

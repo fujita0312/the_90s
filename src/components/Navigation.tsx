@@ -8,7 +8,7 @@ const Navigation: React.FC = () => {
 
   const navItems = [
     { path: '/main', label: 'HOME', icon: '🏠', description: 'Main Page' },
-    { path: '/games', label: 'GAMES', icon: '🎮', description: 'Arcade Games' },
+    { path: '/games', label: 'ARCADE', icon: '🎮', description: 'Arcade Games' },
     { path: '/memes', label: 'MEMES', icon: '😂', description: '90s Memes' },
     { path: '/chatroom', label: 'CHAT', icon: '💬', description: 'Live Chatroom' },
   ];

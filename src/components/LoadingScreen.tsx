@@ -1,6 +1,6 @@
 import { useState, useRef } from 'react';
 import { useToast } from '../contexts/ToastContext';
-import { use90sFeatures } from '../hooks/use90sFeatures';
+// import { use90sFeatures } from '../hooks/use90sFeatures';
 import { useNavigate } from 'react-router-dom';
 
 const LoadingScreen = () => {
@@ -9,7 +9,7 @@ const LoadingScreen = () => {
     const [progress, setProgress] = useState(0);
     const dialupAudioRef = useRef<HTMLAudioElement>(null);
     const navigate = useNavigate();
-    use90sFeatures();
+    // use90sFeatures();
     const handleConnect = async () => {
         setShowProgress(true);
 
