@@ -130,8 +130,22 @@ const MusicPlayer: React.FC = () => {
           return response.data as MusicTrack;
         }
         
-        console.error('Upload failed:', response.error || 'Unknown error');
-        return null;
+        // Handle specific error cases
+        if (response.error) {
+          if (response.error.includes('too large') || response.error.includes('413')) {
+            console.error('File too large:', response.error);
+            throw new Error(`File too large. Please choose a smaller file.`);
+          } else if (response.error.includes('timeout') || response.error.includes('504')) {
+            console.error('Upload timeout:', response.error);
+            throw new Error(`Upload timeout. Please try again with a smaller file.`);
+          } else {
+            console.error('Upload failed:', response.error);
+            throw new Error(`Upload failed: ${response.error}`);
+          }
+        }
+        
+        console.error('Upload failed: Unknown error');
+        throw new Error('Upload failed: Unknown error');
       });
 
       const uploadedTracks = (await Promise.all(uploadPromises)).filter(Boolean) as MusicTrack[];
@@ -152,23 +166,13 @@ const MusicPlayer: React.FC = () => {
       if (fileInput) fileInput.value = '';
     } catch (error) {
       console.error('Error uploading audio files:', error);
-      // Fallback to local handling
-      const newTracks = selectedFiles.map(file => ({
-        _id: URL.createObjectURL(file),
-        title: file.name.replace(/\.[^/.]+$/, ""),
-        type: 'audio' as const,
-        url: URL.createObjectURL(file),
-        createdAt: new Date().toISOString(),
-        updatedAt: new Date().toISOString()
-      }));
-
-      setPlaylist(prev => [...prev, ...newTracks]);
-      if (newTracks.length > 0) {
-        loadAudioFile(newTracks[0]);
-        setCurrentIndex(playlist.length);
-      }
-
-      // Clear selected files after fallback
+      
+      // Show user-friendly error message
+      const errorMessage = error instanceof Error ? error.message : 'Upload failed';
+      alert(`❌ Upload Error: ${errorMessage}`);
+      
+      // Don't fallback to local handling for server errors
+      // Just clear the selected files
       setSelectedFiles([]);
       const fileInput = document.getElementById('audio-file-input') as HTMLInputElement;
       if (fileInput) fileInput.value = '';
