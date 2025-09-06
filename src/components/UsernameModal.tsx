@@ -44,7 +44,7 @@ const UsernameModal: React.FC<UsernameModalProps> = ({ isOpen, onClose, onUserna
       />
       
       {/* Modal Content */}
-      <div className="relative z-10 w-full max-w-md bg-gradient-to-br from-gray-900/95 via-purple-900/95 to-gray-900/95 backdrop-blur-sm border-2 border-cyan-400 rounded-2xl shadow-[0_0_40px_rgba(0,255,255,0.3)] p-8">
+      <div className="relative z-10 w-full max-w-md bg-gradient-to-br from-gray-900/95 via-purple-900/95 to-gray-900/95 backdrop-blur-sm border-2 border-cyan-400 shadow-[0_0_40px_rgba(0,255,255,0.3)] p-8">
         {/* Header */}
         <div className="text-center mb-8">
           <div className="w-16 h-16 bg-gradient-to-r from-cyan-400 to-purple-400 flex items-center justify-center mx-auto mb-4 animate-pulse">
