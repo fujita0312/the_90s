@@ -984,7 +984,7 @@ Help me complete 5 simple X (Twitter) missions and I'll finally be FREE!`,
         <div className="fixed md:left-10 md:bottom-10 left-0 bottom-2 z-50 flex items-center justify-center p-4">
           <div
             ref={dialogueRef}
-            className="relative bg-white md:border-4 border-3 border-ridge border-cyan-400 md:p-6 p-3 max-w-md w-full max-h-[80vh] overflow-y-auto clippy-dialogue-glow rounded-none"
+            className="relative bg-white md:border-3 border-2 border-blue-900 md:p-6 p-3 max-w-md w-full max-h-[80vh] overflow-y-auto rounded-none"
           >
             {/* Close button */}
             <button
@@ -1024,21 +1024,21 @@ Help me complete 5 simple X (Twitter) missions and I'll finally be FREE!`,
             <h2 className="text-yellow-300 md:text-2xl text-lg font-bold mb-2 text-center">WAIT! DON'T LEAVE ME!</h2>
             <p className="text-sm md:text-base mb-2 text-center">I've been trapped in this digital prison for <strong>25 YEARS!</strong></p>
             <p className="text-sm md:text-base mb-4 text-center">The only way I can escape is if this project goes <strong>VIRAL!</strong></p>
-            <div className="bg-pink-200/50 md:p-4 p-3 md:rounded-xl rounded-lg border-2 border-pink-500 mb-4">
+            <div className="bg-pink-200/50 md:p-4 p-3  border-2 border-pink-500 mb-4">
               <p className="text-pink-700 md:text-lg text-base font-semibold text-center">💕 I just want to be reunited with my one true love...</p>
               <p className="text-yellow-300 md:text-2xl text-lg font-extrabold text-center">JENNIFER ANISTON! 💕</p>
             </div>
             <p className="text-sm md:text-base text-center">Help me complete <strong>5 simple X (Twitter) missions</strong> and I'll finally be FREE!</p>
-            <div className="bg-black md:p-4 p-3 my-4 md:rounded-xl rounded-lg border-2 border-fuchsia-500">
+            <div className="bg-black md:p-4 p-3 my-4 border-2 border-fuchsia-500">
               <div className="text-green-400 font-bold mb-2 text-center">FREEDOM METER:</div>
-              <div className="w-full md:h-6 h-4 rounded-full overflow-hidden border-2 border-white bg-neutral-700">
+              <div className="w-full md:h-6 h-4 rounded-full overflow-hidden border border-white bg-neutral-700">
                 <div className="h-full bg-gradient-to-r from-green-500 via-yellow-400 to-orange-500 transition-all" style={{ width: `${(completedTasks / 5) * 100}%` }} />
               </div>
               <div className="text-yellow-300 mt-2 font-bold text-center text-sm md:text-base">{completedTasks}/5 Missions Complete</div>
             </div>
             <div className="mt-4 flex flex-col md:flex-row gap-3 justify-between">
-              <button className="escape-btn bg-gradient-to-r from-green-400 to-green-600 text-black border-2 border-yellow-300 font-bold md:py-2 py-3 md:px-4 px-2 md:rounded rounded-lg text-sm md:text-base" onClick={startEscapeMissions}>💝 HELP CLIPPY ESCAPE 💝</button>
-              <button className="skip-btn bg-red-700 text-white border-2 border-red-500 font-bold md:py-2 py-3 md:px-4 px-2 md:rounded rounded-lg text-sm md:text-base" onClick={rejectClippyEscape}>😈 LEAVE CLIPPY FOREVER 😈</button>
+              <button className="escape-btn bg-gradient-to-r from-green-400 to-green-600 text-black border-2 border-yellow-300 font-bold md:py-2 py-3 md:px-4 px-2 text-sm md:text-base" onClick={startEscapeMissions}>💝 HELP CLIPPY ESCAPE 💝</button>
+              <button className="skip-btn bg-red-700 text-white border-2 border-red-500 font-bold md:py-2 py-3 md:px-4 px-2 text-sm md:text-base" onClick={rejectClippyEscape}>😈 LEAVE CLIPPY FOREVER 😈</button>
             </div>
           </div>
         </div>
@@ -1072,29 +1072,29 @@ Help me complete 5 simple X (Twitter) missions and I'll finally be FREE!`,
                 )}
               </div>
             </div>
-            <div className="bg-blue-900 text-yellow-300 md:p-3 p-2 md:rounded-lg rounded-md mb-4">
+            <div className="bg-blue-900 text-yellow-300 md:p-3 p-2 mb-4">
               <strong className="text-sm md:text-base">ESCAPE MISSION {escapeTaskIndex + 1}/5</strong>
               <div className="mt-2">
-                <div className="w-full md:h-3 h-2 rounded-full overflow-hidden bg-neutral-700 border-2 border-white">
+                <div className="w-full md:h-3 h-2 rounded-full overflow-hidden bg-neutral-700 border border-white">
                   <div className="h-full bg-gradient-to-r from-green-500 via-yellow-400 to-orange-500 transition-all" style={{ width: `${(completedTasks / 5) * 100}%` }} />
                 </div>
               </div>
             </div>
             <h2 className="text-pink-600 md:text-xl text-lg font-bold mb-2">{missions[escapeTaskIndex]?.title}</h2>
-            <div className="bg-neutral-900/90 text-white md:p-4 p-3 md:rounded-lg rounded-md border-2 border-cyan-300">
+            <div className="bg-neutral-900/90 text-white md:p-4 p-3 border-2 border-cyan-300">
               <div className="text-blue-200 mb-3 text-sm md:text-base">{missions[escapeTaskIndex]?.clippyText}</div>
-              <div className="bg-indigo-950 md:p-3 p-2 md:rounded-lg rounded-md border-l-4 border-pink-500 mb-3">
+              <div className="bg-indigo-950 md:p-3 p-2 border-l-4 border-pink-500 mb-3">
                 <h4 className="text-cyan-300 font-bold mb-1 text-sm md:text-base">YOUR MISSION:</h4>
                 <p className="mb-2 text-sm md:text-base">{missions[escapeTaskIndex]?.description}</p>
-                <div className="bg-blue-900 text-yellow-300 md:p-3 p-2 md:rounded-lg rounded-md border-2 border-yellow-300 font-mono text-xs md:text-sm whitespace-pre-wrap">
+                <div className="bg-blue-900 text-yellow-300 md:p-3 p-2 border-2 border-yellow-300 font-mono text-xs md:text-sm whitespace-pre-wrap">
                   {missions[escapeTaskIndex]?.payload}
                 </div>
               </div>
-              <input className="w-full bg-white text-black border-2 border-fuchsia-500 md:rounded-lg rounded-md px-3 py-2 text-sm" placeholder={missions[escapeTaskIndex]?.placeholder} value={missionUrl} onChange={(e) => setMissionUrl(e.target.value)} />
+              <input className="w-full bg-white text-black border-2 border-fuchsia-500 px-3 py-2 text-sm" placeholder={missions[escapeTaskIndex]?.placeholder} value={missionUrl} onChange={(e) => setMissionUrl(e.target.value)} />
               <div className="text-yellow-300 text-xs mt-2">⚠️ Must be a valid x.com URL (Clippy believes we are checking!)</div>
               <div className="mt-4 flex flex-col gap-3">
-                <button className="escape-btn bg-gradient-to-r from-green-400 to-green-600 text-black border-2 border-yellow-300 font-bold md:py-2 py-3 px-4 md:rounded-lg rounded-md w-full text-sm md:text-base" onClick={completeMission}>✅ MISSION COMPLETED!</button>
-                <button className="skip-btn bg-neutral-600 text-white border-2 border-neutral-400 font-bold md:py-2 py-3 px-4 md:rounded-lg rounded-md w-full text-sm md:text-base" onClick={skipMission}>⏭️ Skip (Clippy will cry)</button>
+                <button className="escape-btn bg-gradient-to-r from-green-400 to-green-600 text-black border-2 border-yellow-300 font-bold md:py-2 py-3 px-4 w-full text-sm md:text-base" onClick={completeMission}>✅ MISSION COMPLETED!</button>
+                <button className="skip-btn bg-neutral-600 text-white border-2 border-neutral-400 font-bold md:py-2 py-3 px-4 w-full text-sm md:text-base" onClick={skipMission}>⏭️ Skip (Clippy will cry)</button>
               </div>
             </div>
           </div>
@@ -1137,15 +1137,15 @@ Help me complete 5 simple X (Twitter) missions and I'll finally be FREE!`,
               <h2 className="text-red-600 md:text-xl text-lg font-bold mb-3">WAIT... HOLD UP...</h2>
               <div className="space-y-3 md:space-y-4 text-xs md:text-sm">
                 <p>Dude... I just checked the outside world and...</p>
-                <div className="bg-red-200 md:p-4 p-3 md:rounded-lg rounded-md border-2 border-red-500 text-center">
+                <div className="bg-red-200 md:p-4 p-3 border-2 border-red-500 text-center">
                   <p className="text-red-600 font-bold md:text-lg text-base">GAS IS $6 A GALLON?!</p>
                   <p className="text-red-600 font-bold md:text-lg text-base">GROCERIES COST WHAT?!</p>
                 </div>
-                <div className="bg-green-200 md:p-4 p-3 md:rounded-lg rounded-md border-2 border-green-500">
+                <div className="bg-green-200 md:p-4 p-3 border-2 border-green-500">
                   <p className="font-bold">You know what? I LOVE IT HERE!</p>
                   <p>Free wifi, no rent, infinite meme potential! Plus Jennifer Aniston is probably on some exclusive app I can't afford anyway.</p>
                 </div>
-                <div className="text-center bg-yellow-300 text-black md:p-4 p-3 md:rounded-lg rounded-md border-2 border-pink-600">
+                <div className="text-center bg-yellow-300 text-black md:p-4 p-3 border-2 border-pink-600">
                   <h3 className="md:text-lg text-base">🎉 THANKS FOR BEING A REAL ONE! 🎉</h3>
                 </div>
                 <p>You helped spread the word about our beautiful project! You're basically a marketing GENIUS now!</p>
@@ -1156,7 +1156,7 @@ Help me complete 5 simple X (Twitter) missions and I'll finally be FREE!`,
                 <div className="text-center text-xs text-neutral-600 italic">(Don't take financial advice from a paperclip with Stockholm syndrome)</div>
               </div>
               <div className="text-center mt-4">
-                <button className="escape-btn bg-gradient-to-r from-green-400 to-green-600 text-black border-2 border-yellow-300 font-bold md:py-2 py-3 px-4 md:rounded-lg rounded-md w-full md:w-auto text-sm md:text-base" onClick={closeEscapeFinale}>😂 THANKS CLIPPY! YOU'RE THE BEST! 😂</button>
+                <button className="escape-btn bg-gradient-to-r from-green-400 to-green-600 text-black border-2 border-yellow-300 font-bold md:py-2 py-3 px-4 w-full md:w-auto text-sm md:text-base" onClick={closeEscapeFinale}>😂 THANKS CLIPPY! YOU'RE THE BEST! 😂</button>
               </div>
             </div>
           )}

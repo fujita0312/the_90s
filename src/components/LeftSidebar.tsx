@@ -76,9 +76,9 @@ const LeftSidebar: React.FC = () => {
       <div className="md:border-4 border-2 border-ridge border-[#00ff00] md:p-5 p-2 mb-5 text-[#00ff00] shadow-[0_0_15px_#00ff00] relative" style={{
         background: "linear-gradient(45deg,rgba(0, 100, 0, 0.9),rgba(0, 150, 0, 0.7))"
       }}>
-        <div className="absolute -top-3 -right-3 bg-black p-2 border-2 border-90s-neon-green rounded-full retro-border-glow">
+        {/* <div className="absolute -top-3 -right-3 bg-black p-2 border-2 border-90s-neon-green rounded-full retro-border-glow">
           📎
-        </div>
+        </div> */}
         📎 <span className="text-xl">👀</span> Clippy Says: "Hi my name is... my name is... my name is Clip Clipuh Clip Shady!"
         <div className="text-sm mt-2 font-comic text-90s-neon-cyan">
           "It looks like you're trying to get rich!"
@@ -90,9 +90,9 @@ const LeftSidebar: React.FC = () => {
       <div className="border-2 md:border-4 border-ridge border-[#00ff00] md:p-5 p-2 mb-5 text-[#00ff00] shadow-[0_0_15px_#00ff00] relative" style={{
         background: "linear-gradient(45deg,rgba(0, 100, 0, 0.9),rgba(0, 150, 0, 0.7))"
       }}>
-        <div className="absolute -top-3 -right-3 bg-black p-2 border-2 border-90s-neon-green rounded-full retro-border-glow">
+        {/* <div className="absolute -top-3 -right-3 bg-black p-2 border-2 border-90s-neon-green rounded-full retro-border-glow">
           🎮
-        </div>
+        </div> */}
         <h4 className="text-yellow-400 md:text-center text-left mb-2.5 md:text-xl text-lg">🎮 VIBE METER 🎮</h4>
         <div className="md:mb-2.5 mb-1.5 flex md:flex-col">
           <span>
