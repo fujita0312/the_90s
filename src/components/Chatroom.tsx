@@ -521,7 +521,7 @@ const Chatroom: React.FC = () => {
                                             <div className="text-center text-gray-400">
                                                 <div className="text-4xl sm:text-6xl mb-2 sm:mb-4 animate-bounce">💭</div>
                                                 <p className="text-sm sm:text-lg font-bold mb-1 sm:mb-2">
-                                                    {selectedUserId ? `Private chat with ${selectedUserId}` : 'Welcome to the 90s Chatroom!'}
+                                                    {selectedUserId ? `Private chat with ${users.find(user => user.id === selectedUserId)?.username}` : 'Welcome to the 90s Chatroom!'}
                                                 </p>
                                                 <p className="text-xs sm:text-sm">
                                                     {selectedUserId ? 'Start a private conversation! 🔒' : 'Start the conversation and let the nostalgia flow! 🚀'}

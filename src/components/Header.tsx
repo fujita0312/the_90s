@@ -6,7 +6,7 @@ interface HeaderProps {
 
 const Header: React.FC<HeaderProps> = () => {
   return (
-    <div className="bg-gradient-to-r from-[#ff1493] via-[#00ced1]  to-[#ff1493] bg-[length:400%_400%] text-center md:p-6 p-4 py-8 md:m-3 m-1.5 relative cyber-scan-line animate-gradient-shift-header md:border-4 border-2 border-yellow-400 border-ridge">
+    <div className="bg-gradient-to-r from-[#ff1493] via-[#00ced1]  to-[#ff1493] bg-[length:400%_400%] text-center md:p-6 p-4 py-8 md:m-3 m-1.5 relative cyber-scan-line animate-gradient-shift-header md:border-2 border-2 border-yellow-400 ">
       {/* Enhanced star decorations */}
       <div className="absolute md:top-3 top-2 md:left-3 left-2 text-lg md:text-4xl animate-spin ">
         ⭐

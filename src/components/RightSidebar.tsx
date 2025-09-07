@@ -17,7 +17,6 @@ const RightSidebar: React.FC = () => {
   const { showToast } = useToast();
   const [guestbookEntries, setGuestbookEntries] = useState<GuestbookEntry[]>([]);
   const [isLoading, setIsLoading] = useState(true);
-  const [lastBulletinRefresh, setLastBulletinRefresh] = useState<Date>(new Date());
   const navigate = useNavigate();
   // Load guestbook entries on component mount
   useEffect(() => {
@@ -62,59 +61,8 @@ const RightSidebar: React.FC = () => {
     }
   };
 
-  const handlePlayDialUp = () => {
-    // Create a more realistic dial-up sound simulation
-    const audioContext = new (window.AudioContext || window.webkitAudioContext)();
-
-    // Create the classic dial-up sequence
-    const frequencies = [2100, 1800, 1200, 2400, 1200, 2400];
-    let time = 0;
-
-    frequencies.forEach((freq) => {
-      const oscillator = audioContext.createOscillator();
-      const gainNode = audioContext.createGain();
-
-      oscillator.connect(gainNode);
-      gainNode.connect(audioContext.destination);
-
-      oscillator.frequency.setValueAtTime(freq, audioContext.currentTime + time);
-      oscillator.type = 'sawtooth';
-
-      gainNode.gain.setValueAtTime(0, audioContext.currentTime + time);
-      gainNode.gain.linearRampToValueAtTime(0.1, audioContext.currentTime + time + 0.1);
-      gainNode.gain.linearRampToValueAtTime(0, audioContext.currentTime + time + 0.5);
-
-      oscillator.start(audioContext.currentTime + time);
-      oscillator.stop(audioContext.currentTime + time + 0.5);
-
-      time += 0.3;
-    });
-
-    // Show a fun message
-    setTimeout(() => {
-      showToast("🔊 *DIAL-UP NOISES* 📞\n\nConnecting to AOL...\nBaud rate: 56k\nStatus: WASSSSUPPPP!", 'info');
-    }, 100);
-  };
-
-  const handleBulletinBoardClick = (post: { title: string; replies: number; emoji: string; category: string }) => {
-    // Show a fun toast message when clicking on bulletin board posts
-    const messages = [
-      `📌 Opening "${post.title}"...\n\nLoading ${post.replies} replies...\nCategory: ${post.category}`,
-      `🚀 Launching thread: ${post.title}\n\n${post.emoji} This thread is LIT!`,
-      `💫 Accessing: ${post.title}\n\nConnecting to the 90s forum...\nBaud rate: 56k`
-    ];
-
-    const randomMessage = messages[Math.floor(Math.random() * messages.length)];
-    showToast(randomMessage, 'info');
-  };
-
-  const handleRefreshBulletinBoard = () => {
-    setLastBulletinRefresh(new Date());
-    showToast("🔄 Refreshing bulletin board...\n\nNew posts loaded!\nStay tuned for updates! 📌", 'success');
-  };
-
   return (
-    <div className="md:bg-gradient-to-br bg-transparent from-black/90 via-blue-900/80 to-black/90 md:border-4 border-0 border-yellow-400 md:border-ridge md:p-3 p-2 md:shadow-[0_0_25px_rgba(255,255,0,0.3),inset_0_0_25px_rgba(255,255,255,0.1)] relative md:gradient-border">
+    <div className="md:bg-gradient-to-br bg-transparent from-black/90 via-blue-900/80 to-black/90 md:border-2 border-0 border-cyan-400  md:border-ridge md:p-3 p-2 md:shadow-[0_0_25px_rgba(255,255,0,0.3),inset_0_0_25px_rgba(255,255,255,0.1)] relative md:gradient-border">
       <h3 className="animate-blink text-center text-pink-500 text-xl mb-8">
         📝 GUESTBOOK 📝
       </h3>
