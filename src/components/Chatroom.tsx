@@ -366,7 +366,7 @@ const Chatroom: React.FC = () => {
                                 💬 90s Chatroom
                             </h1>
                             <div className="hidden md:flex items-center space-x-3 text-sm">
-                                <div className={`px-3 py-1  ${isConnected ? 'bg-green-500' : 'bg-red-500'} text-white font-bold`}>
+                                <div className={`px-3 py-1 text-white font-bold`}>
                                     {isConnected ? '🟢 ONLINE' : '🔴 OFFLINE'}
                                 </div>
                                 <div className="text-cyan-400">
@@ -390,7 +390,7 @@ const Chatroom: React.FC = () => {
 
                     {/* Mobile Stats */}
                     <div className="md:hidden flex items-center justify-center space-x-2 sm:space-x-4 text-xs sm:text-sm mt-1 sm:mt-2">
-                        <div className={`px-1 sm:px-2 py-1 ${isConnected ? 'bg-green-500' : 'bg-red-500'} text-white`}>
+                        <div className={`px-1 sm:px-2 py-1 text-white`}>
                             {isConnected ? '🟢' : '🔴'}
                         </div>
                         <div className="text-cyan-400">👤 {currentUser.current.username}</div>
@@ -412,6 +412,33 @@ const Chatroom: React.FC = () => {
                         </div>
 
                         <div className="p-4 space-y-3 max-h-[calc(100vh-200px)] overflow-y-auto custom-scrollbar">
+                            <div
+                                className={`group p-3 border-2 cursor-pointer transition-all duration-300 hover:scale-[1.02] ${currentRoomId === 'general'
+                                    ? 'bg-gradient-to-r from-yellow-500/10 to-orange-500/10 border-yellow-400/50 text-yellow-300 hover:border-cyan-400 hover:text-cyan-300 hover:shadow-[0_0_15px_rgba(0,255,255,0.1)]'
+                                    : 'bg-gradient-to-r from-purple-500/10 to-pink-500/10 border-purple-400/50 text-purple-300 hover:border-cyan-400 hover:text-cyan-300 hover:shadow-[0_0_15px_rgba(0,255,255,0.1)]'
+                                    }`}
+                                onClick={() => handleGeneralChat()}
+                            >
+                                <div className="flex items-center justify-between">
+                                    <div className="flex items-center space-x-3">
+                                        <div className="w-10 h-10  bg-gradient-to-r from-cyan-400 to-purple-400 flex items-center justify-center text-lg font-bold text-white">
+                                            G
+                                        </div>
+                                    </div>
+                                    <div className="flex items-center justify-start space-x-2">
+                                        <span className="font-bold text-sm">General Chat</span>
+                                    </div>
+                                    {/* <button
+                                        onClick={(e) => {
+                                            e.stopPropagation();
+                                        }}
+                                        className="opacity-0 group-hover:opacity-100 bg-cyan-500 hover:bg-cyan-600 text-black px-2 py-1  text-xs font-bold transition-all duration-300"
+                                        disabled={user.id === currentUser.current.id}
+                                    >
+                                        @
+                                    </button> */}
+                                </div>
+                            </div>
                             {users.map((user, index) => (
                                 <div
                                     key={index}
@@ -578,8 +605,8 @@ const Chatroom: React.FC = () => {
                         </div>
 
                         {/* Mobile User List Overlay - Over Messages */}
-                        <div className={`${showUserList ? 'block' : 'hidden'} lg:hidden absolute inset-0 z-20 bg-gradient-to-br from-gray-900/95 via-purple-900/95 to-gray-900/95 backdrop-blur-sm border-2 border-cyan-400  shadow-[0_0_25px_rgba(0,255,255,0.2)] overflow-hidden`}>
-                            <div className="p-3 border-b border-cyan-400/30">
+                        <div className={`${showUserList ? 'block' : 'hidden'} lg:hidden absolute inset-0 z-20 bg-gradient-to-br from-gray-900/95 via-purple-900/95 to-gray-900/95 backdrop-blur-sm border-1 border-cyan-400  shadow-[0_0_25px_rgba(0,255,255,0.2)] overflow-hidden`}>
+                            <div className="p-2 border-b border-cyan-400/30">
                                 <div className="flex items-center justify-between">
                                     <h3 className="text-lg font-bold text-yellow-400">
                                         👥 Online Users ({users.length})
@@ -594,6 +621,34 @@ const Chatroom: React.FC = () => {
                             </div>
 
                             <div className="p-3 space-y-3 h-[calc(100%-80px)] overflow-y-auto custom-scrollbar">
+                                <div
+                                    className={`group p-3 border-2 cursor-pointer transition-all duration-300 hover:scale-[1.02] ${currentRoomId === 'general'
+                                        ? 'bg-gradient-to-r from-yellow-500/10 to-orange-500/10 border-yellow-400/50 text-yellow-300 hover:border-cyan-400 hover:text-cyan-300 hover:shadow-[0_0_15px_rgba(0,255,255,0.1)]'
+                                        : 'bg-gradient-to-r from-purple-500/10 to-pink-500/10 border-purple-400/50 text-purple-300 hover:border-cyan-400 hover:text-cyan-300 hover:shadow-[0_0_15px_rgba(0,255,255,0.1)]'
+                                        }`}
+                                    onClick={() => handleGeneralChat()}
+                                >
+                                    <div className="flex items-center justify-between">
+                                        <div className="flex items-center space-x-3">
+                                            <div className="w-10 h-10  bg-gradient-to-r from-cyan-400 to-purple-400 flex items-center justify-center text-lg font-bold text-white">
+                                                G
+                                            </div>
+                                        </div>
+                                        <div className="flex items-center justify-start space-x-2">
+                                            <span className="font-bold text-sm">General Chat</span>
+                                        </div>
+                                        {/* <button
+                                        onClick={(e) => {
+                                            e.stopPropagation();
+                                        }}
+                                        className="opacity-0 group-hover:opacity-100 bg-cyan-500 hover:bg-cyan-600 text-black px-2 py-1  text-xs font-bold transition-all duration-300"
+                                        disabled={user.id === currentUser.current.id}
+                                    >
+                                        @
+                                    </button> */}
+                                    </div>
+                                </div>
+
                                 {users.map((user, index) => (
                                     <div
                                         key={index}

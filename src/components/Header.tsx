@@ -23,7 +23,7 @@ const Header: React.FC<HeaderProps> = () => {
         💫
       </div>
 
-      <h1 className="rainbow bounce animate-pulse text-3xl md:text-5xl font-impact retro-text-glow mb-2">
+      <h1 className="rainbow bounce animate-pulse text-2xl md:text-5xl font-impact retro-text-glow mb-2">
         ☆ 90's FRESH TIL INFINITY ☆
       </h1>
 
