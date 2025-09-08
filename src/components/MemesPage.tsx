@@ -48,7 +48,7 @@ const MemesPage: React.FC = () => {
     const limit = parseInt(searchParams.get('limit') || '24');
     const search = searchParams.get('search') || '';
     const sort = (searchParams.get('sortBy') as 'newest' | 'oldest' | 'mostVoted' | 'leastVoted') || 'mostVoted';
-    
+
     setPagination(prev => ({ ...prev, page, limit }));
     setSearchTerm(search);
     setSortBy(sort);
@@ -59,16 +59,16 @@ const MemesPage: React.FC = () => {
     const loadMemes = async () => {
       try {
         setIsLoading(true);
-        
+
         const queryParams: MemeQueryParams = {
           page: pagination.page,
           limit: pagination.limit,
           search: debouncedSearchTerm,
           sortBy: sortBy
         };
-        
+
         const response: PaginatedResponse<Meme> = await memeApi.getMemesPaginated(queryParams);
-        
+
         if (response.success && response.data && response.pagination) {
           setMemes(response.data);
           setPagination(response.pagination);
@@ -159,12 +159,12 @@ const MemesPage: React.FC = () => {
 
       const userId = userFingerprint.getUserId();
       const response = await memeApi.voteMeme(id, voteType, userId);
-      
+
       if (response.success) {
         // Mark meme as voted locally
         userFingerprint.markMemeAsVoted(id);
         showToast(`Meme ${voteType}voted! 👍`, 'success');
-        
+
         // Reload current page to get updated vote counts
         const queryParams: MemeQueryParams = {
           page: pagination.page,
@@ -176,7 +176,7 @@ const MemesPage: React.FC = () => {
         if (reloadResponse.success && reloadResponse.data && reloadResponse.pagination) {
           setMemes(reloadResponse.data);
           setPagination(reloadResponse.pagination);
-          
+
           // Update selected meme if it's currently open
           if (selectedMeme && selectedMeme.id === id) {
             const updatedMeme = reloadResponse.data.find(m => m.id === id);
@@ -257,7 +257,7 @@ const MemesPage: React.FC = () => {
 
   const showShareOptions = (memeId: string) => {
     const shareOptions = shareService.getAvailableShareOptions();
-    
+
     if (shareOptions.native) {
       // Try native share as fallback
       shareService.shareNative(memeId, {
@@ -295,7 +295,7 @@ const MemesPage: React.FC = () => {
   // Update URL parameters when pagination, search, or sort changes
   const updateUrlParams = (updates: Partial<{ page: number; limit: number; search: string; sortBy: string }>) => {
     const newSearchParams = new URLSearchParams(searchParams);
-    
+
     Object.entries(updates).forEach(([key, value]) => {
       if (value !== undefined && value !== null && value !== '') {
         newSearchParams.set(key, value.toString());
@@ -303,7 +303,7 @@ const MemesPage: React.FC = () => {
         newSearchParams.delete(key);
       }
     });
-    
+
     setSearchParams(newSearchParams);
   };
 
@@ -352,18 +352,18 @@ const MemesPage: React.FC = () => {
         {/* Header */}
         <div className="text-center mb-8">
           <h1 className="text-3xl font-bold text-white mb-6">90s Memes Gallery</h1>
-          
+
           {/* Search and Filter Controls */}
           <div className="flex flex-col sm:flex-row gap-4 items-center justify-center mb-6">
             {/* Search Bar */}
             <div className="relative">
-                          <input
-              type="text"
-              placeholder="Search memes..."
-              value={searchTerm}
-              onChange={(e) => handleSearchChange(e.target.value)}
-              className="bg-gray-800 border-2 border-cyan-400 text-cyan-400 placeholder-gray-400 px-4 py-2 pr-10 font-bold focus:border-pink-400 focus:outline-none w-64"
-            />
+              <input
+                type="text"
+                placeholder="Search memes..."
+                value={searchTerm}
+                onChange={(e) => handleSearchChange(e.target.value)}
+                className="bg-gray-800 border-2 border-cyan-400 text-cyan-400 placeholder-gray-400 px-4 py-2 pr-10 font-bold focus:border-pink-400 focus:outline-none w-64"
+              />
               <div className="absolute right-3 top-1/2 transform -translate-y-1/2 text-cyan-400">
                 🔍
               </div>
@@ -417,16 +417,16 @@ const MemesPage: React.FC = () => {
               {memes.map((meme, index) => (
                 <div
                   key={meme.id}
-                  className="bg-gray-800 border border-gray-700 overflow-hidden hover:border-gray-600 transition-colors duration-200"
+                  className="bg-gray-800 border relative border-gray-700 overflow-hidden hover:border-gray-600 transition-colors duration-200"
                 >
                   {/* Image */}
-                  <div 
+                  <div
                     className="relative cursor-pointer"
                     onClick={() => handleMemeClick(meme)}
                   >
                     {/* Loading Animation */}
                     {!loadedImages.has(meme.id) && (
-                      <div className="w-full h-48 bg-gradient-to-br from-gray-700 to-gray-800 flex items-center justify-center relative overflow-hidden">
+                      <div className="w-full h-60 bg-gradient-to-br from-gray-700 to-gray-800 flex items-center justify-center relative overflow-hidden">
                         {/* 90s-style shimmer effect */}
                         <div className="absolute inset-0 bg-gradient-to-r from-transparent via-cyan-400/30 to-transparent animate-loading-shimmer"></div>
                         <div className="relative z-10 flex flex-col items-center">
@@ -440,30 +440,34 @@ const MemesPage: React.FC = () => {
                         </div>
                       </div>
                     )}
-                    
+
                     {/* Actual Image */}
                     <img
                       src={meme.imageUrl}
                       alt="90s Meme"
-                      className={`w-full h-48 object-cover transition-opacity duration-500 ${
-                        loadedImages.has(meme.id) ? 'opacity-100' : 'opacity-0 absolute top-0 left-0'
-                      }`}
+                      className={`w-full h-60 object-cover transition-opacity duration-500 ${loadedImages.has(meme.id) ? 'opacity-100' : 'opacity-0 absolute top-0 left-0'
+                        }`}
                       onLoad={() => handleImageLoad(meme.id)}
                       onError={() => handleImageLoad(meme.id)} // Also mark as "loaded" on error to hide loading animation
                     />
                   </div>
 
                   {/* Vote Controls */}
-                  <div className="p-3" onClick={(e) => e.stopPropagation()}>
-                    <div className="flex gap-2 mb-2">
+                  <div className="md:p-2 p-1 absolute w-full bottom-0 h-full flex flex-col justify-between " onClick={(e) => e.stopPropagation()}>
+
+                    {/* Score and Date */}
+                    <div className="flex justify-between items-center text-xs text-gray-400">
+                      <span>Score: {meme.votes || 0}</span>
+                      <span>{new Date(meme.createdAt).toLocaleDateString()}</span>
+                    </div>
+                    <div className="flex gap-2 bg-gray-800/50">
                       <button
                         onClick={() => handleVoteMeme(meme.id, 'up')}
                         disabled={hasUserVotedOnMeme(meme.id)}
-                        className={`flex-1 flex items-center justify-center gap-1 px-2 py-1 text-sm font-medium transition-colors duration-200 ${
-                          hasUserVotedOnMeme(meme.id)
-                            ? 'bg-gray-600 text-gray-400 cursor-not-allowed'
-                            : 'bg-green-600 hover:bg-green-700 text-white'
-                        }`}
+                        className={`flex-1 flex items-center justify-center gap-1 px-2 py-1 text-sm font-medium transition-colors duration-200 ${hasUserVotedOnMeme(meme.id)
+                          ? ' text-gray-400 cursor-not-allowed'
+                          : ' hover:bg-green-700 text-white'
+                          }`}
                         title={hasUserVotedOnMeme(meme.id) ? 'You have already voted on this meme' : 'Vote up'}
                       >
                         <span className="text-xs">{meme.upVotes || 0}</span>
@@ -472,11 +476,10 @@ const MemesPage: React.FC = () => {
                       <button
                         onClick={() => handleVoteMeme(meme.id, 'down')}
                         disabled={hasUserVotedOnMeme(meme.id)}
-                        className={`flex-1 flex items-center justify-center gap-1 px-2 py-1 text-sm font-medium transition-colors duration-200 ${
-                          hasUserVotedOnMeme(meme.id)
-                            ? 'bg-gray-600 text-gray-400 cursor-not-allowed'
-                            : 'bg-red-600 hover:bg-red-700 text-white'
-                        }`}
+                        className={`flex-1 flex items-center justify-center gap-1 px-2 py-1 text-sm font-medium transition-colors duration-200 ${hasUserVotedOnMeme(meme.id)
+                          ? ' text-gray-400 cursor-not-allowed'
+                          : ' hover:bg-red-700 text-white'
+                          }`}
                         title={hasUserVotedOnMeme(meme.id) ? 'You have already voted on this meme' : 'Vote down'}
                       >
                         <span className="text-xs">{meme.downVotes || 0}</span>
@@ -488,29 +491,24 @@ const MemesPage: React.FC = () => {
                           e.stopPropagation();
                           handleShareMeme(meme.id);
                         }}
-                        className="bg-blue-600 hover:bg-blue-700 text-white px-2 py-1 text-sm font-medium transition-colors duration-200"
+                        className=" text-white px-2 py-1 text-sm font-medium transition-colors duration-200"
                         title="Share this meme"
                       >
                         📤
                       </button>
-                      
+
                       {/* Admin Delete Button */}
                       {isAdminMode() && (
                         <button
                           onClick={() => handleDeleteMeme(meme.id)}
-                          className="bg-red-800 hover:bg-red-900 text-white px-2 py-1 text-sm font-medium transition-colors duration-200 border border-red-600"
+                          className=" text-white px-2 py-1 text-sm font-medium transition-colors duration-200"
                           title="Delete meme (Admin only)"
                         >
                           🗑️
                         </button>
                       )}
                     </div>
-                    
-                    {/* Score and Date */}
-                    <div className="flex justify-between items-center text-xs text-gray-400">
-                      <span>Score: {meme.votes || 0}</span>
-                      <span>{new Date(meme.createdAt).toLocaleDateString()}</span>
-                    </div>
+
                   </div>
                 </div>
               ))}
