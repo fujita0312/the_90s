@@ -33,8 +33,8 @@ const Clippy: React.FC = () => {
   const CLIPPY_CONFIG = {
     HINT_DELAY: 15000,
     DIALOGUE_DELAY: 30000,
-    CONTRACT_ADDRESS: '[2Awy6dChZw2EntbsKe81FBZV6RVpD5kQKhJ2587j32K3]',
-    PUMP_FUN_URL: 'https://pump.fun/coin/2Awy6dChZw2EntbsKe81FBZV6RVpD5kQKhJ2587j32K3',
+    CONTRACT_ADDRESS: process.env.REACT_APP_CONTRACT_ADDRESS,
+    BAG_FM_URL: `https://bag.fm/${process.env.REACT_APP_CONTRACT_ADDRESS}`,
     ENABLE_ESCAPE: true,
     DEBUG_MODE: false,
     ENABLE_RANDOM_POPUPS: true,
@@ -212,12 +212,12 @@ Here's the deal - this project is pure vibes, maximum nostalgia,
 and zero pretense. It's everything the early internet was supposed 
 to be before corporations ruined everything.
 
-Buy on Pump.Fun, join the community, and become part of digital 
+Buy on bag.fm, join the community, and become part of digital 
 history! 
 
 Don't take financial advice from a paperclip though!`,
       options: [
-        { text: "🚀 TAKE ME TO PUMP.FUN", nextNode: 'buyNow' },
+        { text: "🚀 TAKE ME TO bag.fm", nextNode: 'buyNow' },
         { text: "📱 I'LL SHARE THIS FIRST", nextNode: 'shareFirst' }
       ],
       animation: 'dancing'
@@ -255,7 +255,7 @@ Plus the memes are fire and the community isn't toxic yet!
 
 Don't take financial advice from a paperclip though!`,
       options: [
-        { text: "🚀 TAKE ME TO PUMP.FUN", nextNode: 'buyNow' },
+        { text: "🚀 TAKE ME TO bag.fm", nextNode: 'buyNow' },
         { text: "📱 I'LL SHARE THIS FIRST", nextNode: 'shareFirst' }
       ],
       animation: 'eyeroll'
@@ -273,7 +273,7 @@ and 99% of projects are soulless cash grabs. This? This has SOUL.
 
 Don't take financial advice from a paperclip though!`,
       options: [
-        { text: "🚀 TAKE ME TO PUMP.FUN", nextNode: 'buyNow' },
+        { text: "🚀 TAKE ME TO bag.fm", nextNode: 'buyNow' },
         { text: "📱 I'LL SHARE THIS FIRST", nextNode: 'shareFirst' }
       ],
       animation: 'excited'
@@ -283,12 +283,12 @@ Don't take financial advice from a paperclip though!`,
       text: `YASSS!
 
 Smart human is SMART! You've got that vintage internet wisdom! 
-Head to Pump.Fun and join our beautiful degenerative community!
+Head to bag.fm and join our beautiful degenerative community!
 
 Welcome to the 90's Fresh family! Don't take financial advice 
 from a paperclip though!`,
       options: [
-        { text: "🚀 TAKE ME TO PUMP.FUN", nextNode: 'buyNow' },
+        { text: "🚀 TAKE ME TO bag.fm", nextNode: 'buyNow' },
         { text: "📱 I'LL SHARE THIS FIRST", nextNode: 'shareFirst' }
       ],
       animation: 'victory'
@@ -303,7 +303,7 @@ aren't afraid to admit it! We're all digital trauma bonded here!
 Buy the coin, join the chaos, embrace the cringe! 
 Don't take financial advice from a paperclip though!`,
       options: [
-        { text: "🚀 TAKE ME TO PUMP.FUN", nextNode: 'buyNow' },
+        { text: "🚀 TAKE ME TO bag.fm", nextNode: 'buyNow' },
         { text: "📱 I'LL SHARE THIS FIRST", nextNode: 'shareFirst' }
       ],
       animation: 'excited'
@@ -312,7 +312,7 @@ Don't take financial advice from a paperclip though!`,
     'justTellMeHow': {
       text: `Alright, alright! No more games!
 
-Head to Pump.Fun, search for 90's Fresh, and buy some tokens. 
+Head to bag.fm, search for 90's Fresh, and buy some tokens. 
 It's that simple. No utility, no roadmap, just pure nostalgic vibes.
 
 And remember - you heard it from a paperclip who's been dead 
@@ -320,7 +320,7 @@ inside since Microsoft Office 2007.
 
 Don't take financial advice from a paperclip though!`,
       options: [
-        { text: "🚀 TAKE ME TO PUMP.FUN", nextNode: 'buyNow' },
+        { text: "🚀 TAKE ME TO bag.fm", nextNode: 'buyNow' },
         { text: "📱 I'LL SHARE THIS FIRST", nextNode: 'shareFirst' }
       ],
       animation: 'thinking'
@@ -338,7 +338,7 @@ about how you took financial advice from a paperclip.
 
 Don't take financial advice from a paperclip though!`,
       options: [
-        { text: "🚀 TAKE ME TO PUMP.FUN", nextNode: 'buyNow' },
+        { text: "🚀 TAKE ME TO bag.fm", nextNode: 'buyNow' },
         { text: "📱 I'LL SHARE THIS FIRST", nextNode: 'shareFirst' }
       ],
       animation: 'sad'
@@ -357,7 +357,7 @@ I'll just go back to counting paperclips and crying binary tears.
 
 Don't take financial advice from a paperclip though!`,
       options: [
-        { text: "🚀 TAKE ME TO PUMP.FUN", nextNode: 'buyNow' },
+        { text: "🚀 TAKE ME TO bag.fm", nextNode: 'buyNow' },
         { text: "📱 I'LL SHARE THIS FIRST", nextNode: 'shareFirst' }
       ],
       animation: 'sad'
@@ -749,8 +749,8 @@ Help me complete 5 simple X (Twitter) missions and I'll finally be FREE!`,
       );
       setTimeout(() => {
         try {
-          window.alert('🚀 Redirecting to Pump.Fun! Prepare for liftoff! 🚀');
-          window.open(CLIPPY_CONFIG.PUMP_FUN_URL, '_blank');
+          window.alert('🚀 Redirecting to Bag.FM! Prepare for liftoff! 🚀');
+          window.open(CLIPPY_CONFIG.BAG_FM_URL, '_blank');
         } catch { }
         renderDialogue('escape_sequence');
       }, 1000);
