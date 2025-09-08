@@ -28,7 +28,7 @@ const SocialLinks: React.FC<SocialLinksProps> = ({
     },
     {
       name: 'Bags.fm',
-      url: 'https://bags.fm/',
+      url: `https://bags.fm/${process.env.REACT_APP_CONTRACT_ADDRESS}`,
       icon: '👜',
       color: 'from-purple-600 to-purple-500',
       hoverColor: 'hover:from-purple-700 hover:to-purple-600'
