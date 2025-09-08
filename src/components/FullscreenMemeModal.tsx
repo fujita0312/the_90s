@@ -64,7 +64,7 @@ const FullscreenMemeModal: React.FC<FullscreenMemeModalProps> = ({
             src={meme.imageUrl}
             alt="90s Meme"
             className="max-w-full max-h-[80vh] object-contain"
-            onLoad={() => console.log('✅ Fullscreen image loaded successfully:', meme.imageUrl)}
+            // onLoad={() => console.log('✅ Fullscreen image loaded successfully:', meme.imageUrl)}
           />
           
           {/* Overlay Info */}

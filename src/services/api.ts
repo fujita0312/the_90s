@@ -28,7 +28,7 @@ apiClient.interceptors.request.use(
 // Response interceptor
 apiClient.interceptors.response.use(
   (response: AxiosResponse) => {
-    console.log(`✅ API Response: ${response.status} ${response.config.url}`);
+    // console.log(`✅ API Response: ${response.status} ${response.config.url}`);
     return response;
   },
   (error: AxiosError) => {

@@ -6,6 +6,7 @@ import MemeModal from './MemeModal';
 import FullscreenMemeModal from './FullscreenMemeModal';
 import Pagination from './Pagination';
 import { useToast } from '../contexts/ToastContext';
+import { isAdminMode } from '../utils/adminUtils';
 
 const MemesPage: React.FC = () => {
   const { memeId } = useParams<{ memeId: string }>();
@@ -27,6 +28,7 @@ const MemesPage: React.FC = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [debouncedSearchTerm, setDebouncedSearchTerm] = useState('');
   const [sortBy, setSortBy] = useState<'newest' | 'oldest' | 'mostVoted' | 'leastVoted'>('mostVoted');
+  const [loadedImages, setLoadedImages] = useState<Set<string>>(new Set());
   const { showToast } = useToast();
 
   // Debounce search term
@@ -68,13 +70,17 @@ const MemesPage: React.FC = () => {
         if (response.success && response.data && response.pagination) {
           setMemes(response.data);
           setPagination(response.pagination);
+          // Clear loaded images when memes change
+          setLoadedImages(new Set());
         } else {
           console.error('Failed to load memes:', response.error);
           setMemes([]);
+          setLoadedImages(new Set());
         }
       } catch (error) {
         console.error('Error loading memes:', error);
         setMemes([]);
+        setLoadedImages(new Set());
       } finally {
         setIsLoading(false);
       }
@@ -173,6 +179,40 @@ const MemesPage: React.FC = () => {
       showToast('Failed to vote meme. Please try again.', 'error');
       console.error('Error voting meme:', error);
     }
+  };
+
+  const handleDeleteMeme = async (id: string) => {
+    if (!window.confirm('Are you sure you want to delete this meme? This action cannot be undone.')) {
+      return;
+    }
+
+    try {
+      const response = await memeApi.deleteMeme(id);
+      if (response.success) {
+        showToast('Meme deleted successfully! 🗑️', 'success');
+        // Reload current page to reflect the deletion
+        const queryParams: MemeQueryParams = {
+          page: pagination.page,
+          limit: pagination.limit,
+          search: searchTerm,
+          sortBy: sortBy
+        };
+        const reloadResponse: PaginatedResponse<Meme> = await memeApi.getMemesPaginated(queryParams);
+        if (reloadResponse.success && reloadResponse.data && reloadResponse.pagination) {
+          setMemes(reloadResponse.data);
+          setPagination(reloadResponse.pagination);
+        }
+      } else {
+        showToast(response.error || 'Failed to delete meme', 'error');
+      }
+    } catch (error) {
+      showToast('Failed to delete meme. Please try again.', 'error');
+      console.error('Error deleting meme:', error);
+    }
+  };
+
+  const handleImageLoad = (memeId: string) => {
+    setLoadedImages(prev => new Set(prev).add(memeId));
   };
 
   const handleMemeClick = (meme: Meme) => {
@@ -319,11 +359,32 @@ const MemesPage: React.FC = () => {
                     className="relative cursor-pointer"
                     onClick={() => handleMemeClick(meme)}
                   >
+                    {/* Loading Animation */}
+                    {!loadedImages.has(meme.id) && (
+                      <div className="w-full h-48 bg-gradient-to-br from-gray-700 to-gray-800 flex items-center justify-center relative overflow-hidden">
+                        {/* 90s-style shimmer effect */}
+                        <div className="absolute inset-0 bg-gradient-to-r from-transparent via-cyan-400/30 to-transparent animate-loading-shimmer"></div>
+                        <div className="relative z-10 flex flex-col items-center">
+                          <div className="text-4xl mb-2 animate-loading-bounce">🎭</div>
+                          <div className="text-cyan-400 text-sm font-bold animate-loading-pulse">LOADING...</div>
+                          <div className="flex space-x-1 mt-2">
+                            <div className="w-2 h-2 bg-cyan-400 rounded-full animate-loading-bounce" style={{ animationDelay: '0ms' }}></div>
+                            <div className="w-2 h-2 bg-cyan-400 rounded-full animate-loading-bounce" style={{ animationDelay: '150ms' }}></div>
+                            <div className="w-2 h-2 bg-cyan-400 rounded-full animate-loading-bounce" style={{ animationDelay: '300ms' }}></div>
+                          </div>
+                        </div>
+                      </div>
+                    )}
+                    
+                    {/* Actual Image */}
                     <img
                       src={meme.imageUrl}
                       alt="90s Meme"
-                      className="w-full h-48 object-cover"
-                      onLoad={() => console.log('✅ Image loaded successfully:', meme.imageUrl)}
+                      className={`w-full h-48 object-cover transition-opacity duration-500 ${
+                        loadedImages.has(meme.id) ? 'opacity-100' : 'opacity-0 absolute top-0 left-0'
+                      }`}
+                      onLoad={() => handleImageLoad(meme.id)}
+                      onError={() => handleImageLoad(meme.id)} // Also mark as "loaded" on error to hide loading animation
                     />
                   </div>
 
@@ -344,6 +405,16 @@ const MemesPage: React.FC = () => {
                         <span className="text-xs">{meme.downVotes || 0}</span>
                         <span>👎</span>
                       </button>
+                      {/* Admin Delete Button */}
+                      {isAdminMode() && (
+                        <button
+                          onClick={() => handleDeleteMeme(meme.id)}
+                          className="bg-red-800 hover:bg-red-900 text-white px-2 py-1 text-sm font-medium transition-colors duration-200 border border-red-600"
+                          title="Delete meme (Admin only)"
+                        >
+                          🗑️
+                        </button>
+                      )}
                     </div>
                     
                     {/* Score and Date */}

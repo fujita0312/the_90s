@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import musicApi from '../services/musicApi';
 import { MusicTrack } from '../types/music';
+import { isAdminMode } from '../utils/adminUtils';
 
 // Custom 90s-style icons
 const PlayIcon = () => (
@@ -348,76 +349,78 @@ const MusicPlayer: React.FC = () => {
             <span className="text-cyan-400 font-mono text-sm text-shadow-cyan">{volume}</span>
           </div>
 
-          {/* File Upload */}
-          <div className="mb-4 p-3 sm:p-4 bg-black/60 border border-cyan-400 border-ridge shadow-[0_0_15px_rgba(0,255,255,0.2)]">
-            <h4 className="text-cyan-400 font-bold mb-2 text-sm sm:text-base text-shadow-cyan">🎵 UPLOAD AUDIO FILES</h4>
-            <div className="mb-2">
-              <input
-                id="audio-file-input"
-                type="file"
-                accept="audio/*"
-                multiple
-                onChange={handleFileSelect}
-                disabled={isLoadingTracks}
-                className="w-full p-2 bg-black text-green-400 border border-cyan-400 text-xs sm:text-sm text-shadow-green file:bg-cyan-400 file:text-black file:border-0 file:px-2 file:py-1 file:rounded file:text-xs disabled:opacity-50"
-              />
-            </div>
-
-            {/* Selected Files Display */}
-            {selectedFiles.length > 0 && (
-              <div className="mb-3 p-2 bg-gray-800 border border-cyan-400/50 rounded">
-                <div className="text-xs text-cyan-400 mb-1">Selected Files:</div>
-                {selectedFiles.map((file, index) => {
-                  const uniqueName = checkUniqueFileName(file.name, playlist);
-                  const isDuplicate = uniqueName !== file.name;
-                  return (
-                    <div key={index} className="text-xs truncate">
-                      <span className={isDuplicate ? "text-yellow-400" : "text-green-400"}>
-                        {uniqueName}
-                      </span>
-                      {isDuplicate && (
-                        <span className="text-yellow-400 ml-1">(renamed)</span>
-                      )}
-                    </div>
-                  );
-                })}
-              </div>
-            )}
-
-            {/* Upload Button */}
-            {selectedFiles.length > 0 && (
+          {/* File Upload - Admin Only */}
+          {isAdminMode() && (
+            <div className="mb-4 p-3 sm:p-4 bg-black/60 border border-cyan-400 border-ridge shadow-[0_0_15px_rgba(0,255,255,0.2)]">
+              <h4 className="text-cyan-400 font-bold mb-2 text-sm sm:text-base text-shadow-cyan">🎵 UPLOAD AUDIO FILES (ADMIN)</h4>
               <div className="mb-2">
-                <button
-                  onClick={handleFileUpload}
+                <input
+                  id="audio-file-input"
+                  type="file"
+                  accept="audio/*"
+                  multiple
+                  onChange={handleFileSelect}
                   disabled={isLoadingTracks}
-                  className="w-full bg-cyan-400 hover:bg-cyan-300 text-black px-4 py-2 transition-colors shadow-glow-cyan flex items-center justify-center gap-2 disabled:opacity-50 font-bold"
-                >
-                  {isLoadingTracks ? '⏳ Uploading...' : '🚀 Upload Files'}
-                </button>
+                  className="w-full p-2 bg-black text-green-400 border border-cyan-400 text-xs sm:text-sm text-shadow-green file:bg-cyan-400 file:text-black file:border-0 file:px-2 file:py-1 file:rounded file:text-xs disabled:opacity-50"
+                />
               </div>
-            )}
 
-            {/* Upload Progress */}
-            {isLoadingTracks && uploadProgress > 0 && (
-              <div className="mb-3">
-                <div className="flex justify-between text-xs text-cyan-400 mb-1">
-                  <span>Upload Progress</span>
-                  <span>{Math.round(uploadProgress)}%</span>
+              {/* Selected Files Display */}
+              {selectedFiles.length > 0 && (
+                <div className="mb-3 p-2 bg-gray-800 border border-cyan-400/50 rounded">
+                  <div className="text-xs text-cyan-400 mb-1">Selected Files:</div>
+                  {selectedFiles.map((file, index) => {
+                    const uniqueName = checkUniqueFileName(file.name, playlist);
+                    const isDuplicate = uniqueName !== file.name;
+                    return (
+                      <div key={index} className="text-xs truncate">
+                        <span className={isDuplicate ? "text-yellow-400" : "text-green-400"}>
+                          {uniqueName}
+                        </span>
+                        {isDuplicate && (
+                          <span className="text-yellow-400 ml-1">(renamed)</span>
+                        )}
+                      </div>
+                    );
+                  })}
                 </div>
-                <div className="w-full bg-gray-700 rounded-full h-2">
-                  <div 
-                    className="bg-cyan-400 h-2 rounded-full transition-all duration-300"
-                    style={{ width: `${uploadProgress}%` }}
-                  ></div>
+              )}
+
+              {/* Upload Button */}
+              {selectedFiles.length > 0 && (
+                <div className="mb-2">
+                  <button
+                    onClick={handleFileUpload}
+                    disabled={isLoadingTracks}
+                    className="w-full bg-cyan-400 hover:bg-cyan-300 text-black px-4 py-2 transition-colors shadow-glow-cyan flex items-center justify-center gap-2 disabled:opacity-50 font-bold"
+                  >
+                    {isLoadingTracks ? '⏳ Uploading...' : '🚀 Upload Files'}
+                  </button>
                 </div>
+              )}
+
+              {/* Upload Progress */}
+              {isLoadingTracks && uploadProgress > 0 && (
+                <div className="mb-3">
+                  <div className="flex justify-between text-xs text-cyan-400 mb-1">
+                    <span>Upload Progress</span>
+                    <span>{Math.round(uploadProgress)}%</span>
+                  </div>
+                  <div className="w-full bg-gray-700 rounded-full h-2">
+                    <div 
+                      className="bg-cyan-400 h-2 rounded-full transition-all duration-300"
+                      style={{ width: `${uploadProgress}%` }}
+                    ></div>
+                  </div>
+                </div>
+              )}
+
+              <div className="text-xs text-yellow-400 text-shadow-yellow">
+                💡 Supports MP3, WAV, OGG, M4A and other audio formats
+                {isLoadingTracks && <span className="block mt-1 text-cyan-400">⏳ Uploading files...</span>}
               </div>
-            )}
-
-            <div className="text-xs text-yellow-400 text-shadow-yellow">
-              💡 Supports MP3, WAV, OGG, M4A and other audio formats
-              {isLoadingTracks && <span className="block mt-1 text-cyan-400">⏳ Uploading files...</span>}
             </div>
-          </div>
+          )}
 
           {/* YouTube Search */}
           {/* <div className="mb-4 p-3 sm:p-4 bg-black/60 border border-cyan-400 border-ridge shadow-[0_0_15px_rgba(0,255,255,0.2)]">
