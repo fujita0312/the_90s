@@ -8,6 +8,7 @@ import Pagination from './Pagination';
 import { useToast } from '../contexts/ToastContext';
 import { isAdminMode } from '../utils/adminUtils';
 import { userFingerprint } from '../utils/userFingerprint';
+import { shareService } from '../utils/shareUtils';
 
 const MemesPage: React.FC = () => {
   const { memeId } = useParams<{ memeId: string }>();
@@ -231,6 +232,54 @@ const MemesPage: React.FC = () => {
     return userFingerprint.hasVotedOnMeme(memeId);
   };
 
+  const handleShareMeme = async (memeId: string) => {
+    try {
+      const result = await shareService.share(memeId, {
+        title: 'Check out this 90s meme!',
+        text: 'Look at this radical 90s meme!'
+      });
+
+      if (result.success) {
+        if (result.method === 'clipboard') {
+          showToast('Meme link copied to clipboard! 📋', 'success');
+        } else if (result.method === 'native') {
+          showToast('Share dialog opened! 📤', 'success');
+        }
+      } else {
+        // Fallback: show share options
+        showShareOptions(memeId);
+      }
+    } catch (error) {
+      console.error('Error sharing meme:', error);
+      showToast('Failed to share meme', 'error');
+    }
+  };
+
+  const showShareOptions = (memeId: string) => {
+    const shareOptions = shareService.getAvailableShareOptions();
+    
+    if (shareOptions.native) {
+      // Try native share as fallback
+      shareService.shareNative(memeId, {
+        title: 'Check out this 90s meme!',
+        text: 'Look at this radical 90s meme!'
+      });
+    } else {
+      // Show manual copy option
+      const url = `${window.location.origin}/memes/${memeId}`;
+      // eslint-disable-next-line no-alert
+      if (window.confirm(`Copy this link to share:\n\n${url}\n\nClick OK to copy to clipboard`)) {
+        shareService.copyToClipboard(memeId).then(success => {
+          if (success) {
+            showToast('Meme link copied to clipboard! 📋', 'success');
+          } else {
+            showToast('Failed to copy link. Please copy manually.', 'error');
+          }
+        });
+      }
+    }
+  };
+
   const handleMemeClick = (meme: Meme) => {
     setSelectedMeme(meme);
     setIsFullscreenOpen(true);
@@ -433,6 +482,18 @@ const MemesPage: React.FC = () => {
                         <span className="text-xs">{meme.downVotes || 0}</span>
                         <span>👎</span>
                       </button>
+                      {/* Share Button */}
+                      <button
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          handleShareMeme(meme.id);
+                        }}
+                        className="bg-blue-600 hover:bg-blue-700 text-white px-2 py-1 text-sm font-medium transition-colors duration-200"
+                        title="Share this meme"
+                      >
+                        📤
+                      </button>
+                      
                       {/* Admin Delete Button */}
                       {isAdminMode() && (
                         <button
