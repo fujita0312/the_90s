@@ -6,6 +6,7 @@ export interface Meme {
   votes?: number;
   upVotes?: number;
   downVotes?: number;
+  votedUsers?: string[]; // Array of user fingerprints who have voted
 }
 
 export interface MemeSubmission {

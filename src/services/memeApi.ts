@@ -66,8 +66,8 @@ class MemeApiService extends ApiService {
   /**
    * Vote on a meme (up or down)
    */
-  async voteMeme(id: string, voteType: 'up' | 'down'): Promise<ApiResponse<Meme>> {
-    return this.post<Meme>(`/memes/${id}/vote`, { voteType });
+  async voteMeme(id: string, voteType: 'up' | 'down', userId: string): Promise<ApiResponse<Meme>> {
+    return this.post<Meme>(`/memes/${id}/vote`, { voteType, userId });
   }
 }
 

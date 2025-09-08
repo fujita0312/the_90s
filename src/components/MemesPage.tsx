@@ -7,6 +7,7 @@ import FullscreenMemeModal from './FullscreenMemeModal';
 import Pagination from './Pagination';
 import { useToast } from '../contexts/ToastContext';
 import { isAdminMode } from '../utils/adminUtils';
+import { userFingerprint } from '../utils/userFingerprint';
 
 const MemesPage: React.FC = () => {
   const { memeId } = useParams<{ memeId: string }>();
@@ -149,9 +150,20 @@ const MemesPage: React.FC = () => {
 
   const handleVoteMeme = async (id: string, voteType: 'up' | 'down') => {
     try {
-      const response = await memeApi.voteMeme(id, voteType);
+      // Check if user has already voted on this meme locally
+      if (userFingerprint.hasVotedOnMeme(id)) {
+        showToast('You have already voted on this meme! 🚫', 'info');
+        return;
+      }
+
+      const userId = userFingerprint.getUserId();
+      const response = await memeApi.voteMeme(id, voteType, userId);
+      
       if (response.success) {
+        // Mark meme as voted locally
+        userFingerprint.markMemeAsVoted(id);
         showToast(`Meme ${voteType}voted! 👍`, 'success');
+        
         // Reload current page to get updated vote counts
         const queryParams: MemeQueryParams = {
           page: pagination.page,
@@ -213,6 +225,10 @@ const MemesPage: React.FC = () => {
 
   const handleImageLoad = (memeId: string) => {
     setLoadedImages(prev => new Set(prev).add(memeId));
+  };
+
+  const hasUserVotedOnMeme = (memeId: string): boolean => {
+    return userFingerprint.hasVotedOnMeme(memeId);
   };
 
   const handleMemeClick = (meme: Meme) => {
@@ -393,14 +409,26 @@ const MemesPage: React.FC = () => {
                     <div className="flex gap-2 mb-2">
                       <button
                         onClick={() => handleVoteMeme(meme.id, 'up')}
-                        className="flex-1 flex items-center justify-center gap-1 bg-green-600 hover:bg-green-700 text-white px-2 py-1 text-sm font-medium transition-colors duration-200"
+                        disabled={hasUserVotedOnMeme(meme.id)}
+                        className={`flex-1 flex items-center justify-center gap-1 px-2 py-1 text-sm font-medium transition-colors duration-200 ${
+                          hasUserVotedOnMeme(meme.id)
+                            ? 'bg-gray-600 text-gray-400 cursor-not-allowed'
+                            : 'bg-green-600 hover:bg-green-700 text-white'
+                        }`}
+                        title={hasUserVotedOnMeme(meme.id) ? 'You have already voted on this meme' : 'Vote up'}
                       >
                         <span className="text-xs">{meme.upVotes || 0}</span>
                         <span>👍</span>
                       </button>
                       <button
                         onClick={() => handleVoteMeme(meme.id, 'down')}
-                        className="flex-1 flex items-center justify-center gap-1 bg-red-600 hover:bg-red-700 text-white px-2 py-1 text-sm font-medium transition-colors duration-200"
+                        disabled={hasUserVotedOnMeme(meme.id)}
+                        className={`flex-1 flex items-center justify-center gap-1 px-2 py-1 text-sm font-medium transition-colors duration-200 ${
+                          hasUserVotedOnMeme(meme.id)
+                            ? 'bg-gray-600 text-gray-400 cursor-not-allowed'
+                            : 'bg-red-600 hover:bg-red-700 text-white'
+                        }`}
+                        title={hasUserVotedOnMeme(meme.id) ? 'You have already voted on this meme' : 'Vote down'}
                       >
                         <span className="text-xs">{meme.downVotes || 0}</span>
                         <span>👎</span>
