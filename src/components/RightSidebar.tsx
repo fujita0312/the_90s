@@ -62,7 +62,7 @@ const RightSidebar: React.FC = () => {
   };
 
   return (
-    <div className="md:bg-gradient-to-br bg-transparent from-black/90 via-blue-900/80 to-black/90 md:border-2 border-0 border-cyan-400  md:border-ridge md:p-3 p-2 md:shadow-[0_0_25px_rgba(255,255,0,0.3),inset_0_0_25px_rgba(255,255,255,0.1)] relative md:gradient-border">
+    <div id="guestbook-section" className="md:bg-gradient-to-br bg-transparent from-black/90 via-blue-900/80 to-black/90 md:border-2 border-0 border-cyan-400  md:border-ridge md:p-3 p-2 md:shadow-[0_0_25px_rgba(255,255,0,0.3),inset_0_0_25px_rgba(255,255,255,0.1)] relative md:gradient-border">
       <h3 className="animate-blink text-center text-pink-500 text-xl mb-8">
         📝 GUESTBOOK 📝
       </h3>

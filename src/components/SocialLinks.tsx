@@ -43,12 +43,12 @@ const SocialLinks: React.FC<SocialLinksProps> = ({
 
   if (variant === 'minimal') {
     return (
-      <div className={`flex gap-2 ${className}`}>
+      <div className={`flex md:gap-3 gap-2 ${className}`}>
         {socialLinks.map((social) => (
           <button
             key={social.name}
             onClick={() => handleSocialClick(social.url, social.name)}
-            className="bg-gradient-to-r from-blue-600 to-blue-500 text-white px-3 py-1 border-2 border-white/20 font-bold transition-all duration-300 hover:scale-105 text-sm"
+            className="bg-gradient-to-r from-blue-600 to-blue-500 text-white md:px-3 px-2 md:py-3 py-1 border-2 border-white/20 font-bold transition-all duration-300 hover:scale-105 text-sm"
             title={`Follow us on ${social.name}`}
           >
             <span className="text-sm">{social.icon}</span>
@@ -60,12 +60,12 @@ const SocialLinks: React.FC<SocialLinksProps> = ({
 
   if (variant === 'compact') {
     return (
-      <div className={`flex gap-3 ${className}`}>
+      <div className={`flex md:gap-3 gap-2 ${className}`}>
         {socialLinks.map((social) => (
           <button
             key={social.name}
             onClick={() => handleSocialClick(social.url, social.name)}
-            className="bg-gradient-to-r from-blue-600 to-blue-500 text-white px-4 py-2 border-2 border-white/20 font-bold transition-all duration-300 hover:scale-105 flex items-center gap-2 text-sm"
+            className="bg-gradient-to-r from-blue-600 to-blue-500 text-white md:px-4 px-2 md:py-3 py-2 border-2 border-white/20 font-bold transition-all duration-300 hover:scale-105 flex items-center gap-2 text-sm"
             title={`Follow us on ${social.name}`}
           >
             <span className="text-sm">{social.icon}</span>
@@ -82,12 +82,12 @@ const SocialLinks: React.FC<SocialLinksProps> = ({
       <h3 className="text-center text-cyan-400 font-bold text-lg mb-2 animate-blink">
         🌐 CONNECT WITH US 🌐
       </h3>
-      <div className="flex flex-wrap justify-center gap-3">
+      <div className="flex flex-wrap justify-center md:gap-3 gap-2">
         {socialLinks.map((social) => (
           <button
             key={social.name}
             onClick={() => handleSocialClick(social.url, social.name)}
-            className="bg-gradient-to-r from-blue-600 to-blue-500 text-white px-4 py-3 border-2 border-white/20 font-bold transition-all duration-300 hover:scale-105 flex items-center gap-3 hover:border-white/40"
+            className="bg-gradient-to-r from-blue-600 to-blue-500 text-white md:px-4 px-2 md:py-3 py-2 border-2 border-white/20 font-bold transition-all duration-300 hover:scale-105 flex items-center gap-3 hover:border-white/40"
             title={`Follow us on ${social.name}`}
           >
             <span className="text-xl">{social.icon}</span>

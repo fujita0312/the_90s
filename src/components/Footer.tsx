@@ -3,11 +3,12 @@ import MemeModal from './MemeModal';
 import memeApi from '../services/memeApi';
 import { useToast } from '../contexts/ToastContext';
 import SocialLinks from './SocialLinks';
+import { useNavigate } from 'react-router-dom';
 
 const Footer: React.FC = () => {
   const [isMemeModalOpen, setIsMemeModalOpen] = useState(false);
   const { showToast } = useToast();
-
+  const navigate = useNavigate();
   const handleMemeSubmit = async (imageUrl: string | undefined, file?: File) => {
     try {
       let response;
@@ -42,40 +43,55 @@ const Footer: React.FC = () => {
     <div className="bg-gradient-to-r from-black via-gray-800 to-black text-[#00ff00] text-center md:p-4 p-3 border-t-2 border-pink-500 mt-10 shadow-[0_-10px_20px_rgba(255,0,255,0.3)]">
       {/* Web Ring Links */}
       <div className="flex justify-center gap-5 my-5 flex-wrap">
-        <button className="bg-gradient-to-r from-blue-600 to-blue-500 text-white md:px-5 px-2 md:py-2.5 py-1 no-underline md:border-2 border border-white/20 font-bold transition-all duration-300 cursor-pointer text-sm md:text-base">
+        <button
+          onClick={() => {
+            navigate('/main');
+            setTimeout(() => {
+              window.scrollTo({ top: 0, behavior: 'smooth' });
+            }, 100);
+          }}
+          className="bg-gradient-to-r from-blue-600 to-blue-500 text-white md:px-5 px-2 md:py-2.5 py-1 no-underline md:border-2 border border-white/20 font-bold transition-all duration-300 cursor-pointer text-sm md:text-base">
           🏠 HOME
         </button>
         <button
           onClick={() => {
-            const guestbookSection = document.querySelector('#guestbook-section');
-            if (guestbookSection) {
-              guestbookSection.scrollIntoView({ behavior: 'smooth' });
-            }
+            navigate('/main');
+            setTimeout(() => {
+              const guestbookSection = document.querySelector('#guestbook-section');
+              if (guestbookSection) {
+                guestbookSection.scrollIntoView({ behavior: 'smooth' });
+              }
+            }, 100);
           }}
           className="bg-gradient-to-r from-blue-600 to-blue-500 text-white md:px-5 px-2 md:py-2.5 py-1 no-underline md:border-2 border border-white/20 border-ridge font-bold transition-all duration-300 cursor-pointer text-sm md:text-base">
           📝 GUESTBOOK
         </button>
-        <button className="bg-gradient-to-r from-blue-600 to-blue-500 text-white md:px-5 px-2 md:py-2.5 py-1 no-underline md:border-2 border border-white/20 font-bold transition-all duration-300 cursor-pointer text-sm md:text-base">
+        {/* <button className="bg-gradient-to-r from-blue-600 to-blue-500 text-white md:px-5 px-2 md:py-2.5 py-1 no-underline md:border-2 border border-white/20 font-bold transition-all duration-300 cursor-pointer text-sm md:text-base">
           🔗 COOL LINKS
-        </button>
+        </button> */}
         <button
           onClick={() => {
-            const gamesSection = document.querySelector('#games-section');
-            if (gamesSection) {
-              gamesSection.scrollIntoView({ behavior: 'smooth' });
-            }
+            navigate('/games');
+            setTimeout(() => {
+              window.scrollTo({ top: 0, behavior: 'smooth' });
+            }, 100);
           }}
           className="bg-gradient-to-r from-blue-600 to-blue-500 text-white md:px-5 px-2 md:py-2.5 py-1 no-underline md:border-2 border border-white/20 font-bold transition-all duration-300 cursor-pointer text-sm md:text-base">
-          ARCADE
+          🎮 ARCADE
         </button>
-        <button className="bg-gradient-to-r from-blue-600 to-blue-500 text-white md:px-5 px-2 md:py-2.5 py-1 no-underline md:border-2 border  border-white/20 font-bold transition-all duration-300 cursor-pointer">
+        {/* <button className="bg-gradient-to-r from-blue-600 to-blue-500 text-white md:px-5 px-2 md:py-2.5 py-1 no-underline md:border-2 border  border-white/20 font-bold transition-all duration-300 cursor-pointer">
           👨‍💻 WEBMASTER
-        </button>
-        <button className="bg-gradient-to-r from-blue-600 to-blue-500 text-white md:px-5 px-2 md:py-2.5 py-1 no-underline md:border-2 border border-white/20 font-bold transition-all duration-300 cursor-pointer">
+        </button> */}
+        {/* <button className="bg-gradient-to-r from-blue-600 to-blue-500 text-white md:px-5 px-2 md:py-2.5 py-1 no-underline md:border-2 border border-white/20 font-bold transition-all duration-300 cursor-pointer">
           📊 STATS
-        </button>
+        </button> */}
         <button
-          onClick={() => setIsMemeModalOpen(true)}
+          onClick={() => {
+            navigate('/memes');
+            setTimeout(() => {
+              window.scrollTo({ top: 0, behavior: 'smooth' });
+            }, 100);
+          }}
           className="bg-gradient-to-r from-blue-600 to-blue-500 text-white md:px-5 px-2 md:py-2.5 py-1 no-underline md:border-2 border border-white/20 font-bold transition-all duration-300 cursor-pointer"
         >
           😂 MEMES

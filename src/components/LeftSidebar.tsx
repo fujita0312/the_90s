@@ -74,7 +74,7 @@ const LeftSidebar: React.FC = () => {
       </div>
 
       {/* Clippy Section */}
-      <div className="md:border-4 border-2 border-ridge border-[#00ff00] md:p-5 p-2 mb-5 text-[#00ff00] shadow-[0_0_15px_#00ff00] relative" style={{
+      <div className="md:border-4 border-2 border-ridge border-[#00ff00] md:p-5 p-2 mb-5 text-[#00ff00] shadow-[0_0_15px_#306bb7] relative" style={{
         background: "linear-gradient(45deg,rgba(0, 100, 0, 0.9),rgba(0, 150, 0, 0.7))"
       }}>
         {/* <div className="absolute -top-3 -right-3 bg-black p-2 border-2 border-90s-neon-green rounded-full retro-border-glow">
@@ -88,7 +88,7 @@ const LeftSidebar: React.FC = () => {
 
 
       {/* Vibe Meter */}
-      <div className="border-2 md:border-4 border-ridge border-[#00ff00] md:p-5 p-2 mb-5 text-[#00ff00] shadow-[0_0_15px_#00ff00] relative" style={{
+      <div className="border-2 md:border-4 border-ridge border-[#00ff00] md:p-5 p-2 mb-5 text-[#00ff00] shadow-[0_0_15px_#306bb7] relative" style={{
         background: "linear-gradient(45deg,rgba(0, 100, 0, 0.9),rgba(0, 150, 0, 0.7))"
       }}>
         {/* <div className="absolute -top-3 -right-3 bg-black p-2 border-2 border-90s-neon-green rounded-full retro-border-glow">
@@ -121,9 +121,6 @@ const LeftSidebar: React.FC = () => {
         </div>
       </div>
 
-
-
-
       {/* Buy Button */}
       <button
         onClick={handleBuyNow}
@@ -132,11 +129,6 @@ const LeftSidebar: React.FC = () => {
         🚀 BUY ON BAGS.FM 🚀
         <div className="text-lg mt-1.5">TO THE MOON!</div>
       </button>
-
-      {/* Social Media Links */}
-      <div className="mb-5">
-        <SocialLinks variant="default" showLabels={false} />
-      </div>
 
       {/* Under Construction */}
       <div className="bg-gradient-to-r from-yellow-400 to-orange-500 text-red-600 p-4 text-center md:border-4 border-2 border-red-600 border-ridge my-5 font-bold animate-pulse shadow-[0_0_15px_#ffff00]">

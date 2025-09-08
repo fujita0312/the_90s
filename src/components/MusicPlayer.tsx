@@ -5,23 +5,23 @@ import { isAdminMode } from '../utils/adminUtils';
 
 // Custom 90s-style icons
 const PlayIcon = () => (
-  <span className="text-lg">▶</span>
+  <span className="text-lg w-5 h-5 flex justify-center items-center">▶</span>
 );
 
 const PauseIcon = () => (
-  <span className="text-lg">⏸</span>
+  <span className="text-lg w-5 h-5 flex justify-center items-center">⏸</span>
 );
 
 const SkipBackIcon = () => (
-  <span className="text-lg">⏮</span>
+  <span className="text-lg w-5 h-5 flex justify-center items-center">⏮</span>
 );
 
 const SkipForwardIcon = () => (
-  <span className="text-lg">⏭</span>
+  <span className="text-lg w-5 h-5 flex justify-center items-center">⏭</span>
 );
 
 const VolumeIcon = () => (
-  <span className="text-lg">🔊</span>
+  <span className="text-lg w-5 h-5 flex justify-center items-center">🔊</span>
 );
 
 
@@ -271,7 +271,7 @@ const MusicPlayer: React.FC = () => {
             <div className="flex items-center gap-3">
               <button
                 onClick={togglePlay}
-                className="bg-cyan-400 hover:bg-cyan-300 text-black p-2 rounded-full transition-colors shadow-glow-cyan"
+                className="bg-cyan-400 hover:bg-cyan-300 text-black p-2 w-10 h-10 flex justify-center items-center rounded-full transition-colors shadow-glow-cyan"
               >
                 {isPlaying ? <PauseIcon /> : <PlayIcon />}
               </button>

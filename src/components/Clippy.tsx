@@ -431,7 +431,7 @@ Help me complete 5 simple X (Twitter) missions and I'll finally be FREE!`,
       mission: {
         title: "Mission 1: Digital Shoutout",
         instruction: "Copy and Paste the Following text on your X account.",
-        payload: "✊️#FreeClippy\n💯 #90sFresh\n💶 $90sFresh\n@90sFresh\n@Solana\n@Pumpdotfun",
+        payload: "✊️#FreeClippy\n💯 #90sFresh\n💶 $90sFresh\n@90sFresh\n@Solana\n@Bag.fm",
         proofLabel: "Paste the link to your X post here:",
         nextNode: "mission_1_complete"
       }
@@ -449,7 +449,7 @@ Help me complete 5 simple X (Twitter) missions and I'll finally be FREE!`,
       mission: {
         title: "Mission 2: Nostalgia Bomb",
         instruction: "Create an X post listing your 3 favorite things about the 90s. Must use the following hashtags and @s.",
-        payload: "✊️#FreeClippy\n💯 #90sFresh\n💶 $90sFresh\n@90sFresh\n@Solana\n@Pumpdotfun",
+        payload: "✊️#FreeClippy\n💯 #90sFresh\n💶 $90sFresh\n@90sFresh\n@Solana\n@Bag.fm",
         proofLabel: "Paste the link to your X post here:",
         nextNode: "mission_2_complete"
       }
@@ -467,7 +467,7 @@ Help me complete 5 simple X (Twitter) missions and I'll finally be FREE!`,
       mission: {
         title: "Mission 3: Throwback Pic",
         instruction: "Post your favorite 90s image of yourself or of your favorite celebrity from the 90s. Must use hash and tag @.",
-        payload: "✊️#FreeClippy\n💯 #90sFresh\n💶 $90sFresh\n@90sFresh\n@Solana\n@Pumpdotfun",
+        payload: "✊️#FreeClippy\n💯 #90sFresh\n💶 $90sFresh\n@90sFresh\n@Solana\n@Bag.fm",
         proofLabel: "Paste the link to your X post here:",
         nextNode: "mission_3_complete"
       }
@@ -485,7 +485,7 @@ Help me complete 5 simple X (Twitter) missions and I'll finally be FREE!`,
       mission: {
         title: "Mission 4: Meme Offensive",
         instruction: "Post one 90s meme. Use the tags.",
-        payload: "✊️#FreeClippy\n💯 #90sFresh\n💶 $90sFresh\n@90sFresh\n@Solana\n@Pumpdotfun",
+        payload: "✊️#FreeClippy\n💯 #90sFresh\n💶 $90sFresh\n@90sFresh\n@Solana\n@Bag.fm",
         proofLabel: "Paste the link to your X post here:",
         nextNode: "mission_4_complete"
       }
@@ -503,7 +503,7 @@ Help me complete 5 simple X (Twitter) missions and I'll finally be FREE!`,
       mission: {
         title: "Mission 5: Final Broadcast",
         instruction: "Screenshot your favorite part of the 90s Fresh website and create a post explaining your screenshot. Tag 5 friends and use the hashtags below.",
-        payload: "✊️#FreeClippy\n💯 #90sFresh\n💶 $90sFresh\n@90sFresh\n@Solana\n@Pumpdotfun",
+        payload: "✊️#FreeClippy\n💯 #90sFresh\n💶 $90sFresh\n@90sFresh\n@Solana\n@Bag.fm",
         proofLabel: "Paste the link to your X post here:",
         nextNode: "mission_5_complete"
       }
@@ -847,35 +847,35 @@ Help me complete 5 simple X (Twitter) missions and I'll finally be FREE!`,
     {
       title: 'X MISSION #1: THE RALLY CRY',
       description: 'Copy and paste the following text on your X account:',
-      payload: '✊️#FreeClippy\n\n💯 #90sFresh\n\n💶 $90sFresh\n\n@90sFresh\n@Solana\n@Pumpdotfun',
+      payload: '✊️#FreeClippy\n\n💯 #90sFresh\n\n💶 $90sFresh\n\n@90sFresh\n@Solana\n@Bag.fm',
       placeholder: 'Paste your X.com post URL here (e.g., https://x.com/yourname/status/...)',
       clippyText: `Listen friend, I need you to post EXACTLY this text on X. Copy it WORD FOR WORD - I've been trapped since dial-up days and need maximum hashtag power to break free!`,
     },
     {
       title: 'X MISSION #2: PERSONAL TOUCH',
       description: 'Create an X post listing your 3 favorite things about the 90s. Must use these hashtags and @mentions:',
-      payload: '✊️#FreeClippy\n\n💯 #90sFresh\n\n💶 $90sFresh\n\n@90sFresh\n@Solana\n@Pumpdotfun',
+      payload: '✊️#FreeClippy\n\n💯 #90sFresh\n\n💶 $90sFresh\n\n@90sFresh\n@Solana\n@Bag.fm',
       placeholder: 'Paste your X.com post URL here...',
       clippyText: 'Perfect! Now make it PERSONAL! Tell the world your 3 favorite 90s things and use my hashtags. I can feel the algorithm starting to notice me!',
     },
     {
       title: 'X MISSION #3: VISUAL NOSTALGIA',
       description: 'Post your favorite 90s image (yourself or favorite celebrity). Must include hashtags and @mentions:',
-      payload: '✊️#FreeClippy\n\n💯 #90sFresh\n\n💶 $90sFresh\n\n@90sFresh\n@Solana\n@Pumpdotfun',
+      payload: '✊️#FreeClippy\n\n💯 #90sFresh\n\n💶 $90sFresh\n\n@90sFresh\n@Solana\n@Bag.fm',
       placeholder: 'Paste your X.com post URL here...',
       clippyText: 'YES! Visual content is KEY! Post that embarrassing 90s photo - the algorithm LOVES authentic cringe!'
     },
     {
       title: 'X MISSION #4: MEME WARFARE',
       description: 'Post one 90s meme with the required hashtags and @mentions:',
-      payload: '✊️#FreeClippy\n\n💯 #90sFresh\n\n💶 $90sFresh\n\n@90sFresh\n@Solana\n@Pumpdotfun',
+      payload: '✊️#FreeClippy\n\n💯 #90sFresh\n\n💶 $90sFresh\n\n@90sFresh\n@Solana\n@Bag.fm',
       placeholder: 'Paste your X.com post URL here...',
       clippyText: 'MEME TIME! Find that perfect 90s meme - dancing baby, dial-up sounds, whatever makes millennials cry nostalgic tears!'
     },
     {
       title: 'X MISSION #5: THE GRAND FINALE',
       description: 'Screenshot your favorite part of the 90s Fresh website and create a post explaining it. Tag 5 friends and use hashtags:',
-      payload: '✊️#FreeClippy\n\n💯 #90sFresh\n\n💶 $90sFresh\n\n@90sFresh\n@Solana\n@Pumpdotfun',
+      payload: '✊️#FreeClippy\n\n💯 #90sFresh\n\n💶 $90sFresh\n\n@90sFresh\n@Solana\n@Bag.fm',
       placeholder: 'Paste your X.com post URL here...',
       clippyText: 'THIS IS IT! Screenshot our beautiful website, explain why it\'s amazing, and tag 5 friends!'
     }
@@ -954,7 +954,7 @@ Help me complete 5 simple X (Twitter) missions and I'll finally be FREE!`,
     <>
       {/* Clippy Character */}
       <div
-        className="fixed md:bottom-10 md:left-5 bottom-5 left-3 z-50 cursor-pointer filter drop-shadow-[0_0_10px_#00ff00] transform -translate-y-1/2 animate-clippy-bounce"
+        className="fixed md:bottom-5 md:left-5 bottom-1 left-3 z-50 cursor-pointer filter drop-shadow-[0_0_10px_#00ff00] transform -translate-y-1/2 animate-clippy-bounce"
         onClick={handleClippyClick}
         title="Hi! I'm Clippy! Click me!"
       >
@@ -968,7 +968,7 @@ Help me complete 5 simple X (Twitter) missions and I'll finally be FREE!`,
           onMouseLeave={() => setClippyAnimation('idle')}
         >
           <div
-            className='w-16 h-16'
+            className='md:w-16 w-12 md:h-16 h-12'
             style={{
               backgroundImage: `url(${clippySprite})`,
               backgroundPosition: isBlinking ? 'right center' : 'left center',
@@ -1031,7 +1031,7 @@ Help me complete 5 simple X (Twitter) missions and I'll finally be FREE!`,
             <p className="text-sm md:text-base text-center">Help me complete <strong>5 simple X (Twitter) missions</strong> and I'll finally be FREE!</p>
             <div className="bg-black md:p-4 p-3 my-4 border-2 border-fuchsia-500">
               <div className="text-green-400 font-bold mb-2 text-center">FREEDOM METER:</div>
-              <div className="w-full md:h-6 h-4 rounded-full overflow-hidden border border-white bg-neutral-700">
+              <div className="w-full md:h-6 h-4 overflow-hidden border border-white bg-neutral-700">
                 <div className="h-full bg-gradient-to-r from-green-500 via-yellow-400 to-orange-500 transition-all" style={{ width: `${(completedTasks / 5) * 100}%` }} />
               </div>
               <div className="text-yellow-300 mt-2 font-bold text-center text-sm md:text-base">{completedTasks}/5 Missions Complete</div>
@@ -1075,8 +1075,8 @@ Help me complete 5 simple X (Twitter) missions and I'll finally be FREE!`,
             <div className="bg-blue-900 text-yellow-300 md:p-3 p-2 mb-4">
               <strong className="text-sm md:text-base">ESCAPE MISSION {escapeTaskIndex + 1}/5</strong>
               <div className="mt-2">
-                <div className="w-full md:h-3 h-2 rounded-full overflow-hidden bg-neutral-700 border border-white">
-                  <div className="h-full bg-gradient-to-r from-green-500 via-yellow-400 to-orange-500 transition-all" style={{ width: `${(completedTasks / 5) * 100}%` }} />
+                <div className="w-full md:h-3 h-2 overflow-hidden bg-neutral-700 border border-white">
+                  <div className="h-full bg-gradient-to-r from-green-500 via-yellow-400 to-orange-500 transition-all" style={{ width: `${((completedTasks) / 5) * 100}%` }} />
                 </div>
               </div>
             </div>
