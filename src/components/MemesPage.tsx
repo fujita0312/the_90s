@@ -452,14 +452,13 @@ const MemesPage: React.FC = () => {
                     />
                   </div>
 
+                  {/* Score and Date */}
+                  <div className="absolute top-0 w-full md:p-2 p-1 flex justify-between items-center text-xs text-gray-400">
+                    <span>Score: {meme.votes || 0}</span>
+                    <span>{new Date(meme.createdAt).toLocaleDateString()}</span>
+                  </div>
                   {/* Vote Controls */}
-                  <div className="md:p-2 p-1 absolute bottom-0 left-0 right-0 flex flex-col justify-end" onClick={(e) => e.stopPropagation()}>
-
-                    {/* Score and Date */}
-                    <div className="flex justify-between items-center text-xs text-gray-400">
-                      <span>Score: {meme.votes || 0}</span>
-                      <span>{new Date(meme.createdAt).toLocaleDateString()}</span>
-                    </div>
+                  <div className="md:p-2 p-1 absolute bottom-0 left-0 right-0" onClick={(e) => e.stopPropagation()}>
                     <div className="flex gap-2 bg-gray-800/50">
                       <button
                         onClick={() => handleVoteMeme(meme.id, 'up')}
