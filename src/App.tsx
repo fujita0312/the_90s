@@ -29,7 +29,7 @@ function App() {
 // Games page component
 function GamesPage() {
   return (
-    <div className="p-4 max-w-6xl mx-auto">
+    <div className="md:p-2 p-1.5 max-w-6xl mx-auto">
       <Games onBack={() => window.history.back()} />
     </div>
   );

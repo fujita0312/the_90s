@@ -137,14 +137,21 @@ const Tetris90s: React.FC<Tetris90sProps> = ({ onBack }) => {
             const { board: clearedBoard, linesCleared } = clearLines(newBoard);
             setBoard(clearedBoard);
             setLines(prev => prev + linesCleared);
-            setScore(prev => prev + (linesCleared * 100 * level) + 10);
+            const newScore = score + (linesCleared * 100 * level) + 10;
+            setScore(newScore);
+            
+            // Level up based on lines cleared
             if (lines + linesCleared >= level * 10) {
                 setLevel(prev => prev + 1);
-                setDropTime(prev => Math.max(100, prev - 100));
             }
+            
+            // Speed up based on score (every 1000 points = 50ms faster, minimum 50ms)
+            const speedIncrease = Math.floor(newScore / 1000) * 50;
+            setDropTime(Math.max(50, 1000 - speedIncrease));
+            
             spawnPiece();
         }
-    }, [currentPiece, currentPosition, gameOver, isPaused, isValidPosition, placePiece, board, clearLines, lines, level, spawnPiece]);
+    }, [currentPiece, currentPosition, gameOver, isPaused, isValidPosition, placePiece, board, clearLines, lines, level, score, spawnPiece]);
 
     const rotatePieceHandler = useCallback(() => {
         if (!currentPiece || gameOver || isPaused) return;
@@ -161,8 +168,25 @@ const Tetris90s: React.FC<Tetris90sProps> = ({ onBack }) => {
             newPosition.y += 1;
         }
         setCurrentPosition(newPosition);
-        movePiece('down');
-    }, [currentPiece, currentPosition, gameOver, isPaused, isValidPosition, movePiece]);
+        // Immediately place the piece and process the drop
+        const newBoard = placePiece(currentPiece, newPosition, board);
+        const { board: clearedBoard, linesCleared } = clearLines(newBoard);
+        setBoard(clearedBoard);
+        setLines(prev => prev + linesCleared);
+        const newScore = score + (linesCleared * 100 * level) + 10;
+        setScore(newScore);
+        
+        // Level up based on lines cleared
+        if (lines + linesCleared >= level * 10) {
+            setLevel(prev => prev + 1);
+        }
+        
+        // Speed up based on score (every 1000 points = 50ms faster, minimum 50ms)
+        const speedIncrease = Math.floor(newScore / 1000) * 50;
+        setDropTime(Math.max(50, 1000 - speedIncrease));
+        
+        spawnPiece();
+    }, [currentPiece, currentPosition, gameOver, isPaused, isValidPosition, placePiece, board, clearLines, lines, level, score, spawnPiece]);
 
     useEffect(() => {
         const handleKeyPress = (e: KeyboardEvent) => {

@@ -121,7 +121,7 @@ const Games: React.FC<GamesProps> = ({ onBack }) => {
     };
 
     return (
-        <section id="games-section" className="md:p-6 p-3 relative animate-fade-in" aria-labelledby="games-heading">
+        <section id="games-section" className="relative animate-fade-in" aria-labelledby="games-heading">
             <div className="mx-auto max-w-6xl">
                 {/* <div className="mb-4 flex items-center justify-between gap-2">
                     <button

@@ -196,7 +196,7 @@ const Snake: React.FC<SnakeProps> = ({ onBack }) => {
                 <h2 className="rainbow text-2xl font-bold">🐍 Snake Game 🐍</h2>
             </div>
 
-            <div className="bg-black/60 md:p-5 p-2 md:border-2 border border-[#00ff00] md:my-6 my-4">
+            <div className="bg-black/60 md:p-5 p-2 md:border-2 border border-[#00ff00] md:my-6 my-4 w-full">
                 <div className="text-[#00ff00] text-center mb-4 font-bold md:text-lg text-base">GAME STATISTICS</div>
                 <div className="grid grid-cols-3 gap-4">
                     <div className="text-center"><div className="text-green-400 font-bold">Score</div><div className="text-white text-xl">{score}</div></div>
