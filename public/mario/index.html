@@ -78,14 +78,14 @@
             left: 10px;
         }
         #mobile-controls #move-left span {
-            background-image: url(/assets/img/arrow_left.png);
+            background-image: url(./assets/img/arrow_left.png);
         }
         #mobile-controls #move-right {
             left: 53px;
             width: 57px;
         }
         #mobile-controls #move-right span {
-            background-image: url(/assets/img/arrow_right.png);
+            background-image: url(./assets/img/arrow_right.png);
         }
         #mobile-controls #move-top,
         #mobile-controls #move-bottom {
@@ -96,13 +96,13 @@
             top: 429px;
         }
         #mobile-controls #move-top span {
-            background-image: url(/assets/img/arrow_top.png);
+            background-image: url(./assets/img/arrow_top.png);
         }
         #mobile-controls #move-bottom {
             top: 477px;
         }
         #mobile-controls #move-bottom span {
-            background-image: url(/assets/img/arrow_bottom.png);
+            background-image: url(./assets/img/arrow_bottom.png);
         }
         #mobile-controls #move-fire {
             display: none;
@@ -110,32 +110,17 @@
             right: 76px;
         }
         #mobile-controls #move-fire span {
-            background-image: url(/assets/img/fire.png);
+            background-image: url(./assets/img/fire.png);
         }
         #explanation {
             display: none;
         }
     </style>
-    <script>
-        var is_mobile = true;
-        function iOS() {
-            return [
-                    'iPad Simulator',
-                    'iPhone Simulator',
-                    'iPod Simulator',
-                    'iPad',
-                    'iPhone',
-                    'iPod'
-                ].includes(navigator.platform)
-                // iPad on iOS 13 detection
-                || (navigator.userAgent.includes("Mac") && "ontouchend" in document)
-        }
-        const is_ios = iOS();
-    </script>
+    <script src="./init.js" defer></script>
 </head>
-<body onload="FullScreenMario()" style="position: relative;">
+<body style="position: relative;">
 
 <div id="log" style="width:300px;overflow:auto"></div>
 
 
-<canvas width="345" height="953" style="width: 345px; height: 953px;"></canvas><table id="data_display" class="display" style="width: 100%; font-size: 13px;"><td class="indisplay">SCORE<br>300</td><td class="indisplay">COINS<br>1</td><td class="indisplay">WORLD<br>1-1</td><td class="indisplay">TIME<br>354</td><td class="indisplay">LIVES<br>3</td></table><div id="paused"><span>CLICK TO UNPAUSE</span></div><div id="mobile-controls"><div id="move-left" class="move"><span></span></div><div id="move-top" class="move"><span></span></div><div id="move-right" class="move"><span></span></div><div id="move-bottom" class="move"><span></span></div><div id="move-fire" class="move"><span></span></div></div><div class="text" style="margin-left: -285px; margin-top: 52px;"><div style="width:350px;max-height:189px;background-color:#d64d00;border-radius:7px;box-shadow:3px 3px #efb28b inset, -3px -3px black inset;background-image: url(&quot;Theme/Greeting.gif&quot;), url(&quot;Theme/Greeting.gif&quot;), url(&quot;Theme/Greeting.gif&quot;), url(&quot;Theme/Greeting.gif&quot;);background-repeat: no-repeat;background-position: 7px 7px, 336px 7px, 7px 168px, 336px 168px">  <p style="text-align:left;padding:7px 0 11px 11px;color:#ffcccc;font-family: Super Plumber Bros;font-size:77px;text-shadow:3px 8px black">    <span style="font-size:84px">super</span>    <br><br>    <span style="font-size:81px;line-height:96px">MARIO BROS.</span>  </p></div><div id="boo" style="text-align:right;color:#ffcccc;margin-top:-7px;width:350px;height:35px;">©1985 NINTENDO</div><p id="explanation" style="text-align:center;&lt;!--/*text-shadow:2px 2px 1px black;*/--&gt;margin-left:7px;">  Move: Arrows/WASD  <br>  Fire/Sprint: Shift/CTRL  <br>  Pause/Mute: P/M </p></div></body></html>
+<canvas width="345" height="953" style="width: 345px; height: 953px;"></canvas><table id="data_display" class="display" style="width: 100%; font-size: 13px;"><td class="indisplay">SCORE<br>300</td><td class="indisplay">COINS<br>1</td><td class="indisplay">WORLD<br>1-1</td><td class="indisplay">TIME<br>354</td><td class="indisplay">LIVES<br>3</td></table><div id="paused"><span>CLICK TO UNPAUSE</span></div><div id="mobile-controls"><div id="move-left" class="move"><span></span></div><div id="move-top" class="move"><span></span></div><div id="move-right" class="move"><span></span></div><div id="move-bottom" class="move"><span></span></div><div id="move-fire" class="move"><span></span></div></div><div class="text" style="margin-left: -285px; margin-top: 52px;"><div style="width:350px;max-height:189px;background-color:#d64d00;border-radius:7px;box-shadow:3px 3px #efb28b inset, -3px -3px black inset;background-image: url(&quot;Theme/Greeting.gif&quot;), url(&quot;Theme/Greeting.gif&quot;), url(&quot;Theme/Greeting.gif&quot;), url(&quot;Theme/Greeting.gif&quot;);background-repeat: no-repeat;background-position: 7px 7px, 336px 7px, 7px 168px, 336px 168px">  <p style="text-align:left;padding:7px 0 11px 11px;color:#ffcccc;font-family: Super Plumber Bros;font-size:77px;text-shadow:3px 8px black">    <span style="font-size:84px">super</span>    <br><br>    <span style="font-size:81px;line-height:96px">MARIO BROS.</span>  </p></div><div id="boo" style="text-align:right;color:#ffcccc;margin-top:-7px;width:350px;height:35px;">©1985 NINTENDO</div><p id="explanation" style="text-align:center;margin-left:7px;">  Move: Arrows/WASD  <br>  Fire/Sprint: Shift/CTRL  <br>  Pause/Mute: P/M </p></div></body></html>
