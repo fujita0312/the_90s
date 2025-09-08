@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import MemeModal from './MemeModal';
 import memeApi from '../services/memeApi';
 import { useToast } from '../contexts/ToastContext';
+import SocialLinks from './SocialLinks';
 
 const Footer: React.FC = () => {
   const [isMemeModalOpen, setIsMemeModalOpen] = useState(false);
@@ -82,6 +83,11 @@ const Footer: React.FC = () => {
         >
           😂 MEMES
         </button>
+      </div>
+
+      {/* Social Media Links */}
+      <div className="md:my-8 my-4">
+        <SocialLinks variant="compact" className="justify-center" />
       </div>
 
       {/* Contact Info */}

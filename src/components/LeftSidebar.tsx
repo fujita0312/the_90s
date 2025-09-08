@@ -1,5 +1,6 @@
 import React from 'react';
 import { useToast } from '../contexts/ToastContext';
+import SocialLinks from './SocialLinks';
 const ContractAddress = process.env.REACT_APP_CONTRACT_ADDRESS || '';
 const BagsFmUrl = 'https://bags.fm/' + ContractAddress;
 const LeftSidebar: React.FC = () => {
@@ -131,6 +132,11 @@ const LeftSidebar: React.FC = () => {
         🚀 BUY ON BAGS.FM 🚀
         <div className="text-lg mt-1.5">TO THE MOON!</div>
       </button>
+
+      {/* Social Media Links */}
+      <div className="mb-5">
+        <SocialLinks variant="default" showLabels={false} />
+      </div>
 
       {/* Under Construction */}
       <div className="bg-gradient-to-r from-yellow-400 to-orange-500 text-red-600 p-4 text-center md:border-4 border-2 border-red-600 border-ridge my-5 font-bold animate-pulse shadow-[0_0_15px_#ffff00]">
