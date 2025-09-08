@@ -538,7 +538,7 @@ const Chatroom: React.FC = () => {
                         </div>
 
                         {/* Messages Area */}
-                        <div ref={messagesContainerRef} className="flex-1 overflow-y-auto p-2 sm:p-4 space-y-2 sm:space-y-4 bg-black/10 custom-scrollbar relative">
+                        <div ref={messagesContainerRef} className="flex-1 overflow-y-auto p-2 md:p-4 space-y-2 md:space-y-4 bg-black/10 custom-scrollbar relative">
                             {(() => {
                                 const currentMessages = messages;
 
