@@ -465,7 +465,7 @@ const MemesPage: React.FC = () => {
                         onClick={() => handleVoteMeme(meme.id, 'up')}
                         disabled={hasUserVotedOnMeme(meme.id)}
                         className={`flex-1 flex items-center justify-center gap-1 px-2 py-1 text-sm font-medium transition-colors duration-200 ${hasUserVotedOnMeme(meme.id)
-                          ? ' text-gray-400 cursor-not-allowed'
+                          ? ' text-white cursor-not-allowed'
                           : ' hover:bg-green-700 text-white'
                           }`}
                         title={hasUserVotedOnMeme(meme.id) ? 'You have already voted on this meme' : 'Vote up'}
@@ -477,7 +477,7 @@ const MemesPage: React.FC = () => {
                         onClick={() => handleVoteMeme(meme.id, 'down')}
                         disabled={hasUserVotedOnMeme(meme.id)}
                         className={`flex-1 flex items-center justify-center gap-1 px-2 py-1 text-sm font-medium transition-colors duration-200 ${hasUserVotedOnMeme(meme.id)
-                          ? ' text-gray-400 cursor-not-allowed'
+                          ? ' text-white cursor-not-allowed'
                           : ' hover:bg-red-700 text-white'
                           }`}
                         title={hasUserVotedOnMeme(meme.id) ? 'You have already voted on this meme' : 'Vote down'}
