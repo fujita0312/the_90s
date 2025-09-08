@@ -27,65 +27,50 @@ const MainContent: React.FC = () => {
       {/* Main Message */}
       <div className="md:p-4 p-2 md:border-4 border-2 border-cyan-400 border-ridge mb-8 text-white shadow-[0_0_30px_rgba(0,255,255,0.3)]" style={{ background: "linear-gradient(135deg,rgba(0, 0, 139, 0.9),rgba(25, 25, 112, 0.8))" }}>
         <h3 className="text-cyan-400 text-center mb-5 md:text-2xl text-xl font-bold">
-          🛸 GREETINGS FROM 2025! 🛸
+          In 2025 the 90s are literally EVERYWHERE.
         </h3>
 
-        <p className="md:text-2xl text-xl mb-4">
-          <strong>Dear Original Internet Pioneers,</strong>
+        <p className="mb-4 leading-relaxed md:text-xl text-lg">
+          We created the culture that never dies. Beepers and Walkmans, time flies.
         </p>
-
-        <p className="mb-5 leading-relaxed">
-          We've discovered something MIND-BLOWING in the future - those dreams
-          about internet money from our IRC chats?
-          <span className="animate-blink text-yellow-400">THEY CAME TRUE!</span>
-        </p>
+        <p className="mb-2 leading-relaxed">Computer room. box tv screens.</p>
+        <p className="mb-2 leading-relaxed">Video memories. Dial-up dreams.</p>
+        <p className="mb-6 leading-relaxed">Mix tapes and now the memes.</p>
 
         <div className="flame text-center my-8 md:text-2xl text-base bg-black/50 p-4 md:border-3 border-2 border-orange-500">
-          🔥 OUR DECADE CONQUERED EVERYTHING! 🔥
+          THATS ALL US. WE DID THAT.
         </div>
-
-        <p className="mb-6 leading-relaxed">
-          In 2025, something called "MEME CULTURE" rules the internet, and
-          guess what?
-          <strong className="text-yellow-400">IT'S ALL OUR STUFF!</strong>
-        </p>
 
         <div className="bg-black/60 md:p-5 p-2 md:border-2 border border-[#00ff00] md:my-6 my-4">
           <div className="text-[#00ff00] text-center mb-4 font-bold md:text-lg text-base">
-            Our Music, Movies and Fashion rule pop Culture. AND YES BLEACHED TIPS STILL LOOKS GAY BUT STILL PULLS CHICKS. WILD RIGHT.
+            GUIDE TO GETTING PAID IN 2025.
           </div>
-          <ul className="text-[#00ff00] leading-loose">
-            <li>🎵 Our dial-up sounds = Now considered music</li>
-            <li>💬 Our AOL chat slang = Universal language</li>
-            <li>🎨 Our GeoCities pages = Worth millions</li>
-            <li>🎮 Our Tamagotchis = Came back bigger than ever</li>
-            <li>✨ Our Y2K vibes = The ultimate aesthetic</li>
-            <li>📺 Our CRT monitors = Premium gaming displays</li>
-            <li>💿 Our CD collections = Vintage gold</li>
+          <ul className="text-[#00ff00] leading-loose list-disc ml-5">
+            <li>
+              🕹 Save your video games systems and all the games. Honestly it's
+              best if you don't play them and keep them unopened and in original
+              package. TRUST ME.
+            </li>
+            <li>
+              👖 90s Fashion is everywhere. Starter Jackets, Band Tee's, Snap
+              Backs Hats. All things 90s Style fetch a pretty penny.
+            </li>
+            <li>
+              😐 Those Pokemon and Magic the Gathering Cards you're thinking
+              about playing with don't. Seriously. Unopened packs of both fetch
+              many $1000s of dollars each pack.
+            </li>
+            <li>🎮 Original Sealed Tomagatchis are selling for 3k.</li>
+            <li>
+              📼 Disney VHS. BLACK DIAMOND EDITION. Find em. Keep them. Protect
+              them. Why $1000-$15000 each
+            </li>
+            <li>
+              💶 90s FRESH Coin. When ever it comes to you grab some. This is
+              what they refer to as crypto. It's internet money and 90s Fresh is
+              hot. But don't take my advice dyor.
+            </li>
           </ul>
-        </div>
-
-        <div className="animate-bounce text-center bg-gradient-to-r from-yellow-400 to-orange-500 text-black md:p-5 p-2 md:my-8 my-4 border-4 border-red-600 border-ridge font-bold shadow-[0_0_20px_#ffd700] md:text-xl text-lg">
-          <strong>
-            YOU WEREN'T JUST USING THE INTERNET - YOU WERE CREATING THE
-            FUTURE!
-          </strong>
-        </div>
-
-        <p className="mb-6 leading-relaxed">
-          This coin contains the pure essence of our cultural DNA. Every time
-          someone buys it, they're not just getting internet money...
-          <span className="rainbow">
-            <strong>
-              they're joining the FOUNDING FATHERS OF DIGITAL COOL!
-            </strong>
-          </span>
-        </p>
-
-        <div className="text-center my-6">
-          <div className="animate-blink md:text-2xl text-xl text-yellow-400">
-            ⚡ YOU ARE THE CHOSEN ONES ⚡
-          </div>
         </div>
       </div>
 

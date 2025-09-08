@@ -5,6 +5,9 @@ const TicTacToe = lazy(() => import('./games/TicTacToe'));
 const Snake = lazy(() => import('./games/Snake'));
 const FamilyFeud = lazy(() => import('./games/FamilyFeud'));
 const Tetris90s = lazy(() => import('./games/Tetris90s'));
+const DuckHunt = lazy(() => import('./games/DuckHunt'));
+const Mario = lazy(() => import('./games/Mario'));
+// const EasterEgg = lazy(() => import('./games/EasterEgg'));
 
 interface GamesProps {
     onBack: () => void;
@@ -18,7 +21,10 @@ const Games: React.FC<GamesProps> = ({ onBack }) => {
         { id: 'tictactoe', name: 'Tic Tac Toe', icon: '⭕', description: 'Classic X vs O with AI' },
         { id: 'snake', name: 'Snake', icon: '🐍', description: 'Grow by eating food, avoid walls' },
         { id: 'familyfeud', name: 'Family Feud', icon: '👨‍👩‍👧‍👦', description: 'Guess the most popular answers' },
-        { id: 'tetris90s', name: 'Tetris (90s)', icon: '🧩', description: 'Stack blocks, clear lines, level up' }
+        { id: 'tetris90s', name: 'Tetris (90s)', icon: '🧩', description: 'Stack blocks, clear lines, level up' },
+        { id: 'duckhunt', name: 'Duck Hunt', icon: '🦆', description: 'Aim, shoot, and beat the clock' },
+        { id: 'mario', name: 'Super Mario', icon: '🍄', description: 'Run, jump, and save the day' },
+        // { id: 'easteregg', name: 'Easter Egg', icon: '🥚', description: 'Hidden gem surprise' }
     ]), []);
 
     const handleGameSelect = (gameId: string) => {
@@ -85,6 +91,39 @@ const Games: React.FC<GamesProps> = ({ onBack }) => {
                         <Tetris90s onBack={() => setActiveGame('menu')} />
                     </Suspense>
                 );
+            case 'duckhunt':
+                return (
+                    <Suspense fallback={
+                        <div className="text-center py-16" role="status" aria-live="polite">
+                            <div className="mx-auto mb-4 h-16 w-16 rounded-full border-4 border-cyan-400 border-t-transparent animate-spin"></div>
+                            <div className="text-cyan-400 md:text-xl text-lg font-semibold">Loading Duck Hunt…</div>
+                        </div>
+                    }>
+                        <DuckHunt onBack={() => setActiveGame('menu')} />
+                    </Suspense>
+                );
+            case 'mario':
+                return (
+                    <Suspense fallback={
+                        <div className="text-center py-16" role="status" aria-live="polite">
+                            <div className="mx-auto mb-4 h-16 w-16 rounded-full border-4 border-cyan-400 border-t-transparent animate-spin"></div>
+                            <div className="text-cyan-400 md:text-xl text-lg font-semibold">Loading Mario…</div>
+                        </div>
+                    }>
+                        <Mario onBack={() => setActiveGame('menu')} />
+                    </Suspense>
+                );
+            // case 'easteregg':
+            //     return (
+            //         <Suspense fallback={
+            //             <div className="text-center py-16" role="status" aria-live="polite">
+            //                 <div className="mx-auto mb-4 h-16 w-16 rounded-full border-4 border-cyan-400 border-t-transparent animate-spin"></div>
+            //                 <div className="text-cyan-400 md:text-xl text-lg font-semibold">Loading Easter Egg…</div>
+            //             </div>
+            //         }>
+            //             <EasterEgg onBack={() => setActiveGame('menu')} />
+            //         </Suspense>
+            //     );
             default:
                 return (
                     <div className="mx-auto max-w-6xl text-center">

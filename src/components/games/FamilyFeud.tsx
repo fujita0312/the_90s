@@ -570,7 +570,7 @@ const FamilyFeud: React.FC<FamilyFeudProps> = ({ onBack }) => {
                     </button>
                     <button
                         onClick={onBack}
-                        className="bg-gradient-to-r from-yellow-500 to-orange-500 text-black px-6 py-2 rounded border-2 border-yellow-400 hover:scale-105 transition-all duration-300"
+                        className="bg-gradient-to-r from-yellow-500 to-orange-500 text-black px-6 py-2 border-2 border-yellow-400 hover:scale-105 transition-all duration-300"
                     >
                         Back to Games
                     </button>

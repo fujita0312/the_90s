@@ -139,16 +139,16 @@ const Tetris90s: React.FC<Tetris90sProps> = ({ onBack }) => {
             setLines(prev => prev + linesCleared);
             const newScore = score + (linesCleared * 100 * level) + 10;
             setScore(newScore);
-            
+
             // Level up based on lines cleared
             if (lines + linesCleared >= level * 10) {
                 setLevel(prev => prev + 1);
             }
-            
+
             // Speed up based on score (every 1000 points = 50ms faster, minimum 50ms)
             const speedIncrease = Math.floor(newScore / 1000) * 50;
             setDropTime(Math.max(50, 1000 - speedIncrease));
-            
+
             spawnPiece();
         }
     }, [currentPiece, currentPosition, gameOver, isPaused, isValidPosition, placePiece, board, clearLines, lines, level, score, spawnPiece]);
@@ -175,16 +175,16 @@ const Tetris90s: React.FC<Tetris90sProps> = ({ onBack }) => {
         setLines(prev => prev + linesCleared);
         const newScore = score + (linesCleared * 100 * level) + 10;
         setScore(newScore);
-        
+
         // Level up based on lines cleared
         if (lines + linesCleared >= level * 10) {
             setLevel(prev => prev + 1);
         }
-        
+
         // Speed up based on score (every 1000 points = 50ms faster, minimum 50ms)
         const speedIncrease = Math.floor(newScore / 1000) * 50;
         setDropTime(Math.max(50, 1000 - speedIncrease));
-        
+
         spawnPiece();
     }, [currentPiece, currentPosition, gameOver, isPaused, isValidPosition, placePiece, board, clearLines, lines, level, score, spawnPiece]);
 
@@ -392,7 +392,7 @@ const Tetris90s: React.FC<Tetris90sProps> = ({ onBack }) => {
             <div className="grid lg:grid-cols-3 md:gap-6 gap-1">
                 <div className="lg:col-span-2">
                     <div className="bg-gradient-to-br from-gray-800 to-gray-900 text-white border-2 border-gray-700">
-                        <div className="md:p-6 p-1 flex justify-center">
+                        <div className="p-1 flex justify-center">
                             <div
                                 ref={boardRef}
                                 onTouchStart={handleTouchStart}
@@ -499,7 +499,7 @@ const Tetris90s: React.FC<Tetris90sProps> = ({ onBack }) => {
                     </div>
 
                     <div className="flex justify-center">
-                        <button onClick={onBack} className="bg-gradient-to-r from-yellow-500 to-orange-500 text-black md:px-4 px-3 md:py-2 py-1 rounded border-2 border-yellow-400 hover:scale-105 transition-all duration-300 font-bold">← Back to Games</button>
+                        <button onClick={onBack} className="bg-gradient-to-r from-yellow-500 to-orange-500 text-black md:px-4 px-3 md:py-2 py-1 border-2 border-yellow-400 hover:scale-105 transition-all duration-300 font-bold">← Back to Games</button>
                     </div>
                 </div>
             </div>

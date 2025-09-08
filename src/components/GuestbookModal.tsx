@@ -13,34 +13,34 @@ const GuestbookModal: React.FC<GuestbookModalProps> = ({ isOpen, onClose, onSubm
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    
+
     // Reset errors
     setErrors({});
-    
+
     // Validate inputs
     if (!name.trim()) {
       setErrors(prev => ({ ...prev, name: 'Username is required!' }));
       return;
     }
-    
+
     if (!message.trim()) {
       setErrors(prev => ({ ...prev, message: 'Message is required!' }));
       return;
     }
-    
+
     if (name.length > 30) {
       setErrors(prev => ({ ...prev, name: 'Username must be 30 characters or less!' }));
       return;
     }
-    
+
     if (message.length > 500) {
       setErrors(prev => ({ ...prev, message: 'Message must be 500 characters or less!' }));
       return;
     }
-    
+
     // Submit the form
     onSubmit(name.trim(), message.trim());
-    
+
     // Reset form
     setName('');
     setMessage('');
@@ -78,16 +78,15 @@ const GuestbookModal: React.FC<GuestbookModalProps> = ({ isOpen, onClose, onSubm
           {/* Username Field */}
           <div className="mb-4">
             <label htmlFor="username" className="block text-cyan-400 font-bold mb-2">
-              🎭 Our 90s Username:
+              🎭 Your 90s Username:
             </label>
             <input
               type="text"
               id="username"
               value={name}
               onChange={(e) => setName(e.target.value)}
-              className={`w-full md:p-3 p-2 bg-slate-800 border-2 border-cyan-400 rounded-none text-white placeholder-gray-400 focus:outline-none focus:border-pink-500 transition-colors ${
-                errors.name ? 'border-red-500' : ''
-              }`}
+              className={`w-full md:p-3 p-2 bg-slate-800 border-2 border-cyan-400 rounded-none text-white placeholder-gray-400 focus:outline-none focus:border-pink-500 transition-colors ${errors.name ? 'border-red-500' : ''
+                }`}
               placeholder="e.g., CryptoKid98, DialUpDreamer"
               maxLength={30}
             />
@@ -102,17 +101,16 @@ const GuestbookModal: React.FC<GuestbookModalProps> = ({ isOpen, onClose, onSubm
           {/* Message Field */}
           <div className="mb-6">
             <label htmlFor="message" className="block text-cyan-400 font-bold mb-2">
-              💭 Our Message:
+              💭 Your Message:
             </label>
             <textarea
               id="message"
               value={message}
               onChange={(e) => setMessage(e.target.value)}
               rows={4}
-              className={`w-full md:p-3 p-2 bg-slate-800 border-2 border-cyan-400 rounded-none text-white placeholder-gray-400 focus:outline-none focus:border-pink-500 transition-colors resize-none ${
-                errors.message ? 'border-red-500' : ''
-              }`}
-                              placeholder="Share our thoughts, memories, or just say WASSSUPPP! 🚀"
+              className={`w-full md:p-3 p-2 bg-slate-800 border-2 border-cyan-400 rounded-none text-white placeholder-gray-400 focus:outline-none focus:border-pink-500 transition-colors resize-none ${errors.message ? 'border-red-500' : ''
+                }`}
+              placeholder="Share your thoughts, memories, or just say WASSSUPPP! 🚀"
               maxLength={500}
             />
             {errors.message && (
