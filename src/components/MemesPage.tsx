@@ -453,7 +453,7 @@ const MemesPage: React.FC = () => {
                   </div>
 
                   {/* Vote Controls */}
-                  <div className="md:p-2 p-1 absolute w-full bottom-0 h-full flex flex-col justify-between " onClick={(e) => e.stopPropagation()}>
+                  <div className="md:p-2 p-1 absolute bottom-0 left-0 right-0 flex flex-col justify-end" onClick={(e) => e.stopPropagation()}>
 
                     {/* Score and Date */}
                     <div className="flex justify-between items-center text-xs text-gray-400">
