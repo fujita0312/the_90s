@@ -56,9 +56,6 @@ const Footer: React.FC = () => {
           📝 GUESTBOOK
         </button>
         <button className="bg-gradient-to-r from-blue-600 to-blue-500 text-white md:px-5 px-2 md:py-2.5 py-1 no-underline md:border-2 border border-white/20 font-bold transition-all duration-300 cursor-pointer text-sm md:text-base">
-          📌 BULLETIN BOARD
-        </button>
-        <button className="bg-gradient-to-r from-blue-600 to-blue-500 text-white md:px-5 px-2 md:py-2.5 py-1 no-underline md:border-2 border border-white/20 font-bold transition-all duration-300 cursor-pointer text-sm md:text-base">
           🔗 COOL LINKS
         </button>
         <button
