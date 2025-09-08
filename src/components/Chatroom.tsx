@@ -522,14 +522,14 @@ const Chatroom: React.FC = () => {
                                     </h2>
                                 </div>
                                 <div className="flex items-center space-x-1 sm:space-x-2">
-                                    {selectedUserId && (
+                                    {/* {selectedUserId && (
                                         <button
                                             onClick={handleGeneralChat}
                                             className="px-2 sm:px-3 py-1 bg-yellow-500 hover:bg-yellow-600 text-black text-xs font-bold  transition-colors"
                                         >
                                             General
                                         </button>
-                                    )}
+                                    )} */}
                                     <div className="text-xs sm:text-sm text-white/80">
                                         {new Date().toLocaleTimeString()}
                                     </div>
