@@ -351,20 +351,18 @@ const MemesPage: React.FC = () => {
       <div className="container mx-auto px-4 py-6">
         {/* Header */}
         <div className="text-center mb-8">
-          <h1 className="text-3xl font-bold text-white mb-6">90s Memes Gallery</h1>
-
           {/* Search and Filter Controls */}
-          <div className="flex flex-col sm:flex-row gap-4 items-center justify-center mb-6">
+          <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 items-center justify-center mb-6 w-full max-w-4xl mx-auto">
             {/* Search Bar */}
-            <div className="relative">
+            <div className="relative w-full sm:w-auto">
               <input
                 type="text"
                 placeholder="Search memes..."
                 value={searchTerm}
                 onChange={(e) => handleSearchChange(e.target.value)}
-                className="bg-gray-800 border-2 border-cyan-400 text-cyan-400 placeholder-gray-400 px-4 py-2 pr-10 font-bold focus:border-pink-400 focus:outline-none w-64"
+                className="w-full sm:w-64 bg-gradient-to-r from-gray-800 to-gray-900 border-2 border-cyan-400 text-cyan-400 placeholder-gray-400 px-4 py-3 pr-12 font-bold focus:border-pink-400 focus:outline-none focus:shadow-[0_0_15px_rgba(0,255,255,0.3)] transition-all duration-300 rounded-none"
               />
-              <div className="absolute right-3 top-1/2 transform -translate-y-1/2 text-cyan-400">
+              <div className="absolute right-3 top-1/2 transform -translate-y-1/2 text-cyan-400 text-lg">
                 🔍
               </div>
             </div>
@@ -373,7 +371,7 @@ const MemesPage: React.FC = () => {
             <select
               value={sortBy}
               onChange={(e) => handleSortChange(e.target.value as any)}
-              className="bg-gray-800 border-2 border-cyan-400 text-cyan-400 px-4 py-2 font-bold focus:border-pink-400 focus:outline-none"
+              className="w-full sm:w-auto bg-gradient-to-r from-gray-800 to-gray-900 border-2 border-cyan-400 text-cyan-400 px-4 py-3 font-bold focus:border-pink-400 focus:outline-none focus:shadow-[0_0_15px_rgba(0,255,255,0.3)] transition-all duration-300 rounded-none"
             >
               <option value="mostVoted">🔥 Most Voted</option>
               <option value="leastVoted">👎 Least Voted</option>
@@ -384,7 +382,7 @@ const MemesPage: React.FC = () => {
             {/* Add Meme Button */}
             <button
               onClick={() => setIsMemeModalOpen(true)}
-              className="bg-gradient-to-r from-green-600 to-blue-600 hover:from-green-700 hover:to-blue-700 text-white px-6 py-2 font-bold transition-all duration-300 border-2 border-green-400 hover:border-blue-400 hover:shadow-[0_0_15px_rgba(0,255,0,0.4)]"
+              className="w-full sm:w-auto bg-gradient-to-r from-green-600 to-blue-600 hover:from-green-700 hover:to-blue-700 text-white px-6 py-3 font-bold transition-all duration-300 border-2 border-green-400 hover:border-blue-400 hover:shadow-[0_0_20px_rgba(0,255,0,0.5)] hover:scale-105 transform rounded-none"
             >
               ➕ Add Meme
             </button>
@@ -405,9 +403,9 @@ const MemesPage: React.FC = () => {
             <p className="text-gray-400 mb-6">Be the first to add a meme!</p>
             <button
               onClick={() => setIsMemeModalOpen(true)}
-              className="bg-green-600 hover:bg-green-700 text-white px-4 py-2 font-medium transition-colors duration-200"
+              className="bg-gradient-to-r from-green-600 to-blue-600 hover:from-green-700 hover:to-blue-700 text-white px-6 py-3 font-bold transition-all duration-300 border-2 border-green-400 hover:border-blue-400 hover:shadow-[0_0_20px_rgba(0,255,0,0.5)] hover:scale-105 transform rounded-none"
             >
-              Add First Meme
+              ➕ Add First Meme
             </button>
           </div>
         ) : (
@@ -459,30 +457,30 @@ const MemesPage: React.FC = () => {
                   </div>
                   {/* Vote Controls */}
                   <div className="md:p-2 p-1 absolute bottom-0 left-0 right-0" onClick={(e) => e.stopPropagation()}>
-                    <div className="flex gap-2 bg-gray-800/50">
+                    <div className="flex gap-1 sm:gap-2 bg-gray-800/50 p-1">
                       <button
                         onClick={() => handleVoteMeme(meme.id, 'up')}
                         disabled={hasUserVotedOnMeme(meme.id)}
-                        className={`flex-1 flex items-center justify-center gap-1 px-2 py-1 text-sm font-medium transition-colors duration-200 ${hasUserVotedOnMeme(meme.id)
-                          ? ' text-white cursor-not-allowed'
-                          : ' hover:bg-green-700 text-white'
-                          }`}
+                        className={`flex-1 flex items-center justify-center gap-1 px-2 py-2 text-sm font-bold transition-all duration-300 border-2 rounded-none ${hasUserVotedOnMeme(meme.id)
+                          ? 'bg-gray-600 border-gray-500 text-gray-400 cursor-not-allowed'
+                          : 'bg-gradient-to-r from-green-600 to-green-700 border-green-400 text-white hover:from-green-700 hover:to-green-800 hover:border-green-300 hover:shadow-[0_0_10px_rgba(0,255,0,0.4)] hover:scale-105 transform'
+                        }`}
                         title={hasUserVotedOnMeme(meme.id) ? 'You have already voted on this meme' : 'Vote up'}
                       >
                         <span className="text-xs">{meme.upVotes || 0}</span>
-                        <span>👍</span>
+                        <span className="text-base">👍</span>
                       </button>
                       <button
                         onClick={() => handleVoteMeme(meme.id, 'down')}
                         disabled={hasUserVotedOnMeme(meme.id)}
-                        className={`flex-1 flex items-center justify-center gap-1 px-2 py-1 text-sm font-medium transition-colors duration-200 ${hasUserVotedOnMeme(meme.id)
-                          ? ' text-white cursor-not-allowed'
-                          : ' hover:bg-red-700 text-white'
-                          }`}
+                        className={`flex-1 flex items-center justify-center gap-1 px-2 py-2 text-sm font-bold transition-all duration-300 border-2 rounded-none ${hasUserVotedOnMeme(meme.id)
+                          ? 'bg-gray-600 border-gray-500 text-gray-400 cursor-not-allowed'
+                          : 'bg-gradient-to-r from-red-600 to-red-700 border-red-400 text-white hover:from-red-700 hover:to-red-800 hover:border-red-300 hover:shadow-[0_0_10px_rgba(255,0,0,0.4)] hover:scale-105 transform'
+                        }`}
                         title={hasUserVotedOnMeme(meme.id) ? 'You have already voted on this meme' : 'Vote down'}
                       >
                         <span className="text-xs">{meme.downVotes || 0}</span>
-                        <span>👎</span>
+                        <span className="text-base">👎</span>
                       </button>
                       {/* Share Button */}
                       <button
@@ -490,20 +488,20 @@ const MemesPage: React.FC = () => {
                           e.stopPropagation();
                           handleShareMeme(meme.id);
                         }}
-                        className=" text-white px-2 py-1 text-sm font-medium transition-colors duration-200"
+                        className="bg-gradient-to-r from-blue-600 to-blue-700 border-2 border-blue-400 text-white px-2 py-2 text-sm font-bold transition-all duration-300 hover:from-blue-700 hover:to-blue-800 hover:border-blue-300 hover:shadow-[0_0_10px_rgba(0,0,255,0.4)] hover:scale-105 transform rounded-none"
                         title="Share this meme"
                       >
-                        📤
+                        <span className="text-base">📤</span>
                       </button>
 
                       {/* Admin Delete Button */}
                       {isAdminMode() && (
                         <button
                           onClick={() => handleDeleteMeme(meme.id)}
-                          className=" text-white px-2 py-1 text-sm font-medium transition-colors duration-200"
+                          className="bg-gradient-to-r from-red-600 to-red-700 border-2 border-red-400 text-white px-2 py-2 text-sm font-bold transition-all duration-300 hover:from-red-700 hover:to-red-800 hover:border-red-300 hover:shadow-[0_0_10px_rgba(255,0,0,0.4)] hover:scale-105 transform rounded-none"
                           title="Delete meme (Admin only)"
                         >
-                          🗑️
+                          <span className="text-base">🗑️</span>
                         </button>
                       )}
                     </div>

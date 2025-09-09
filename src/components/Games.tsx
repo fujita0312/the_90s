@@ -1,4 +1,5 @@
-import React, { Suspense, lazy, useMemo, useState } from 'react';
+import React, { Suspense, lazy, useMemo, useState, useEffect } from 'react';
+import { useGameContext } from '../contexts/GameContext';
 
 // Lazy-load game components for performance
 const TicTacToe = lazy(() => import('./games/TicTacToe'));
@@ -16,6 +17,49 @@ interface GamesProps {
 const Games: React.FC<GamesProps> = ({ onBack }) => {
     const [activeGame, setActiveGame] = useState<string>('menu');
     const [isLoading, setIsLoading] = useState(false);
+    const { setGameActive } = useGameContext();
+
+    // Global keyboard handler to prevent page scrolling during gameplay
+    useEffect(() => {
+        const handleGlobalKeyPress = (e: KeyboardEvent) => {
+            // Only prevent default for games that are active (not menu)
+            if (activeGame !== 'menu') {
+                // List of keys that commonly cause page scrolling or unwanted behavior
+                const problematicKeys = [
+                    ' ', // Spacebar - causes page scroll
+                    'ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight', // Arrow keys - can cause scrolling
+                    'PageUp', 'PageDown', 'Home', 'End', // Page navigation
+                    'Tab' // Tab navigation (but we'll be more selective)
+                ];
+                
+                // For iframe games (DuckHunt, Mario), only prevent spacebar
+                if (activeGame === 'duckhunt' || activeGame === 'mario') {
+                    if (e.key === ' ') {
+                        e.preventDefault();
+                        e.stopPropagation();
+                    }
+                } else {
+                    // For other games, prevent all problematic keys
+                    if (problematicKeys.includes(e.key)) {
+                        e.preventDefault();
+                        e.stopPropagation();
+                    }
+                }
+            }
+        };
+
+        // Add event listener with capture to intercept before other handlers
+        window.addEventListener('keydown', handleGlobalKeyPress, { capture: true });
+        
+        return () => {
+            window.removeEventListener('keydown', handleGlobalKeyPress, { capture: true });
+        };
+    }, [activeGame]);
+
+    // Update game state when activeGame changes
+    useEffect(() => {
+        setGameActive(activeGame !== 'menu');
+    }, [activeGame, setGameActive]);
 
     const games = useMemo(() => ([
         { id: 'tictactoe', name: 'Tic Tac Toe', icon: '⭕', description: 'Classic X vs O with AI' },

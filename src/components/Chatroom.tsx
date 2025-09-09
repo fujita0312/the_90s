@@ -51,6 +51,8 @@ const Chatroom: React.FC = () => {
         // Set initial state
         handleResize();
 
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+
         // Listen for resize events
         window.addEventListener('resize', handleResize);
         return () => window.removeEventListener('resize', handleResize);
@@ -59,17 +61,6 @@ const Chatroom: React.FC = () => {
     useEffect(() => {
         currentRoomIdRef.current = currentRoomId;
     }, [currentRoomId])
-    // Auto-hide user list on mobile when screen size changes
-    useEffect(() => {
-        const handleResize = () => {
-            if (window.innerWidth < 1024) {
-                setShowUserList(false);
-            }
-        };
-
-        window.addEventListener('resize', handleResize);
-        return () => window.removeEventListener('resize', handleResize);
-    }, []);
 
     // Auto-scroll to bottom when new messages arrive
     const scrollToBottom = () => {
@@ -157,9 +148,9 @@ const Chatroom: React.FC = () => {
             setSelectedUserId(data.selectedUser || null);
             setCurrentRoomId(data.roomId);
 
-            if (inputRef.current) {
-                inputRef.current.focus();
-            }
+            // if (inputRef.current) {
+            //     inputRef.current.focus();
+            // }
 
             const formattedMessages = data.recentMessages.map(msg => {
                 const user = users.find(user => user.id === msg.sender);
@@ -338,6 +329,10 @@ const Chatroom: React.FC = () => {
         // Send message via Socket.IO using current room ID
         socketService.sendMessage(messageToSend, currentRoomId);
         setNewMessage('');
+
+        if (inputRef.current) {
+            inputRef.current.focus();
+        }
     };
 
     const handleUserClick = (user: User) => {

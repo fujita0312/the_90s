@@ -190,19 +190,29 @@ const Tetris90s: React.FC<Tetris90sProps> = ({ onBack }) => {
 
     useEffect(() => {
         const handleKeyPress = (e: KeyboardEvent) => {
+            // Always prevent default for game-related keys when game is active
+            if (gameStarted || gameOver) {
+                const gameKeys = ['ArrowLeft', 'ArrowRight', 'ArrowDown', 'ArrowUp', ' ', 'p', 'P'];
+                if (gameKeys.includes(e.key)) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                }
+            }
+            
             if (!gameStarted || gameOver) return;
+            
             switch (e.key) {
-                case 'ArrowLeft': e.preventDefault(); movePiece('left'); break;
-                case 'ArrowRight': e.preventDefault(); movePiece('right'); break;
-                case 'ArrowDown': e.preventDefault(); movePiece('down'); break;
-                case 'ArrowUp': e.preventDefault(); rotatePieceHandler(); break;
-                case ' ': e.preventDefault(); hardDrop(); break;
+                case 'ArrowLeft': movePiece('left'); break;
+                case 'ArrowRight': movePiece('right'); break;
+                case 'ArrowDown': movePiece('down'); break;
+                case 'ArrowUp': rotatePieceHandler(); break;
+                case ' ': hardDrop(); break;
                 case 'p':
-                case 'P': e.preventDefault(); setIsPaused(prev => !prev); break;
+                case 'P': setIsPaused(prev => !prev); break;
             }
         };
-        window.addEventListener('keydown', handleKeyPress);
-        return () => window.removeEventListener('keydown', handleKeyPress);
+        window.addEventListener('keydown', handleKeyPress, { capture: true });
+        return () => window.removeEventListener('keydown', handleKeyPress, { capture: true });
     }, [gameStarted, gameOver, movePiece, rotatePieceHandler, hardDrop]);
 
     useEffect(() => {

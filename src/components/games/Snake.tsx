@@ -120,17 +120,27 @@ const Snake: React.FC<SnakeProps> = ({ onBack }) => {
 
     useEffect(() => {
         const handleKeyPress = (e: KeyboardEvent) => {
+            // Always prevent default for game-related keys when game is active
+            if (gameStarted || gameOver) {
+                const gameKeys = ['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight', ' '];
+                if (gameKeys.includes(e.key)) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                }
+            }
+
             if (!gameStarted || gameOver) return;
+
             switch (e.key) {
-                case 'ArrowUp': e.preventDefault(); setDirection(prev => prev.y !== 1 ? { x: 0, y: -1 } : prev); break;
-                case 'ArrowDown': e.preventDefault(); setDirection(prev => prev.y !== -1 ? { x: 0, y: 1 } : prev); break;
-                case 'ArrowLeft': e.preventDefault(); setDirection(prev => prev.x !== 1 ? { x: -1, y: 0 } : prev); break;
-                case 'ArrowRight': e.preventDefault(); setDirection(prev => prev.x !== -1 ? { x: 1, y: 0 } : prev); break;
-                case ' ': e.preventDefault(); togglePause(); break;
+                case 'ArrowUp': setDirection(prev => prev.y !== 1 ? { x: 0, y: -1 } : prev); break;
+                case 'ArrowDown': setDirection(prev => prev.y !== -1 ? { x: 0, y: 1 } : prev); break;
+                case 'ArrowLeft': setDirection(prev => prev.x !== 1 ? { x: -1, y: 0 } : prev); break;
+                case 'ArrowRight': setDirection(prev => prev.x !== -1 ? { x: 1, y: 0 } : prev); break;
+                case ' ': togglePause(); break;
             }
         };
-        window.addEventListener('keydown', handleKeyPress);
-        return () => window.removeEventListener('keydown', handleKeyPress);
+        window.addEventListener('keydown', handleKeyPress, { capture: true });
+        return () => window.removeEventListener('keydown', handleKeyPress, { capture: true });
     }, [gameStarted, gameOver, togglePause]);
 
     useEffect(() => {
@@ -244,6 +254,7 @@ const Snake: React.FC<SnakeProps> = ({ onBack }) => {
                 </div>
             </div>
 
+
             {showMobileControls && (
                 <div className="mb-6">
                     {/* <div className="text-center mb-3"><div className="text-cyan-400 text-sm font-bold">MOBILE CONTROLS</div></div> */}
@@ -258,7 +269,9 @@ const Snake: React.FC<SnakeProps> = ({ onBack }) => {
                     </div>
                 </div>
             )}
-
+            <div className="flex justify-center my-2">
+                <button onClick={onBack} className="bg-gradient-to-r from-yellow-500 to-orange-500 text-black md:px-4 px-3 md:py-2 py-1 border-2 border-yellow-400 hover:scale-105 transition-all duration-300 font-bold">← Back to Games</button>
+            </div>
             <div className="text-xs md:text-sm text-gray-400 space-y-1 md:space-y-2 text-center px-2">
                 <div>Use arrow keys to control the snake</div>
                 <div>Eat the red food to grow and score points</div>

@@ -630,7 +630,7 @@ Help me complete 5 simple X (Twitter) missions and I'll finally be FREE!`,
           <div className="text-sm leading-relaxed mb-4 text-blue-800">
             {node.text}
           </div>
-          <div className="bg-black/50 border-2 border-dashed border-green-400 p-4 mb-4">
+          <div className="bg-black/50 border-2 border-dashed border-cyan-400 p-4 mb-4">
             <h4 className="text-blue-800 text-center mb-3 font-bold text-lg">
               {node.mission.title}
             </h4>
@@ -638,7 +638,7 @@ Help me complete 5 simple X (Twitter) missions and I'll finally be FREE!`,
               {node.mission.instruction}
             </p>
             <textarea
-              className="w-full h-24 bg-black text-blue-800 border border-green-400 p-2 font-mono text-sm resize-none mb-3"
+              className="w-full h-24 bg-black text-blue-800 border border-cyan-400 p-2 font-mono text-sm resize-none mb-3"
               value={node.mission.payload}
               readOnly
             />
@@ -648,7 +648,7 @@ Help me complete 5 simple X (Twitter) missions and I'll finally be FREE!`,
             >
               Copy Text
             </button>
-            <hr className="border-dashed border-green-400 my-3" />
+            <hr className="border-dashed border-cyan-400 my-3" />
             <label className="block text-blue-800 font-bold mb-2 text-sm">
               {node.mission.proofLabel}
             </label>
@@ -656,7 +656,7 @@ Help me complete 5 simple X (Twitter) missions and I'll finally be FREE!`,
               type="text"
               id="proof-input"
               placeholder="https://x.com/your_post_link"
-              className="w-full bg-black text-blue-800 border border-green-400 p-2 font-mono text-sm mb-3"
+              className="w-full bg-black text-blue-800 border border-cyan-400 p-2 font-mono text-sm mb-3"
             />
             <button
               onClick={() => submitProof(node.mission!.nextNode)}

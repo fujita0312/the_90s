@@ -249,13 +249,16 @@ const MusicPlayer: React.FC = () => {
   return (
     <div
       data-music-player
-      className="bg-gradient-to-br from-black/90 via-blue-900/80 to-black/90 border-2 sm:border-3 lg:border-4 border-cyan-400 border-ridge p-3 sm:p-4 lg:p-6 shadow-[0_0_30px_rgba(0,255,255,0.3),inset_0_0_25px_rgba(255,255,255,0.1)] mb-4 sm:mb-6 max-w-5xl mx-auto"
+      className="bg-gradient-to-br from-black/90 via-blue-900/80 to-black/90 border-3 border-cyan-400 border-ridge p-1 md:p-2 shadow-[0_0_30px_rgba(0,255,255,0.3),inset_0_0_25px_rgba(255,255,255,0.1)] mb-4 sm:mb-6 max-w-5xl mx-auto"
     >
       {/* Header */}
       <div className="text-center mb-4">
         <h3 className="text-cyan-400 text-lg sm:text-xl lg:text-2xl font-bold mb-2 text-shadow-cyan">
           📻 90s MUSIC PLAYER 📻
         </h3>
+        <div className="text-yellow-400 text-sm mb-2 text-shadow-yellow">
+          PRESS PLAY TO LISTEN TO THE 90'sFRESH ANTHEM.
+        </div>
         <button
           onClick={() => setIsExpanded(!isExpanded)}
           className="text-yellow-400 text-sm hover:text-yellow-300 transition-colors text-shadow-yellow"

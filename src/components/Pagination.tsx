@@ -49,38 +49,40 @@ const Pagination: React.FC<PaginationProps> = ({
   if (totalPages <= 1) return null;
 
   return (
-    <div className="flex flex-col sm:flex-row items-center justify-between gap-4 p-4 bg-gradient-to-r from-purple-900/20 to-pink-900/20 border-2 border-cyan-400/30">
+    <div className="flex flex-col lg:flex-row items-center justify-between gap-4 p-4 bg-gradient-to-r from-purple-900/20 to-pink-900/20 border-2 border-cyan-400/30 rounded-none">
       {/* Items Info */}
-      <div className="text-sm text-cyan-400 font-medium">
+      <div className="text-sm text-cyan-400 font-bold text-center lg:text-left">
         Showing {startItem}-{endItem} of {totalItems} memes
       </div>
 
       {/* Pagination Controls */}
-      <div className="flex items-center gap-2">
+      <div className="flex flex-wrap items-center justify-center gap-1 sm:gap-2">
         {/* First Page */}
         <button
           onClick={() => onPageChange(1)}
           disabled={currentPage === 1}
-          className={`px-3 py-2 text-sm font-bold transition-all duration-300 border-2 ${
+          className={`px-2 sm:px-3 py-2 text-xs sm:text-sm font-bold transition-all duration-300 border-2 rounded-none ${
             currentPage === 1
               ? 'bg-gray-700 border-gray-600 text-gray-400 cursor-not-allowed'
-              : 'bg-gradient-to-r from-cyan-400/20 to-pink-400/20 border-cyan-400 text-cyan-400 hover:border-pink-400 hover:text-pink-400 hover:shadow-[0_0_15px_rgba(0,255,255,0.4)]'
+              : 'bg-gradient-to-r from-cyan-400/20 to-pink-400/20 border-cyan-400 text-cyan-400 hover:border-pink-400 hover:text-pink-400 hover:shadow-[0_0_15px_rgba(0,255,255,0.4)] hover:scale-105 transform'
           }`}
         >
-          ⏮️ First
+          <span className="hidden sm:inline">⏮️ First</span>
+          <span className="sm:hidden">⏮️</span>
         </button>
 
         {/* Previous Page */}
         <button
           onClick={() => onPageChange(currentPage - 1)}
           disabled={currentPage === 1}
-          className={`px-3 py-2 text-sm font-bold transition-all duration-300 border-2 ${
+          className={`px-2 sm:px-3 py-2 text-xs sm:text-sm font-bold transition-all duration-300 border-2 rounded-none ${
             currentPage === 1
               ? 'bg-gray-700 border-gray-600 text-gray-400 cursor-not-allowed'
-              : 'bg-gradient-to-r from-cyan-400/20 to-pink-400/20 border-cyan-400 text-cyan-400 hover:border-pink-400 hover:text-pink-400 hover:shadow-[0_0_15px_rgba(0,255,255,0.4)]'
+              : 'bg-gradient-to-r from-cyan-400/20 to-pink-400/20 border-cyan-400 text-cyan-400 hover:border-pink-400 hover:text-pink-400 hover:shadow-[0_0_15px_rgba(0,255,255,0.4)] hover:scale-105 transform'
           }`}
         >
-          ⬅️ Prev
+          <span className="hidden sm:inline">⬅️ Prev</span>
+          <span className="sm:hidden">⬅️</span>
         </button>
 
         {/* Page Numbers */}
@@ -88,14 +90,14 @@ const Pagination: React.FC<PaginationProps> = ({
           {getVisiblePages().map((page, index) => (
             <React.Fragment key={index}>
               {page === '...' ? (
-                <span className="px-2 py-2 text-cyan-400 font-bold">...</span>
+                <span className="px-2 py-2 text-cyan-400 font-bold text-xs sm:text-sm">...</span>
               ) : (
                 <button
                   onClick={() => onPageChange(page as number)}
-                  className={`px-3 py-2 text-sm font-bold transition-all duration-300 border-2 ${
+                  className={`px-2 sm:px-3 py-2 text-xs sm:text-sm font-bold transition-all duration-300 border-2 rounded-none ${
                     currentPage === page
-                      ? 'bg-gradient-to-r from-yellow-400/30 to-orange-400/30 border-yellow-400 text-yellow-400 shadow-[0_0_20px_rgba(255,255,0,0.6)]'
-                      : 'bg-gradient-to-r from-cyan-400/20 to-pink-400/20 border-cyan-400 text-cyan-400 hover:border-pink-400 hover:text-pink-400 hover:shadow-[0_0_15px_rgba(0,255,255,0.4)]'
+                      ? 'bg-gradient-to-r from-yellow-400/30 to-orange-400/30 border-yellow-400 text-yellow-400 shadow-[0_0_20px_rgba(255,255,0,0.6)] scale-105'
+                      : 'bg-gradient-to-r from-cyan-400/20 to-pink-400/20 border-cyan-400 text-cyan-400 hover:border-pink-400 hover:text-pink-400 hover:shadow-[0_0_15px_rgba(0,255,255,0.4)] hover:scale-105 transform'
                   }`}
                 >
                   {page}
@@ -109,32 +111,35 @@ const Pagination: React.FC<PaginationProps> = ({
         <button
           onClick={() => onPageChange(currentPage + 1)}
           disabled={currentPage === totalPages}
-          className={`px-3 py-2 text-sm font-bold transition-all duration-300 border-2 ${
+          className={`px-2 sm:px-3 py-2 text-xs sm:text-sm font-bold transition-all duration-300 border-2 rounded-none ${
             currentPage === totalPages
               ? 'bg-gray-700 border-gray-600 text-gray-400 cursor-not-allowed'
-              : 'bg-gradient-to-r from-cyan-400/20 to-pink-400/20 border-cyan-400 text-cyan-400 hover:border-pink-400 hover:text-pink-400 hover:shadow-[0_0_15px_rgba(0,255,255,0.4)]'
+              : 'bg-gradient-to-r from-cyan-400/20 to-pink-400/20 border-cyan-400 text-cyan-400 hover:border-pink-400 hover:text-pink-400 hover:shadow-[0_0_15px_rgba(0,255,255,0.4)] hover:scale-105 transform'
           }`}
         >
-          Next ➡️
+          <span className="hidden sm:inline">Next ➡️</span>
+          <span className="sm:hidden">➡️</span>
         </button>
 
         {/* Last Page */}
         <button
           onClick={() => onPageChange(totalPages)}
           disabled={currentPage === totalPages}
-          className={`px-3 py-2 text-sm font-bold transition-all duration-300 border-2 ${
+          className={`px-2 sm:px-3 py-2 text-xs sm:text-sm font-bold transition-all duration-300 border-2 rounded-none ${
             currentPage === totalPages
               ? 'bg-gray-700 border-gray-600 text-gray-400 cursor-not-allowed'
-              : 'bg-gradient-to-r from-cyan-400/20 to-pink-400/20 border-cyan-400 text-cyan-400 hover:border-pink-400 hover:text-pink-400 hover:shadow-[0_0_15px_rgba(0,255,255,0.4)]'
+              : 'bg-gradient-to-r from-cyan-400/20 to-pink-400/20 border-cyan-400 text-cyan-400 hover:border-pink-400 hover:text-pink-400 hover:shadow-[0_0_15px_rgba(0,255,255,0.4)] hover:scale-105 transform'
           }`}
         >
-          Last ⏭️
+          <span className="hidden sm:inline">Last ⏭️</span>
+          <span className="sm:hidden">⏭️</span>
         </button>
       </div>
 
       {/* Page Size Selector */}
-      <div className="flex items-center gap-2 text-sm text-cyan-400">
-        <span>Per page:</span>
+      <div className="flex items-center gap-2 text-xs sm:text-sm text-cyan-400">
+        <span className="hidden sm:inline">Per page:</span>
+        <span className="sm:hidden">Per:</span>
         <select
           onChange={(e) => {
             const newPageSize = parseInt(e.target.value);
@@ -145,7 +150,7 @@ const Pagination: React.FC<PaginationProps> = ({
             const newCurrentPage = Math.min(currentPage, newTotalPages);
             onPageChange(newCurrentPage);
           }}
-          className="bg-gray-800 border-2 border-cyan-400 text-cyan-400 px-2 py-1 font-bold focus:border-pink-400 focus:outline-none"
+          className="bg-gradient-to-r from-gray-800 to-gray-900 border-2 border-cyan-400 text-cyan-400 px-2 py-1 font-bold focus:border-pink-400 focus:outline-none focus:shadow-[0_0_10px_rgba(0,255,255,0.3)] transition-all duration-300 rounded-none"
           value={itemsPerPage}
         >
           <option value={12}>12</option>

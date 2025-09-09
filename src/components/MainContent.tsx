@@ -1,7 +1,7 @@
 import React from 'react';
- 
+
 import MemeSlider from './MemeSlider';
-import MusicPlayer from './MusicPlayer';
+import HitCounter from './HitCounter';
 
 
 
@@ -9,23 +9,41 @@ const MainContent: React.FC = () => {
 
 
   return (
-    <div className="md:bg-gradient-to-br bg-transparent from-black/90 via-blue-900/80 to-black/90 md:border-2 border-0 border-cyan-400  md:border-ridge md:p-4 p-1 md:shadow-[0_0_25px_rgba(255,255,0,0.3),inset_0_0_25px_rgba(255,255,255,0.1)] relative md:gradient-border">
+    <div className="md:bg-gradient-to-r from-black via-gray-800 to-black bg-transparent md:border-2 border-0 border-cyan-400  md:border-ridge md:p-4 p-0 md:shadow-[0_0_25px_rgba(255,255,0,0.3),inset_0_0_25px_rgba(255,255,255,0.1)] relative md:gradient-border">
       <h2 className="rainbow text-center mb-8 md:text-3xl text-xl">
         📡 MESSAGE FROM THE FUTURE 📡
       </h2>
 
       {/* Coin Icon */}
-      <div className="text-center mb-8">
-        <div className="animate-spin md:text-8xl text-6xl filter drop-shadow-[0_0_20px_#ffd700] mb-2.5">
-          🪙
+      <div className="text-center mb-8 flex flex-col items-center justify-center">
+        <div className="relative md:w-40 w-32 md:h-40 h-32 mb-2.5">
+          {/* 3D Coin Container with Reflection */}
+          <div className="coin-purse w-full h-full">
+            <div className="coin-3d-container coin-enhanced w-full h-full">
+              {/* Back side of coin */}
+              <div className="coin-back"></div>
+              {/* Thickness layers */}
+              <div className="coin-middle coin-middle-1"></div>
+              <div className="coin-middle coin-middle-2"></div>
+              <div className="coin-middle coin-middle-3"></div>
+              <div className="coin-middle coin-middle-4"></div>
+              <div className="coin-middle coin-middle-5"></div>
+              <div className="coin-middle coin-middle-6"></div>
+              <div className="coin-middle coin-middle-7"></div>
+              <div className="coin-middle coin-middle-8"></div>
+              <div className="coin-middle coin-middle-9"></div>
+              {/* Front side of coin */}
+              <div className="coin-front"></div>
+            </div>
+          </div>
         </div>
-        <div className="md:text-xl text-lg text-yellow-400 mt-2.5">
+        <div className="md:text-xl text-lg text-yellow-400 mt-2.5 animate-pulse">
           The Ultimate Meme Coin
         </div>
       </div>
 
       {/* Main Message */}
-      <div className="md:p-4 p-2 md:border-4 border-2 border-cyan-400 border-ridge mb-8 text-white shadow-[0_0_30px_rgba(0,255,255,0.3)]" style={{ background: "linear-gradient(135deg,rgba(0, 0, 139, 0.9),rgba(25, 25, 112, 0.8))" }}>
+      <div className="md:p-4 p-2 border-3 border-cyan-400 border-ridge mb-8 text-white shadow-[0_0_30px_rgba(0,255,255,0.3)]" style={{ background: "linear-gradient(135deg,rgba(0, 0, 139, 0.9),rgba(25, 25, 112, 0.8))" }}>
         <h3 className="text-cyan-400 text-center mb-5 md:text-2xl text-xl font-bold">
           In 2025 the 90s are literally EVERYWHERE.
         </h3>
@@ -73,9 +91,6 @@ const MainContent: React.FC = () => {
           </ul>
         </div>
       </div>
-
-      {/* Music Player Section */}
-      <MusicPlayer />
 
       {/* Meme Slider Section */}
       <MemeSlider />

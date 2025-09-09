@@ -427,6 +427,10 @@ const FamilyFeud: React.FC<FamilyFeudProps> = ({ onBack }) => {
                     {/* <div className="w-[120px]" /> */}
                 </div>
 
+                <div className="flex justify-center my-5">
+                    <button onClick={onBack} className="bg-gradient-to-r from-yellow-500 rounded to-orange-500 text-black md:px-4 px-3 md:py-2 py-1 border-2 border-yellow-400 hover:scale-105 transition-all duration-300 font-bold">← Back to Games</button>
+                </div>
+
                 <div className="grid md:grid-cols-2 gap-6">
                     <div className="bg-gradient-to-br from-green-600 to-teal-600 text-white cursor-pointer hover:scale-105 transition-all duration-300 p-6 border-2 border-green-400">
                         <div className="text-2xl text-yellow-300 font-bold">👤 Single Player</div>
@@ -700,6 +704,10 @@ const FamilyFeud: React.FC<FamilyFeudProps> = ({ onBack }) => {
                         Fast Money
                     </button>
                 )}
+            </div>
+
+            <div className="flex justify-center my-5">
+                <button onClick={() => setGamePhase('setup')} className="bg-gradient-to-r rounded from-yellow-500 to-orange-500 text-black md:px-4 px-3 md:py-2 py-1 border-2 border-yellow-400 hover:scale-105 transition-all duration-300 font-bold">← Back</button>
             </div>
         </div>
     );

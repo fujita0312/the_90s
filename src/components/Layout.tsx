@@ -2,11 +2,11 @@ import React, { useRef, useState, useEffect } from 'react';
 import { Outlet } from 'react-router-dom';
 import Header from './Header';
 import Marquee from './Marquee';
-import HitCounter from './HitCounter';
 import Footer from './Footer';
 import DancingBaby from './DancingBaby';
 import Clippy from './Clippy';
 import MatrixRain from './MatrixRain';
+import { useGameContext } from '../contexts/GameContext';
 // import { use90sFeatures } from '../hooks/use90sFeatures';
 
 interface LayoutProps {
@@ -22,6 +22,7 @@ const Layout: React.FC<LayoutProps> = ({
 }) => {
   const budweiserAudioRef = useRef<HTMLAudioElement>(null);
   const [matrixRainVisible, setMatrixRainVisible] = useState(false);
+  const { isGameActive } = useGameContext();
 
   useEffect(() => {
     setMatrixRainVisible(true);
@@ -36,16 +37,16 @@ const Layout: React.FC<LayoutProps> = ({
         console.log('Budweiser audio play failed:', err);
       }
     }
-  }, []);
+  }, [showAudio]);
 
   return (
     <div className="min-h-screen">
       {/* Background Effects */}
       {showMatrixRain && matrixRainVisible && <MatrixRain />}
 
-      {/* Interactive Elements */}
-      <DancingBaby />
-      <Clippy />
+      {/* Interactive Elements - Hidden during gameplay */}
+      {!isGameActive && <DancingBaby />}
+      {!isGameActive && <Clippy />}
 
       {/* Header with Navigation */}
       <Header />
@@ -53,7 +54,7 @@ const Layout: React.FC<LayoutProps> = ({
 
 
       {/* Main Content Area */}
-      <div className="min-h-screen">
+      <div className="">
         <Outlet />
       </div>
 

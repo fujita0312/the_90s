@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { Autoplay, FreeMode } from 'swiper/modules';
+import { Autoplay, FreeMode, EffectCoverflow } from 'swiper/modules';
 import { Meme } from '../types/meme';
 import memeApi from '../services/memeApi';
 
@@ -60,6 +60,9 @@ const MemeSlider: React.FC = () => {
 
     const handleViewAll = () => {
         navigate('/memes');
+        setTimeout(() => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }, 100);
     };
 
     if (isLoading) {
@@ -109,22 +112,40 @@ const MemeSlider: React.FC = () => {
 
 
     return (
-        <div className="bg-gradient-to-r from-black via-gray-800 to-black border-2 sm:border-3 lg:border-4 border-pink-500 border-ridge p-3 sm:p-4 lg:p-6 shadow-[0_0_20px_rgba(255,0,255,0.3)] mb-4 sm:mb-6 max-w-5xl mx-auto">
-            <h4 className="text-pink-500 text-center mb-3 sm:mb-4 lg:mb-5 text-lg sm:text-xl lg:text-2xl font-bold">
+        <div className="bg-gradient-to-r from-black via-gray-800 to-black border-3 border-pink-500 border-ridge p-3 sm:p-4 lg:p-6 shadow-[0_0_20px_rgba(255,0,255,0.3)] mb-4 sm:mb-6 max-w-5xl mx-auto">
+            {/* <h4 className="text-pink-500 text-center mb-3 sm:mb-4 lg:mb-5 text-lg sm:text-xl lg:text-2xl font-bold">
                 😂 90s MEME GALLERY 😂
-            </h4>
+            </h4> */}
 
+            <div className="mb-4 flex justify-center md:px-6 px-0">
+                <img
+                    src="/assets/img/memes-banner.png"
+                    alt="Guest Book - Retro pixel art banner with neon colors and classic computer elements"
+                    className="max-w-full h-auto w-full rounded-lg transition-all duration-500"
+                    style={{ imageRendering: 'pixelated' }}
+                />
+            </div>
             {/* Swiper Container */}
             <div className="mb-4 md:mb-6">
                 <Swiper
-                    modules={[Autoplay, FreeMode]}
-                    spaceBetween={3}
+                    modules={[Autoplay, FreeMode, EffectCoverflow]}
+                    spaceBetween={1}
                     // slidesPerView={1}
                     slidesPerView="auto"
                     autoplay={{
                         delay: 3000,
                         disableOnInteraction: false,
                         pauseOnMouseEnter: true,
+                    }}
+                    effect={'coverflow'}
+                    grabCursor={true}
+                    centeredSlides={true}
+                    coverflowEffect={{
+                        rotate: 40,
+                        stretch: 0,
+                        depth: 100,
+                        modifier: 1,
+                        slideShadows: true,
                     }}
                     freeMode={true}
                     loop={memes.length > 3}

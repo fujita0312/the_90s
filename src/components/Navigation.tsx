@@ -20,6 +20,9 @@ const Navigation: React.FC = () => {
   const handleNavClick = (path: string) => {
     navigate(path);
     setIsMenuOpen(false);
+    setTimeout(() => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }, 100);
   };
 
   // Close menu on escape key
@@ -49,7 +52,7 @@ const Navigation: React.FC = () => {
       {/* Mobile Menu Button */}
       <button
         onClick={() => setIsMenuOpen(!isMenuOpen)}
-        className="md:hidden fixed top-2 right-2 z-50 bg-gradient-to-r from-purple-600 via-pink-500 to-purple-600 text-white p-2 border-2 border-yellow-400 hover:scale-110 transition-all duration-300 shadow-[0_0_20px_rgba(255,0,255,0.6)] hover:shadow-[0_0_30px_rgba(255,0,255,0.8)]"
+        className="fixed top-2 right-2 z-50 bg-gradient-to-r from-purple-600 via-pink-500 to-purple-600 text-white p-2 border-2 border-yellow-400 hover:scale-110 transition-all duration-300 shadow-[0_0_20px_rgba(255,0,255,0.6)] hover:shadow-[0_0_30px_rgba(255,0,255,0.8)]"
         aria-label="Toggle navigation menu"
       >
         <div className="flex flex-col space-y-1">
@@ -61,13 +64,13 @@ const Navigation: React.FC = () => {
 
       {/* Mobile Navigation Overlay */}
       {isMenuOpen && (
-        <div className="md:hidden fixed inset-0 z-40">
+        <div className="fixed inset-0 z-40">
           {/* Backdrop */}
-          <div 
+          <div
             className="absolute inset-0 bg-gradient-to-br from-black/80 via-purple-900/60 to-black/80 backdrop-blur-sm"
             onClick={() => setIsMenuOpen(false)}
           />
-          
+
           {/* Menu Content */}
           <div className="relative z-50 h-full flex flex-col">
             {/* Header */}
@@ -89,11 +92,10 @@ const Navigation: React.FC = () => {
                 <button
                   key={item.path}
                   onClick={() => handleNavClick(item.path)}
-                  className={`group relative w-full max-w-xs px-4 py-3 border-2 transition-all duration-300 transform hover:scale-105 ${
-                    isActive(item.path)
+                  className={`group relative w-full max-w-xs px-4 py-3 border-2 transition-all duration-300 transform hover:scale-105 ${isActive(item.path)
                       ? 'bg-gradient-to-r from-yellow-400/30 to-orange-400/30 border-yellow-400 shadow-[0_0_20px_rgba(255,255,0,0.6)] text-yellow-400'
                       : 'bg-gradient-to-r from-cyan-400/20 to-pink-400/20 border-cyan-400 hover:border-pink-400 text-cyan-400 hover:text-pink-400 hover:shadow-[0_0_15px_rgba(0,255,255,0.4)]'
-                  }`}
+                    }`}
                   style={{ animationDelay: `${index * 50}ms` }}
                 >
                   <div className="flex items-center space-x-3">
@@ -109,7 +111,7 @@ const Navigation: React.FC = () => {
                       </div>
                     </div>
                   </div>
-                  
+
                   {/* Active indicator */}
                   {isActive(item.path) && (
                     <div className="absolute -top-1 -right-1 w-4 h-4 bg-yellow-400 animate-pulse shadow-[0_0_10px_rgba(255,255,0,0.8)] flex items-center justify-center">
@@ -132,7 +134,7 @@ const Navigation: React.FC = () => {
       )}
 
       {/* Desktop Navigation */}
-      <nav className="hidden md:block">
+      {/* <nav className="hidden md:block">
         <div className="flex items-center justify-center space-x-2">
           {navItems.map((item) => (
             <button
@@ -151,16 +153,16 @@ const Navigation: React.FC = () => {
                 <span className="group-hover:animate-pulse">
                   {item.label}
                 </span>
-              </span>
-              
-              {/* Active indicator */}
-              {isActive(item.path) && (
+              </span> */}
+
+      {/* Active indicator */}
+      {/* {isActive(item.path) && (
                 <div className="absolute -top-1 -right-1 w-2 h-2 bg-yellow-400 animate-pulse shadow-[0_0_8px_rgba(255,255,0,0.8)]"></div>
               )}
             </button>
           ))}
-        </div>
-      </nav>
+        </div> */}
+      {/* </nav> */}
     </div>
   );
 };

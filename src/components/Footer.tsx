@@ -43,7 +43,7 @@ const Footer: React.FC = () => {
     <div className="bg-gradient-to-r from-black via-gray-800 to-black text-[#00ff00] text-center md:p-4 p-3 border-t-2 border-pink-500 mt-10 shadow-[0_-10px_20px_rgba(255,0,255,0.3)]">
       {/* Web Ring Links */}
       <div className="flex justify-center gap-5 my-5 flex-wrap">
-        <button
+        {/* <button
           onClick={() => {
             navigate('/main');
             setTimeout(() => {
@@ -52,8 +52,8 @@ const Footer: React.FC = () => {
           }}
           className="bg-gradient-to-r from-blue-600 to-blue-500 text-white md:px-5 px-2 md:py-2.5 py-1 no-underline md:border-2 border border-white/20 font-bold transition-all duration-300 cursor-pointer text-sm md:text-base">
           🏠 HOME
-        </button>
-        <button
+        </button> */}
+        {/* <button
           onClick={() => {
             navigate('/main');
             setTimeout(() => {
@@ -65,11 +65,11 @@ const Footer: React.FC = () => {
           }}
           className="bg-gradient-to-r from-blue-600 to-blue-500 text-white md:px-5 px-2 md:py-2.5 py-1 no-underline md:border-2 border border-white/20 border-ridge font-bold transition-all duration-300 cursor-pointer text-sm md:text-base">
           📝 GUESTBOOK
-        </button>
+        </button> */}
         {/* <button className="bg-gradient-to-r from-blue-600 to-blue-500 text-white md:px-5 px-2 md:py-2.5 py-1 no-underline md:border-2 border border-white/20 font-bold transition-all duration-300 cursor-pointer text-sm md:text-base">
           🔗 COOL LINKS
         </button> */}
-        <button
+        {/* <button
           onClick={() => {
             navigate('/games');
             setTimeout(() => {
@@ -78,14 +78,14 @@ const Footer: React.FC = () => {
           }}
           className="bg-gradient-to-r from-blue-600 to-blue-500 text-white md:px-5 px-2 md:py-2.5 py-1 no-underline md:border-2 border border-white/20 font-bold transition-all duration-300 cursor-pointer text-sm md:text-base">
           🎮 ARCADE
-        </button>
+        </button> */}
         {/* <button className="bg-gradient-to-r from-blue-600 to-blue-500 text-white md:px-5 px-2 md:py-2.5 py-1 no-underline md:border-2 border  border-white/20 font-bold transition-all duration-300 cursor-pointer">
           👨‍💻 WEBMASTER
         </button> */}
         {/* <button className="bg-gradient-to-r from-blue-600 to-blue-500 text-white md:px-5 px-2 md:py-2.5 py-1 no-underline md:border-2 border border-white/20 font-bold transition-all duration-300 cursor-pointer">
           📊 STATS
         </button> */}
-        <button
+        {/* <button
           onClick={() => {
             navigate('/memes');
             setTimeout(() => {
@@ -95,7 +95,7 @@ const Footer: React.FC = () => {
           className="bg-gradient-to-r from-blue-600 to-blue-500 text-white md:px-5 px-2 md:py-2.5 py-1 no-underline md:border-2 border border-white/20 font-bold transition-all duration-300 cursor-pointer"
         >
           😂 MEMES
-        </button>
+        </button> */}
       </div>
 
       {/* Social Media Links */}

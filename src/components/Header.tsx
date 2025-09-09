@@ -1,74 +1,114 @@
 import React from 'react';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { EffectCreative, Autoplay, Pagination } from 'swiper/modules';
 import Navigation from './Navigation';
+
+// Import Swiper styles
+import 'swiper/css';
+import 'swiper/css/effect-creative';
+import 'swiper/css/pagination';
 
 interface HeaderProps {
 }
 
 const Header: React.FC<HeaderProps> = () => {
   return (
-    <div className="bg-gradient-to-r from-[#ff1493] via-[#00ced1]  to-[#ff1493] bg-[length:400%_400%] text-center md:p-6 p-4 py-8 md:m-3 m-1.5 relative cyber-scan-line animate-gradient-shift-header md:border-2 border-2 border-yellow-400 ">
-      {/* Enhanced star decorations */}
-      <div className="absolute md:top-3 top-2 md:left-3 left-2 text-lg md:text-4xl animate-spin ">
-        ⭐
-      </div>
-      <div className="absolute md:top-3 top-2 md:right-3 right-2 text-lg md:text-4xl animate-spin " style={{ animationDirection: 'reverse' }}>
-        ⭐
-      </div>
-      
-      {/* Additional corner decorations */}
-      <div className="absolute md:bottom-3 bottom-2 md:left-3 left-2 text-sm md:text-xl animate-pulse text-90s-neon-cyan">
-        🔥
-      </div>
-      <div className="absolute md:bottom-3 bottom-2 md:right-3 right-2 text-sm md:text-xl animate-pulse text-90s-neon-pink">
-        💫
-      </div>
+    <div className="md:m-3 m-1.5 md:h-[400px] h-[250px] relative">
+      {/* Swiper Carousel */}
+      <Swiper
+        grabCursor={true}
+        effect={'creative'}
+        creativeEffect={{
+          prev: {
+            shadow: true,
+            translate: ['-20%', 0, -1],
+          },
+          next: {
+            translate: ['100%', 0, 0],
+          },
+        }}
+        modules={[EffectCreative, Autoplay]}
+        className="header-swiper w-full h-full"
+        autoplay={{
+          delay: 3000,
+          disableOnInteraction: false,
+        }}
+        // pagination={{
+        //   clickable: true,
+        //   bulletClass: 'swiper-pagination-bullet header-bullet',
+        //   bulletActiveClass: 'swiper-pagination-bullet-active header-bullet-active',
+        // }}
+        loop={true}
+        speed={1000}
+      >
+        {/* 90s Fresh Background */}
+        <SwiperSlide>
+          <div className="relative w-full h-full">
+            <img
+              src="/assets/img/90s-fresh-bg.jpg"
+              alt="90s Fresh Background"
+              className="w-full h-full object-cover"
+              style={{ imageRendering: 'pixelated' }}
+            />
+            {/* <div className="absolute inset-0 bg-gradient-to-r from-[#ff1493]/20 via-[#00ced1]/20 to-[#ff1493]/20"></div> */}
+            <div className="absolute inset-0 flex flex-col items-center justify-center text-center p-4">
+              {/* <h1 className="rainbow bounce animate-pulse text-2xl md:text-5xl font-impact retro-text-glow mb-2">
+                ☆ 90's FRESH TIL INFINITY ☆
+              </h1>
+              <div className="animate-blink text-lg md:text-4xl md:mt-6 mt-3 md:mb-6 mb-3 font-bold text-90s-neon-yellow retro-text-glow">
+                🚀 TRANSMISSION FROM 2025! THE 90s CONQUERED THE FUTURE! 🚀
+              </div> */}
+            </div>
+          </div>
+        </SwiperSlide>
 
-      <h1 className="rainbow bounce animate-pulse text-2xl md:text-5xl font-impact retro-text-glow mb-2">
-        ☆ 90's FRESH TIL INFINITY ☆
-      </h1>
+        {/* Arcade Banner */}
+        {/* <SwiperSlide>
+          <div className="relative w-full h-full">
+            <img
+              src="/assets/img/games-banner.jpg"
+              alt="90s Games Arcade"
+              className="w-full h-full object-cover"
+              style={{ imageRendering: 'pixelated' }}
+            />
+            <div className="absolute inset-0 bg-gradient-to-r from-purple-900/30 via-pink-900/30 to-purple-900/30"></div>
+            <div className="absolute inset-0 flex flex-col items-center justify-center text-center p-4">
+              <h1 className="text-2xl md:text-5xl font-impact retro-text-glow mb-2 text-white">
+                🎮 90s GAMES ARCADE 🎮
+              </h1>
+              <div className="text-lg md:text-3xl md:mt-6 mt-3 font-bold text-90s-neon-cyan retro-text-glow">
+                🕹️ CLASSIC GAMING EXPERIENCE 🕹️
+              </div>
+            </div>
+          </div>
+        </SwiperSlide> */}
 
-      <div className="animate-blink text-lg md:text-4xl md:mt-6 mt-3 md:mb-6 mb-3 font-bold text-90s-neon-yellow retro-text-glow">
-        🚀 TRANSMISSION FROM 2025! THE 90s CONQUERED THE FUTURE! 🚀
-      </div>
+        {/* Memes Banner */}
+        {/* <SwiperSlide>
+          <div className="relative w-full h-full">
+            <img
+              src="/assets/img/memes-banner.jpg"
+              alt="90s Memes Gallery"
+              className="w-full h-full object-cover"
+              style={{ imageRendering: 'pixelated' }}
+            />
+            <div className="absolute inset-0 bg-gradient-to-r from-cyan-900/30 via-teal-900/30 to-cyan-900/30"></div>
+            <div className="absolute inset-0 flex flex-col items-center justify-center text-center p-4">
+              <h1 className="text-2xl md:text-5xl font-impact retro-text-glow mb-2 text-white">
+                😂 90s MEMES GALLERY 😂
+              </h1>
+              <div className="text-lg md:text-3xl md:mt-6 mt-3 font-bold text-90s-neon-green retro-text-glow">
+                🎭 VINTAGE HUMOR COLLECTION 🎭
+              </div>
+            </div>
+          </div>
+        </SwiperSlide> */}
+      </Swiper>
 
-      <div className="md:mt-6 mt-3 md:text-2xl text-lg font-comic text-90s-neon-cyan">
-        <span className="animate-spin inline-block">💿</span> Best viewed in Netscape Navigator 4.0!
-        <span className="animate-spin inline-block">💿</span>
-      </div>
-
-      <div className="md:mt-4 mt-2 text-lg md:text-xl font-comic text-90s-neon-green">
-        <span className="animate-blink">🌐 Now with 256 colors! 🌐</span>
-      </div>
-
-      {/* Navigation Menu */}
-      <div className="md:mt-6 mt-4">
+      {/* Navigation Overlay */}
+      <div className="absolute bottom-0 left-0 right-0 z-10">
         <Navigation />
       </div>
-
-      {/* Enhanced status indicators */}
-      <div className="md:mt-6 mt-4 flex flex-wrap justify-center gap-4 text-sm md:text-base">
-        <div className=" px-3 py-1 text-90s-neon-green">
-          <span className="animate-pulse">●</span> ONLINE
-        </div>
-        <div className=" px-3 py-1 text-90s-neon-cyan">
-          <span className="animate-pulse">●</span> 56K MODEM
-        </div>
-        <div className=" px-3 py-1 text-90s-neon-pink">
-          <span className="animate-pulse">●</span> 1995 MODE
-        </div>
-      </div>
-
-      {/* Games Button */}
-      {/* {onGamesClick && (
-        <div className="md:mt-4 mt-2">
-          <button
-            onClick={onGamesClick}
-            className="bg-gradient-to-r from-purple-500 to-pink-500 text-white px-6 py-2 rounded border-2 border-purple-400 hover:scale-105 transition-all duration-300 text-lg font-bold shadow-[0_0_15px_rgba(255,0,255,0.5)] hover:shadow-[0_0_25px_rgba(255,0,255,0.7)] hover:border-purple-300 group"
-          >
-            <span className="group-hover:animate-pulse">🎮 Play Games 🎮</span>
-          </button>
-        </div>
-      )} */}
     </div>
   );
 };

@@ -260,11 +260,17 @@ const TicTacToe: React.FC<TicTacToeProps> = ({ onBack }) => {
                 </div>
             </div>
 
+
             {!gameOver && (
                 <div className="text-xs md:text-sm text-gray-400 text-center px-2">
                     {isPlayerTurn ? "Click any empty cell to make your move" : "Computer is thinking..."}
                 </div>
             )}
+
+            <div className="flex justify-center my-5">
+                <button onClick={onBack} className="bg-gradient-to-r from-yellow-500 to-orange-500 text-black md:px-4 px-3 md:py-2 py-1 border-2 border-yellow-400 hover:scale-105 transition-all duration-300 font-bold">← Back to Games</button>
+            </div>
+
         </div>
     );
 };
