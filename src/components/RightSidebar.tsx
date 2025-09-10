@@ -151,20 +151,21 @@ const RightSidebar: React.FC = () => {
         </div>
       </div>
 
-      {/* Why This Will Go Viral */}
+      {/* Why 90sFRESH Will Run */}
       <div className="bg-gradient-to-r from-black via-gray-800 to-black border-3 border-pink-500 border-ridge md:p-3 p-2 shadow-[0_0_20px_rgba(255,0,255,0.3)]">
         <h4 className="text-pink-500 text-center mb-5 text-xl font-bold">
-          🎯 WHY THIS WILL GO VIRAL:
+          🎯 WHY 90sFRESH WILL RUN:
         </h4>
         <div className="text-white leading-loose md:text-lg text-base ">
-          • Perfect nostalgia timing for millennial money<br />
-          • Zero utility = Maximum meme potential<br />
-          • 90s aesthetic is trending everywhere<br />
-          • Built-in community of culture creators<br />
-          • Time travel narrative = infinite content<br />
-          • Fair launch = No VC dumping<br />
-          • Endorsed by dancing baby and Clippy<br />
-          • Y2K compliant smart contracts
+          • 95% of Crypto Users were either born in the 90s or Lived through the 90s.<br />
+          • The 90's are the most Influential decade as it pertains to technology and current Pop Culture.<br />
+          • 100% FUBU.<br />
+          • The 90's Created MEME Culture which is now Pop Culture. We fully understand the power of the meme.<br />
+          • The Meta, Aura & Orgin are deeply tied to the core of our beings.<br />
+          • Dancing Baby & Clippy give it TWO SNAPS IN A Z FORMATION.<br />
+          • 100% Organic. No Bundles. No Insiders. No Cabal.<br />
+          • Ultimate Meme. No Utility. Pure Xtreme Vibes.<br />
+          • The 90s just like 90sFRESH is a fresh breath in a copy cat meme coin market.
         </div>
       </div>
 
