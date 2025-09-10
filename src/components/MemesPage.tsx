@@ -93,14 +93,40 @@ const MemesPage: React.FC = () => {
 
   // Handle URL-based meme opening
   useEffect(() => {
-    if (memeId && memes.length > 0) {
-      const meme = memes.find(m => m.id === memeId);
-      if (meme) {
-        setSelectedMeme(meme);
-        setIsFullscreenOpen(true);
+    if (memeId) {
+      // First try to find the meme in the current page
+      if (memes.length > 0) {
+        const meme = memes.find(m => m.id === memeId);
+        if (meme) {
+          setSelectedMeme(meme);
+          setIsFullscreenOpen(true);
+          return;
+        }
       }
+      
+      // If not found in current page, fetch the individual meme
+      const fetchIndividualMeme = async () => {
+        try {
+          const response = await memeApi.getMemeById(memeId);
+          if (response.success && response.data) {
+            setSelectedMeme(response.data);
+            setIsFullscreenOpen(true);
+          } else {
+            console.error('Meme not found:', response.error);
+            showToast('Meme not found', 'error');
+            // Navigate back to memes page if meme doesn't exist
+            navigate('/memes');
+          }
+        } catch (error) {
+          console.error('Error fetching meme:', error);
+          showToast('Failed to load meme', 'error');
+          navigate('/memes');
+        }
+      };
+      
+      fetchIndividualMeme();
     }
-  }, [memeId, memes]);
+  }, [memeId, memes, navigate, showToast]);
 
   const handleMemeSubmit = async (imageUrl: string | undefined, file?: File) => {
     try {
