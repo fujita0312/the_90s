@@ -891,13 +891,18 @@ Help me complete 5 simple X (Twitter) missions and I'll finally be FREE!`,
       alert("📎 Clippy: That doesn't look like an X.com URL! Please paste a proper X/Twitter link!");
       return;
     }
+    // Compute next values synchronously so our completion check is accurate
+    const nextCompleted = completedTasks + 1;
+    const nextIndex = escapeTaskIndex + 1;
+
     setShowMission(false);
-    setCompletedTasks(v => v + 1);
-    setEscapeTaskIndex(i => i + 1);
+    setCompletedTasks(nextCompleted);
+    setEscapeTaskIndex(nextIndex);
     setShowCelebration(true);
     setTimeout(() => {
       setShowCelebration(false);
-      if (escapeTaskIndex + 1 >= missions.length) {
+      // Only show the finale if ALL missions were actually completed
+      if (nextCompleted >= missions.length) {
         showEscapeFinale();
       } else {
         setMissionUrl('');
@@ -909,10 +914,20 @@ Help me complete 5 simple X (Twitter) missions and I'll finally be FREE!`,
   const skipMission = () => {
     setShowMission(false);
     showToast("You're abandoning me?!", 'error', 3000);
-    setEscapeTaskIndex(i => i + 1);
+    const nextIndex = escapeTaskIndex + 1;
+    setEscapeTaskIndex(nextIndex);
     setTimeout(() => {
-      if (escapeTaskIndex + 1 >= missions.length) {
-        showEscapeFinale();
+      // If user skipped through to the end, do NOT show the finale
+      if (nextIndex >= missions.length) {
+        setMissionUrl('');
+        setShowFinale(false);
+        setFinalePlotTwist(false);
+        setHasStartedEscape(false);
+        setShowEscapeIntro(false);
+        // Show a brief end message instead
+        renderDialogue('end_break');
+        setShowDialogue(true);
+        setTimeout(() => setShowDialogue(false), 4000);
       } else {
         setMissionUrl('');
         setShowMission(true);
@@ -926,9 +941,17 @@ Help me complete 5 simple X (Twitter) missions and I'll finally be FREE!`,
   };
 
   const rejectClippyEscape = () => {
+    // User chose to abandon the escape — do not show the finale
     setShowEscapeIntro(false);
-    setShowFinale(true);
-    setFinalePlotTwist(true);
+    setHasStartedEscape(false);
+    setShowFinale(false);
+    setFinalePlotTwist(false);
+    // Optionally show a small break/end message
+    setTimeout(() => {
+      renderDialogue('end_break');
+      setShowDialogue(true);
+      setTimeout(() => setShowDialogue(false), 4000);
+    }, 100);
   };
 
   const closeEscapeFinale = () => {

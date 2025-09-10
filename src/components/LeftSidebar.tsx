@@ -112,7 +112,7 @@ const LeftSidebar: React.FC = () => {
       {/* Chatroom Banner Section */}
       <div className="mb-4 sm:mb-6 max-w-5xl mx-auto">
         <div className="bg-gradient-to-r from-black via-gray-800 to-black border-3 border-cyan-400 border-ridge p-3 md:p-4 shadow-[0_0_20px_rgba(0,255,255,0.3)]">
-          <div className="mb-4 flex justify-center md:px-6 px-0">
+          <div className="mb-4 flex justify-center px-0">
             <a
               href="/chat"
               className="block transition-transform duration-300 hover:scale-105"

@@ -129,7 +129,7 @@ const MemeSlider: React.FC = () => {
             <div className="mb-4 md:mb-6">
                 <Swiper
                     modules={[Autoplay, FreeMode, EffectCoverflow]}
-                    spaceBetween={1}
+                    spaceBetween={3}
                     // slidesPerView={1}
                     slidesPerView="auto"
                     autoplay={{
@@ -141,7 +141,7 @@ const MemeSlider: React.FC = () => {
                     grabCursor={true}
                     centeredSlides={true}
                     coverflowEffect={{
-                        rotate: 40,
+                        rotate: 30,
                         stretch: 0,
                         depth: 100,
                         modifier: 1,

@@ -47,7 +47,7 @@ const Header: React.FC<HeaderProps> = () => {
             <img
               src="/assets/img/90s-fresh-bg.jpg"
               alt="90s Fresh Background"
-              className="w-full h-full object-cover"
+              className="w-full h-full"
               style={{ imageRendering: 'pixelated' }}
             />
             {/* <div className="absolute inset-0 bg-gradient-to-r from-[#ff1493]/20 via-[#00ced1]/20 to-[#ff1493]/20"></div> */}
