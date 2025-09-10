@@ -9,6 +9,7 @@ const Tetris90s = lazy(() => import('./games/Tetris90s'));
 const DuckHunt = lazy(() => import('./games/DuckHunt'));
 const Mario = lazy(() => import('./games/Mario'));
 const Contra = lazy(() => import('./games/Contra'));
+const Jackal = lazy(() => import('./games/Jackal'));
 // const EasterEgg = lazy(() => import('./games/EasterEgg'));
 
 interface GamesProps {
@@ -33,8 +34,8 @@ const Games: React.FC<GamesProps> = ({ onBack }) => {
                     'Tab' // Tab navigation (but we'll be more selective)
                 ];
                 
-                // For iframe games (DuckHunt, Mario, Contra), only prevent spacebar
-                if (activeGame === 'duckhunt' || activeGame === 'mario' || activeGame === 'contra') {
+                // For iframe games (DuckHunt, Mario, Contra, Jackal), only prevent spacebar
+                if (activeGame === 'duckhunt' || activeGame === 'mario' || activeGame === 'contra' || activeGame === 'jackal') {
                     if (e.key === ' ') {
                         e.preventDefault();
                         e.stopPropagation();
@@ -70,6 +71,7 @@ const Games: React.FC<GamesProps> = ({ onBack }) => {
         { id: 'duckhunt', name: 'Duck Hunt', icon: '🦆', description: 'Aim, shoot, and beat the clock' },
         { id: 'mario', name: 'Super Mario', icon: '🍄', description: 'Run, jump, and save the day' },
         { id: 'contra', name: 'Contra', icon: '🔫', description: 'Classic run-and-gun action!' },
+        { id: 'jackal', name: 'Jackal', icon: '🚗', description: 'Top-down military action!' },
         // { id: 'easteregg', name: 'Easter Egg', icon: '🥚', description: 'Hidden gem surprise' }
     ]), []);
 
@@ -168,6 +170,17 @@ const Games: React.FC<GamesProps> = ({ onBack }) => {
                         </div>
                     }>
                         <Contra onBack={() => setActiveGame('menu')} />
+                    </Suspense>
+                );
+            case 'jackal':
+                return (
+                    <Suspense fallback={
+                        <div className="text-center py-16" role="status" aria-live="polite">
+                            <div className="mx-auto mb-4 h-16 w-16 rounded-full border-4 border-cyan-400 border-t-transparent animate-spin"></div>
+                            <div className="text-cyan-400 md:text-xl text-lg font-semibold">Loading Jackal…</div>
+                        </div>
+                    }>
+                        <Jackal onBack={() => setActiveGame('menu')} />
                     </Suspense>
                 );
             // case 'easteregg':
