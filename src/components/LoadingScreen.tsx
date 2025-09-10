@@ -63,6 +63,8 @@ const LoadingScreen = () => {
                     autoPlay
                     loop
                     muted
+                    preload="metadata"
+                    poster="/assets/img/90s-fresh-bg.jpg"
                 >
                     <source src="/video_2025-09-03_20-14-01.mp4" type="video/mp4" />
                     Your browser does not support the video tag.

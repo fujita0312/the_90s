@@ -445,6 +445,8 @@ const MemesPage: React.FC = () => {
                       alt="90s Meme"
                       className={`w-full h-60 object-cover transition-opacity duration-500 ${loadedImages.has(meme.id) ? 'opacity-100' : 'opacity-0 absolute top-0 left-0'
                         }`}
+                      loading="lazy"
+                      decoding="async"
                       onLoad={() => handleImageLoad(meme.id)}
                       onError={() => handleImageLoad(meme.id)} // Also mark as "loaded" on error to hide loading animation
                     />
@@ -464,7 +466,7 @@ const MemesPage: React.FC = () => {
                         className={`flex-1 flex items-center justify-center gap-1 px-2 py-2 text-sm font-bold transition-all duration-300 border-2 rounded-none ${hasUserVotedOnMeme(meme.id)
                           ? 'bg-gray-600 border-gray-500 text-gray-400 cursor-not-allowed'
                           : 'bg-gradient-to-r from-green-600 to-green-700 border-green-400 text-white hover:from-green-700 hover:to-green-800 hover:border-green-300 hover:shadow-[0_0_10px_rgba(0,255,0,0.4)] hover:scale-105 transform'
-                        }`}
+                          }`}
                         title={hasUserVotedOnMeme(meme.id) ? 'You have already voted on this meme' : 'Vote up'}
                       >
                         <span className="text-xs">{meme.upVotes || 0}</span>
@@ -476,7 +478,7 @@ const MemesPage: React.FC = () => {
                         className={`flex-1 flex items-center justify-center gap-1 px-2 py-2 text-sm font-bold transition-all duration-300 border-2 rounded-none ${hasUserVotedOnMeme(meme.id)
                           ? 'bg-gray-600 border-gray-500 text-gray-400 cursor-not-allowed'
                           : 'bg-gradient-to-r from-red-600 to-red-700 border-red-400 text-white hover:from-red-700 hover:to-red-800 hover:border-red-300 hover:shadow-[0_0_10px_rgba(255,0,0,0.4)] hover:scale-105 transform'
-                        }`}
+                          }`}
                         title={hasUserVotedOnMeme(meme.id) ? 'You have already voted on this meme' : 'Vote down'}
                       >
                         <span className="text-xs">{meme.downVotes || 0}</span>
