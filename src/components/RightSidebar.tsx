@@ -20,7 +20,6 @@ const RightSidebar: React.FC = () => {
   const [isLoading, setIsLoading] = useState(true);
   const navigate = useNavigate();
 
-  const [showAllManifesto, setShowAllManifesto] = useState(false);
   const [showAgreementModal, setShowAgreementModal] = useState(false);
   const [userInitials, setUserInitials] = useState('');
   const [hasAgreed, setHasAgreed] = useState(false);
@@ -178,8 +177,16 @@ const RightSidebar: React.FC = () => {
 
 
       {/* The 90s Manifesto Section */}
-      <div className="mt-5 md:p-3 p-2 border-3 border-purple-500 border-ridge mb-8 text-white shadow-[0_0_30px_rgba(147,51,234,0.3)]" style={{ background: "linear-gradient(135deg,rgba(75, 0, 130, 0.9),rgba(138, 43, 226, 0.8))" }}>
-        <div className="space-y-4 text-sm md:text-base leading-relaxed">
+      <div className="mt-5 md:p-1 p-2 border-3 border-purple-500 border-ridge mb-8 text-white shadow-[0_0_30px_rgba(147,51,234,0.3)]" style={{ background: "linear-gradient(135deg,rgba(75, 0, 130, 0.9),rgba(138, 43, 226, 0.8))" }}>
+        <div className="mb-1 flex justify-center">
+          <img
+            src="/assets/img/manifesto-banner.png"
+            alt="Manifesto - Retro pixel art banner with neon colors and classic computer elements"
+            className="max-w-full h-auto w-full rounded-lg transition-all duration-500 animate-fade-in"
+            style={{ imageRendering: 'pixelated' }}
+          />
+        </div>
+        <div className="space-y-4 text-sm md:text-base leading-relaxed max-h-96 overflow-y-auto custom-scrollbar">
           <div className="bg-black/40 p-3 rounded border-l-4 border-purple-400">
             <strong className="text-purple-300">I. We are Freethinkers, Not Followers.</strong><br />
             We are creators, not destroyers. Though our visions may differ, we journey toward the same destination—a future we shape with our own hands.
@@ -194,50 +201,38 @@ const RightSidebar: React.FC = () => {
             <strong className="text-purple-300">III. Each Voice Matters in Our Collective Symphony.</strong><br />
             We will not wait for others to act. When we see what needs fixing, we fix it—respectfully, selflessly, without hunger for recognition.
           </div>
-          {showAllManifesto && (
-            <>
-              <div className="bg-black/40 p-3 rounded border-l-4 border-purple-400">
-                <strong className="text-purple-300">IV. We Act with Love, Not Permission.</strong><br />
-                We don't wait for approval. We respond to what stands before us, guided by hearts full of love and minds sharp with purpose.
-              </div>
 
-              <div className="bg-black/40 p-3 rounded border-l-4 border-purple-400">
-                <strong className="text-purple-300">V. Leaderless Yet Unstoppable.</strong><br />
-                Our movement flows without a single commander, yet our mission burns crystal clear. We cannot, will not lose.
-              </div>
+          <div className="bg-black/40 p-3 rounded border-l-4 border-purple-400">
+            <strong className="text-purple-300">IV. We Act with Love, Not Permission.</strong><br />
+            We don't wait for approval. We respond to what stands before us, guided by hearts full of love and minds sharp with purpose.
+          </div>
 
-              <div className="bg-black/40 p-3 rounded border-l-4 border-purple-400">
-                <strong className="text-purple-300">VI. United by Our Sacred Decade.</strong><br />
-                Bound together through the music that moved us, the movies that shaped us, the fashion that defined us, and above all—our memes. We are the alpha and omega of meme culture. When the moment demands it, we remind the world who truly runs this kingdom.
-              </div>
+          <div className="bg-black/40 p-3 rounded border-l-4 border-purple-400">
+            <strong className="text-purple-300">V. Leaderless Yet Unstoppable.</strong><br />
+            Our movement flows without a single commander, yet our mission burns crystal clear. We cannot, will not lose.
+          </div>
 
-              <div className="bg-black/40 p-3 rounded border-l-4 border-purple-400">
-                <strong className="text-purple-300">VII. Ideas Live Through Action.</strong><br />
-                Your brilliance means nothing without the courage to execute. We implement without permission, we create without recognition. The reward is the creation itself—awesome as an undeniable force, excellence as our baseline.
-              </div>
+          <div className="bg-black/40 p-3 rounded border-l-4 border-purple-400">
+            <strong className="text-purple-300">VI. United by Our Sacred Decade.</strong><br />
+            Bound together through the music that moved us, the movies that shaped us, the fashion that defined us, and above all—our memes. We are the alpha and omega of meme culture. When the moment demands it, we remind the world who truly runs this kingdom.
+          </div>
 
-              <div className="bg-black/40 p-3 rounded border-l-4 border-purple-400">
-                <strong className="text-purple-300">VIII. We Create Unapologetically.</strong><br />
-                We believe in ourselves and understand our place in the hierarchy of meme history. We are both students and masters of the craft that defines generations.
-              </div>
+          <div className="bg-black/40 p-3 rounded border-l-4 border-purple-400">
+            <strong className="text-purple-300">VII. Ideas Live Through Action.</strong><br />
+            Your brilliance means nothing without the courage to execute. We implement without permission, we create without recognition. The reward is the creation itself—awesome as an undeniable force, excellence as our baseline.
+          </div>
 
-              <div className="bg-black/40 p-3 rounded border-l-4 border-purple-400">
-                <strong className="text-purple-300">IX. We Ride Together Until the End.</strong><br />
-                We support our 90s movement and every soul riding this wave with us—until the fucking wheels fall off.
-              </div>
-            </>
-          )}
+          <div className="bg-black/40 p-3 rounded border-l-4 border-purple-400">
+            <strong className="text-purple-300">VIII. We Create Unapologetically.</strong><br />
+            We believe in ourselves and understand our place in the hierarchy of meme history. We are both students and masters of the craft that defines generations.
+          </div>
+
+          <div className="bg-black/40 p-3 rounded border-l-4 border-purple-400">
+            <strong className="text-purple-300">IX. We Ride Together Until the End.</strong><br />
+            We support our 90s movement and every soul riding this wave with us—until the fucking wheels fall off.
+          </div>
         </div>
 
-        {/* Toggle Button */}
-        <div className="text-center mt-4">
-          <button
-            onClick={() => setShowAllManifesto(!showAllManifesto)}
-            className="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white font-bold md:py-2 py-1.5 md:px-6 px-4 border-2 border-purple-400 hover:border-purple-300 transition-all duration-300 hover:scale-105 shadow-[0_0_15px_rgba(147,51,234,0.4)] hover:shadow-[0_0_25px_rgba(147,51,234,0.6)] md:text-base text-sm md:w-auto w-full max-w-xs mx-auto block"
-          >
-            {showAllManifesto ? '🔼 Show Less' : '🔽 Show More (6 more principles)'}
-          </button>
-        </div>
 
         <div className="text-center mt-6 md:p-4 p-3 bg-gradient-to-r from-purple-600/30 to-pink-600/30 border-2 border-purple-400">
           <div className="text-purple-300 font-bold md:text-lg text-base mb-2">We created a culture that never dies.</div>
