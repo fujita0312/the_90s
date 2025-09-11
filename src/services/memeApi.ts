@@ -18,12 +18,19 @@ class MemeApiService extends ApiService {
     if (queryParams.page) searchParams.append('page', queryParams.page.toString());
     if (queryParams.limit) searchParams.append('limit', queryParams.limit.toString());
     if (queryParams.search) searchParams.append('search', queryParams.search);
-    if (queryParams.sortBy) searchParams.append('sortBy', queryParams.sortBy);
+    if (queryParams.sortBy) searchParams.append('sortBy', queryParams.sortBy as any);
     
     const queryString = searchParams.toString();
     const url = `/memes/paginated${queryString ? `?${queryString}` : ''}`;
     
     return this.get<Meme[]>(url) as Promise<PaginatedResponse<Meme>>;
+  }
+
+  /**
+   * Increment view count for a meme
+   */
+  async viewMeme(id: string): Promise<ApiResponse<{ id: string; views: number }>> {
+    return this.post<{ id: string; views: number }>(`/memes/${id}/view`);
   }
 
   /**

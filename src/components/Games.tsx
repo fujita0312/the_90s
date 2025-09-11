@@ -1,5 +1,6 @@
 import React, { Suspense, lazy, useMemo, useState, useEffect } from 'react';
 import { useGameContext } from '../contexts/GameContext';
+import { gameApi } from '../services/gameApi';
 
 // Lazy-load game components for performance
 const TicTacToe = lazy(() => import('./games/TicTacToe'));
@@ -20,6 +21,7 @@ const Games: React.FC<GamesProps> = ({ onBack }) => {
     const [activeGame, setActiveGame] = useState<string>('menu');
     const [isLoading, setIsLoading] = useState(false);
     const { setGameActive } = useGameContext();
+    const [visitCounts, setVisitCounts] = useState<Record<string, number>>({});
 
     // Global keyboard handler to prevent page scrolling during gameplay
     useEffect(() => {
@@ -63,6 +65,25 @@ const Games: React.FC<GamesProps> = ({ onBack }) => {
         setGameActive(activeGame !== 'menu');
     }, [activeGame, setGameActive]);
 
+    // Load visit counts on mount
+    useEffect(() => {
+        const fetchVisits = async () => {
+            try {
+                const res: any = await gameApi.getAllVisits();
+                if (res && res.success && Array.isArray(res.data)) {
+                    const counts: Record<string, number> = {};
+                    for (const item of res.data) {
+                        if (item && item.gameId) counts[item.gameId] = item.count || 0;
+                    }
+                    setVisitCounts(counts);
+                }
+            } catch (e) {
+                // noop
+            }
+        };
+        fetchVisits();
+    }, []);
+
     const games = useMemo(() => ([
         { id: 'tictactoe', name: 'Tic Tac Toe', icon: '⭕', description: 'Classic X vs O with AI' },
         { id: 'snake', name: 'Snake', icon: '🐍', description: 'Grow by eating food, avoid walls' },
@@ -77,6 +98,16 @@ const Games: React.FC<GamesProps> = ({ onBack }) => {
 
     const handleGameSelect = (gameId: string) => {
         setIsLoading(true);
+        // Increment visit count in the backend (fire-and-forget) and optimistically update UI
+        (async () => {
+            try {
+                const res: any = await gameApi.incrementVisit(gameId);
+                const newCount = (res?.data?.count as number) ?? ((visitCounts[gameId] || 0) + 1);
+                setVisitCounts(prev => ({ ...prev, [gameId]: newCount }));
+            } catch {
+                setVisitCounts(prev => ({ ...prev, [gameId]: (prev[gameId] || 0) + 1 }));
+            }
+        })();
         // Small delay for a pleasant transition between menu and game load
         setTimeout(() => {
             setActiveGame(gameId);
@@ -195,6 +226,8 @@ const Games: React.FC<GamesProps> = ({ onBack }) => {
             //         </Suspense>
             //     );
             default:
+                // Games menu with sorting by visit count
+                const sortedGames = [...games].sort((a, b) => (visitCounts[b.id] || 0) - (visitCounts[a.id] || 0));
                 return (
                     <div className="mx-auto max-w-6xl text-center">
                         <h1 className="rainbow mb-6 md:text-5xl text-3xl font-impact retro-text-glow tracking-wide">
@@ -202,7 +235,7 @@ const Games: React.FC<GamesProps> = ({ onBack }) => {
                         </h1>
                         <p className="text-gray-300 md:text-base text-sm mb-6">Pick a classic and start playing!</p>
                         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 mb-8">
-                            {games.map((game) => (
+                            {sortedGames.map((game) => (
                                 <button
                                     key={game.id}
                                     onClick={() => handleGameSelect(game.id)}
@@ -214,6 +247,7 @@ const Games: React.FC<GamesProps> = ({ onBack }) => {
                                         <div>
                                             <h2 className="text-cyan-300 md:text-xl text-lg font-bold group-hover:text-cyan-200 transition-colors duration-300">{game.name}</h2>
                                             <p className="text-white/90 md:text-sm text-xs group-hover:text-white transition-colors duration-300">{game.description}</p>
+                                            <div className="text-cyan-400/90 md:text-xs text-[11px] mt-1">Visits: {visitCounts[game.id] || 0}</div>
                                         </div>
                                     </div>
                                     <div className="mt-4 text-cyan-300 text-xs md:text-sm opacity-80">

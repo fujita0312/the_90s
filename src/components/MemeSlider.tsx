@@ -24,6 +24,8 @@ const MemeSlider: React.FC = () => {
                 const response = await memeApi.getAllMemes();
                 if (response.success && response.data) {
                     const validMemes = Array.isArray(response.data) ? response.data.filter(meme => meme && meme.id) : [];
+                    // Backend already sorts by views desc; if not, sort here defensively
+                    validMemes.sort((a, b) => (b.views || 0) - (a.views || 0));
                     setMemes(validMemes);
                 } else {
                     console.error('Failed to load memes:', response.error);

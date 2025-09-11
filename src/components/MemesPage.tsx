@@ -29,7 +29,7 @@ const MemesPage: React.FC = () => {
   });
   const [searchTerm, setSearchTerm] = useState('');
   const [debouncedSearchTerm, setDebouncedSearchTerm] = useState('');
-  const [sortBy, setSortBy] = useState<'newest' | 'oldest' | 'mostVoted' | 'leastVoted'>('mostVoted');
+  const [sortBy, setSortBy] = useState<'newest' | 'oldest' | 'mostVoted' | 'leastVoted' | 'mostViewed'>('mostVoted');
   const [loadedImages, setLoadedImages] = useState<Set<string>>(new Set());
   const { showToast } = useToast();
 
@@ -103,7 +103,7 @@ const MemesPage: React.FC = () => {
           return;
         }
       }
-      
+
       // If not found in current page, fetch the individual meme
       const fetchIndividualMeme = async () => {
         try {
@@ -123,7 +123,7 @@ const MemesPage: React.FC = () => {
           navigate('/memes');
         }
       };
-      
+
       fetchIndividualMeme();
     }
   }, [memeId, memes, navigate, showToast]);
@@ -310,6 +310,8 @@ const MemesPage: React.FC = () => {
     setSelectedMeme(meme);
     setIsFullscreenOpen(true);
     navigate(`/memes/${meme.id}`);
+    // Increment view count (fire-and-forget)
+    memeApi.viewMeme(meme.id).catch(() => { });
   };
 
   const handleCloseFullscreen = () => {
@@ -344,7 +346,7 @@ const MemesPage: React.FC = () => {
     updateUrlParams({ search, page: 1 });
   };
 
-  const handleSortChange = (sort: 'newest' | 'oldest' | 'mostVoted' | 'leastVoted') => {
+  const handleSortChange = (sort: 'newest' | 'oldest' | 'mostVoted' | 'leastVoted' | 'mostViewed') => {
     setSortBy(sort);
     updateUrlParams({ sortBy: sort, page: 1 });
   };
@@ -399,6 +401,7 @@ const MemesPage: React.FC = () => {
               onChange={(e) => handleSortChange(e.target.value as any)}
               className="w-full sm:w-auto bg-gradient-to-r from-gray-800 to-gray-900 border-2 border-cyan-400 text-cyan-400 px-4 py-3 font-bold focus:border-pink-400 focus:outline-none focus:shadow-[0_0_15px_rgba(0,255,255,0.3)] transition-all duration-300 rounded-none"
             >
+              <option value="mostViewed">🔥 Most Viewed</option>
               <option value="mostVoted">🔥 Most Voted</option>
               <option value="leastVoted">👎 Least Voted</option>
               <option value="newest">🆕 Newest</option>
@@ -481,7 +484,7 @@ const MemesPage: React.FC = () => {
                   {/* Score and Date */}
                   <div className="absolute top-0 w-full md:p-2 p-1 flex justify-between items-center text-xs text-gray-400">
                     <span>Score: {meme.votes || 0}</span>
-                    <span>{new Date(meme.createdAt).toLocaleDateString()}</span>
+                    <span>Views: {meme.views || 0}</span>
                   </div>
                   {/* Vote Controls */}
                   <div className="md:p-2 p-1 absolute bottom-0 left-0 right-0" onClick={(e) => e.stopPropagation()}>

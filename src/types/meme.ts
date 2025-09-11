@@ -7,6 +7,7 @@ export interface Meme {
   upVotes?: number;
   downVotes?: number;
   votedUsers?: string[]; // Array of user fingerprints who have voted
+  views?: number;
 }
 
 export interface MemeSubmission {
@@ -33,5 +34,5 @@ export interface MemeQueryParams {
   page?: number;
   limit?: number;
   search?: string;
-  sortBy?: 'newest' | 'oldest' | 'mostVoted' | 'leastVoted';
+  sortBy?: 'newest' | 'oldest' | 'mostVoted' | 'leastVoted' | 'mostViewed';
 }
