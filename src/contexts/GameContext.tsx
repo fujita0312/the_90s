@@ -1,8 +1,8 @@
 import React, { createContext, useContext, useState, ReactNode } from 'react';
 
 interface GameContextType {
-  isGameActive: boolean;
-  setGameActive: (active: boolean) => void;
+  hideBackgroundElements: boolean;
+  handleHideBackgroundElements: (active: boolean) => void;
 }
 
 const GameContext = createContext<GameContextType | undefined>(undefined);
@@ -20,14 +20,14 @@ interface GameProviderProps {
 }
 
 export const GameProvider: React.FC<GameProviderProps> = ({ children }) => {
-  const [isGameActive, setIsGameActive] = useState(false);
+  const [hideBackgroundElements, setHideBackgroundElements] = useState(false);
 
-  const setGameActive = (active: boolean) => {
-    setIsGameActive(active);
+  const handleHideBackgroundElements = (active: boolean) => {
+    setHideBackgroundElements(active);
   };
 
   return (
-    <GameContext.Provider value={{ isGameActive, setGameActive }}>
+    <GameContext.Provider value={{ hideBackgroundElements, handleHideBackgroundElements }}>
       {children}
     </GameContext.Provider>
   );

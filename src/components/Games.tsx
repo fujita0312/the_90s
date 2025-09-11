@@ -20,7 +20,7 @@ interface GamesProps {
 const Games: React.FC<GamesProps> = ({ onBack }) => {
     const [activeGame, setActiveGame] = useState<string>('menu');
     const [isLoading, setIsLoading] = useState(false);
-    const { setGameActive } = useGameContext();
+    const { handleHideBackgroundElements } = useGameContext();
     const [visitCounts, setVisitCounts] = useState<Record<string, number>>({});
 
     // Global keyboard handler to prevent page scrolling during gameplay
@@ -35,7 +35,7 @@ const Games: React.FC<GamesProps> = ({ onBack }) => {
                     'PageUp', 'PageDown', 'Home', 'End', // Page navigation
                     'Tab' // Tab navigation (but we'll be more selective)
                 ];
-                
+
                 // For iframe games (DuckHunt, Mario, Contra, Jackal), only prevent spacebar
                 if (activeGame === 'duckhunt' || activeGame === 'mario' || activeGame === 'contra' || activeGame === 'jackal') {
                     if (e.key === ' ') {
@@ -54,7 +54,7 @@ const Games: React.FC<GamesProps> = ({ onBack }) => {
 
         // Add event listener with capture to intercept before other handlers
         window.addEventListener('keydown', handleGlobalKeyPress, { capture: true });
-        
+
         return () => {
             window.removeEventListener('keydown', handleGlobalKeyPress, { capture: true });
         };
@@ -62,8 +62,8 @@ const Games: React.FC<GamesProps> = ({ onBack }) => {
 
     // Update game state when activeGame changes
     useEffect(() => {
-        setGameActive(activeGame !== 'menu');
-    }, [activeGame, setGameActive]);
+        handleHideBackgroundElements(activeGame !== 'menu');
+    }, [activeGame, handleHideBackgroundElements]);
 
     // Load visit counts on mount
     useEffect(() => {

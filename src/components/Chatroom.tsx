@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import UsernameModal from './UsernameModal';
 import socketService from '../services/socketService';
 import { generateRoomId } from '../utils/roomUtils';
+import { useGameContext } from '../contexts/GameContext';
 
 interface Message {
     id: string;
@@ -38,6 +39,7 @@ const Chatroom: React.FC = () => {
     const messagesContainerRef = useRef<HTMLDivElement>(null);
     const inputRef = useRef<HTMLInputElement>(null);
     const currentUser = useRef<{ id: string, username: string }>({ id: '', username: '' });
+    const { handleHideBackgroundElements } = useGameContext();
 
     const currentRoomIdRef = useRef<string>(currentRoomId);
     // Show user list by default on desktop, hide on mobile
@@ -306,7 +308,7 @@ const Chatroom: React.FC = () => {
         } else {
             setIsUsernameModalOpen(true);
         }
-
+        handleHideBackgroundElements(true);
         // Cleanup on unmount
         return () => {
             socket.off('connect', handleConnect);
@@ -317,6 +319,7 @@ const Chatroom: React.FC = () => {
             socket.off('user_joined', handleUserJoined);
             socket.off('user_left', handleUserLeft);
             socketService.disconnect();
+            handleHideBackgroundElements(false);
         };
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
@@ -381,13 +384,30 @@ const Chatroom: React.FC = () => {
                             </div>
                         </div>
 
-                        <div className="flex items-center space-x-1 sm:space-x-2 md:hidden">
-                            <button
-                                onClick={() => setShowUserList(!showUserList)}
-                                className="bg-gradient-to-r from-cyan-500 to-purple-500 text-white px-2 sm:px-4 py-1 sm:py-2 font-bold hover:from-cyan-600 hover:to-purple-600 transition-all duration-300 transform hover:scale-105 shadow-[0_0_15px_rgba(0,255,255,0.3)] text-xs sm:text-sm"
+                        <div className="flex items-center space-x-2 md:hidden">
+                            {/* Mobile user icons inside chat panel header */}
+                            <div
+                                onClick={() => setShowUserList(true)}
+                                className="flex -space-x-2 items-center cursor-pointer"
+                                title="View users"
                             >
-                                {showUserList ? '👥 Hide' : '👥 Users'}
-                            </button>
+                                {users
+                                    .filter(u => u.id !== currentUser.current.id)
+                                    .slice(0, 3)
+                                    .map((u, idx) => (
+                                        <div
+                                            key={u.id || idx}
+                                            className="w-6 h-6 rounded-full bg-gradient-to-r from-cyan-500 to-purple-500 flex items-center justify-center text-[10px] font-bold text-white ring-2 ring-gray-900"
+                                        >
+                                            {u.username?.charAt(0)?.toUpperCase() || '?'}
+                                        </div>
+                                    ))}
+                                {/* Count badge if more users */}
+                                {users.filter(u => u.id !== currentUser.current.id).length > 3 && (
+                                    <div className="w-6 h-6 rounded-full bg-gray-700 flex items-center justify-center text-[10px] font-bold text-white ring-2 ring-gray-900">+{users.filter(u => u.id !== currentUser.current.id).length - 3}</div>
+                                )}
+                            </div>
+
                         </div>
                     </div>
 
@@ -625,10 +645,17 @@ const Chatroom: React.FC = () => {
                                 );
                             })()}
                             <div ref={messagesEndRef} />
+
+                            <button
+                                onClick={() => setShowUserList(!showUserList)}
+                                className="fixed bottom-24 left-1 md:hidden bg-gradient-to-r from-cyan-500 to-purple-500 text-white px-2 sm:px-4 py-1 sm:py-2 font-bold hover:from-cyan-600 hover:to-purple-600 transition-all duration-300 transform hover:scale-105 shadow-[0_0_15px_rgba(0,255,255,0.3)] text-xs sm:text-sm animate-pulse"
+                            >
+                                {showUserList ? '👥' : '👥'}
+                            </button>
                         </div>
 
                         {/* Mobile User List Overlay - Over Messages */}
-                        <div className={`${showUserList ? 'block' : 'hidden'} lg:hidden absolute inset-0 z-20 bg-gradient-to-br from-gray-900/95 via-purple-900/95 to-gray-900/95 backdrop-blur-sm border-1 border-cyan-400  shadow-[0_0_25px_rgba(0,255,255,0.2)] overflow-hidden`}>
+                        <div className={`${showUserList ? 'block' : 'hidden'} lg:hidden absolute top-0 right-0 bottom-0 z-20 w-72 max-w-[80%] bg-gradient-to-br from-gray-900/95 via-purple-900/95 to-gray-900/95 backdrop-blur-sm border-l-2 border-cyan-400 shadow-[0_0_25px_rgba(0,255,255,0.2)] overflow-hidden`}>
                             <div className="p-2 border-b border-cyan-400/30">
                                 <div className="flex items-center justify-between">
                                     <h3 className="text-lg font-bold text-yellow-400">

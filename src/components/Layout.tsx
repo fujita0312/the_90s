@@ -22,7 +22,7 @@ const Layout: React.FC<LayoutProps> = ({
 }) => {
   const budweiserAudioRef = useRef<HTMLAudioElement>(null);
   const [matrixRainVisible, setMatrixRainVisible] = useState(false);
-  const { isGameActive } = useGameContext();
+  const { hideBackgroundElements } = useGameContext();
 
   useEffect(() => {
     setMatrixRainVisible(true);
@@ -45,8 +45,8 @@ const Layout: React.FC<LayoutProps> = ({
       {showMatrixRain && matrixRainVisible && <MatrixRain />}
 
       {/* Interactive Elements - Hidden during gameplay */}
-      {!isGameActive && <DancingBaby />}
-      {!isGameActive && <Clippy />}
+      {!hideBackgroundElements && <DancingBaby />}
+      {!hideBackgroundElements && <Clippy />}
 
       {/* Header with Navigation */}
       <Header />
