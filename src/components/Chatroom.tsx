@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useMemo } from 'react';
 import UsernameModal from './UsernameModal';
 import socketService from '../services/socketService';
 import { generateRoomId } from '../utils/roomUtils';
@@ -42,6 +42,9 @@ const Chatroom: React.FC = () => {
     const { handleHideBackgroundElements } = useGameContext();
 
     const currentRoomIdRef = useRef<string>(currentRoomId);
+    const totalUnread = useMemo(() => {
+        return users.reduce((sum, u) => sum + (u.unreadCount || 0), 0);
+    }, [users]);
     // Show user list by default on desktop, hide on mobile
     useEffect(() => {
         const handleResize = () => {
@@ -649,8 +652,16 @@ const Chatroom: React.FC = () => {
                             <button
                                 onClick={() => setShowUserList(!showUserList)}
                                 className="fixed bottom-32 left-1 md:hidden bg-gradient-to-r from-cyan-500 to-purple-500 text-white px-2 sm:px-4 py-1 sm:py-2 font-bold hover:from-cyan-600 hover:to-purple-600 transition-all duration-300 transform hover:scale-105 shadow-[0_0_15px_rgba(0,255,255,0.3)] text-xs sm:text-sm animate-pulse"
+                                aria-label="Toggle users list"
                             >
-                                {showUserList ? '👥' : '👥'}
+                                <span className="relative inline-block">
+                                    <span>👥</span>
+                                    {totalUnread > 0 && (
+                                        <span className="absolute -top-2 -right-2 bg-red-600 text-white text-[10px] font-bold rounded-full px-1.5 py-0.5 border border-white/30">
+                                            {totalUnread}
+                                        </span>
+                                    )}
+                                </span>
                             </button>
                         </div>
 
