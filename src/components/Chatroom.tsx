@@ -25,10 +25,12 @@ interface User {
 
 const Chatroom: React.FC = () => {
     const [isUsernameModalOpen, setIsUsernameModalOpen] = useState(false);
+    const [isLoading, setIsLoading] = useState(true);
     const [messages, setMessages] = useState<Message[]>([]);
     const [newMessage, setNewMessage] = useState('');
     const [isConnected, setIsConnected] = useState(false);
     const [users, setUsers] = useState<User[]>([]);
+    const [isUsersLoading, setIsUsersLoading] = useState(true);
     const [selectedUserId, setSelectedUserId] = useState<string | null>(null);
     const [showUserList, setShowUserList] = useState(false);
     const [currentRoomId, setCurrentRoomId] = useState<string>('general'); // Track current room ID
@@ -85,12 +87,14 @@ const Chatroom: React.FC = () => {
 
     // Socket.IO connection and event listeners
     useEffect(() => {
+        setIsLoading(true);
         const socket = socketService.connect();
 
         // Connection status
         const handleConnect = () => {
             console.log('Connected to chat server');
             setIsConnected(true);
+            // Keep loading until initial payload arrives
         };
 
         const handleDisconnect = () => {
@@ -147,7 +151,7 @@ const Chatroom: React.FC = () => {
         }) => {
             setSelectedUserId(data.selectedUser || null);
             setCurrentRoomId(data.roomId);
-
+            setIsLoading(false);
             // if (inputRef.current) {
             //     inputRef.current.focus();
             // }
@@ -172,6 +176,7 @@ const Chatroom: React.FC = () => {
                     return p.id === data.selectedUser ? { ...p, unreadCount: 0 } : p
                 })]
             });
+            setIsUsersLoading(false);
         };
 
         // User management
@@ -243,6 +248,7 @@ const Chatroom: React.FC = () => {
                     };
                 });
             setUsers([...userObjects]);
+            setIsUsersLoading(false);
         };
 
         const handleJoinedChatroom = (data: {
@@ -280,6 +286,7 @@ const Chatroom: React.FC = () => {
                     recentMessages: data.recentMessages
                 });
             }
+            setIsLoading(false);
         };
 
         // Set up event listeners
@@ -338,6 +345,7 @@ const Chatroom: React.FC = () => {
     const handleUserClick = (user: User) => {
         if (user.id !== currentUser.current.id) {
             socketService.selectUser(user.id);
+            setIsLoading(true);
         }
     };
 
@@ -406,7 +414,15 @@ const Chatroom: React.FC = () => {
                             </div>
                         </div>
 
-                        <div className="p-4 space-y-3 max-h-[calc(100vh-200px)] overflow-y-auto custom-scrollbar">
+                        <div className="p-4 space-y-3 max-h-[calc(100vh-200px)] overflow-y-auto custom-scrollbar relative">
+                            {isUsersLoading && (
+                                <div className="absolute inset-0 flex items-center justify-center bg-black/20">
+                                    <div className="text-center">
+                                        <div className="w-8 h-8 border-4 border-cyan-400/30 border-t-cyan-400 rounded-full animate-spin mx-auto mb-2"></div>
+                                        <div className="text-cyan-300 text-xs font-bold">Loading users...</div>
+                                    </div>
+                                </div>
+                            )}
                             <div
                                 className={`group p-3 border-2 cursor-pointer transition-all duration-300 hover:scale-[1.02] ${currentRoomId === 'general'
                                     ? 'bg-gradient-to-r from-yellow-500/10 to-orange-500/10 border-yellow-400/50 text-yellow-300 hover:border-cyan-400 hover:text-cyan-300 hover:shadow-[0_0_15px_rgba(0,255,255,0.1)]'
@@ -434,7 +450,7 @@ const Chatroom: React.FC = () => {
                                     </button> */}
                                 </div>
                             </div>
-                            {users.map((user, index) => (
+                            {!isUsersLoading && users.map((user, index) => (
                                 <div
                                     key={index}
                                     className={`group p-3 border-2 cursor-pointer transition-all duration-300 hover:scale-[1.02] ${user.id === currentUser.current.id
@@ -494,7 +510,7 @@ const Chatroom: React.FC = () => {
                                 </div>
                             ))}
 
-                            {users.length === 0 && (
+                            {!isUsersLoading && users.length === 0 && (
                                 <div className="text-center text-gray-400 py-8">
                                     <div className="text-4xl mb-2">👻</div>
                                     <p className="text-sm">No other users online</p>
@@ -534,7 +550,19 @@ const Chatroom: React.FC = () => {
 
                         {/* Messages Area */}
                         <div ref={messagesContainerRef} className="flex-1 overflow-y-auto p-2 md:p-4 space-y-2 md:space-y-4 bg-black/10 custom-scrollbar relative">
-                            {(() => {
+                            {isLoading ? (
+                                <div className="absolute inset-0 flex items-center justify-center">
+                                    <div className="text-center">
+                                        <div className="relative mb-4">
+                                            <div className="w-12 h-12 border-4 border-cyan-400/30 border-t-cyan-400 rounded-full animate-spin mx-auto"></div>
+                                            <div className="absolute inset-0 flex items-center justify-center">
+                                                <span className="text-xl">💬</span>
+                                            </div>
+                                        </div>
+                                        <div className="text-cyan-300 text-sm font-bold">Connecting to Chat...</div>
+                                    </div>
+                                </div>
+                            ) : (() => {
                                 const currentMessages = messages;
 
                                 if (currentMessages.length === 0) {
@@ -615,7 +643,15 @@ const Chatroom: React.FC = () => {
                                 </div>
                             </div>
 
-                            <div className="p-3 space-y-3 h-[calc(100%-80px)] overflow-y-auto custom-scrollbar">
+                            <div className="p-3 space-y-3 h-[calc(100%-80px)] overflow-y-auto custom-scrollbar relative">
+                                {isUsersLoading && (
+                                    <div className="absolute inset-0 flex items-center justify-center bg-black/20">
+                                        <div className="text-center">
+                                            <div className="w-8 h-8 border-4 border-cyan-400/30 border-t-cyan-400 rounded-full animate-spin mx-auto mb-2"></div>
+                                            <div className="text-cyan-300 text-xs font-bold">Loading users...</div>
+                                        </div>
+                                    </div>
+                                )}
                                 <div
                                     className={`group p-3 border-2 cursor-pointer transition-all duration-300 hover:scale-[1.02] ${currentRoomId === 'general'
                                         ? 'bg-gradient-to-r from-yellow-500/10 to-orange-500/10 border-yellow-400/50 text-yellow-300 hover:border-cyan-400 hover:text-cyan-300 hover:shadow-[0_0_15px_rgba(0,255,255,0.1)]'
@@ -708,7 +744,7 @@ const Chatroom: React.FC = () => {
                                     </div>
                                 ))}
 
-                                {users.length === 0 && (
+                                {!isUsersLoading && users.length === 0 && (
                                     <div className="text-center text-gray-400 py-8">
                                         <div className="text-4xl mb-2">👻</div>
                                         <p className="text-sm">No other users online</p>
