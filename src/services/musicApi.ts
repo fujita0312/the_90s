@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { MusicTrack, CreateMusicTrack } from '../types/music';
+import { MusicTrack } from '../types/music';
 import { ApiService, ApiResponse } from './api';
 
 class MusicApiService extends ApiService {
@@ -8,6 +8,13 @@ class MusicApiService extends ApiService {
    */
   async getAllMusic(): Promise<ApiResponse<MusicTrack[]>> {
     return this.get<MusicTrack[]>('/music');
+  }
+
+  /**
+   * Increment play count for a music track
+   */
+  async playMusic(id: string): Promise<ApiResponse<{ id: string; playCount: number }>> {
+    return this.post<{ id: string; playCount: number }>(`/music/${id}/play`);
   }
 
   /**

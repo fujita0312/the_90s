@@ -5,6 +5,7 @@ export interface MusicTrack {
   url: string; // URL to the audio file
   filePath?: string; // Local file path
   duration?: number; // Duration in seconds
+  playCount: number; // Number of times the track has been played
   createdAt: string;
   updatedAt: string;
 }

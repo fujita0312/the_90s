@@ -82,6 +82,24 @@ const MusicPlayer: React.FC = () => {
     setTimeout(() => setIsLoading(false), 500);
   };
 
+  // Function to increment play count when music starts playing
+  const incrementPlayCount = async (trackId: string) => {
+    try {
+      const response = await musicApi.playMusic(trackId);
+      if (response.success && response.data) {
+        // Update the playlist with the new play count
+        setPlaylist(prev => prev.map(track => 
+          track._id === trackId 
+            ? { ...track, playCount: response.data!.playCount }
+            : track
+        ));
+      }
+    } catch (error) {
+      console.error('Error incrementing play count:', error);
+      // Don't show error to user as this is a background operation
+    }
+  };
+
   const handleFileSelect = (event: React.ChangeEvent<HTMLInputElement>) => {
     const files = Array.from(event.target.files || []);
     const audioFiles = files.filter(file => file.type.startsWith('audio/'));
@@ -282,6 +300,11 @@ const MusicPlayer: React.FC = () => {
                 <div className="text-sm font-bold md:max-w-[300px] max-w-[150px] text-shadow-green truncate">
                   {isLoading ? 'LOADING...' : currentVideo?.title || 'NO TRACK'}
                 </div>
+                {currentVideo && (
+                  <div className="text-xs text-yellow-400 text-shadow-yellow">
+                    🎵 {currentVideo.playCount || 0} plays
+                  </div>
+                )}
               </div>
             </div>
             <div className="flex items-center gap-2">
@@ -313,6 +336,11 @@ const MusicPlayer: React.FC = () => {
               <div className="text-sm sm:text-base truncate">
                 {isLoading ? 'LOADING...' : currentVideo?.title || 'NO TRACK'}
               </div>
+              {currentVideo && (
+                <div className="text-xs text-yellow-400 text-shadow-yellow mt-1">
+                  🎵 {currentVideo.playCount || 0} plays
+                </div>
+              )}
             </div>
           </div>
 
@@ -483,7 +511,12 @@ const MusicPlayer: React.FC = () => {
                     : 'bg-gray-800 text-cyan-300 hover:bg-gray-700 text-shadow-cyan'
                     }`}
                 >
-                  <div className="truncate font-bold">{track.title}</div>
+                  <div className="flex justify-between items-center">
+                    <div className="truncate font-bold flex-1">{track.title}</div>
+                    <div className={`text-xs ml-2 ${index === currentIndex ? 'text-black' : 'text-yellow-400'}`}>
+                      🎵 {track.playCount || 0}
+                    </div>
+                  </div>
                 </div>
               ))}
             </div>
@@ -497,7 +530,11 @@ const MusicPlayer: React.FC = () => {
           <audio
             ref={audioRef}
             src={currentVideo.url}
-            onPlay={() => setIsPlaying(true)}
+            onPlay={() => {
+              setIsPlaying(true);
+              // Increment play count when music starts playing
+              incrementPlayCount(currentVideo._id);
+            }}
             onPause={() => setIsPlaying(false)}
             onEnded={() => nextTrack()}
             onError={(e) => {
