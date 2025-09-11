@@ -160,8 +160,45 @@ const LeftSidebar: React.FC = () => {
         <div className="text-lg mt-1.5">TO THE MOON!</div>
       </button>
 
-      {/* Meme Slider Section */}
-      <MemeSlider />
+      {/* Under Construction */}
+      <div className="bg-gradient-to-r from-yellow-400 to-orange-500 text-red-600 p-4 text-center border-3 border-red-600 border-ridge my-5 m-1 font-bold animate-pulse shadow-[0_0_15px_#ffff00]">
+        🚧 TOKENOMICS UNDER CONSTRUCTION 🚧<br />
+        <div className="text-lg mt-2.5">
+          (But who needs utility when you have PURE VIBES!)
+        </div>
+        <div className="text-sm mt-1.5">
+          Webmaster is updating from his 56k modem
+        </div>
+      </div>
+      
+      {/* Games Section */}
+      <div id="games-section" className="mt-5 bg-gradient-to-r from-black via-gray-800 to-black border-3 border-pink-500 border-ridge md:p-4 p-2 shadow-[0_0_20px_rgba(255,0,255,0.3)] mb-6">
+        {/* Arcade Banner Image */}
+        <div className="mb-4 flex justify-center">
+          <img
+            src="/assets/img/arcade-banner.png"
+            alt="90s Games Arcade - Classic retro gaming banner with pixel art elements"
+            className="max-w-full h-auto w-full rounded-lg transition-all duration-500 animate-pulse"
+            style={{ imageRendering: 'pixelated' }}
+          />
+        </div>
+        <div className="text-center">
+          <p className="text-white mb-4">
+            Take a break from the future and enjoy some classic 90s games!
+          </p>
+          <button
+            onClick={() => {
+              navigate('/games')
+              setTimeout(() => {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+              }, 100);
+            }}
+            className="bg-gradient-to-r from-pink-500 to-purple-500 text-white md:px-4 px-3 py-3 border-2 border-pink-400 hover:scale-105 transition-all duration-300 text-lg font-bold shadow-[0_0_20px_rgba(255,0,255,0.3)] hover:shadow-[0_0_30px_rgba(255,0,255,0.5)] hover:border-pink-300 group"
+          >
+            <span className="group-hover:animate-pulse">🎮 Play Games Now! 🎮</span>
+          </button>
+        </div>
+      </div>
     </div>
   );
 };
