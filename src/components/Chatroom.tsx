@@ -651,7 +651,7 @@ const Chatroom: React.FC = () => {
 
                             <button
                                 onClick={() => setShowUserList(!showUserList)}
-                                className="fixed bottom-32 left-1 md:hidden bg-gradient-to-r from-cyan-500 to-purple-500 text-white px-2 sm:px-4 py-1 sm:py-2 font-bold hover:from-cyan-600 hover:to-purple-600 transition-all duration-300 transform hover:scale-105 shadow-[0_0_15px_rgba(0,255,255,0.3)] text-xs sm:text-sm animate-pulse"
+                                className="fixed bottom-32 left-0 rounded-tr-xl rounded-br-xl md:hidden bg-gradient-to-r from-cyan-500 to-purple-500 text-white px-3 py-2 font-bold hover:from-cyan-600 hover:to-purple-600 transition-all duration-300 transform hover:scale-105 shadow-[0_0_15px_rgba(0,255,255,0.3)] text-xs sm:text-sm"
                                 aria-label="Toggle users list"
                             >
                                 <span className="relative inline-block">
@@ -665,51 +665,61 @@ const Chatroom: React.FC = () => {
                             </button>
                         </div>
 
-                        {/* Mobile User List Overlay - Over Messages */}
-                        <div className={`${showUserList ? 'block' : 'hidden'} lg:hidden absolute top-0 right-0 bottom-0 z-20 w-72 max-w-[80%] bg-gradient-to-br from-gray-900/95 via-purple-900/95 to-gray-900/95 backdrop-blur-sm border-l-2 border-cyan-400 shadow-[0_0_25px_rgba(0,255,255,0.2)] overflow-hidden`}>
-                            <div className="p-2 border-b border-cyan-400/30">
-                                <div className="flex items-center justify-between">
-                                    <h3 className="text-lg font-bold text-yellow-400">
-                                        👥 Online Users ({users.length})
-                                    </h3>
-                                    <button
-                                        onClick={() => setShowUserList(false)}
-                                        className="text-gray-400 hover:text-white transition-colors p-2  hover:bg-gray-700"
-                                    >
-                                        ✕
-                                    </button>
-                                </div>
-                            </div>
+                        {/* Mobile User List Sidebar + Backdrop (animated) */}
+                        {/* Wrapper ensures backdrop + panel share the same stacking context */}
+                        <div className="lg:hidden md:hidden">
+                            {/* Backdrop */}
+                            <div
+                                className={`fixed inset-0 z-20 bg-black/40 transition-opacity duration-300 ${showUserList ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}
+                                onClick={() => setShowUserList(false)}
+                                aria-hidden="true"
+                            />
 
-                            <div className="p-3 space-y-3 h-[calc(100%-80px)] overflow-y-auto custom-scrollbar relative">
-                                {isUsersLoading && (
-                                    <div className="absolute inset-0 flex items-center justify-center bg-black/20">
-                                        <div className="text-center">
-                                            <div className="w-8 h-8 border-4 border-cyan-400/30 border-t-cyan-400 rounded-full animate-spin mx-auto mb-2"></div>
-                                            <div className="text-cyan-300 text-xs font-bold">Loading users...</div>
-                                        </div>
-                                    </div>
-                                )}
-                                <div
-                                    className={`group p-3 border-2 cursor-pointer transition-all duration-300 hover:scale-[1.02] ${currentRoomId === 'general'
-                                        ? 'bg-gradient-to-r from-yellow-500/10 to-orange-500/10 border-yellow-400/50 text-yellow-300 hover:border-cyan-400 hover:text-cyan-300 hover:shadow-[0_0_15px_rgba(0,255,255,0.1)]'
-                                        : 'bg-gradient-to-r from-purple-500/10 to-pink-500/10 border-purple-400/50 text-purple-300 hover:border-cyan-400 hover:text-cyan-300 hover:shadow-[0_0_15px_rgba(0,255,255,0.1)]'
-                                        }`}
-                                    onClick={() => {
-                                        handleGeneralChat()
-                                        setShowUserList(false); // Close overlay after selection
-                                    }}
-                                >
+                            {/* Sliding panel */}
+                            <div className={`fixed top-0 right-0 bottom-0 z-30 w-72 max-w-[80%] transform transition-transform duration-300 ${showUserList ? 'translate-x-0' : 'translate-x-full'} bg-gradient-to-br from-gray-900/95 via-purple-900/95 to-gray-900/95 backdrop-blur-sm border-l-2 border-cyan-400 shadow-[0_0_25px_rgba(0,255,255,0.2)] overflow-hidden`}>
+                                <div className="p-2 border-b border-cyan-400/30">
                                     <div className="flex items-center justify-between">
-                                        <div className="flex items-center space-x-3">
-                                            <div className="w-10 h-10  bg-gradient-to-r from-cyan-400 to-purple-400 flex items-center justify-center text-lg font-bold text-white">
-                                                G
+                                        <h3 className="text-lg font-bold text-yellow-400">
+                                            👥 Online Users ({users.length})
+                                        </h3>
+                                        <button
+                                            onClick={() => setShowUserList(false)}
+                                            className="text-gray-400 hover:text-white transition-colors p-2  hover:bg-gray-700"
+                                        >
+                                            ✕
+                                        </button>
+                                    </div>
+                                </div>
+
+                                <div className="p-3 space-y-3 h-[calc(100%-80px)] overflow-y-auto custom-scrollbar relative">
+                                    {isUsersLoading && (
+                                        <div className="absolute inset-0 flex items-center justify-center bg-black/20">
+                                            <div className="text-center">
+                                                <div className="w-8 h-8 border-4 border-cyan-400/30 border-t-cyan-400 rounded-full animate-spin mx-auto mb-2"></div>
+                                                <div className="text-cyan-300 text-xs font-bold">Loading users...</div>
                                             </div>
                                         </div>
-                                        <div className="flex items-center justify-start space-x-2">
-                                            <span className="font-bold text-sm">General Chat</span>
-                                        </div>
-                                        {/* <button
+                                    )}
+                                    <div
+                                        className={`group p-3 border-2 cursor-pointer transition-all duration-300 hover:scale-[1.02] ${currentRoomId === 'general'
+                                            ? 'bg-gradient-to-r from-yellow-500/10 to-orange-500/10 border-yellow-400/50 text-yellow-300 hover:border-cyan-400 hover:text-cyan-300 hover:shadow-[0_0_15px_rgba(0,255,255,0.1)]'
+                                            : 'bg-gradient-to-r from-purple-500/10 to-pink-500/10 border-purple-400/50 text-purple-300 hover:border-cyan-400 hover:text-cyan-300 hover:shadow-[0_0_15px_rgba(0,255,255,0.1)]'
+                                            }`}
+                                        onClick={() => {
+                                            handleGeneralChat()
+                                            setShowUserList(false); // Close overlay after selection
+                                        }}
+                                    >
+                                        <div className="flex items-center justify-between">
+                                            <div className="flex items-center space-x-3">
+                                                <div className="w-10 h-10  bg-gradient-to-r from-cyan-400 to-purple-400 flex items-center justify-center text-lg font-bold text-white">
+                                                    G
+                                                </div>
+                                            </div>
+                                            <div className="flex items-center justify-start space-x-2">
+                                                <span className="font-bold text-sm">General Chat</span>
+                                            </div>
+                                            {/* <button
                                             onClick={(e) => {
                                                 e.stopPropagation();
                                             }}
@@ -718,79 +728,80 @@ const Chatroom: React.FC = () => {
                                         >
                                             @
                                         </button> */}
+                                        </div>
                                     </div>
-                                </div>
 
-                                {users.map((user, index) => (
-                                    <div
-                                        key={index}
-                                        className={`group p-3  border-2 cursor-pointer transition-all duration-300 hover:scale-[1.02] ${user.id === currentUser.current.id
-                                            ? 'bg-gradient-to-r from-green-500/20 to-blue-500/20 border-green-400 text-green-400 shadow-[0_0_15px_rgba(0,255,0,0.2)]'
-                                            : selectedUserId === user.id
-                                                ? 'bg-gradient-to-r from-yellow-500/20 to-orange-500/20 border-yellow-400 text-yellow-400 shadow-[0_0_15px_rgba(255,255,0,0.2)]'
-                                                : user.isOnline
-                                                    ? 'bg-gradient-to-r from-purple-500/10 to-pink-500/10 border-purple-400/50 text-purple-300 hover:border-cyan-400 hover:text-cyan-300 hover:shadow-[0_0_15px_rgba(0,255,255,0.1)]'
-                                                    : 'bg-gradient-to-r from-gray-500/5 to-gray-600/5 border-gray-500/30 text-gray-400 opacity-60'
-                                            }`}
-                                        onClick={() => {
-                                            handleUserClick(user);
-                                            setShowUserList(false); // Close overlay after selection
-                                        }}
-                                    >
-                                        <div className="flex items-center justify-between">
-                                            <div className="flex items-center space-x-3">
-                                                <div className="w-10 h-10  bg-gradient-to-r from-cyan-400 to-purple-400 flex items-center justify-center text-lg font-bold text-white">
-                                                    {user.username.charAt(0).toUpperCase()}
-                                                </div>
-                                                <div>
-                                                    <div className="flex items-center space-x-2">
-                                                        <span className="font-bold text-sm">{user.username}</span>
-                                                        <div className="flex items-center space-x-1">
-                                                            <div className={`w-2 h-2 rounded-full ${user.isOnline ? 'bg-green-400' : 'bg-gray-400'}`}></div>
-                                                            <span className="text-xs opacity-70">
-                                                                {user.isOnline ? 'Online' : 'Offline'}
-                                                            </span>
-                                                        </div>
-                                                        {user.id === currentUser.current.id && (
-                                                            <span className="text-xs bg-green-500 text-black px-2 py-0.5  font-bold">
-                                                                YOU
-                                                            </span>
-                                                        )}
+                                    {users.map((user, index) => (
+                                        <div
+                                            key={index}
+                                            className={`group p-3  border-2 cursor-pointer transition-all duration-300 hover:scale-[1.02] ${user.id === currentUser.current.id
+                                                ? 'bg-gradient-to-r from-green-500/20 to-blue-500/20 border-green-400 text-green-400 shadow-[0_0_15px_rgba(0,255,0,0.2)]'
+                                                : selectedUserId === user.id
+                                                    ? 'bg-gradient-to-r from-yellow-500/20 to-orange-500/20 border-yellow-400 text-yellow-400 shadow-[0_0_15px_rgba(255,255,0,0.2)]'
+                                                    : user.isOnline
+                                                        ? 'bg-gradient-to-r from-purple-500/10 to-pink-500/10 border-purple-400/50 text-purple-300 hover:border-cyan-400 hover:text-cyan-300 hover:shadow-[0_0_15px_rgba(0,255,255,0.1)]'
+                                                        : 'bg-gradient-to-r from-gray-500/5 to-gray-600/5 border-gray-500/30 text-gray-400 opacity-60'
+                                                }`}
+                                            onClick={() => {
+                                                handleUserClick(user);
+                                                setShowUserList(false); // Close overlay after selection
+                                            }}
+                                        >
+                                            <div className="flex items-center justify-between">
+                                                <div className="flex items-center space-x-3">
+                                                    <div className="w-10 h-10  bg-gradient-to-r from-cyan-400 to-purple-400 flex items-center justify-center text-lg font-bold text-white">
+                                                        {user.username.charAt(0).toUpperCase()}
                                                     </div>
-                                                    <div className="flex items-center justify-between">
-                                                        <div className="text-xs opacity-70">
-                                                            {formatTime(user.joinedAt)}
-                                                        </div>
-                                                        <div className="flex items-center space-x-1">
-                                                            {(user.unreadCount || 0) > 0 && (
-                                                                <span className="bg-red-500 text-white text-xs px-2 py-0.5 font-bold">
-                                                                    {user.unreadCount}
+                                                    <div>
+                                                        <div className="flex items-center space-x-2">
+                                                            <span className="font-bold text-sm">{user.username}</span>
+                                                            <div className="flex items-center space-x-1">
+                                                                <div className={`w-2 h-2 rounded-full ${user.isOnline ? 'bg-green-400' : 'bg-gray-400'}`}></div>
+                                                                <span className="text-xs opacity-70">
+                                                                    {user.isOnline ? 'Online' : 'Offline'}
+                                                                </span>
+                                                            </div>
+                                                            {user.id === currentUser.current.id && (
+                                                                <span className="text-xs bg-green-500 text-black px-2 py-0.5  font-bold">
+                                                                    YOU
                                                                 </span>
                                                             )}
                                                         </div>
+                                                        <div className="flex items-center justify-between">
+                                                            <div className="text-xs opacity-70">
+                                                                {formatTime(user.joinedAt)}
+                                                            </div>
+                                                            <div className="flex items-center space-x-1">
+                                                                {(user.unreadCount || 0) > 0 && (
+                                                                    <span className="bg-red-500 text-white text-xs px-2 py-0.5 font-bold">
+                                                                        {user.unreadCount}
+                                                                    </span>
+                                                                )}
+                                                            </div>
+                                                        </div>
                                                     </div>
                                                 </div>
+                                                <button
+                                                    onClick={(e) => {
+                                                        e.stopPropagation();
+                                                        setShowUserList(false); // Close overlay after mention
+                                                    }}
+                                                    className="opacity-0 group-hover:opacity-100 bg-cyan-500 hover:bg-cyan-600 text-black px-2 py-1  text-xs font-bold transition-all duration-300"
+                                                    disabled={user.id === currentUser.current.id}
+                                                >
+                                                    @
+                                                </button>
                                             </div>
-                                            <button
-                                                onClick={(e) => {
-                                                    e.stopPropagation();
-                                                    setShowUserList(false); // Close overlay after mention
-                                                }}
-                                                className="opacity-0 group-hover:opacity-100 bg-cyan-500 hover:bg-cyan-600 text-black px-2 py-1  text-xs font-bold transition-all duration-300"
-                                                disabled={user.id === currentUser.current.id}
-                                            >
-                                                @
-                                            </button>
                                         </div>
-                                    </div>
-                                ))}
+                                    ))}
 
-                                {!isUsersLoading && users.length === 0 && (
-                                    <div className="text-center text-gray-400 py-8">
-                                        <div className="text-4xl mb-2">👻</div>
-                                        <p className="text-sm">No other users online</p>
-                                    </div>
-                                )}
+                                    {!isUsersLoading && users.length === 0 && (
+                                        <div className="text-center text-gray-400 py-8">
+                                            <div className="text-4xl mb-2">👻</div>
+                                            <p className="text-sm">No other users online</p>
+                                        </div>
+                                    )}
+                                </div>
                             </div>
                         </div>
 
