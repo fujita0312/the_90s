@@ -648,7 +648,7 @@ const Chatroom: React.FC = () => {
 
                             <button
                                 onClick={() => setShowUserList(!showUserList)}
-                                className="fixed bottom-24 left-1 md:hidden bg-gradient-to-r from-cyan-500 to-purple-500 text-white px-2 sm:px-4 py-1 sm:py-2 font-bold hover:from-cyan-600 hover:to-purple-600 transition-all duration-300 transform hover:scale-105 shadow-[0_0_15px_rgba(0,255,255,0.3)] text-xs sm:text-sm animate-pulse"
+                                className="fixed bottom-32 left-1 md:hidden bg-gradient-to-r from-cyan-500 to-purple-500 text-white px-2 sm:px-4 py-1 sm:py-2 font-bold hover:from-cyan-600 hover:to-purple-600 transition-all duration-300 transform hover:scale-105 shadow-[0_0_15px_rgba(0,255,255,0.3)] text-xs sm:text-sm animate-pulse"
                             >
                                 {showUserList ? '👥' : '👥'}
                             </button>
