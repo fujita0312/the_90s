@@ -117,7 +117,7 @@ const MemeSlider: React.FC = () => {
                 😂 90s MEME GALLERY 😂
             </h4> */}
 
-            <div className="mb-4 flex justify-center md:px-6 px-0">
+            <div className="mb-4 flex justify-center md:px-12 px-0">
                 <img
                     src="/assets/img/memes-banner.png"
                     alt="Guest Book - Retro pixel art banner with neon colors and classic computer elements"
