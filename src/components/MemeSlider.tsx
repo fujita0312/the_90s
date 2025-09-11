@@ -112,16 +112,16 @@ const MemeSlider: React.FC = () => {
 
 
     return (
-        <div className="bg-gradient-to-r from-black via-gray-800 to-black border-3 border-pink-500 border-ridge p-3 sm:p-4 lg:p-6 shadow-[0_0_20px_rgba(255,0,255,0.3)] mb-4 sm:mb-6 max-w-5xl mx-auto">
+        <div className="bg-gradient-to-r from-black via-gray-800 to-black border-3 border-pink-500 border-ridge p-2 md:p-1 shadow-[0_0_20px_rgba(255,0,255,0.3)] mb-4 sm:mb-6 max-w-5xl mx-auto">
             {/* <h4 className="text-pink-500 text-center mb-3 sm:mb-4 lg:mb-5 text-lg sm:text-xl lg:text-2xl font-bold">
                 😂 90s MEME GALLERY 😂
             </h4> */}
 
-            <div className="mb-4 flex justify-center md:px-6 px-0">
+            <div className="mb-4 flex justify-center md:px-3 px-0">
                 <img
                     src="/assets/img/memes-banner.png"
                     alt="Guest Book - Retro pixel art banner with neon colors and classic computer elements"
-                    className="max-w-full h-auto w-full rounded-lg transition-all duration-500"
+                    className="max-w-full h-auto w-full rounded-lg transition-all duration-500 animate-fade-in"
                     style={{ imageRendering: 'pixelated' }}
                 />
             </div>

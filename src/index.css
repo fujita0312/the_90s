@@ -122,27 +122,6 @@
   }
 }
 
-/* Original rainbow class from HTML */
-.rainbow {
-background: linear-gradient(
-    90deg,
-    red,
-    orange,
-    yellow,
-    green,
-    blue,
-    indigo,
-    violet
-);
-background-size: 200% 100%;
--webkit-background-clip: text;
--webkit-text-fill-color: transparent;
-background-clip: text;
-animation: rainbowMove 3s linear infinite;
-font-family: "Orbitron", monospace;
-font-weight: 900;
-text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
-}
 
 .flame {
 color: #ff4500;

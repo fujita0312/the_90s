@@ -2,6 +2,7 @@ import React from 'react';
 import { useToast } from '../contexts/ToastContext';
 import MusicPlayer from './MusicPlayer';
 import { useNavigate } from 'react-router-dom';
+import MemeSlider from './MemeSlider';
 // import SocialLinks from './SocialLinks';
 const ContractAddress = process.env.REACT_APP_CONTRACT_ADDRESS || '';
 const BagsFmUrl = 'https://bags.fm/' + ContractAddress;
@@ -113,8 +114,13 @@ const LeftSidebar: React.FC = () => {
       <div className="mb-4 sm:mb-6 max-w-5xl mx-auto">
         <div className="bg-gradient-to-r from-black via-gray-800 to-black border-3 border-cyan-400 border-ridge p-3 md:p-4 shadow-[0_0_20px_rgba(0,255,255,0.3)]">
           <div className="mb-4 flex justify-center px-0">
-            <a
-              href="/chat"
+            <button
+              onClick={() => {
+                navigate('/chatroom');
+                setTimeout(() => {
+                  window.scrollTo({ top: 0, behavior: 'smooth' });
+                }, 100);
+              }}
               className="block transition-transform duration-300 hover:scale-105"
               title="Join the 90s Fresh Chatroom!"
             >
@@ -124,7 +130,7 @@ const LeftSidebar: React.FC = () => {
                 className="max-w-full h-auto w-full rounded-lg transition-all duration-500"
                 style={{ imageRendering: 'pixelated' }}
               />
-            </a>
+            </button>
           </div>
           <div className="text-center">
             <p className="text-cyan-400 text-sm sm:text-base mb-2">
@@ -133,9 +139,9 @@ const LeftSidebar: React.FC = () => {
             <button
               onClick={() => {
                 navigate('/chatroom');
-                // setTimeout(() => {
-                //   window.scrollTo({ top: 0, behavior: 'smooth' });
-                // }, 100);
+                setTimeout(() => {
+                  window.scrollTo({ top: 0, behavior: 'smooth' });
+                }, 100);
               }}
               className="inline-block bg-gradient-to-r from-cyan-500 to-blue-500 text-black px-4 py-2 sm:px-6 sm:py-2.5 lg:px-8 lg:py-3 border-2 border-cyan-400 hover:scale-105 transition-all duration-300 text-xs sm:text-sm lg:text-base font-bold shadow-[0_0_15px_rgba(0,255,255,0.3)] hover:shadow-[0_0_25px_rgba(0,255,255,0.5)] hover:border-cyan-300"
             >
@@ -154,17 +160,8 @@ const LeftSidebar: React.FC = () => {
         <div className="text-lg mt-1.5">TO THE MOON!</div>
       </button>
 
-      {/* Under Construction */}
-      <div className="bg-gradient-to-r from-yellow-400 to-orange-500 text-red-600 p-4 text-center border-3 border-red-600 border-ridge my-5 m-1 font-bold animate-pulse shadow-[0_0_15px_#ffff00]">
-        🚧 TOKENOMICS UNDER CONSTRUCTION 🚧<br />
-        <div className="text-lg mt-2.5">
-          (But who needs utility when you have PURE VIBES!)
-        </div>
-        <div className="text-sm mt-1.5">
-          Webmaster is updating from his 56k modem
-        </div>
-      </div>
-
+      {/* Meme Slider Section */}
+      <MemeSlider />
     </div>
   );
 };

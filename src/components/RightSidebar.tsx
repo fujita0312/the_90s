@@ -72,7 +72,7 @@ const RightSidebar: React.FC = () => {
           <img
             src="/assets/img/guestbook-banner.png"
             alt="Guest Book - Retro pixel art banner with neon colors and classic computer elements"
-            className="max-w-full h-auto w-full rounded-lg transition-all duration-500"
+            className="max-w-full h-auto w-full rounded-lg transition-all duration-500 animate-fade-in"
             style={{ imageRendering: 'pixelated' }}
           />
         </div>
@@ -129,7 +129,7 @@ const RightSidebar: React.FC = () => {
           <img
             src="/assets/img/arcade-banner.png"
             alt="90s Games Arcade - Classic retro gaming banner with pixel art elements"
-            className="max-w-full h-auto w-full rounded-lg transition-all duration-500"
+            className="max-w-full h-auto w-full rounded-lg transition-all duration-500 animate-pulse"
             style={{ imageRendering: 'pixelated' }}
           />
         </div>
@@ -183,7 +183,18 @@ const RightSidebar: React.FC = () => {
       </div>
 
       {/* Hit Counter Section */}
-      <HitCounter />
+      {/* <HitCounter /> */}
+
+      {/* Under Construction */}
+      <div className="bg-gradient-to-r from-yellow-400 to-orange-500 text-red-600 p-4 text-center border-3 border-red-600 border-ridge my-5 m-1 font-bold animate-pulse shadow-[0_0_15px_#ffff00]">
+        🚧 TOKENOMICS UNDER CONSTRUCTION 🚧<br />
+        <div className="text-lg mt-2.5">
+          (But who needs utility when you have PURE VIBES!)
+        </div>
+        <div className="text-sm mt-1.5">
+          Webmaster is updating from his 56k modem
+        </div>
+      </div>
 
       {/* Guestbook Modal */}
       <GuestbookModal

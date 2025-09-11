@@ -824,7 +824,7 @@ Help me complete 5 simple X (Twitter) missions and I'll finally be FREE!`,
     };
     const onMouseLeave = (e: MouseEvent) => {
       if ((e as MouseEvent).clientY <= 0 && !hasStartedEscape && hasAppeared && window.innerWidth > 768) {
-        // triggerEscapeSequence();
+        triggerEscapeSequence();
       }
     };
     window.addEventListener('beforeunload', beforeUnload);
