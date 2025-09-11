@@ -82,6 +82,10 @@ const Games: React.FC<GamesProps> = ({ onBack }) => {
             }
         };
         fetchVisits();
+
+        return () => {
+            handleHideBackgroundElements(false);
+        };
     }, []);
 
     const games = useMemo(() => ([
