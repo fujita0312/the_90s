@@ -657,7 +657,10 @@ const Chatroom: React.FC = () => {
                                         ? 'bg-gradient-to-r from-yellow-500/10 to-orange-500/10 border-yellow-400/50 text-yellow-300 hover:border-cyan-400 hover:text-cyan-300 hover:shadow-[0_0_15px_rgba(0,255,255,0.1)]'
                                         : 'bg-gradient-to-r from-purple-500/10 to-pink-500/10 border-purple-400/50 text-purple-300 hover:border-cyan-400 hover:text-cyan-300 hover:shadow-[0_0_15px_rgba(0,255,255,0.1)]'
                                         }`}
-                                    onClick={() => handleGeneralChat()}
+                                    onClick={() => {
+                                        handleGeneralChat()
+                                        setShowUserList(false); // Close overlay after selection
+                                    }}
                                 >
                                     <div className="flex items-center justify-between">
                                         <div className="flex items-center space-x-3">
@@ -669,14 +672,14 @@ const Chatroom: React.FC = () => {
                                             <span className="font-bold text-sm">General Chat</span>
                                         </div>
                                         {/* <button
-                                        onClick={(e) => {
-                                            e.stopPropagation();
-                                        }}
-                                        className="opacity-0 group-hover:opacity-100 bg-cyan-500 hover:bg-cyan-600 text-black px-2 py-1  text-xs font-bold transition-all duration-300"
-                                        disabled={user.id === currentUser.current.id}
-                                    >
-                                        @
-                                    </button> */}
+                                            onClick={(e) => {
+                                                e.stopPropagation();
+                                            }}
+                                            className="opacity-0 group-hover:opacity-100 bg-cyan-500 hover:bg-cyan-600 text-black px-2 py-1  text-xs font-bold transition-all duration-300"
+                                        // disabled={user.id === currentUser.current.id}
+                                        >
+                                            @
+                                        </button> */}
                                     </div>
                                 </div>
 
