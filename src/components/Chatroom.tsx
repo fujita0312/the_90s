@@ -619,10 +619,10 @@ const Chatroom: React.FC = () => {
                                                             : 'bg-gradient-to-r from-purple-500 to-pink-500 text-white rounded-bl-md'
                                                         }`}
                                                 >
-                                                    {message.username !== 'System' && (
+                                                    {((message.sender !== currentUser.current.id) && (currentRoomId == 'general')) && (
                                                         <div className="flex items-center space-x-1 sm:space-x-2 mb-1">
                                                             <span className="text-xs font-bold opacity-90">
-                                                                {message.username}
+                                                                {users.find(user => user.id === message.sender)?.username}
                                                             </span>
                                                         </div>
                                                     )}
