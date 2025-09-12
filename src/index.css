@@ -37,7 +37,8 @@
   }
 
   @keyframes loadingPulse {
-    0%, 100% {
+    0%,
+    100% {
       opacity: 0.4;
       transform: scale(1);
     }
@@ -48,7 +49,11 @@
   }
 
   @keyframes loadingBounce {
-    0%, 20%, 50%, 80%, 100% {
+    0%,
+    20%,
+    50%,
+    80%,
+    100% {
       transform: translateY(0);
     }
     40% {
@@ -122,18 +127,17 @@
   }
 }
 
-
 /* Original rainbow class from HTML */
 .rainbow {
   background: linear-gradient(
-      90deg,
-      red,
-      orange,
-      yellow,
-      green,
-      blue,
-      indigo,
-      violet
+    90deg,
+    red,
+    orange,
+    yellow,
+    green,
+    blue,
+    indigo,
+    violet
   );
   background-size: 200% 100%;
   -webkit-background-clip: text;
@@ -143,69 +147,69 @@
   font-family: "Orbitron", monospace;
   font-weight: 900;
   text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
-  }
-  
+}
+
 .flame {
-color: #ff4500;
-font-weight: bold;
-animation: flicker 0.5s infinite alternate;
-text-shadow: 0 0 10px #ff4500;
+  color: #ff4500;
+  font-weight: bold;
+  animation: flicker 0.5s infinite alternate;
+  text-shadow: 0 0 10px #ff4500;
 }
 
 .gradient-border {
-position: relative;
+  position: relative;
 }
 
 .gradient-border::before {
-content: "";
-position: absolute;
-top: -2px;
-left: -2px;
-right: -2px;
-bottom: -2px;
-background: linear-gradient(45deg, #ff00ff, #00ffff, #ffff00, #ff00ff);
-z-index: -1;
-border-radius: 5px;
+  content: "";
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  background: linear-gradient(45deg, #ff00ff, #00ffff, #ffff00, #ff00ff);
+  z-index: -1;
+  border-radius: 5px;
 }
 
 .matrix-column {
-position: absolute;
-top: -100px;
-color: #00ff00;
-font-family: "Courier New", monospace;
-font-size: 17px;
-animation: matrixFall linear infinite;
-opacity: 0.7;
+  position: absolute;
+  top: -100px;
+  color: #00ff00;
+  font-family: "Courier New", monospace;
+  font-size: 17px;
+  animation: matrixFall linear infinite;
+  opacity: 0.7;
 }
 
 /* Custom 90s styling to match original HTML */
 .border-3 {
-border-width: 3px;
+  border-width: 3px;
 }
 
 .border-4 {
-border-width: 4px;
+  border-width: 4px;
 }
 
 .border-5 {
-border-width: 5px;
+  border-width: 5px;
 }
 
 .border-t-5 {
-border-top-width: 5px;
+  border-top-width: 5px;
 }
 
 .border-l-5 {
-border-left-width: 5px;
+  border-left-width: 5px;
 }
 
 .border-ridge {
-border-style: ridge;
+  border-style: ridge;
 }
 
 /* Header animation with exact timing from HTML */
 .animate-gradient-shift-header {
-animation: gradientShift 2s ease infinite;
+  animation: gradientShift 2s ease infinite;
 }
 
 @layer utilities {
@@ -403,8 +407,6 @@ animation: gradientShift 2s ease infinite;
   }
 }
 
-
-
 @keyframes loading {
   0% {
     width: 0%;
@@ -436,17 +438,17 @@ animation: gradientShift 2s ease infinite;
 }
 
 @keyframes fadeOut {
-  0% { 
-    opacity: 1; 
-    transform: scale(1) rotate(0deg); 
+  0% {
+    opacity: 1;
+    transform: scale(1) rotate(0deg);
   }
-  50% { 
-    opacity: 0.7; 
-    transform: scale(1.2) rotate(180deg); 
+  50% {
+    opacity: 0.7;
+    transform: scale(1.2) rotate(180deg);
   }
-  100% { 
-    opacity: 0; 
-    transform: scale(0) rotate(360deg); 
+  100% {
+    opacity: 0;
+    transform: scale(0) rotate(360deg);
   }
 }
 
@@ -473,72 +475,104 @@ animation: gradientShift 2s ease infinite;
 .mouse-trail-dot {
   width: 6px;
   height: 6px;
-  background: #00FF00;
+  background: #00ff00;
   border-radius: 50%;
-  box-shadow: 0 0 8px #00FF00, 0 0 16px #00FF00;
+  box-shadow: 0 0 8px #00ff00, 0 0 16px #00ff00;
 }
 
 .mouse-trail-star {
   width: 8px;
   height: 8px;
-  background: #FFD700;
-  clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
-  box-shadow: 0 0 10px #FFD700, 0 0 20px #FFD700;
+  background: #ffd700;
+  clip-path: polygon(
+    50% 0%,
+    61% 35%,
+    98% 35%,
+    68% 57%,
+    79% 91%,
+    50% 70%,
+    21% 91%,
+    32% 57%,
+    2% 35%,
+    39% 35%
+  );
+  box-shadow: 0 0 10px #ffd700, 0 0 20px #ffd700;
 }
 
 .mouse-trail-heart {
   width: 8px;
   height: 8px;
-  background: #FF1493;
-  clip-path: path('M8 21.35l-1.45-1.32C5.11 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.11 6.86-6.55 11.54L14 21.35z');
-  box-shadow: 0 0 10px #FF1493, 0 0 20px #FF1493;
+  background: #ff1493;
+  clip-path: path(
+    "M8 21.35l-1.45-1.32C5.11 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.11 6.86-6.55 11.54L14 21.35z"
+  );
+  box-shadow: 0 0 10px #ff1493, 0 0 20px #ff1493;
 }
 
 .mouse-trail-floppy {
   width: 10px;
   height: 8px;
-  background: #00CED1;
-  border: 1px solid #00CED1;
+  background: #00ced1;
+  border: 1px solid #00ced1;
   border-radius: 2px;
   position: relative;
 }
 
 .mouse-trail-floppy::before {
-  content: '';
+  content: "";
   position: absolute;
   top: 1px;
   left: 1px;
   width: 2px;
   height: 2px;
-  background: #00CED1;
+  background: #00ced1;
   border-radius: 50%;
 }
 
 .mouse-trail-cd {
   width: 8px;
   height: 8px;
-  background: radial-gradient(circle, #FFD700 30%, transparent 70%);
+  background: radial-gradient(circle, #ffd700 30%, transparent 70%);
   border-radius: 50%;
-  box-shadow: 0 0 10px #FFD700, 0 0 20px #FFD700;
+  box-shadow: 0 0 10px #ffd700, 0 0 20px #ffd700;
 }
 
 .mouse-trail-rainbow {
   width: 6px;
   height: 6px;
-  background: linear-gradient(45deg, #FF0000, #FF7F00, #FFFF00, #00FF00, #0000FF, #4B0082, #9400D3);
+  background: linear-gradient(
+    45deg,
+    #ff0000,
+    #ff7f00,
+    #ffff00,
+    #00ff00,
+    #0000ff,
+    #4b0082,
+    #9400d3
+  );
   border-radius: 50%;
   animation: rainbowSpin 0.8s linear infinite;
 }
 
 @keyframes rainbowSpin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }
 
 @keyframes trailFloat {
-  0% { transform: translateY(0px) scale(1); }
-  50% { transform: translateY(-10px) scale(1.1); }
-  100% { transform: translateY(-20px) scale(0.8); }
+  0% {
+    transform: translateY(0px) scale(1);
+  }
+  50% {
+    transform: translateY(-10px) scale(1.1);
+  }
+  100% {
+    transform: translateY(-20px) scale(0.8);
+  }
 }
 
 .mouse-trail-float {
@@ -546,11 +580,21 @@ animation: gradientShift 2s ease infinite;
 }
 
 @keyframes trailBounce {
-  0% { transform: translateY(0px) scale(1); }
-  25% { transform: translateY(-15px) scale(1.2); }
-  50% { transform: translateY(0px) scale(0.8); }
-  75% { transform: translateY(-8px) scale(1.1); }
-  100% { transform: translateY(0px) scale(0); }
+  0% {
+    transform: translateY(0px) scale(1);
+  }
+  25% {
+    transform: translateY(-15px) scale(1.2);
+  }
+  50% {
+    transform: translateY(0px) scale(0.8);
+  }
+  75% {
+    transform: translateY(-8px) scale(1.1);
+  }
+  100% {
+    transform: translateY(0px) scale(0);
+  }
 }
 
 .mouse-trail-bounce {
@@ -558,9 +602,15 @@ animation: gradientShift 2s ease infinite;
 }
 
 @keyframes trailSpin {
-  0% { transform: rotate(0deg) scale(1); }
-  50% { transform: rotate(180deg) scale(1.3); }
-  100% { transform: rotate(360deg) scale(0); }
+  0% {
+    transform: rotate(0deg) scale(1);
+  }
+  50% {
+    transform: rotate(180deg) scale(1.3);
+  }
+  100% {
+    transform: rotate(360deg) scale(0);
+  }
 }
 
 .mouse-trail-spin {
@@ -582,20 +632,20 @@ animation: gradientShift 2s ease infinite;
 .cursor-trail-line {
   position: fixed;
   height: 2px;
-  background: linear-gradient(90deg, #00FF00, #00CED1, #FFD700);
+  background: linear-gradient(90deg, #00ff00, #00ced1, #ffd700);
   pointer-events: none;
   z-index: 9998;
   animation: lineFade 0.8s ease-out forwards;
 }
 
 @keyframes lineFade {
-  0% { 
-    opacity: 1; 
-    transform: scaleX(1); 
+  0% {
+    opacity: 1;
+    transform: scaleX(1);
   }
-  100% { 
-    opacity: 0; 
-    transform: scaleX(0); 
+  100% {
+    opacity: 0;
+    transform: scaleX(0);
   }
 }
 
@@ -616,167 +666,368 @@ animation: gradientShift 2s ease infinite;
 
 /* Enhanced Clippy Animations */
 @keyframes clippy-thinking {
-  0%, 100% { transform: rotate(0deg) scale(1); }
-  25% { transform: rotate(5deg) scale(1.1); }
-  50% { transform: rotate(-5deg) scale(1.05); }
-  75% { transform: rotate(3deg) scale(1.15); }
+  0%,
+  100% {
+    transform: rotate(0deg) scale(1);
+  }
+  25% {
+    transform: rotate(5deg) scale(1.1);
+  }
+  50% {
+    transform: rotate(-5deg) scale(1.05);
+  }
+  75% {
+    transform: rotate(3deg) scale(1.15);
+  }
 }
 
 @keyframes clippy-smug {
-  0% { transform: scale(1) rotate(0deg); }
-  50% { transform: scale(1.2) rotate(10deg); }
-  100% { transform: scale(1) rotate(0deg); }
+  0% {
+    transform: scale(1) rotate(0deg);
+  }
+  50% {
+    transform: scale(1.2) rotate(10deg);
+  }
+  100% {
+    transform: scale(1) rotate(0deg);
+  }
 }
 
 @keyframes clippy-eyeroll {
-  0% { transform: rotate(0deg); }
-  25% { transform: rotate(15deg); }
-  50% { transform: rotate(0deg); }
-  75% { transform: rotate(-15deg); }
-  100% { transform: rotate(0deg); }
+  0% {
+    transform: rotate(0deg);
+  }
+  25% {
+    transform: rotate(15deg);
+  }
+  50% {
+    transform: rotate(0deg);
+  }
+  75% {
+    transform: rotate(-15deg);
+  }
+  100% {
+    transform: rotate(0deg);
+  }
 }
 
 @keyframes clippy-impatient {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-10px); }
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
 }
 
 @keyframes clippy-talk {
-  0%, 100% { transform: scale(1); }
-  50% { transform: scale(1.1); }
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
 }
 
 @keyframes clippy-explaining {
-  0% { transform: rotate(0deg) scale(1); }
-  25% { transform: rotate(2deg) scale(1.05); }
-  50% { transform: rotate(-2deg) scale(1.1); }
-  75% { transform: rotate(1deg) scale(1.05); }
-  100% { transform: rotate(0deg) scale(1); }
+  0% {
+    transform: rotate(0deg) scale(1);
+  }
+  25% {
+    transform: rotate(2deg) scale(1.05);
+  }
+  50% {
+    transform: rotate(-2deg) scale(1.1);
+  }
+  75% {
+    transform: rotate(1deg) scale(1.05);
+  }
+  100% {
+    transform: rotate(0deg) scale(1);
+  }
 }
 
 @keyframes clippy-annoyed {
-  0%, 100% { transform: scale(1) rotate(0deg); }
-  25% { transform: scale(1.1) rotate(5deg); }
-  50% { transform: scale(1.2) rotate(-5deg); }
-  75% { transform: scale(1.1) rotate(3deg); }
+  0%,
+  100% {
+    transform: scale(1) rotate(0deg);
+  }
+  25% {
+    transform: scale(1.1) rotate(5deg);
+  }
+  50% {
+    transform: scale(1.2) rotate(-5deg);
+  }
+  75% {
+    transform: scale(1.1) rotate(3deg);
+  }
 }
 
 @keyframes clippy-excited {
-  0%, 100% { transform: scale(1) rotate(0deg); }
-  50% { transform: scale(1.3) rotate(15deg); }
+  0%,
+  100% {
+    transform: scale(1) rotate(0deg);
+  }
+  50% {
+    transform: scale(1.3) rotate(15deg);
+  }
 }
 
 @keyframes clippy-success {
-  0% { transform: scale(1) rotate(0deg); }
-  50% { transform: scale(1.4) rotate(360deg); }
-  100% { transform: scale(1) rotate(0deg); }
+  0% {
+    transform: scale(1) rotate(0deg);
+  }
+  50% {
+    transform: scale(1.4) rotate(360deg);
+  }
+  100% {
+    transform: scale(1) rotate(0deg);
+  }
 }
 
 @keyframes clippy-celebrate {
-  0% { transform: scale(1) rotate(0deg); }
-  25% { transform: scale(1.2) rotate(90deg); }
-  50% { transform: scale(1.4) rotate(180deg); }
-  75% { transform: scale(1.2) rotate(270deg); }
-  100% { transform: scale(1) rotate(360deg); }
+  0% {
+    transform: scale(1) rotate(0deg);
+  }
+  25% {
+    transform: scale(1.2) rotate(90deg);
+  }
+  50% {
+    transform: scale(1.4) rotate(180deg);
+  }
+  75% {
+    transform: scale(1.2) rotate(270deg);
+  }
+  100% {
+    transform: scale(1) rotate(360deg);
+  }
 }
 
 @keyframes clippy-idle {
-  0%, 100% { transform: translateY(0) rotate(0deg); }
-  25% { transform: translateY(-5px) rotate(2deg); }
-  50% { transform: translateY(-2px) rotate(-1deg); }
-  75% { transform: translateY(-8px) rotate(1deg); }
+  0%,
+  100% {
+    transform: translateY(0) rotate(0deg);
+  }
+  25% {
+    transform: translateY(-5px) rotate(2deg);
+  }
+  50% {
+    transform: translateY(-2px) rotate(-1deg);
+  }
+  75% {
+    transform: translateY(-8px) rotate(1deg);
+  }
 }
 
 @keyframes clippy-disappear {
-  0% { opacity: 1; transform: scale(1); }
-  100% { opacity: 0; transform: scale(0.5); }
+  0% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(0.5);
+  }
 }
 
 @keyframes clippy-waiting {
-  0%, 100% { transform: scale(1) rotate(0deg); }
-  50% { transform: scale(0.9) rotate(180deg); }
+  0%,
+  100% {
+    transform: scale(1) rotate(0deg);
+  }
+  50% {
+    transform: scale(0.9) rotate(180deg);
+  }
 }
 
 @keyframes clippy-wave {
-  0% { transform: rotate(0deg) scale(1); }
-  25% { transform: rotate(15deg) scale(1.1); }
-  50% { transform: rotate(30deg) scale(1.2); }
-  75% { transform: rotate(15deg) scale(1.1); }
-  100% { transform: rotate(0deg) scale(1); }
+  0% {
+    transform: rotate(0deg) scale(1);
+  }
+  25% {
+    transform: rotate(15deg) scale(1.1);
+  }
+  50% {
+    transform: rotate(30deg) scale(1.2);
+  }
+  75% {
+    transform: rotate(15deg) scale(1.1);
+  }
+  100% {
+    transform: rotate(0deg) scale(1);
+  }
 }
 
 @keyframes clippy-staring {
-  0%, 100% { transform: scale(1.1) rotate(0deg); }
-  50% { transform: scale(1.2) rotate(2deg); }
+  0%,
+  100% {
+    transform: scale(1.1) rotate(0deg);
+  }
+  50% {
+    transform: scale(1.2) rotate(2deg);
+  }
 }
 
 @keyframes clippy-crying {
-  0%, 100% { transform: scale(1) rotate(0deg); }
-  25% { transform: scale(0.9) rotate(-2deg); }
-  50% { transform: scale(0.95) rotate(1deg); }
-  75% { transform: scale(0.9) rotate(-1deg); }
+  0%,
+  100% {
+    transform: scale(1) rotate(0deg);
+  }
+  25% {
+    transform: scale(0.9) rotate(-2deg);
+  }
+  50% {
+    transform: scale(0.95) rotate(1deg);
+  }
+  75% {
+    transform: scale(0.9) rotate(-1deg);
+  }
 }
 
 @keyframes clippy-confident {
-  0%, 100% { transform: scale(1) rotate(0deg); }
-  50% { transform: scale(1.15) rotate(5deg); }
+  0%,
+  100% {
+    transform: scale(1) rotate(0deg);
+  }
+  50% {
+    transform: scale(1.15) rotate(5deg);
+  }
 }
 
 @keyframes clippy-rubbing {
-  0%, 100% { transform: scale(1) rotate(0deg); }
-  25% { transform: scale(1.1) rotate(-3deg); }
-  50% { transform: scale(1.05) rotate(2deg); }
-  75% { transform: scale(1.1) rotate(-2deg); }
+  0%,
+  100% {
+    transform: scale(1) rotate(0deg);
+  }
+  25% {
+    transform: scale(1.1) rotate(-3deg);
+  }
+  50% {
+    transform: scale(1.05) rotate(2deg);
+  }
+  75% {
+    transform: scale(1.1) rotate(-2deg);
+  }
 }
 
 @keyframes clippy-laughing {
-  0%, 100% { transform: scale(1) rotate(0deg); }
-  25% { transform: scale(1.2) rotate(-5deg); }
-  50% { transform: scale(1.1) rotate(3deg); }
-  75% { transform: scale(1.15) rotate(-2deg); }
+  0%,
+  100% {
+    transform: scale(1) rotate(0deg);
+  }
+  25% {
+    transform: scale(1.2) rotate(-5deg);
+  }
+  50% {
+    transform: scale(1.1) rotate(3deg);
+  }
+  75% {
+    transform: scale(1.15) rotate(-2deg);
+  }
 }
 
 @keyframes clippy-dancing {
-  0%, 100% { transform: scale(1) rotate(0deg); }
-  25% { transform: scale(1.1) rotate(15deg); }
-  50% { transform: scale(1.2) rotate(-10deg); }
-  75% { transform: scale(1.1) rotate(8deg); }
+  0%,
+  100% {
+    transform: scale(1) rotate(0deg);
+  }
+  25% {
+    transform: scale(1.1) rotate(15deg);
+  }
+  50% {
+    transform: scale(1.2) rotate(-10deg);
+  }
+  75% {
+    transform: scale(1.1) rotate(8deg);
+  }
 }
 
 @keyframes clippy-victory {
-  0%, 100% { transform: scale(1) rotate(0deg); }
-  25% { transform: scale(1.3) rotate(90deg); }
-  50% { transform: scale(1.4) rotate(180deg); }
-  75% { transform: scale(1.3) rotate(270deg); }
+  0%,
+  100% {
+    transform: scale(1) rotate(0deg);
+  }
+  25% {
+    transform: scale(1.3) rotate(90deg);
+  }
+  50% {
+    transform: scale(1.4) rotate(180deg);
+  }
+  75% {
+    transform: scale(1.3) rotate(270deg);
+  }
 }
 
 /* Clippy Animation Classes */
-.clippy-anim-thinking { animation: clippy-thinking 2s infinite; }
-.clippy-anim-smug { animation: clippy-smug 1s forwards; }
-.clippy-anim-eyeroll { animation: clippy-eyeroll 1s forwards; }
-.clippy-anim-impatient { animation: clippy-impatient 0.5s infinite alternate; }
-.clippy-anim-talk { animation: clippy-talk 0.3s infinite alternate; }
-.clippy-anim-explaining { animation: clippy-explaining 1.5s infinite; }
-.clippy-anim-annoyed { animation: clippy-annoyed 0.6s infinite; }
-.clippy-anim-excited { animation: clippy-excited 0.4s infinite alternate; }
-.clippy-anim-success { animation: clippy-success 1s forwards; }
-.clippy-anim-celebrate { animation: clippy-celebrate 1.5s infinite; }
-.clippy-anim-idle { animation: clippy-idle 5s infinite; }
-.clippy-anim-disappear { animation: clippy-disappear 0.5s forwards; }
-.clippy-anim-waiting { animation: clippy-waiting 3s infinite; }
-.clippy-anim-wave { animation: clippy-wave 1s forwards; }
-.clippy-anim-staring { animation: clippy-staring 2s infinite; }
-.clippy-anim-crying { animation: clippy-crying 1.5s infinite; }
-.clippy-anim-confident { animation: clippy-confident 2s infinite; }
-.clippy-anim-rubbing { animation: clippy-rubbing 1.5s infinite; }
-.clippy-anim-laughing { animation: clippy-laughing 1s infinite; }
-.clippy-anim-dancing { animation: clippy-dancing 1.5s infinite; }
-.clippy-anim-victory { animation: clippy-victory 2s infinite; }
+.clippy-anim-thinking {
+  animation: clippy-thinking 2s infinite;
+}
+.clippy-anim-smug {
+  animation: clippy-smug 1s forwards;
+}
+.clippy-anim-eyeroll {
+  animation: clippy-eyeroll 1s forwards;
+}
+.clippy-anim-impatient {
+  animation: clippy-impatient 0.5s infinite alternate;
+}
+.clippy-anim-talk {
+  animation: clippy-talk 0.3s infinite alternate;
+}
+.clippy-anim-explaining {
+  animation: clippy-explaining 1.5s infinite;
+}
+.clippy-anim-annoyed {
+  animation: clippy-annoyed 0.6s infinite;
+}
+.clippy-anim-excited {
+  animation: clippy-excited 0.4s infinite alternate;
+}
+.clippy-anim-success {
+  animation: clippy-success 1s forwards;
+}
+.clippy-anim-celebrate {
+  animation: clippy-celebrate 1.5s infinite;
+}
+.clippy-anim-idle {
+  animation: clippy-idle 5s infinite;
+}
+.clippy-anim-disappear {
+  animation: clippy-disappear 0.5s forwards;
+}
+.clippy-anim-waiting {
+  animation: clippy-waiting 3s infinite;
+}
+.clippy-anim-wave {
+  animation: clippy-wave 1s forwards;
+}
+.clippy-anim-staring {
+  animation: clippy-staring 2s infinite;
+}
+.clippy-anim-crying {
+  animation: clippy-crying 1.5s infinite;
+}
+.clippy-anim-confident {
+  animation: clippy-confident 2s infinite;
+}
+.clippy-anim-rubbing {
+  animation: clippy-rubbing 1.5s infinite;
+}
+.clippy-anim-laughing {
+  animation: clippy-laughing 1s infinite;
+}
+.clippy-anim-dancing {
+  animation: clippy-dancing 1.5s infinite;
+}
+.clippy-anim-victory {
+  animation: clippy-victory 2s infinite;
+}
 
 /* Clippy Dialogue Box Enhancements */
 .clippy-dialogue-glow {
-  box-shadow: 
-    0 0 25px rgba(0, 255, 255, 0.7),
+  box-shadow: 0 0 25px rgba(0, 255, 255, 0.7),
     inset 0 0 25px rgba(0, 255, 255, 0.1);
 }
 
@@ -860,20 +1111,24 @@ animation: gradientShift 2s ease infinite;
     0 0 10px rgba(255, 0, 255, 0.3);
 } */
 
-
 .cyber-scan-line {
   position: relative;
   overflow: hidden;
 }
 
 .cyber-scan-line::after {
-  content: '';
+  content: "";
   position: absolute;
   top: 0;
   left: -100%;
   width: 100%;
   height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(0, 255, 0, 0.5), transparent);
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(0, 255, 0, 0.5),
+    transparent
+  );
   animation: cyberScan 3s linear infinite;
 }
 
@@ -883,13 +1138,18 @@ animation: gradientShift 2s ease infinite;
 }
 
 .data-stream::before {
-  content: '';
+  content: "";
   position: absolute;
   top: -100%;
   left: 0;
   width: 100%;
   height: 100%;
-  background: linear-gradient(180deg, transparent, rgba(0, 255, 255, 0.3), transparent);
+  background: linear-gradient(
+    180deg,
+    transparent,
+    rgba(0, 255, 255, 0.3),
+    transparent
+  );
   animation: dataStream 2s linear infinite;
 }
 
@@ -937,7 +1197,7 @@ animation: gradientShift 2s ease infinite;
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
   }
-  
+
   .animate-spin,
   .animate-bounce,
   .animate-pulse,
@@ -954,29 +1214,28 @@ animation: gradientShift 2s ease infinite;
     background: #000;
     color: #fff;
   }
-  
+
   .retro-card {
     border-width: 4px;
     border-color: #fff;
   }
-  
+
   .text-90s-neon-green {
     color: #00ff00 !important;
   }
-  
+
   .text-90s-neon-pink {
     color: #ff00ff !important;
   }
-  
+
   .text-90s-neon-cyan {
     color: #00ffff !important;
   }
-  
+
   .text-90s-neon-yellow {
     color: #ffff00 !important;
   }
 }
-
 
 /* Skip to content link */
 .skip-link {
@@ -1066,20 +1325,42 @@ animation: gradientShift 2s ease infinite;
 }
 
 /* Thickness layers positioning */
-.coin-middle-1 { transform: translateZ(1px); }
-.coin-middle-2 { transform: translateZ(2px); }
-.coin-middle-3 { transform: translateZ(3px); }
-.coin-middle-4 { transform: translateZ(4px); }
-.coin-middle-5 { transform: translateZ(5px); }
-.coin-middle-6 { transform: translateZ(6px); }
-.coin-middle-7 { transform: translateZ(7px); }
-.coin-middle-8 { transform: translateZ(8px); }
-.coin-middle-9 { transform: translateZ(9px); }
- 
+.coin-middle-1 {
+  transform: translateZ(1px);
+}
+.coin-middle-2 {
+  transform: translateZ(2px);
+}
+.coin-middle-3 {
+  transform: translateZ(3px);
+}
+.coin-middle-4 {
+  transform: translateZ(4px);
+}
+.coin-middle-5 {
+  transform: translateZ(5px);
+}
+.coin-middle-6 {
+  transform: translateZ(6px);
+}
+.coin-middle-7 {
+  transform: translateZ(7px);
+}
+.coin-middle-8 {
+  transform: translateZ(8px);
+}
+.coin-middle-9 {
+  transform: translateZ(9px);
+}
+
 /* Coin Spin Animation */
 @keyframes coinSpin {
-  0% { transform: rotateY(0deg); }
-  100% { transform: rotateY(360deg); }
+  0% {
+    transform: rotateY(0deg);
+  }
+  100% {
+    transform: rotateY(360deg);
+  }
 }
 
 @keyframes coinGlow {
@@ -1144,5 +1425,9 @@ animation: gradientShift 2s ease infinite;
 
 /* Swiper Creative Effect Enhancements */
 .header-swiper .swiper-slide-shadow {
-  background: linear-gradient(45deg, rgba(255, 20, 147, 0.3), rgba(0, 206, 209, 0.3)) !important;
+  background: linear-gradient(
+    45deg,
+    rgba(255, 20, 147, 0.3),
+    rgba(0, 206, 209, 0.3)
+  ) !important;
 }
