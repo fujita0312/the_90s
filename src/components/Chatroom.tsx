@@ -21,6 +21,7 @@ interface User {
     joinedAt: Date;
     unreadCount?: number;
     isOnline?: boolean;
+    roomId?: string;
 }
 
 
@@ -194,31 +195,32 @@ const Chatroom: React.FC = () => {
         }) => {
             const roomId = generateRoomId(currentUser.current.id, data.id);
 
-            let updated = false;
             setUsers(prev => {
-                return [...prev.map((p) => {
-                    if (p.id === data.id) {
-                        updated = true;
-                        return {
-                            ...p,
-                            joinedAt: new Date(),
-                            unreadCount: data.unreadCount || 0,
-                            isOnline: true
-                        }
-                    }
-                    return p;
-                })]
+                // Check if user already exists
+                const existingUserIndex = prev.findIndex(user => user.id === data.id);
+                
+                if (existingUserIndex !== -1) {
+                    // Update existing user
+                    const updatedUsers = [...prev];
+                    updatedUsers[existingUserIndex] = {
+                        ...updatedUsers[existingUserIndex],
+                        joinedAt: new Date(),
+                        unreadCount: data.unreadCount || 0,
+                        isOnline: true
+                    };
+                    return updatedUsers;
+                } else {
+                    // Add new user
+                    return [...prev, {
+                        id: data.id,
+                        username: data.username,
+                        roomId: roomId,
+                        joinedAt: new Date(),
+                        unreadCount: data.unreadCount || 0,
+                        isOnline: true
+                    }];
+                }
             });
-            if (!updated) {
-                setUsers((prev) => [...prev, {
-                    id: data.id,
-                    username: data.username,
-                    roomId: roomId,
-                    joinedAt: new Date(),
-                    unreadCount: data.unreadCount || 0,
-                    isOnline: true
-                }]);
-            }
         };
 
         const handleUserLeft = (data: {
