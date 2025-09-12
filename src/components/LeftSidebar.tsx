@@ -63,7 +63,6 @@ const LeftSidebar: React.FC = () => {
                   navigator.clipboard.writeText(ContractAddress);
                   showToast("📋 Contract address copied to clipboard!\n\n🚀 Opening bags.fm to buy...\n\nTO THE MOON! 🌙", 'success');
                   // Open bags.fm in new tab
-                  window.open(BagsFmUrl, '_blank');
                 }}
               >
                 Copy
