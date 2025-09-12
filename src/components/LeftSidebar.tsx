@@ -48,7 +48,7 @@ const LeftSidebar: React.FC = () => {
         <div className="text-center">
           <div className="bg-black/60 md:p-4 p-2 md:border-2 border border-cyan-400 mb-4 hover:bg-black/80 transition-all duration-300 hover:shadow-[0_0_15px_rgba(0,255,255,0.5)]">
             <div className="text-cyan-400 text-sm mb-2">Click to copy & buy:</div>
-            <div className="flex justify-between items-center">
+            <div className="flex flex-col justify-between items-center">
               <a
                 href={BagsFmUrl}
                 target="_blank"
@@ -58,7 +58,7 @@ const LeftSidebar: React.FC = () => {
                 {ContractAddress.slice(0, 6) + '...' + ContractAddress.slice(-4)}
               </a>
               <button
-                className="text-yellow-400 hover:text-yellow-300 transition-all duration-300 font-mono text-sm md:text-base break-all hover:underline cursor-pointer hover:scale-105 transform block"
+                className="text-yellow-400 hover:text-yellow-300 transition-all duration-300 font-mono text-sm md:text-base break-all cursor-pointer hover:scale-105 transform block"
                 onClick={(e) => {
                   e.preventDefault();
                   navigator.clipboard.writeText(ContractAddress);
