@@ -384,7 +384,7 @@ const Chatroom: React.FC = () => {
                                     👤 {currentUser.current.username || 'Anonymous'}
                                 </div>
                                 <div className="text-pink-400">
-                                    👥 {users.length} online
+                                    👥 {users.length}
                                 </div>
                             </div>
                         </div>
@@ -434,7 +434,7 @@ const Chatroom: React.FC = () => {
                         <div className="p-4 border-b border-cyan-400/30">
                             <div className="flex items-center justify-between">
                                 <h3 className="text-lg font-bold text-yellow-400">
-                                    👥 Online Users ({users.length})
+                                    👥 Users ({users.length})
                                 </h3>
                             </div>
                         </div>
