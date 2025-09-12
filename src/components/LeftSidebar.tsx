@@ -58,6 +58,7 @@ const LeftSidebar: React.FC = () => {
                 {ContractAddress.slice(0, 6) + '...' + ContractAddress.slice(-4)}
               </a>
               <button
+                className="text-yellow-400 hover:text-yellow-300 transition-all duration-300 font-mono text-sm md:text-base break-all hover:underline cursor-pointer hover:scale-105 transform block"
                 onClick={(e) => {
                   e.preventDefault();
                   navigator.clipboard.writeText(ContractAddress);
