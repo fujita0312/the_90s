@@ -48,21 +48,27 @@ const LeftSidebar: React.FC = () => {
         <div className="text-center">
           <div className="bg-black/60 md:p-4 p-2 md:border-2 border border-cyan-400 mb-4 hover:bg-black/80 transition-all duration-300 hover:shadow-[0_0_15px_rgba(0,255,255,0.5)]">
             <div className="text-cyan-400 text-sm mb-2">Click to copy & buy:</div>
-            <a
-              href={BagsFmUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-yellow-400 hover:text-yellow-300 transition-all duration-300 font-mono text-sm md:text-base break-all hover:underline cursor-pointer hover:scale-105 transform block"
-              onClick={(e) => {
-                e.preventDefault();
-                navigator.clipboard.writeText(ContractAddress);
-                showToast("📋 Contract address copied to clipboard!\n\n🚀 Opening bags.fm to buy...\n\nTO THE MOON! 🌙", 'success');
-                // Open bags.fm in new tab
-                window.open(BagsFmUrl, '_blank');
-              }}
-            >
-              {ContractAddress}
-            </a>
+            <div className="flex justify-between items-center">
+              <a
+                href={BagsFmUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-yellow-400 hover:text-yellow-300 transition-all duration-300 font-mono text-sm md:text-base break-all hover:underline cursor-pointer hover:scale-105 transform block"
+              >
+                {ContractAddress.slice(0, 6) + '...' + ContractAddress.slice(-4)}
+              </a>
+              <button
+                onClick={(e) => {
+                  e.preventDefault();
+                  navigator.clipboard.writeText(ContractAddress);
+                  showToast("📋 Contract address copied to clipboard!\n\n🚀 Opening bags.fm to buy...\n\nTO THE MOON! 🌙", 'success');
+                  // Open bags.fm in new tab
+                  window.open(BagsFmUrl, '_blank');
+                }}
+              >
+                Copy
+              </button>
+            </div>
           </div>
           <div className="text-white text-sm mb-2">
             🚀 <strong>Ready to join the time travel revolution?</strong> 🚀
@@ -170,7 +176,7 @@ const LeftSidebar: React.FC = () => {
           Webmaster is updating from his 56k modem
         </div>
       </div>
-      
+
       {/* Games Section */}
       <div id="games-section" className="mt-5 bg-gradient-to-r from-black via-gray-800 to-black border-3 border-pink-500 border-ridge md:p-4 p-2 shadow-[0_0_20px_rgba(255,0,255,0.3)] mb-6">
         {/* Arcade Banner Image */}
