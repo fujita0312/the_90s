@@ -20,6 +20,7 @@ interface GamesProps {
 const Games: React.FC<GamesProps> = ({ onBack }) => {
     const [activeGame, setActiveGame] = useState<string>('menu');
     const [isLoading, setIsLoading] = useState(false);
+    const [isLoadingVisits, setIsLoadingVisits] = useState(true);
     const { handleHideBackgroundElements } = useGameContext();
     const [visitCounts, setVisitCounts] = useState<Record<string, number>>({});
 
@@ -79,6 +80,8 @@ const Games: React.FC<GamesProps> = ({ onBack }) => {
                 }
             } catch (e) {
                 // noop
+            } finally {
+                setIsLoadingVisits(false);
             }
         };
         fetchVisits();
@@ -86,7 +89,7 @@ const Games: React.FC<GamesProps> = ({ onBack }) => {
         return () => {
             handleHideBackgroundElements(false);
         };
-    }, []);
+    }, [handleHideBackgroundElements]);
 
     const games = useMemo(() => ([
         { id: 'tictactoe', name: 'Tic Tac Toe', icon: '⭕', description: 'Classic X vs O with AI' },
@@ -230,6 +233,16 @@ const Games: React.FC<GamesProps> = ({ onBack }) => {
             //         </Suspense>
             //     );
             default:
+                // Show loading spinner while visit counts are being fetched
+                if (isLoadingVisits) {
+                    return (
+                        <div className="text-center py-16" role="status" aria-live="polite">
+                            <div className="mx-auto mb-4 h-16 w-16 rounded-full border-4 border-cyan-400 border-t-transparent animate-spin" aria-hidden="true"></div>
+                            <div className="text-cyan-400 md:text-xl text-lg font-semibold">Loading games...</div>
+                        </div>
+                    );
+                }
+
                 // Games menu with sorting by visit count
                 const sortedGames = [...games].sort((a, b) => (visitCounts[b.id] || 0) - (visitCounts[a.id] || 0));
                 return (
