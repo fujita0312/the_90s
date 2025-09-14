@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import MemeSlider from './MemeSlider';
 // import SocialLinks from './SocialLinks';
 const ContractAddress = process.env.REACT_APP_CONTRACT_ADDRESS || '';
-const BagsFmUrl = 'https://bags.fm/' + ContractAddress;
+const pumpFunUrl = 'https://pump.fun/coin/' + ContractAddress;
 const LeftSidebar: React.FC = () => {
   const { showToast } = useToast();
   const navigate = useNavigate();
@@ -50,7 +50,7 @@ const LeftSidebar: React.FC = () => {
             <div className="text-cyan-400 text-sm mb-2">Click to copy & buy:</div>
             <div className="flex flex-col justify-between items-center">
               <a
-                href={BagsFmUrl}
+                href={pumpFunUrl}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-yellow-400 hover:text-yellow-300 transition-all duration-300 font-mono text-sm md:text-base break-all hover:underline cursor-pointer hover:scale-105 transform block"
@@ -62,7 +62,7 @@ const LeftSidebar: React.FC = () => {
                 onClick={(e) => {
                   e.preventDefault();
                   navigator.clipboard.writeText(ContractAddress);
-                  showToast("📋 Contract address copied to clipboard!\n\n🚀 Opening bags.fm to buy...\n\nTO THE MOON! 🌙", 'success');
+                  showToast("📋 Contract address copied to clipboard!\n\n🚀 Opening pump.fun to buy...\n\nTO THE MOON! 🌙", 'success');
                   // Open bags.fm in new tab
                 }}
               >
@@ -74,7 +74,7 @@ const LeftSidebar: React.FC = () => {
             🚀 <strong>Ready to join the time travel revolution?</strong> 🚀
           </div>
           <div className="text-cyan-400 text-xs">
-            Click address above to copy & visit bags.fm!
+            Click address above to copy & visit pump.fun!
           </div>
           <div className="text-yellow-400 text-xs mt-1 animate-pulse">
             ⚡ Instant copy + buy link! ⚡
@@ -162,7 +162,7 @@ const LeftSidebar: React.FC = () => {
         onClick={handleBuyNow}
         className="w-full bg-gradient-to-r from-orange-500 via-red-500 to-orange-600 bg-[length:200%_200%] text-white border-3 border-yellow-400 border-ridge py-5 md:text-xl text-lg font-bold cursor-pointer animate-bounce my-5 block text-center shadow-[0_0_20px_#ff4500] text-shadow-90s font-orbitron transition-all duration-300 hover:scale-110 hover:rotate-1"
       >
-        🚀 BUY ON BAGS.FM 🚀
+        🚀 BUY ON PUMP.FUN 🚀
         <div className="text-lg mt-1.5">TO THE MOON!</div>
       </button>
 

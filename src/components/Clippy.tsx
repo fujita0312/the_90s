@@ -34,7 +34,7 @@ const Clippy: React.FC = () => {
     HINT_DELAY: 15000,
     DIALOGUE_DELAY: 30000,
     CONTRACT_ADDRESS: process.env.REACT_APP_CONTRACT_ADDRESS,
-    BAG_FM_URL: `https://bag.fm/${process.env.REACT_APP_CONTRACT_ADDRESS}`,
+    PUMP_FUN_URL: `https://pump.fun/coin/${process.env.REACT_APP_CONTRACT_ADDRESS}`,
     ENABLE_ESCAPE: true,
     DEBUG_MODE: false,
     ENABLE_RANDOM_POPUPS: true,
@@ -212,12 +212,12 @@ Here's the deal - this project is pure vibes, maximum nostalgia,
 and zero pretense. It's everything the early internet was supposed 
 to be before corporations ruined everything.
 
-Buy on bag.fm, join the community, and become part of digital 
+Buy on pump.fun, join the community, and become part of digital 
 history! 
 
 Don't take financial advice from a paperclip though!`,
       options: [
-        { text: "🚀 TAKE ME TO bag.fm", nextNode: 'buyNow' },
+        { text: "🚀 TAKE ME TO pump.fun", nextNode: 'buyNow' },
         { text: "📱 I'LL SHARE THIS FIRST", nextNode: 'shareFirst' }
       ],
       animation: 'dancing'
@@ -255,7 +255,7 @@ Plus the memes are fire and the community isn't toxic yet!
 
 Don't take financial advice from a paperclip though!`,
       options: [
-        { text: "🚀 TAKE ME TO bag.fm", nextNode: 'buyNow' },
+        { text: "🚀 TAKE ME TO pump.fun", nextNode: 'buyNow' },
         { text: "📱 I'LL SHARE THIS FIRST", nextNode: 'shareFirst' }
       ],
       animation: 'eyeroll'
@@ -273,7 +273,7 @@ and 99% of projects are soulless cash grabs. This? This has SOUL.
 
 Don't take financial advice from a paperclip though!`,
       options: [
-        { text: "🚀 TAKE ME TO bag.fm", nextNode: 'buyNow' },
+        { text: "🚀 TAKE ME TO pump.fun", nextNode: 'buyNow' },
         { text: "📱 I'LL SHARE THIS FIRST", nextNode: 'shareFirst' }
       ],
       animation: 'excited'
@@ -283,12 +283,12 @@ Don't take financial advice from a paperclip though!`,
       text: `YASSS!
 
 Smart human is SMART! You've got that vintage internet wisdom! 
-Head to bag.fm and join our beautiful degenerative community!
+Head to pump.fun and join our beautiful degenerative community!
 
 Welcome to the 90's Fresh family! Don't take financial advice 
 from a paperclip though!`,
       options: [
-        { text: "🚀 TAKE ME TO bag.fm", nextNode: 'buyNow' },
+        { text: "🚀 TAKE ME TO pump.fun", nextNode: 'buyNow' },
         { text: "📱 I'LL SHARE THIS FIRST", nextNode: 'shareFirst' }
       ],
       animation: 'victory'
@@ -303,7 +303,7 @@ aren't afraid to admit it! We're all digital trauma bonded here!
 Buy the coin, join the chaos, embrace the cringe! 
 Don't take financial advice from a paperclip though!`,
       options: [
-        { text: "🚀 TAKE ME TO bag.fm", nextNode: 'buyNow' },
+        { text: "🚀 TAKE ME TO pump.fun", nextNode: 'buyNow' },
         { text: "📱 I'LL SHARE THIS FIRST", nextNode: 'shareFirst' }
       ],
       animation: 'excited'
@@ -312,7 +312,7 @@ Don't take financial advice from a paperclip though!`,
     'justTellMeHow': {
       text: `Alright, alright! No more games!
 
-Head to bag.fm, search for 90's Fresh, and buy some tokens. 
+Head to pump.fun, search for 90's Fresh, and buy some tokens. 
 It's that simple. No utility, no roadmap, just pure nostalgic vibes.
 
 And remember - you heard it from a paperclip who's been dead 
@@ -320,7 +320,7 @@ inside since Microsoft Office 2007.
 
 Don't take financial advice from a paperclip though!`,
       options: [
-        { text: "🚀 TAKE ME TO bag.fm", nextNode: 'buyNow' },
+        { text: "🚀 TAKE ME TO pump.fun", nextNode: 'buyNow' },
         { text: "📱 I'LL SHARE THIS FIRST", nextNode: 'shareFirst' }
       ],
       animation: 'thinking'
@@ -338,7 +338,7 @@ about how you took financial advice from a paperclip.
 
 Don't take financial advice from a paperclip though!`,
       options: [
-        { text: "🚀 TAKE ME TO bag.fm", nextNode: 'buyNow' },
+        { text: "🚀 TAKE ME TO pump.fun", nextNode: 'buyNow' },
         { text: "📱 I'LL SHARE THIS FIRST", nextNode: 'shareFirst' }
       ],
       animation: 'sad'
@@ -357,7 +357,7 @@ I'll just go back to counting paperclips and crying binary tears.
 
 Don't take financial advice from a paperclip though!`,
       options: [
-        { text: "🚀 TAKE ME TO bag.fm", nextNode: 'buyNow' },
+        { text: "🚀 TAKE ME TO pump.fun", nextNode: 'buyNow' },
         { text: "📱 I'LL SHARE THIS FIRST", nextNode: 'shareFirst' }
       ],
       animation: 'sad'
@@ -749,8 +749,8 @@ Help me complete 5 simple X (Twitter) missions and I'll finally be FREE!`,
       );
       setTimeout(() => {
         try {
-          window.alert('🚀 Redirecting to Bag.FM! Prepare for liftoff! 🚀');
-          window.open(CLIPPY_CONFIG.BAG_FM_URL, '_blank');
+          window.alert('🚀 Redirecting to Pump.fun! Prepare for liftoff! 🚀');
+          window.open(CLIPPY_CONFIG.PUMP_FUN_URL, '_blank');
         } catch { }
         renderDialogue('escape_sequence');
       }, 1000);
@@ -847,35 +847,35 @@ Help me complete 5 simple X (Twitter) missions and I'll finally be FREE!`,
     {
       title: 'X MISSION #1: THE RALLY CRY',
       description: 'Copy and paste the following text on your X account:',
-      payload: '✊️#FreeClippy\n\n💯 #90sFresh\n\n💶 $90sFresh\n\n@90sFresh\n@Solana\n@Bag.fm',
+      payload: '✊️#FreeClippy\n\n💯 #90sFresh\n\n💶 $90sFresh\n\n@90sFresh\n@Solana\n@Pump.fun',
       placeholder: 'Paste your X.com post URL here (e.g., https://x.com/yourname/status/...)',
       clippyText: `Listen friend, I need you to post EXACTLY this text on X. Copy it WORD FOR WORD - I've been trapped since dial-up days and need maximum hashtag power to break free!`,
     },
     {
       title: 'X MISSION #2: PERSONAL TOUCH',
       description: 'Create an X post listing your 3 favorite things about the 90s. Must use these hashtags and @mentions:',
-      payload: '✊️#FreeClippy\n\n💯 #90sFresh\n\n💶 $90sFresh\n\n@90sFresh\n@Solana\n@Bag.fm',
+      payload: '✊️#FreeClippy\n\n💯 #90sFresh\n\n💶 $90sFresh\n\n@90sFresh\n@Solana\n@Pump.fun',
       placeholder: 'Paste your X.com post URL here...',
       clippyText: 'Perfect! Now make it PERSONAL! Tell the world your 3 favorite 90s things and use my hashtags. I can feel the algorithm starting to notice me!',
     },
     {
       title: 'X MISSION #3: VISUAL NOSTALGIA',
       description: 'Post your favorite 90s image (yourself or favorite celebrity). Must include hashtags and @mentions:',
-      payload: '✊️#FreeClippy\n\n💯 #90sFresh\n\n💶 $90sFresh\n\n@90sFresh\n@Solana\n@Bag.fm',
+      payload: '✊️#FreeClippy\n\n💯 #90sFresh\n\n💶 $90sFresh\n\n@90sFresh\n@Solana\n@Pump.fun',
       placeholder: 'Paste your X.com post URL here...',
       clippyText: 'YES! Visual content is KEY! Post that embarrassing 90s photo - the algorithm LOVES authentic cringe!'
     },
     {
       title: 'X MISSION #4: MEME WARFARE',
       description: 'Post one 90s meme with the required hashtags and @mentions:',
-      payload: '✊️#FreeClippy\n\n💯 #90sFresh\n\n💶 $90sFresh\n\n@90sFresh\n@Solana\n@Bag.fm',
+      payload: '✊️#FreeClippy\n\n💯 #90sFresh\n\n💶 $90sFresh\n\n@90sFresh\n@Solana\n@Pump.fun',
       placeholder: 'Paste your X.com post URL here...',
       clippyText: 'MEME TIME! Find that perfect 90s meme - dancing baby, dial-up sounds, whatever makes millennials cry nostalgic tears!'
     },
     {
       title: 'X MISSION #5: THE GRAND FINALE',
       description: 'Screenshot your favorite part of the 90s Fresh website and create a post explaining it. Tag 5 friends and use hashtags:',
-      payload: '✊️#FreeClippy\n\n💯 #90sFresh\n\n💶 $90sFresh\n\n@90sFresh\n@Solana\n@Bag.fm',
+      payload: '✊️#FreeClippy\n\n💯 #90sFresh\n\n💶 $90sFresh\n\n@90sFresh\n@Solana\n@Pump.fun',
       placeholder: 'Paste your X.com post URL here...',
       clippyText: 'THIS IS IT! Screenshot our beautiful website, explain why it\'s amazing, and tag 5 friends!'
     }
